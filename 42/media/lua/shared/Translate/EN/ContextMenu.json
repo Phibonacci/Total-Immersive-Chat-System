@@ -1,0 +1,5 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/ContextMenu.schema.json",
+    "ContextMenu_TICS_learn_language"   : "Learn %1",
+    "ContextMenu_TICS_forget_languages" : "Forget languages"
+}

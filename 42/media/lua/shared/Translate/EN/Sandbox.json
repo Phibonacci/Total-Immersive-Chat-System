@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Total Immersive Chat System",
+    "Sandbox_TICSChannels"                       : "Total Immersive Chat System: Channels",
+
+    "Sandbox_TICS_ShowCharacterName"             : "Show character name in chat instead of username",
+
+    "Sandbox_TICS_BoredomReduction"              : "Boredom reduction by message heard",
+
+    "Sandbox_TICS_Languages"                     : "Enable roleplay languages",
+
+    "Sandbox_TICS_BubblePortrait"                : "Show player portrait on the left of the Bubble (custom goes in: Zomboid/Lua/avatars/username.png on server)",
+    "Sandbox_TICS_BubblePortrait_help"           : "Show player portrait on the left of the Bubble.\nCustom avatars go to: Zomboid/Lua/avatars/username.png on the server.\nVanilla portrait will be used if no image is found for the username.\n1 = None\n2 = Vanilla\n 3 = Steam Avatar\n4 = Custom",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "None",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "Custom and Vanilla",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam Avatar",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "Bubble timer (seconds)",
+    "Sandbox_TICS_BubbleOpacity"                 : "Bubble opacity",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "Enable player fake voices",
+
+    "Sandbox_TICS_VerbEnabled"                   : "Add verb prefix to messages, and quotes",
+
+    "Sandbox_TICS_Capitalize"                    : "Automatically capitalize the first letter of a message and add punctuation",
+
+    "Sandbox_TICS_HideCallout"                   : "Hide callouts in chat window (Q spam)",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdown one asterisk color",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdown two asterisks color",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "Enable discord sync with /general messages",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "Enable discord sync with a radio channel",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "Set the radio frequency to sync with discord (100.000MHz is 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "Set the color of scripted radio messages",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "Maximum range at which a radio with full volume can be heard",
+
+    "Sandbox_TICS_WhisperEnabled"                : "Enable /whisper chat",
+    "Sandbox_TICS_LowEnabled"                    : "Enable /low chat",
+    "Sandbox_TICS_SayEnabled"                    : "Enable /say chat",
+    "Sandbox_TICS_YellEnabled"                   : "Enable /yell chat",
+    "Sandbox_TICS_MeEnabled"                     : "Enable /me chat",
+    "Sandbox_TICS_DoEnabled"                     : "Enable /do chat",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "Enable /pm (private message) chat",
+    "Sandbox_TICS_FactionMessageEnabled"         : "Enable /faction chat",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "Enable /safehouse chat",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "Enable /general chat",
+    "Sandbox_TICS_AdminMessageEnabled"           : "Enable /admin chat",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Enable /ooc (Out Of Character) chat",
+
+    "Sandbox_TICS_WhisperColor"                  : "Set /whisper color",
+    "Sandbox_TICS_LowColor"                      : "Set /low color",
+    "Sandbox_TICS_SayColor"                      : "Set /say color",
+    "Sandbox_TICS_YellColor"                     : "Set /yell color",
+    "Sandbox_TICS_MeColor"                       : "Set /me color",
+    "Sandbox_TICS_DoColor"                       : "Set /do color",
+    "Sandbox_TICS_PrivateMessageColor"           : "Set /pm (private message) color",
+    "Sandbox_TICS_FactionMessageColor"           : "Set /faction color",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "Set /safehouse color",
+    "Sandbox_TICS_GeneralMessageColor"           : "Set /general color",
+    "Sandbox_TICS_AdminMessageColor"             : "Set /admin color",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "Set /ooc (Out Of Character) color",
+
+    "Sandbox_TICS_WhisperRange"                  : "/whisper chat range",
+    "Sandbox_TICS_LowRange"                      : "/low chat range",
+    "Sandbox_TICS_SayRange"                      : "/say chat range",
+    "Sandbox_TICS_YellRange"                     : "/yell chat range",
+    "Sandbox_TICS_MeRange"                       : "/me chat range",
+    "Sandbox_TICS_DoRange"                       : "/do chat range",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "/ooc (Out Of Character) chat range",
+
+    "Sandbox_TICS_DoAdminOnly"                   : "/do requires admin privileges",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "/whisper chat rombie range",
+    "Sandbox_TICS_LowZombieRange"                : "/low chat rombie range",
+    "Sandbox_TICS_SayZombieRange"                : "/say chat rombie range",
+    "Sandbox_TICS_YellZombieRange"               : "/yell chat rombie range"
+}

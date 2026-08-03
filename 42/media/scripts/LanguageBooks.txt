@@ -1,0 +1,2191 @@
+module LanguageBooks
+{
+    imports
+    {
+        Base
+    }
+
+    item ForgetLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Forget Languages,
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AbkhazianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Abkhazian (ab),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AfarLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Afar (aa),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AfrikaansLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Afrikaans (af),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AkanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Akan (ak),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AlbanianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Albanian (sq),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AmharicLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Amharic (am),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ArabicLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Arabic (ar),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AragoneseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Aragonese (an),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ArmenianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Armenian (hy),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AssameseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Assamese (as),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AvaricLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Avaric (av),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AymaraLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Aymara (ay),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item AzerbaijaniLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Azerbaijani (az),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BambaraLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Bambara (bm),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BashkirLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Bashkir (ba),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BasqueLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Basque (eu),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BelarusianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Belarusian (be),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BengaliLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Bengali (bn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BislamaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Bislama (bi),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BosnianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Bosnian (bs),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BretonLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Breton (br),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BulgarianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Bulgarian (bg),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BurmeseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Burmese (my),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item CatalanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Catalan (ca),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ChamorroLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Chamorro (ch),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ChechenLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Chechen (ce),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ChichewaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Chichewa (ny),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ChineseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Chinese (zh),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ChuvashLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Chuvash (cv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item CornishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Cornish (kw),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item CorsicanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Corsican (co),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item CreeLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Cree (cr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item CroatianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Croatian (hr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item CzechLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Czech (cs),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item DanishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Danish (da),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item DivehiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Divehi (dv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item DutchLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Dutch (nl),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item DzongkhaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Dzongkha (dz),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item EnglishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn English (en),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item EsperantoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Esperanto (eo),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item EstonianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Estonian (et),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item EweLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Ewe (ee),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item FaroeseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Faroese (fo),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item FijianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Fijian (fj),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item FinnishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Finnish (fi),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item FrenchLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn French (fr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item WesternFrisianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Western Frisian (fy),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item FulahLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Fulah (ff),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GaelicLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Gaelic (gd),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GalicianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Galician (gl),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GandaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Ganda (lg),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GeorgianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Georgian (ka),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GermanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn German (de),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GreekLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Greek (el),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KalaallisutLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kalaallisut (kl),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GuaraniLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Guarani (gn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item GujaratiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Gujarati (gu),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item HaitianHaitianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Haitian Haitian (ht),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item HausaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Hausa (ha),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item HebrewLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Hebrew (he),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item HereroLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Herero (hz),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item HindiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Hindi (hi),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item HiriMotuLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Hiri Motu (ho),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item HungarianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Hungarian (hu),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item IcelandicLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Icelandic (is),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item IdoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Ido (io),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item IgboLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Igbo (ig),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item IndonesianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Indonesian (id),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item InterlinguaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Interlingua (ia),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item InterlingueLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Interlingue (ie),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item InuktitutLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Inuktitut (iu),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item InupiaqLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Inupiaq (ik),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item IrishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Irish (ga),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ItalianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Italian (it),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item JapaneseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Japanese (ja),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item JavaneseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Javanese (jv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KannadaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kannada (kn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KanuriLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kanuri (kr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KashmiriLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kashmiri (ks),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KazakhLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kazakh (kk),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item CentralKhmerLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Central Khmer (km),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KikuyuLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kikuyu (ki),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KinyarwandaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kinyarwanda (rw),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KirghizLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kirghiz (ky),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KomiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Komi (kv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KongoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kongo (kg),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KoreanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Korean (ko),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KuanyamaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kuanyama (kj),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item KurdishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Kurdish (ku),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LaoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Lao (lo),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LatinLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Latin (la),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LatvianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Latvian (lv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LimburganLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Limburgan (li),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LingalaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Lingala (ln),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LithuanianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Lithuanian (lt),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LubaKatangaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Luba-Katanga (lu),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item LuxembourgishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Luxembourgish (lb),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MacedonianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Macedonian (mk),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MalagasyLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Malagasy (mg),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MalayLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Malay (ms),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MalayalamLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Malayalam (ml),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MalteseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Maltese (mt),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ManxLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Manx (gv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MaoriLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Maori (mi),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MarathiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Marathi (mr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MarshalleseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Marshallese (mh),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item MongolianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Mongolian (mn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NauruLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Nauru (na),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NavajoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Navajo (nv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NorthNdebeleLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn North Ndebele (nd),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SouthNdebeleLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn South Ndebele (nr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NdongaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Ndonga (ng),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NepaliLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Nepali (ne),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NorwegianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Norwegian (no),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item BokmalLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Bokmal (nb),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NynorskLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Nynorsk (nn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item OccitanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Occitan (oc),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item OjibwaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Ojibwa (oj),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item OriyaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Oriya (or),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item OromoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Oromo (om),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item OssetianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Ossetian (os),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item PaliLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Pali (pi),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item PashtoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Pashto (ps),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item PersianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Persian (fa),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item PolishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Polish (pl),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item PortugueseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Portuguese (pt),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item PunjabiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Punjabi (pa),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item QuechuaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Quechua (qu),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item RomanianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Romanian (ro),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item RomanshLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Romansh (rm),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item RundiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Rundi (rn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item RussianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Russian (ru),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item NorthernSamiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Northern Sami (se),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SamoanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Samoan (sm),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SangoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Sango (sg),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SanskritLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Sanskrit (sa),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SardinianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Sardinian (sc),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SerbianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Serbian (sr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ShonaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Shona (sn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SindhiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Sindhi (sd),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SinhalaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Sinhala (si),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SlovakLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Slovak (sk),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SlovenianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Slovenian (sl),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SomaliLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Somali (so),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SouthernSothoLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Southern Sotho (st),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SpanishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Spanish (es),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SundaneseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Sundanese (su),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SwahiliLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Swahili (sw),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SwatiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Swati (ss),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SwedishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Swedish (sv),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TagalogLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tagalog (tl),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TahitianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tahitian (ty),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TajikLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tajik (tg),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TamilLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tamil (ta),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TatarLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tatar (tt),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TeluguLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Telugu (te),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ThaiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Thai (th),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TibetanLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tibetan (bo),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TigrinyaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tigrinya (ti),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TongaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tonga (to),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TsongaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tsonga (ts),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TswanaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Tswana (tn),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TurkishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Turkish (tr),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TurkmenLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Turkmen (tk),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item TwiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Twi (tw),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item UighurLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Uighur (ug),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item UkrainianLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Ukrainian (uk),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item UrduLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Urdu (ur),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item UzbekLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Uzbek (uz),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item VendaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Venda (ve),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item VietnameseLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Vietnamese (vi),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item VolapükLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Volapük (vo),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item WalloonLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Walloon (wa),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item WelshLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Welsh (cy),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item WolofLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Wolof (wo),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item XhosaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Xhosa (xh),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item SichuanYiLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Sichuan Yi (ii),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item YiddishLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Yiddish (yi),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item YorubaLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Yoruba (yo),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ZhuangLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Zhuang (za),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+
+    item ZuluLanguageBook
+    {
+        Weight           = 0.1,
+        ItemType         = base:literature,
+        DisplayName      = Learn Zulu (zu),
+        Icon             = MagazineWordsearch1,
+        WorldStaticModel = TVMagazineGround,
+        StaticModel      = Magazine,
+        DisplayCategory  = Literature,
+        NumberOfPages    = 1,
+    }
+}

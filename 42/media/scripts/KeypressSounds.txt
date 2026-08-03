@@ -1,0 +1,15 @@
+
+module TICS {
+    sound TypewritterKey {
+        category = EHE: Main,
+        loop = false,
+        is3D = true,
+        clip {
+            file = media/sound/tics/keyboard/COMType_Typewriter key (ID 2842)_BSB.wav,
+            distanceMax = 650,
+            reverbFactor = 0.1,
+            volume = 0.7,
+            pitch = 1,
+        }
+    }
+}

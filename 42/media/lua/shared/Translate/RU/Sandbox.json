@@ -1,0 +1,67 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Система полного погружения в чат",
+    "Sandbox_TICSChannels"                       : "Система полного погружения в чат: Каналы",
+
+    "Sandbox_TICS_ShowCharacterName"             : "Отображать имя персонажа в чате вместо имени пользователя",
+
+    "Sandbox_TICS_BoredomReduction"              : "Снижение скуки за каждое услышанное сообщение",
+
+    "Sandbox_TICS_BubblePortrait"                : "Отображать портрет игрока слева от «пузырька» (пользовательские аватары помещаются в: Zomboid/Lua/avatars/username.png на сервере)",
+    "Sandbox_TICS_BubblePortrait_help"           : "Отображать портрет игрока слева от «пузырька».\nПользовательские аватары должны находиться в: Zomboid/Lua/avatars/username.png на сервере.\nЕсли для имени пользователя не найдено изображение, будет использован стандартный портрет.\n1 = Нет\n2 = Стандартный\n3 = Аватар Steam\n4 = Пользовательский",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "Нет",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "Стандартный и пользовательский",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Аватар Steam",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "Таймер «пузырька» (в секундах)",
+    "Sandbox_TICS_BubbleOpacity"                 : "Прозрачность «пузырька»",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "Включить имитацию голосов игроков",
+
+    "Sandbox_TICS_VerbEnabled"                   : "Добавлять глагол в начале сообщения и заключать текст в кавычки",
+
+    "Sandbox_TICS_HideCallout"                   : "Скрывать призывы (Q) в окне чата",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Цвет для выделения * (одной звёздочки)",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"    : "Цвет для выделения ** (двух звёздочек)",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "Включить синхронизацию с Discord для сообщений /general",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "Включить синхронизацию с Discord для радиоканала",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "Установить радиочастоту для синхронизации с Discord (100.000МГц = 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "Установить цвет сообщений от скриптового радио",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "Максимальная дистанция слышимости радио на полной громкости",
+
+    "Sandbox_TICS_WhisperEnabled"                : "Включить чат /whisper",
+    "Sandbox_TICS_LowEnabled"                    : "Включить чат /low",
+    "Sandbox_TICS_SayEnabled"                    : "Включить чат /say",
+    "Sandbox_TICS_YellEnabled"                   : "Включить чат /yell",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "Включить чат /pm (личное сообщение)",
+    "Sandbox_TICS_FactionMessageEnabled"         : "Включить чат /faction",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "Включить чат /safehouse",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "Включить чат /general",
+    "Sandbox_TICS_AdminMessageEnabled"           : "Включить чат /admin",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Включить чат /ooc (Out Of Character)",
+
+    "Sandbox_TICS_WhisperColor"                  : "Установить цвет для /whisper",
+    "Sandbox_TICS_LowColor"                      : "Установить цвет для /low",
+    "Sandbox_TICS_SayColor"                      : "Установить цвет для /say",
+    "Sandbox_TICS_YellColor"                     : "Установить цвет для /yell",
+    "Sandbox_TICS_PrivateMessageColor"           : "Установить цвет для /pm (личное сообщение)",
+    "Sandbox_TICS_FactionMessageColor"           : "Установить цвет для /faction",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "Установить цвет для /safehouse",
+    "Sandbox_TICS_GeneralMessageColor"           : "Установить цвет для /general",
+    "Sandbox_TICS_AdminMessageColor"             : "Установить цвет для /admin",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "Установить цвет для /ooc (Out Of Character)",
+
+    "Sandbox_TICS_WhisperRange"                  : "Дистанция слышимости для чата /whisper",
+    "Sandbox_TICS_LowRange"                      : "Дистанция слышимости для чата /low",
+    "Sandbox_TICS_SayRange"                      : "Дистанция слышимости для чата /say",
+    "Sandbox_TICS_YellRange"                     : "Дистанция слышимости для чата /yell",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "Дистанция слышимости для чата /ooc (Out Of Character)",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "Дистанция слышимости зомби для чата /whisper",
+    "Sandbox_TICS_LowZombieRange"                : "Дистанция слышимости зомби для чата /low",
+    "Sandbox_TICS_SayZombieRange"                : "Дистанция слышимости зомби для чата /say",
+    "Sandbox_TICS_YellZombieRange"               : "Дистанция слышимости зомби для чата /yell"
+}

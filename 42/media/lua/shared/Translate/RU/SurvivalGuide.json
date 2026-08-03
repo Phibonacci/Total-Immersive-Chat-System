@@ -1,0 +1,38 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/SurvivalGuide.schema.json",
+    "SurvivalGuide_TICS"           : " <H1> СИСТЕМА ПОЛНОГО ПОГРУЖЕНИЯ В ЧАТ <BR> <TEXT> <SIZE:medium> <CENTRE> %1 <BR> <TEXT> <SIZE:small> <IMAGE:media/ui/tics/icons/eye-on.png> Отображать зону слышимости текущего канала при фокусе на чате <BR> <IMAGE:media/ui/tics/icons/eye-on-plus.png> Всегда отображать зону слышимости текущего канала <BR> <IMAGE:media/ui/tics/icons/mic-on.png> Отображать зону слышимости окружающих радиоприёмников <BR>",
+
+    "SurvivalGuide_TICS_Markdown"  : " текст, написанный между * или **, будет окрашен по-разному (**текст**) <BR>",
+
+    "SurvivalGuide_TICS_Whisper"   : " /whisper или /w, чтобы шептать <BR>",
+    "SurvivalGuide_TICS_MeWhisper" : " /mewhisper или /mw, чтобы описать действие без добавления глагола <BR>",
+
+    "SurvivalGuide_TICS_Low"       : " /low или /l, чтобы говорить тихо <BR>",
+    "SurvivalGuide_TICS_MeLow"     : " /melow или /ml, чтобы описать действие без добавления глагола <BR>",
+
+    "SurvivalGuide_TICS_Say"       : " /say или /s, чтобы говорить обычным тоном <BR>",
+    "SurvivalGuide_TICS_MeSay"     : " /me или /ms, чтобы описать действие без добавления глагола <BR>",
+
+    "SurvivalGuide_TICS_Yell"      : " /yell или /y, чтобы кричать <BR>",
+    "SurvivalGuide_TICS_MeYell"    : " /meyell или /my, чтобы описать действие без добавления глагола <BR>",
+
+    "SurvivalGuide_TICS_Faction"   : " /faction или /f, чтобы говорить в канале фракции <BR>",
+    "SurvivalGuide_TICS_SafeHouse" : " /safehouse или /sh, чтобы говорить в канале убежища <BR>",
+    "SurvivalGuide_TICS_General"   : " /all или /g, чтобы говорить в общем канале <BR>",
+    "SurvivalGuide_TICS_Ooc"       : " /ooc или /o, чтобы говорить вне роли <BR>",
+
+    "SurvivalGuide_TICS_Pm"        : " /pm username или /p username, чтобы отправить личное сообщение (/r для ответа) <BR>",
+    "SurvivalGuide_TICS_Admin"     : " /admin или /a, чтобы говорить в админ-канале <BR>",
+
+    "SurvivalGuide_TICS_Color"     : " \"/color r,g,b\" (где r,g,b — числа от 0 до 255) или \"/color #FFFFFF\", чтобы изменить цвет игрока, либо просто \"/color\", чтобы увидеть текущий цвет <BR>",
+
+    "SurvivalGuide_TICS_Pitch"     : " \"/pitch значение\" (где значение от 0.85 до 1.45), чтобы изменить высоту голоса игрока, либо просто \"/pitch\", чтобы увидеть текущее значение <BR>",
+
+    "SurvivalGuide_TICS_Roll"      : " \"/roll xdy\" (где x и y — числа, а x от 1 до 20), чтобы бросить кубики <BR>",
+
+    "SurvivalGuide_TICS_AvatarUploadHelp"   : " <H1> КАК ЗАГРУЗИТЬ СВОЙ АВАТАР <BR> <TEXT> <SIZE:small> Вы можете загрузить собственное изображение аватара, которое будет отображаться в «пузырьке» при разговоре вместо 3D-портрета. <BR> Для этого необходимо поместить PNG-файл с именем, соответствующим вашему имени пользователя, а также имени и фамилии персонажа, «%1.png», в следующую папку (Windows): <BR> <CENTRE> %2 <BR> <TEXT> <SIZE:small> Изображение ДОЛЖНО быть размером ровно 60 пикселей в ширину и 80 пикселей в высоту. Прозрачность поддерживается и даже приветствуется. <BR> <IMAGE:media/ui/tics/icons/upload.png> После того как изображение поместится в нужную папку, нажмите иконку загрузки в окне чата, чтобы отправить заявку на утверждение аватара администратору.",
+
+    "SurvivalGuide_TICS_AvatarUploadPrompt" : " <TEXT> <SIZE:small>Отправить запрос на утверждение этого аватара?",
+
+    "SurvivalGuide_TICS_AvatarSizeError"    : " <TEXT> <SIZE:small> Обнаружен аватар неправильного размера.  Размер вашего аватара должен быть %1x%2."
+}

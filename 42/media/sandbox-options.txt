@@ -1,0 +1,485 @@
+VERSION = 1,
+
+option TICS.ShowCharacterName
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_ShowCharacterName,
+}
+
+option TICS.BoredomReduction
+{
+	type = double,
+	min = 0.0,
+	max = 50.0,
+	default = 1.2,
+
+	page = TICS,
+	translation = TICS_BoredomReduction,
+}
+
+option TICS.Languages
+{
+	type = boolean,
+	default = false,
+
+	page = TICS,
+	translation = TICS_Languages,
+}
+
+option TICS.BubblePortrait
+{
+	type = enum,
+	numValues = 3,
+	default = 2,
+
+	page = TICS,
+	translation = TICS_BubblePortrait,
+	valueTranslation = TICS_BubblePortrait_Values,
+}
+option TICS.BubbleTimerInSeconds
+{
+	type = integer,
+	min = 1,
+	max = 20,
+	default = 8,
+
+	page = TICS,
+	translation = TICS_BubbleTimerInSeconds,
+}
+option TICS.BubbleOpacity
+{
+	type = integer,
+	min = 0,
+	max = 100,
+	default = 75,
+
+	page = TICS,
+	translation = TICS_BubbleOpacity,
+}
+
+option TICS.VoiceEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_VoiceEnabled,
+}
+
+
+option TICS.VerbEnabled
+{
+	type = boolean,
+	default = false,
+
+	page = TICS,
+	translation = TICS_VerbEnabled,
+}
+
+option TICS.Capitalize
+{
+	type = boolean,
+	default = false,
+
+	page = TICS,
+	translation = TICS_Capitalize,
+}
+
+option TICS.HideCallout
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_HideCallout,
+}
+
+option TICS.MarkdownOneAsteriskColor
+{
+	type = string,
+	default = #F676FF,
+
+	page = TICS,
+	translation = TICS_MarkdownOneAsteriskColor,
+}
+option TICS.MarkdownTwoAsterisksColor
+{
+	type = string,
+	default = #D2D200,
+
+	page = TICS,
+	translation = TICS_MarkdownTwoAsterisksColor,
+}
+
+option TICS.GeneralDiscordEnabled
+{
+	type = boolean,
+	default = false,
+
+	page = TICS,
+	translation = TICS_GeneralDiscordEnabled,
+}
+option TICS.RadioDiscordEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_RadioDiscordEnabled,
+}
+
+option TICS.RadioDiscordFrequency
+{
+	type = integer,
+	min = 200,
+	max = 1000000,
+	default = 100000,
+
+	page = TICS,
+	translation = TICS_RadioDiscordFrequency,
+}
+
+option TICS.RadioColor
+{
+	type = string,
+	default = #ABF08C,
+
+	page = TICS,
+	translation = TICS_RadioColor,
+}
+
+option TICS.RadioSoundMaxRange
+{
+	type = integer,
+	min = 1,
+	max = 15,
+	default = 6,
+
+	page = TICS,
+	translation = TICS_RadioSoundMaxRange,
+}
+
+option TICS.WhisperEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_WhisperEnabled,
+}
+option TICS.WhisperRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 3,
+
+	page = TICSChannels,
+	translation = TICS_WhisperRange,
+}
+option TICS.WhisperZombieRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 3,
+
+	page = TICSChannels,
+	translation = TICS_WhisperZombieRange,
+}
+option TICS.WhisperColor
+{
+	type = string,
+	default = #B4FFC5,
+
+	page = TICSChannels,
+	translation = TICS_WhisperColor,
+}
+
+option TICS.LowEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_LowEnabled,
+}
+option TICS.LowRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 10,
+
+	page = TICSChannels,
+	translation = TICS_LowRange,
+}
+option TICS.LowZombieRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 10,
+
+	page = TICSChannels,
+	translation = TICS_LowZombieRange,
+}
+option TICS.LowColor
+{
+	type = string,
+	default = #B4FFFF,
+
+	page = TICSChannels,
+	translation = TICS_LowColor,
+}
+
+option TICS.SayEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_SayEnabled,
+}
+option TICS.SayRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 30,
+
+	page = TICSChannels,
+	translation = TICS_SayRange,
+}
+option TICS.SayZombieRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 30,
+
+	page = TICSChannels,
+	translation = TICS_SayZombieRange,
+}
+option TICS.SayColor
+{
+	type = string,
+	default = #F5F5F5,
+
+	page = TICSChannels,
+	translation = TICS_SayColor,
+}
+
+option TICS.YellEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_YellEnabled,
+}
+option TICS.YellRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 60,
+
+	page = TICSChannels,
+	translation = TICS_YellRange,
+}
+option TICS.YellZombieRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 60,
+
+	page = TICSChannels,
+	translation = TICS_YellZombieRange,
+}
+option TICS.YellColor
+{
+	type = string,
+	default = #E69696,
+
+	page = TICSChannels,
+	translation = TICS_YellColor,
+}
+
+option TICS.PrivateMessageEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_PrivateMessageEnabled,
+}
+option TICS.PrivateMessageColor
+{
+	type = string,
+	default = #FFB8DA,
+
+	page = TICSChannels,
+	translation = TICS_PrivateMessageColor,
+}
+
+option TICS.MeEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_MeEnabled,
+}
+option TICS.MeRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 30,
+
+	page = TICSChannels,
+	translation = TICS_MeRange,
+}
+option TICS.MeColor
+{
+	type = string,
+	default = #B8F0FF,
+
+	page = TICSChannels,
+	translation = TICS_MeColor,
+}
+
+option TICS.DoEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_DoEnabled,
+}
+option TICS.DoRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 30,
+
+	page = TICSChannels,
+	translation = TICS_DoRange,
+}
+option TICS.DoColor
+{
+	type = string,
+	default = #B8F0FF,
+
+	page = TICSChannels,
+	translation = TICS_DoColor,
+}
+option TICS.DoAdminOnly
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_DoAdminOnly,
+}
+
+option TICS.FactionMessageEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_FactionMessageEnabled,
+}
+option TICS.FactionMessageColor
+{
+	type = string,
+	default = #AAFFAA,
+
+	page = TICSChannels,
+	translation = TICS_FactionMessageColor,
+}
+
+option TICS.SafeHouseMessageEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_SafeHouseMessageEnabled,
+}
+option TICS.SafeHouseMessageColor
+{
+	type = string,
+	default = #F5F580,
+
+	page = TICSChannels,
+	translation = TICS_SafeHouseMessageColor,
+}
+
+option TICS.GeneralMessageEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_GeneralMessageEnabled,
+}
+option TICS.GeneralMessageColor
+{
+	type = string,
+	default = #BEBEFF,
+
+	page = TICSChannels,
+	translation = TICS_GeneralMessageColor,
+}
+
+option TICS.AdminMessageEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_AdminMessageEnabled,
+}
+option TICS.AdminMessageColor
+{
+	type = string,
+	default = #FFAAAA,
+
+	page = TICSChannels,
+	translation = TICS_AdminMessageColor,
+}
+
+option TICS.OutOfCharacterMessageEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_OutOfCharacterMessageEnabled,
+}
+option TICS.OutOfCharacterMessageRange
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 120,
+
+	page = TICSChannels,
+	translation = TICS_OutOfCharacterMessageRange,
+}
+option TICS.OutOfCharacterMessageColor
+{
+	type = string,
+	default = #92FF94,
+
+	page = TICSChannels,
+	translation = TICS_OutOfCharacterMessageColor,
+}
