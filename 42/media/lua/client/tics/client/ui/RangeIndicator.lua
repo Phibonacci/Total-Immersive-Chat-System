@@ -2,117 +2,87 @@ local coordinates = require('tics/client/utils/coordinates')
 
 local RangeIndicator = ISUIElement:derive("RangeIndicator")
 
-local RectTexturePath = 'media/ui/tics/indicator/white-rectangle.png'
 local function PreLoadTextures()
-    getTexture(RectTexturePath)
+    --getTexture(IsoBordersTexturePath)
+end
+
+function IsSamePosition(firstPos, nextPos)
+    return firstPos.x == nextPos.x and firstPos.y == nextPos.y and firstPos.z == nextPos.z
 end
 
 -- draw a square at the center and parts of losanges on the borders to avoid
 -- drawing too many losanges and hurt the performances
-function RangeIndicator:render(z)
-    if (z ~= nil and z ~= 0) then
+function RangeIndicator:show()
+    local x, y, z = self.object:getX(), self.object:getY(), self.object:getZ() + 0.5
+    local pos = { x = math.floor(x), y = math.floor(y), z = math.floor(z) }
+
+    if self.markers then
+        if IsSamePosition(pos, self.lastPos) then
+            return
+        else
+            self:hide()
+        end
+    end
+    self.lastPos = pos
+
+    self.markers = {}
+    if self.range > 30 then
+        local square = self.object:getSquare()
+        if square == nil then
+            return
+        end
+        local marker = getWorldMarkers():addGridSquareMarker("circle_center", nil, square,
+                self.color[1] / 255, self.color[2] / 255, self.color[3] / 255, true, self.range, 1, 0.3, 0.3)
+        table.insert(self.markers, marker)
         return
     end
-    local width         = 128
-    local height        = 64
-    local alpha         = 0.02
-    local squareOffsetX = self.object:getX() - math.floor(self.object:getX())
-    local squareOffsetY = self.object:getY() - math.floor(self.object:getY())
 
+    local maxRange = self.range - 1
 
-    local xOffset = (squareOffsetX - squareOffsetY) * (width / 2)
-    local yOffset = (squareOffsetX + squareOffsetY) * (height / 2) - (height / 2)
+    for yModifier = -maxRange, maxRange do
+        local lineY = y + yModifier
+        local maxLineRange = maxRange - math.abs(yModifier)
+        for xModifier =  -maxLineRange , maxLineRange do
+            local lineX = x + xModifier
+            local square = self.object:getCell():getOrCreateGridSquare(lineX, lineY, z)
 
-
-    local rectTexture = getTexture(RectTexturePath)
-
-
-    local x, y = coordinates.CenterBaseOfObjectNoZoom(self.object)
-    x          = math.floor(x - xOffset)
-    y          = math.floor(y - yOffset)
-    if self.range <= 120 then
-        for j = 0, self.range do
-            local i = -self.range + math.abs(j)
-            local xTTile = j * width / 2 + i * width / 2
-            local yTTile = -j * height / 2 + i * height / 2
-
-            i = self.range - math.abs(j)
-            local xBTile = j * width / 2 + i * width / 2
-            local yBTile = -j * height / 2 + i * height / 2
-
-            self:drawTextureAllPoint(rectTexture,
-                x + xTTile - 2,
-                y + yTTile - height / 2,
-                x + xTTile + 2,
-                y + yTTile - height / 2 - 2,
-
-                x + xBTile + width / 2 + 4,
-                y + yBTile - 1,
-                x + xBTile + width / 2,
-                y + yBTile + 1,
-                self.color[1] / 255, self.color[2] / 255, self.color[3] / 255,
-                alpha)
-            self:drawTextureAllPoint(rectTexture,
-                x - (xTTile - 2),
-                y - (yTTile - height / 2),
-                x - (xTTile + 2),
-                y - (yTTile - height / 2 - 2),
-
-                x - (xBTile + width / 2 + 2),
-                y - (yBTile - 1),
-                x - (xBTile + width / 2),
-                y - (yBTile + 1),
-                self.color[1] / 255, self.color[2] / 255, self.color[3] / 255,
-                alpha)
-            self:drawTextureAllPoint(rectTexture,
-                x + xTTile - 2,
-                y - (yTTile - height / 2),
-                x + xTTile + 2,
-                y - (yTTile - height / 2 - 2),
-
-                x + xBTile + width / 2 + 4,
-                y - (yBTile - 1),
-                x + xBTile + width / 2,
-                y - (yBTile + 1),
-                self.color[1] / 255, self.color[2] / 255, self.color[3] / 255,
-                alpha)
-            self:drawTextureAllPoint(rectTexture,
-                x - (xTTile - 2),
-                y + yTTile - height / 2,
-                x - (xTTile + 2),
-                y + yTTile - height / 2 - 2,
-
-                x - (xBTile + width / 2 + 4),
-                y + yBTile - 1,
-                x - (xBTile + width / 2),
-                y + yBTile + 1,
-                self.color[1] / 255, self.color[2] / 255, self.color[3] / 255,
-                alpha)
+            local marker = getWorldMarkers():addGridSquareMarker("circle_center", nil, square,
+                self.color[1] / 255, self.color[2] / 255, self.color[3] / 255, true, 0.1, 1, 0.3, 0.3)
+            table.insert(self.markers, marker)
         end
     end
 end
 
-function RangeIndicator:subscribe()
-    if self.event ~= nil then
+function RangeIndicator:hide()
+    if self.markers == nil then
         return
     end
-    self.event = function()
-        self:render()
+    for _, marker in ipairs(self.markers) do
+
+        -- -- the highlight way
+        -- floor:setHighlighted(false)
+        -- -- floor:setBlink(false);
+
+        -- -- The tile object way
+        -- square:RemoveTileObject(marker);
+
+        -- The grid square marker way
+        marker:remove()
+
+        -- -- Maybe related to tile object way?
+        -- square:getSpecialObjects():remove(marker);
+        -- square:getObjects():remove(marker);
+        -- square:transmitRemoveItemFromSquare(marker)
     end
-    -- OnPostRender is buggy and will sometimes fail to draw at the right coordinates
-    -- The UI drawing events are limited to 10FPS
-    -- OnPostFloorLayerDraw is called once for every layer, contrary to
-    -- OnPostRender it does not allow us to draw over the squares before the
-    -- character is drawn but it looks that's the most PZ has to offer to us.
-    Events.OnPostFloorLayerDraw.Add(self.event)
+    self.markers = nil
+end
+
+function RangeIndicator:subscribe()
+    self:show()
 end
 
 function RangeIndicator:unsubscribe()
-    if self.event == nil then
-        return
-    end
-    Events.OnPostFloorLayerDraw.Remove(self.event)
-    self.event = nil
+    self:hide()
 end
 
 function RangeIndicator:new(object, range, color)
