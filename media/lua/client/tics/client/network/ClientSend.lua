@@ -94,6 +94,10 @@ function ClientSend.sendMuteRadio(radio, state)
     end
 end
 
+function ClientSend.sendChangeName(fullName) -- Sending ChangeName to server
+    ClientSendCommand('ChangeName', { fullName = fullName }) -- Send fullName as fullName
+end
+
 -- only for belt items
 function ClientSend.sendGiveRadioState(radio)
     if not isClient() then return end
