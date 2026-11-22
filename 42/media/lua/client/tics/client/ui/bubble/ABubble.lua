@@ -31,6 +31,43 @@ local function BuildPlayerNameString(playerName, playerColor)
     return StringBuilder.BuildBracketColorString(playerColor) .. playerName
 end
 
+-- Returns the bubble width that fits the paginated text with the same padding on
+-- both sides. `maxTextWidth` caps the width of a line, longer text is wrapped.
+-- The panel text must already contain the full message.
+function ABubble.computeFittedWidth(panel, maxTextWidth)
+    local marginLeft = panel.marginLeft
+    -- same maximum width as the original formula: min(textLength, cap) + 40
+    panel:setWidth(maxTextWidth + 40)
+    panel:paginate()
+    local textManager = getTextManager()
+    local font = panel.defaultFont
+    local minLeft = nil
+    local maxRight = 0
+    for index, line in ipairs(panel.lines) do
+        if panel.fonts[index] then
+            font = panel.fonts[index]
+        end
+        if string.trim(line) ~= '' then
+            local x = panel.lineX[index] or 0
+            -- our paginate keeps a leading space at the start of each text chunk
+            local leadingSpaces = line:match('^%s*')
+            local left = x + textManager:MeasureStringX(font, leadingSpaces)
+            local right = x + textManager:MeasureStringX(font, line)
+            if minLeft == nil or left < minLeft then
+                minLeft = left
+            end
+            if right > maxRight then
+                maxRight = right
+            end
+        end
+    end
+    if minLeft == nil then
+        return panel:getWidth()
+    end
+    -- the empty space on the right matches the empty space on the left
+    return math.ceil(marginLeft + maxRight + minLeft + marginLeft)
+end
+
 function ABubble:parseMessage(length)
     local messageLength = length
     if length and self.showPlayerName and self.playerName then
@@ -46,7 +83,9 @@ function ABubble:parseMessage(length)
     if self.showPlayerName then
         local nameLength = length and (#self.playerName + 1) or nil -- + 1 for the trailing space
         local truncatedName = self.playerName .. ' '
-        truncatedName = length >= nameLength and truncatedName or truncatedName:sub(1, length)
+        if length ~= nil and length < nameLength then
+            truncatedName = truncatedName:sub(1, length)
+        end
         rawMessage = truncatedName .. rawMessage
         bubbleMessage = BuildPlayerNameString(truncatedName, self.playerColor) .. ' ' .. bubbleMessage
     end
@@ -181,9 +220,9 @@ end
 
 function ABubble:new(
     x, y, text, rawText, message, messageColor, timer, opacity, heightOffsetStart,
-    showArrow, showPlayerName, playerName, playerColor)
-    local textLength = getTextManager():MeasureStringX(UIFont.medium, rawText)
-    local width = math.min(textLength * 1.25, 162) + 40
+    showArrow, showPlayerName, playerName, playerColor, maxTextWidth)
+    local textLength = getTextManager():MeasureStringX(UIFont.Medium, rawText)
+    local width = math.min(textLength, maxTextWidth or 162) + 40
     local height = 0
     local o = ISTicsRichTextPanel:new(x, y, width, height)
     setmetatable(o, self)
@@ -208,6 +247,8 @@ function ABubble:new(
     o.previousTime = o.startTime
     o.dead = false
     ISUIElement.initialise(o)
+    width = ABubble.computeFittedWidth(o, maxTextWidth or 162)
+    o:setWidth(width)
     o:paginate()
     o.texturesLoaded = false
     o.currentX = x

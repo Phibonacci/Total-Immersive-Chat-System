@@ -133,7 +133,7 @@ function PlayerBubble:new(
         rawMessage = playerName .. ' ' .. rawMessage
         bubbleMessage = BuildPlayerNameString(playerName, playerColor) .. ' ' .. bubbleMessage
     end
-    local textLength = getTextManager():MeasureStringX(UIFont.medium, rawMessage)
+    local textLength = getTextManager():MeasureStringX(UIFont.Medium, rawMessage)
     local width = math.min(textLength * 1.25, 162) + 40
     local height = 0
     local x, y = Coordinates.CenterTopOfPlayer(player, width, height)

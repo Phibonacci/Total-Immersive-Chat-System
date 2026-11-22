@@ -182,7 +182,7 @@ function ContextBubble:new(message, messageColor, timer, opacity, isVoiceEnabled
     local rawMessage = parsedMessages['rawMessage']
     local bubbleMessage = parsedMessages['bubble']
 
-    local textLength = getTextManager():MeasureStringX(UIFont.medium, rawMessage)
+    local textLength = getTextManager():MeasureStringX(UIFont.Medium, rawMessage)
     local width = math.min(textLength * 1.25, 364) + 40
     local height = 40
     local screenWidth = getCore():getScreenWidth()
@@ -220,6 +220,11 @@ function ContextBubble:new(message, messageColor, timer, opacity, isVoiceEnabled
     o.dead = false
 
     ISUIElement.initialise(o)
+    o.text = StringBuilder.BuildFontSizeString('medium') .. bubbleMessage
+    width = ABubble.computeFittedWidth(o, 364)
+    x = screenWidth / 2 - width / 2
+    o:setWidth(width)
+    o.text = ''
     o:paginate()
     o:setHeight(height)
 

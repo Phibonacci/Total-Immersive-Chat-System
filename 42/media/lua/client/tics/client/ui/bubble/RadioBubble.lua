@@ -58,7 +58,7 @@ RadioBubble.types = {
 
 function RadioBubble:new(object, message, messageColor, timer, opacity, type, isVoicesEnabled, voicePitch, offsetY)
     local parsedMessages = Parser.ParseTicsMessage(message, messageColor, 20, 200)
-    local textLength = getTextManager():MeasureStringX(UIFont.medium, parsedMessages['rawMessage'])
+    local textLength = getTextManager():MeasureStringX(UIFont.Medium, parsedMessages['rawMessage'])
     local width = math.min(textLength * 1.25, 162) + 40
     local height = 0
     local x, y = RadioBubble.CenterTop(type, object, width, height)
