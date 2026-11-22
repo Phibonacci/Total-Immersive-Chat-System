@@ -78,7 +78,9 @@ local function OnSwatchClick(swatch)
     swatch.picker = picker
 end
 
--- Adds the swatch to the right of a text field, in the same parent.
+-- Adds the swatch at the right end of a text field, in the same parent. The field is shortened
+-- to make room so the row keeps its width: the screens size their content for the original
+-- controls and a swatch added after the field would be cut by the window border.
 function SandboxColorPickers.attach(settingName, control)
     if not IsColorSetting(settingName) or control == nil or control.ticsColorSwatch ~= nil
         or control.getText == nil or control.parent == nil
@@ -86,7 +88,10 @@ function SandboxColorPickers.attach(settingName, control)
         return
     end
     local size = control:getHeight()
-    local swatch = ISButton:new(control:getRight() + 4, control:getY(), size, size, '', nil, OnSwatchClick)
+    local gap = 4
+    local right = control:getRight()
+    control:setWidth(control:getWidth() - size - gap)
+    local swatch = ISButton:new(right - size, control:getY(), size, size, '', nil, OnSwatchClick)
     swatch.target = nil
     swatch.onclick = function() OnSwatchClick(swatch) end
     swatch:initialise()
