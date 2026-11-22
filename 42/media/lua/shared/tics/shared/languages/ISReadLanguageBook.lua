@@ -1,45 +1,35 @@
 -- Timed action reading a language book (learn a language, or forget them all).
 --
 -- In multiplayer the server rebuilds timed actions from their global class name (Type) and
--- runs complete() itself, so this class is shared and global. The book is removed in
--- complete(): on the server in multiplayer, locally in single player. perform() only runs on
--- the client, it handles the known languages and the chat messages.
+-- runs complete() itself, so this class is shared and global. The book is applied in
+-- complete(), on the server in multiplayer and locally in single player: the known languages
+-- are stored on the server (KnownLanguages), the book is removed, and the player receives
+-- the new list and the result to show in the chat.
+--
+-- Nothing is done in perform() on purpose: in multiplayer, once the server removed the book,
+-- the client action is no longer valid (the book is not in the inventory) and is stopped,
+-- so its perform() is not called.
 
 require 'TimedActions/ISReadABook'
 
 ISReadLanguageBook = ISReadABook:derive('ISReadLanguageBook')
 
-local function IsLanguageKnownOnServer(character, language)
-    -- server module, also loaded in single player
-    local ok, KnownLanguages = pcall(require, 'tics/server/KnownLanguages')
-    if not ok or type(KnownLanguages) ~= 'table' then
-        return false
+-- 'learnt', 'already_known', 'forgotten' or nil when the book is invalid
+local function ApplyBook(character, language)
+    -- server modules, also loaded in single player; complete() never runs on a multiplayer client
+    local KnownLanguages = require('tics/server/KnownLanguages')
+    local Languages = require('tics/shared/languages/Languages')
+    if language == 'Forget' then
+        KnownLanguages.forgetAll(character)
+        return 'forgotten'
+    elseif Languages[language] == nil then
+        print('TICS error: ISReadLanguageBook: unknown language ' .. tostring(language))
+        return nil
+    elseif KnownLanguages.isKnown(character, language) then
+        return 'already_known'
     end
-    return KnownLanguages.get(character)[language] ~= nil
-end
-
-function ISReadLanguageBook:perform()
-    ISReadABook.perform(self)
-    -- client side modules: perform() never runs on a dedicated server
-    local LanguageManager = require('tics/client/languages/LanguageManager')
-
-    if self.language ~= 'Forget' and not LanguageManager.LanguageExists(self.language) then
-        print('TICS error: ISReadLanguageBook:perform: unknown language ' .. self.language)
-        return
-    end
-
-    if self.language == 'Forget' then
-        LanguageManager:forgetAll()
-        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Messages_languages_forgotten', getText('UI_TICS_Languages_en')))
-    else
-        local languageTranslated = LanguageManager.GetLanguageTranslated(self.language)
-        if LanguageManager:isKnown(self.language) then
-            ISChat.sendErrorToCurrentTab(getText('UI_TICS_Messages_language_already_learnt', languageTranslated))
-            return
-        end
-        LanguageManager:registerLanguage(self.language)
-        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Messages_language_learnt', languageTranslated))
-    end
+    KnownLanguages.learn(character, language)
+    return 'learnt'
 end
 
 function ISReadLanguageBook:complete()
@@ -47,14 +37,34 @@ function ISReadLanguageBook:complete()
     if isServer() and self.forceStopped then
         return true
     end
-    -- a book of an already known language is kept, like the client does not learn it again
-    if self.language ~= 'Forget' and IsLanguageKnownOnServer(self.character, self.language) then
-        return true
+
+    local result = ApplyBook(self.character, self.language)
+    if result == 'learnt' or result == 'forgotten' then
+        self.character:removeFromHands(self.item)
+        self.character:getInventory():Remove(self.item)
+        sendRemoveItemFromContainer(self.character:getInventory(), self.item)
     end
-    self.character:removeFromHands(self.item)
-    self.character:getInventory():Remove(self.item)
-    sendRemoveItemFromContainer(self.character:getInventory(), self.item)
+    if result then
+        local KnownLanguages = require('tics/server/KnownLanguages')
+        local ServerSend = require('tics/server/network/ServerSend')
+        ServerSend.KnownLanguages(self.character, KnownLanguages.get(self.character))
+        ServerSend.LanguageBookRead(self.character, result, self.language)
+    end
     return true
+end
+
+-- see ISReadABook.perform, without the book container: the book may already be removed
+function ISReadLanguageBook:perform()
+    self.character:setReading(false)
+    self.item:setJobDelta(0.0)
+    local container = self.item:getContainer()
+    if container then
+        container:setDrawDirty(true)
+    end
+    self.character:playSound('CloseMagazine')
+
+    -- needed to remove from queue / start next.
+    ISBaseTimedAction.perform(self)
 end
 
 function ISReadLanguageBook:start()

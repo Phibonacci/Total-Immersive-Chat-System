@@ -53,12 +53,9 @@ function ClientSend.sendAskKnownLanguages()
     ClientSendCommand('AskKnownLanguages', {})
 end
 
-function ClientSend.sendLearnLanguage(language, code)
-    ClientSendCommand('LearnLanguage', { language = language, code = code })
-end
-
-function ClientSend.sendForgetLanguages()
-    ClientSendCommand('ForgetLanguages', {})
+-- only used to migrate the languages learnt before they were stored on the server
+function ClientSend.sendLearnLanguage(language)
+    ClientSendCommand('LearnLanguage', { language = language })
 end
 
 function ClientSend.sendAskSandboxVars()

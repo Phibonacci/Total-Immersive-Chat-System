@@ -315,13 +315,10 @@ RecvServer['AskKnownLanguages'] = function(player, args)
     ServerSend.KnownLanguages(player, KnownLanguages.get(player))
 end
 
+-- only used to migrate the languages learnt before they were stored on the server,
+-- language books are applied by the server itself (ISReadLanguageBook:complete)
 RecvServer['LearnLanguage'] = function(player, args)
-    KnownLanguages.learn(player, args['language'], args['code'])
-    ServerSend.KnownLanguages(player, KnownLanguages.get(player))
-end
-
-RecvServer['ForgetLanguages'] = function(player, args)
-    KnownLanguages.forgetAll(player)
+    KnownLanguages.learn(player, args['language'])
     ServerSend.KnownLanguages(player, KnownLanguages.get(player))
 end
 

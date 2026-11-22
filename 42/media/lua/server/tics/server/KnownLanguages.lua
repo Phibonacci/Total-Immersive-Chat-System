@@ -4,6 +4,7 @@
 -- character (after a death for example) starts again with the default language only.
 
 local Character = require('tics/shared/utils/Character')
+local Languages = require('tics/shared/languages/Languages')
 
 local KnownLanguages = {}
 
@@ -18,8 +19,7 @@ local function GetKey(player)
 end
 
 local function IsValidLanguage(language, code)
-    return type(language) == 'string' and #language <= 64 and language:match('^[%a ]+$') ~= nil
-        and type(code) == 'string' and code:match('^%a%a%a?$') ~= nil
+    return type(language) == 'string' and Languages[language] ~= nil and Languages[language] == code
 end
 
 -- language name -> language code, always including the default language
@@ -36,7 +36,12 @@ function KnownLanguages.get(player)
     return languages
 end
 
-function KnownLanguages.learn(player, language, code)
+function KnownLanguages.isKnown(player, language)
+    return KnownLanguages.get(player)[language] ~= nil
+end
+
+function KnownLanguages.learn(player, language)
+    local code = Languages[language]
     if not IsValidLanguage(language, code) then
         print('TICS error: KnownLanguages.learn: invalid language "' .. tostring(language) .. '"')
         return

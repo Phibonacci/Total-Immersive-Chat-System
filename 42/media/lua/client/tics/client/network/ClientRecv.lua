@@ -38,6 +38,20 @@ ClientRecv['KnownLanguages'] = function(args)
     LanguageManager:setKnownLanguages(args['languages'])
 end
 
+ClientRecv['LanguageBookRead'] = function(args)
+    local result = args['result']
+    if result == 'forgotten' then
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Messages_languages_forgotten', getText('UI_TICS_Languages_en')))
+        return
+    end
+    local languageTranslated = LanguageManager.GetLanguageTranslated(args['language'])
+    if result == 'learnt' then
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Messages_language_learnt', languageTranslated))
+    elseif result == 'already_known' then
+        ISChat.sendErrorToCurrentTab(getText('UI_TICS_Messages_language_already_learnt', languageTranslated))
+    end
+end
+
 ClientRecv['ServerPrint'] = function(args)
     print('Server: ' .. args.message)
 end

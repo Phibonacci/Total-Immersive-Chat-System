@@ -9,6 +9,11 @@ function ServerSend.KnownLanguages(player, languages)
     ServerSend.Command(player, 'KnownLanguages', { languages = languages })
 end
 
+-- result of a language book read by the player: 'learnt', 'already_known' or 'forgotten'
+function ServerSend.LanguageBookRead(player, result, language)
+    ServerSend.Command(player, 'LanguageBookRead', { result = result, language = language })
+end
+
 function ServerSend.Print(player, message)
     ServerSend.Command(player, 'ServerPrint', { message = message })
 end

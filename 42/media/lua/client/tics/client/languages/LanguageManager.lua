@@ -3,195 +3,13 @@ local ClientSend = require('tics/client/network/ClientSend')
 local LanguageManager = {}
 
 -- Known languages are stored on the server per character (server/tics/server/KnownLanguages.lua)
--- and sent to the client on login. The client keeps them in memory and asks the server to
--- learn / forget languages. This key is the old client side storage, only read to migrate it.
+-- and sent to the client on login and when a language book is read (the server applies the
+-- book, see ISReadLanguageBook). This key is the old client side storage, only read to migrate it.
 local OldLanguageRegister = 'ticsKnownLanguages'
 
 LanguageManager.DefaultLanguage = 'English'
 
-local AllLanguages = {
-    ['Abkhazian']      = 'ab',
-    ['Afar']           = 'aa',
-    ['Afrikaans']      = 'af',
-    ['Akan']           = 'ak',
-    ['Albanian']       = 'sq',
-    ['Amharic']        = 'am',
-    ['Arabic']         = 'ar',
-    ['Aragonese']      = 'an',
-    ['Armenian']       = 'hy',
-    ['Assamese']       = 'as',
-    ['Avaric']         = 'av',
-    ['Aymara']         = 'ay',
-    ['Azerbaijani']    = 'az',
-    ['Bambara']        = 'bm',
-    ['Bashkir']        = 'ba',
-    ['Basque']         = 'eu',
-    ['Belarusian']     = 'be',
-    ['Bengali']        = 'bn',
-    ['Bislama']        = 'bi',
-    ['Bosnian']        = 'bs',
-    ['Breton']         = 'br',
-    ['Bulgarian']      = 'bg',
-    ['Burmese']        = 'my',
-    ['Catalan']        = 'ca',
-    ['Chamorro']       = 'ch',
-    ['Chechen']        = 'ce',
-    ['Chichewa']       = 'ny',
-    ['Chinese']        = 'zh',
-    ['Chuvash']        = 'cv',
-    ['Cornish']        = 'kw',
-    ['Corsican']       = 'co',
-    ['Cree']           = 'cr',
-    ['Croatian']       = 'hr',
-    ['Czech']          = 'cs',
-    ['Danish']         = 'da',
-    ['Divehi']         = 'dv',
-    ['Dutch']          = 'nl',
-    ['Dzongkha']       = 'dz',
-    ['English']        = 'en',
-    ['Esperanto']      = 'eo',
-    ['Estonian']       = 'et',
-    ['Ewe']            = 'ee',
-    ['Faroese']        = 'fo',
-    ['Fijian']         = 'fj',
-    ['Finnish']        = 'fi',
-    ['French']         = 'fr',
-    ['WesternFrisian'] = 'fy',
-    ['Fulah']          = 'ff',
-    ['Gaelic']         = 'gd',
-    ['Galician']       = 'gl',
-    ['Ganda']          = 'lg',
-    ['Georgian']       = 'ka',
-    ['German']         = 'de',
-    ['Greek']          = 'el',
-    ['Kalaallisut']    = 'kl',
-    ['Guarani']        = 'gn',
-    ['Gujarati']       = 'gu',
-    ['HaitianHaitian'] = 'ht',
-    ['Hausa']          = 'ha',
-    ['Hebrew']         = 'he',
-    ['Herero']         = 'hz',
-    ['Hindi']          = 'hi',
-    ['HiriMotu']       = 'ho',
-    ['Hungarian']      = 'hu',
-    ['Icelandic']      = 'is',
-    ['Ido']            = 'io',
-    ['Igbo']           = 'ig',
-    ['Indonesian']     = 'id',
-    ['Interlingua']    = 'ia',
-    ['Interlingue']    = 'ie',
-    ['Inuktitut']      = 'iu',
-    ['Inupiaq']        = 'ik',
-    ['Irish']          = 'ga',
-    ['Italian']        = 'it',
-    ['Japanese']       = 'ja',
-    ['Javanese']       = 'jv',
-    ['Kannada']        = 'kn',
-    ['Kanuri']         = 'kr',
-    ['Kashmiri']       = 'ks',
-    ['Kazakh']         = 'kk',
-    ['CentralKhmer']   = 'km',
-    ['Kikuyu']         = 'ki',
-    ['Kinyarwanda']    = 'rw',
-    ['Kirghiz']        = 'ky',
-    ['Komi']           = 'kv',
-    ['Kongo']          = 'kg',
-    ['Korean']         = 'ko',
-    ['Kuanyama']       = 'kj',
-    ['Kurdish']        = 'ku',
-    ['Lao']            = 'lo',
-    ['Latin']          = 'la',
-    ['Latvian']        = 'lv',
-    ['Limburgan']      = 'li',
-    ['Lingala']        = 'ln',
-    ['Lithuanian']     = 'lt',
-    ['Luba']           = 'lu',
-    ['Luxembourgish']  = 'lb',
-    ['Macedonian']     = 'mk',
-    ['Malagasy']       = 'mg',
-    ['Malay']          = 'ms',
-    ['Malayalam']      = 'ml',
-    ['Maltese']        = 'mt',
-    ['Manx']           = 'gv',
-    ['Maori']          = 'mi',
-    ['Marathi']        = 'mr',
-    ['Marshallese']    = 'mh',
-    ['Mongolian']      = 'mn',
-    ['Nauru']          = 'na',
-    ['Navajo']         = 'nv',
-    ['NorthNdebele']   = 'nd',
-    ['SouthNdebele']   = 'nr',
-    ['Ndonga']         = 'ng',
-    ['Nepali']         = 'ne',
-    ['Norwegian']      = 'no',
-    ['Bokmal']         = 'nb',
-    ['Nynorsk']        = 'nn',
-    ['Occitan']        = 'oc',
-    ['Ojibwa']         = 'oj',
-    ['Oriya']          = 'or',
-    ['Oromo']          = 'om',
-    ['Ossetian']       = 'os',
-    ['Pali']           = 'pi',
-    ['Pashto']         = 'ps',
-    ['Persian']        = 'fa',
-    ['Polish']         = 'pl',
-    ['Portuguese']     = 'pt',
-    ['Punjabi']        = 'pa',
-    ['Quechua']        = 'qu',
-    ['Romanian']       = 'ro',
-    ['Romansh']        = 'rm',
-    ['Rundi']          = 'rn',
-    ['Russian']        = 'ru',
-    ['NorthernSami']   = 'se',
-    ['Samoan']         = 'sm',
-    ['Sango']          = 'sg',
-    ['Sanskrit']       = 'sa',
-    ['Sardinian']      = 'sc',
-    ['Serbian']        = 'sr',
-    ['Shona']          = 'sn',
-    ['Sindhi']         = 'sd',
-    ['Sinhala']        = 'si',
-    ['Slovak']         = 'sk',
-    ['Slovenian']      = 'sl',
-    ['Somali']         = 'so',
-    ['SouthernSotho']  = 'st',
-    ['Spanish']        = 'es',
-    ['Sundanese']      = 'su',
-    ['Swahili']        = 'sw',
-    ['Swati']          = 'ss',
-    ['Swedish']        = 'sv',
-    ['Tagalog']        = 'tl',
-    ['Tahitian']       = 'ty',
-    ['Tajik']          = 'tg',
-    ['Tamil']          = 'ta',
-    ['Tatar']          = 'tt',
-    ['Telugu']         = 'te',
-    ['Thai']           = 'th',
-    ['Tibetan']        = 'bo',
-    ['Tigrinya']       = 'ti',
-    ['Tonga']          = 'to',
-    ['Tsonga']         = 'ts',
-    ['Tswana']         = 'tn',
-    ['Turkish']        = 'tr',
-    ['Turkmen']        = 'tk',
-    ['Twi']            = 'tw',
-    ['Uighur']         = 'ug',
-    ['Ukrainian']      = 'uk',
-    ['Urdu']           = 'ur',
-    ['Uzbek']          = 'uz',
-    ['Venda']          = 've',
-    ['Vietnamese']     = 'vi',
-    ['Volapük']        = 'vo',
-    ['Walloon']        = 'wa',
-    ['Welsh']          = 'cy',
-    ['Wolof']          = 'wo',
-    ['Xhosa']          = 'xh',
-    ['SichuanYi']      = 'ii',
-    ['Yiddish']        = 'yi',
-    ['Yoruba']         = 'yo',
-    ['Zhuang']         = 'za',
-    ['Zulu']           = 'zu',
-}
+local AllLanguages = require('tics/shared/languages/Languages')
 
 local function DefaultKnownLanguages()
     return { [LanguageManager.DefaultLanguage] = AllLanguages[LanguageManager.DefaultLanguage] }
@@ -212,7 +30,7 @@ local function MigrateOldKnownLanguages(serverLanguages)
     end
     for language, code in pairs(old) do
         if serverLanguages[language] == nil and AllLanguages[language] == code then
-            ClientSend.sendLearnLanguage(language, code)
+            ClientSend.sendLearnLanguage(language)
         end
     end
     ModData.remove(OldLanguageRegister)
@@ -268,29 +86,6 @@ end
 
 function LanguageManager.LanguageExists(languageName)
     return AllLanguages[languageName] ~= nil
-end
-
-function LanguageManager:forgetAll()
-    self.knownLanguages = DefaultKnownLanguages()
-    self.currentLanguage = LanguageManager.DefaultLanguage
-    ClientSend.sendForgetLanguages()
-end
-
-function LanguageManager:registerLanguage(language)
-    if not LanguageManager.LanguageExists(language) then
-        print('TICS error: language does not exist: ' .. language)
-    end
-    if self:isKnown(language) then
-        print('TICS info: cannot learn language, already known: ' .. language)
-    end
-    if not LanguageManager.LanguageExists(language) or self:isKnown(language) then
-        return false
-    end
-    local knownLanguages = self:getKnownLanguagesAndInitialize()
-    knownLanguages[language] = AllLanguages[language]
-    print('TICS info: learning language: ' .. knownLanguages[language])
-    ClientSend.sendLearnLanguage(language, AllLanguages[language])
-    return true
 end
 
 function LanguageManager.GetLanguageTranslatedFromCode(languageCode)
