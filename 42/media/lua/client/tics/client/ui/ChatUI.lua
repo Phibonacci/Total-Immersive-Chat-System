@@ -122,6 +122,47 @@ function ChatUI.layoutTitleButtons(self)
     end
 end
 
+local ChipLabels = {
+    say = 'Say', whisper = 'Whisper', low = 'Low', yell = 'Yell',
+    faction = 'Faction', safehouse = 'Safehouse', general = 'General',
+    ooc = 'OOC', pm = 'PM', admin = 'Admin', me = 'Me', ['do'] = 'Do',
+}
+
+local function GetChipLabel(stream)
+    return ChipLabels[stream.name] or stream.name
+end
+
+local function GetChipColor(stream)
+    -- BuildColorFromMessageType (ISChat.lua) raises an error for types without a color
+    local ok, color = pcall(BuildColorFromMessageType, stream.name)
+    if ok and type(color) == 'table' then
+        return { r = color[1] / 255, g = color[2] / 255, b = color[3] / 255 }
+    end
+    return ChatTheme.textActive
+end
+
+-- The text box starts after the channel chip, the box frame drawn by
+-- ChatUI.textEntry.prerender covers both.
+function ChatUI.layoutInput(self)
+    local entry = self.textEntry
+    if entry == nil then
+        return
+    end
+    local chipWidth = 0
+    if self.inputChip then
+        local label = GetChipLabel(self.inputChip.stream)
+        local textWidth = getTextManager():MeasureStringX(UIFont.Small, label)
+        chipWidth = ChatTheme.chipMargin + textWidth + ChatTheme.chipPaddingX * 2
+    end
+    local x = ChatTheme.inputPadding + chipWidth
+    local width = self:getWidth() - ChatTheme.inputPadding * 2 - chipWidth
+    if entry:getX() ~= x or entry:getWidth() ~= width then
+        entry:setX(x)
+        entry:setWidth(width)
+    end
+    entry.chipWidth = chipWidth
+end
+
 function ChatUI:prerender()
     ISChat.instance = self
     self.gearButton.onclick = self.onGearButtonClick
@@ -133,6 +174,7 @@ function ChatUI:prerender()
     end
     self:makeFade(self.fade:fraction())
     ChatUI.layoutTitleButtons(self)
+    ChatUI.layoutInput(self)
 
     local alpha = self.chromeAlpha or 1
     local th = self:titleBarHeight()
@@ -366,11 +408,28 @@ function ChatUI.textEntry:prerender()
     if alpha <= 0.01 then
         return
     end
+    local chipWidth = self.chipWidth or 0
     local background = ChatTheme.pill
-    self:drawRect(0, 0, self.width, self.height, alpha * ChatTheme.inputOpacity,
+    self:drawRect(-chipWidth, 0, self.width + chipWidth, self.height, alpha * ChatTheme.inputOpacity,
         background.r, background.g, background.b)
     local border = ISChat.focused and ChatTheme.accent or ChatTheme.inputBorder
-    self:drawRectBorder(0, 0, self.width, self.height, alpha, border.r, border.g, border.b)
+    self:drawRectBorder(-chipWidth, 0, self.width + chipWidth, self.height, alpha, border.r, border.g, border.b)
+
+    local chip = chat and chat.inputChip
+    if chip and chipWidth > 0 then
+        local font = UIFont.Small
+        local label = GetChipLabel(chip.stream)
+        local fontHeight = getTextManager():getFontHeight(font)
+        local chipHeight = math.min(fontHeight + 2, self.height - 6)
+        local chipX = -chipWidth + ChatTheme.chipMargin
+        local chipY = (self.height - chipHeight) / 2
+        local chipBackground = ChatTheme.chip
+        self:drawRect(chipX, chipY, chipWidth - ChatTheme.chipMargin - 2, chipHeight, alpha,
+            chipBackground.r, chipBackground.g, chipBackground.b)
+        local color = GetChipColor(chip.stream)
+        self:drawText(label, chipX + ChatTheme.chipPaddingX, chipY + (chipHeight - fontHeight) / 2,
+            color.r, color.g, color.b, alpha, font)
+    end
 end
 
 function ChatUI.textEntry:instantiate()

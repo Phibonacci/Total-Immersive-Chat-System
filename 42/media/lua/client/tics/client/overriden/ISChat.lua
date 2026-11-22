@@ -155,10 +155,63 @@ local function UpdateRangeIndicator(stream)
     end
 end
 
+-- Input channel chip: typing a channel command followed by a space ("/s ", "/yell "...)
+-- moves the command out of the text into a label on the left of the input box.
+-- getInputText() always returns the full text, command included.
+local function FindChipStream(text)
+    for _, stream in ipairs(ISChat.allChatStreams) do
+        if stream.command and luautils.stringStarts(text, stream.command) then
+            return stream, stream.command
+        elseif stream.shortCommand and luautils.stringStarts(text, stream.shortCommand) then
+            return stream, stream.shortCommand
+        end
+    end
+    return nil
+end
+
+function ISChat:getInputText()
+    local prefix = self.inputChip and self.inputChip.prefix or ''
+    return prefix .. self.textEntry:getInternalText()
+end
+
+function ISChat:setInputText(text)
+    local stream, prefix = FindChipStream(text or '')
+    if stream then
+        self.inputChip = { stream = stream, prefix = prefix }
+        text = text:sub(#prefix + 1)
+    else
+        self.inputChip = nil
+    end
+    self.textEntry:setText(text or '')
+end
+
+-- backspace in an empty input box puts the command back in the text so it can be edited
+function ISChat:removeInputChip()
+    if self.inputChip == nil then
+        return
+    end
+    local command = self.inputChip.prefix:gsub('%s+$', '')
+    self.inputChip = nil
+    self.textEntry:setText(command .. self.textEntry:getInternalText())
+    ISChat.onTextChange()
+end
+
+-- called every frame, the text box does not report a backspace on an empty text
+-- and key events are not sent to Lua while typing
+function ISChat:updateInputChipBackspace()
+    local isEmpty = self.textEntry:getInternalText() == ''
+    local backspaceDown = ISChat.focused and GameKeyboard.isKeyDownRaw(Keyboard.KEY_BACK)
+    if backspaceDown and not self.backspaceWasDown and self.inputWasEmpty and isEmpty then
+        self:removeInputChip()
+        isEmpty = self.textEntry:getInternalText() == ''
+    end
+    self.backspaceWasDown = backspaceDown
+    self.inputWasEmpty = isEmpty
+end
+
 ISChat.onSwitchStream = function()
     if ISChat.focused then
-        local t = ISChat.instance.textEntry
-        local internalText = t:getInternalText()
+        local internalText = ISChat.instance:getInputText()
         local data = luautils.split(internalText, " ")
         local onlineUsers = getOnlinePlayers()
         for i = 0, onlineUsers:size() - 1 do
@@ -169,7 +222,7 @@ ISChat.onSwitchStream = function()
                     txt = txt .. data[i] .. " "
                 end
                 txt = txt .. username
-                ISChat.instance.textEntry:setText(txt)
+                ISChat.instance:setInputText(txt)
                 return
             end
         end
@@ -182,7 +235,7 @@ ISChat.onSwitchStream = function()
         curTxtPanel.streamID = curTxtPanel.streamID % #chatStreams + 1
         local stream = chatStreams[curTxtPanel.streamID]
         ISChat.lastTabStream[ISChat.instance.currentTabID] = stream
-        ISChat.instance.textEntry:setText(stream.command)
+        ISChat.instance:setInputText(stream.command)
         UpdateRangeIndicator(stream)
     end
 end
@@ -577,7 +630,7 @@ local function ProcessTicsCommand(ticsCommand, message)
 end
 
 function ISChat:onCommandEntered()
-    local command = ISChat.instance.textEntry:getText()
+    local command = ISChat.instance:getInputText()
     local chat = ISChat.instance
 
     ISChat.instance:unfocus(true) -- the message is sent, nothing to keep
@@ -964,8 +1017,8 @@ local function AddMessageToTab(tabID, language, time, formattedMessage, line, ch
             table.insert(ISChat.instance.panel.blinkTabs, chatText.tabTitle)
         end
     end
-    local vscroll = chatText.vscroll
-    local scrolledToBottom = (chatText:getScrollHeight() <= chatText:getHeight()) or (vscroll and vscroll.pos == 1)
+    -- follow the new messages only if the player did not scroll up
+    local scrolledToBottom = chatText:isScrolledToBottom()
     if #chatText.chatTextLines > ISChat.maxLine then
         local newLines = {}
         for i, v in ipairs(chatText.chatTextLines) do
@@ -1517,6 +1570,7 @@ function ISChat:prerender()
     local instance = ISChat.instance
 
     instance:createValidationWindowButton()
+    instance:updateInputChipBackspace()
 
     if instance.rangeIndicator ~= nil then
         if instance.rangeButtonState == 'visible' then
@@ -1563,13 +1617,21 @@ function IsOnlyCommand(text)
 end
 
 function ISChat.onTextChange()
-    local t = ISChat.instance.textEntry
-    local internalText = t:getInternalText()
+    local chat = ISChat.instance
+    local t = chat.textEntry
+    local typed = t:getInternalText()
+    -- "/command " at the start of the text becomes the channel chip
+    local chipStream, chipPrefix = FindChipStream(typed)
+    if chipStream then
+        chat.inputChip = { stream = chipStream, prefix = chipPrefix }
+        t:setText(typed:sub(#chipPrefix + 1))
+    end
+    local internalText = chat:getInputText()
     if #internalText > 1
         and IsOnlyCommand(internalText:sub(1, #internalText - 1))
         and internalText:sub(#internalText) == '/'
     then
-        t:setText("/")
+        chat:setInputText("/")
         if ISChat.instance.rangeIndicator then
             ISChat.instance.rangeIndicator:unsubscribe()
         end
@@ -1581,7 +1643,7 @@ function ISChat.onTextChange()
     if internalText == '/r' and ISChat.instance.lastPrivateMessageAuthor ~= nil
         and ISChat.instance.currentTabID == 3
     then
-        t:setText('/pm ' .. ISChat.instance.lastPrivateMessageAuthor .. ' ')
+        chat:setInputText('/pm ' .. ISChat.instance.lastPrivateMessageAuthor .. ' ')
         return
     end
     local stream = GetCommandFromMessage(internalText)
@@ -2232,11 +2294,11 @@ function ISChat:focus()
     local stream = ISChat.lastTabStream[ISChat.instance.currentTabID]
     if self.draftText then
         -- restore what the player was writing before the chat was unfocused
-        self.textEntry:setText(self.draftText)
+        self:setInputText(self.draftText)
         stream = GetCommandFromMessage(self.draftText) or stream
         self.draftText = nil
     else
-        self.textEntry:setText(stream['command'])
+        self:setInputText(stream['command'])
     end
     UpdateRangeIndicator(stream)
     self.fade:reset()
@@ -2249,13 +2311,14 @@ function ISChat:unfocus(clearText)
     if clearText then
         self.draftText = nil
     elseif ISChat.focused then
-        local text = self.textEntry:getText()
+        local text = self:getInputText()
         if text ~= nil and string.trim(text) ~= '' and not IsOnlyCommand(text) then
             self.draftText = text
         end
     end
     self.textEntry:unfocus()
     -- the box is emptied either way, the text would be drawn over the unfocused chat
+    self.inputChip = nil
     self.textEntry:setText("")
     if ISChat.focused then
         self.fade:reset() -- to begin fade. unfocus called when element was unfocused also.

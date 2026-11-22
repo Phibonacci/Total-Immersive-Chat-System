@@ -389,6 +389,15 @@ function ChatText:scrollToTop()
     return true
 end
 
+-- computed from the scroll offset: the scroll bar is hidden so its position is never updated
+function ChatText:isScrolledToBottom()
+    local maxScroll = self:getScrollHeight() - self:getScrollAreaHeight()
+    if maxScroll <= 0 then
+        return true
+    end
+    return -self:getYScroll() >= maxScroll - 4
+end
+
 function ChatText:scrollToBottom()
     self:setYScroll(-(self:getScrollHeight() - self:getScrollAreaHeight()))
     return true

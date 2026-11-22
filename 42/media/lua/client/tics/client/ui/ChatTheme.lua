@@ -17,6 +17,7 @@ local ChatTheme = {
     textHover      = rgb(215, 215, 215),
     iconIdle       = rgb(169, 169, 169),
     pill           = rgb(0, 0, 0),
+    chip           = rgb(58, 58, 58),  -- channel label in the input box
 
     bodyOpacity    = 0.92, -- multiplied by the player's chat opacity settings
     stripeOpacity  = 0.045,
@@ -24,6 +25,9 @@ local ChatTheme = {
     pillOpacity    = 0.55,
 
     iconSize       = 14,
+    inputPadding   = 6,  -- space between the window border and the input box
+    chipMargin     = 6,  -- space between the input box border and the channel label
+    chipPaddingX   = 6,
     buttonGap      = 2,
     textPaddingX   = 12,
     textPaddingTop = 6,
