@@ -1,4 +1,4 @@
-local ISReadLanguageBook = require('tics/client/languages/ISReadLanguageBook')
+local ISReadLanguageBook = require('tics/shared/languages/ISReadLanguageBook')
 local LanguageManager    = require('tics/client/languages/LanguageManager')
 
 
@@ -41,7 +41,7 @@ function ISInventoryMenuElements.ContextLanguageBooks()
     end
 
     function self.registerLanguage(_p, item, languageName)
-        ISTimedActionQueue.add(ISReadLanguageBook:new(getPlayer(), item, languageName, 1))
+        ISTimedActionQueue.add(ISReadLanguageBook:new(getPlayer(), item, languageName))
     end
 
     return self
