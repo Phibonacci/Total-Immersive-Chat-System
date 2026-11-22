@@ -80,6 +80,9 @@ RecvServer['ChatMessage'] = function(player, args)
     ChatMessage.ProcessMessage(player, args, 'ChatMessage', true)
 end
 
+RecvServer['ChangeName'] = function(player, args)
+    ChatMessage.ChangeName(player, args.fullName) -- Pass args.fullName to ChatMessage.ChangeName
+end
 
 RecvServer['Typing'] = function(player, args)
     ChatMessage.ProcessMessage(player, args, 'Typing', false)

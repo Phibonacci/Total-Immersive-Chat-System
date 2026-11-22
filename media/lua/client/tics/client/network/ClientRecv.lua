@@ -190,11 +190,30 @@ ClientRecv['RollResult'] = function(args)
     ISChat.onDiceResult(username, characterName, diceCount, diceType, addCount, diceResults, finalResult)
 end
 
+ClientRecv["OverheadNameChange"] = function(args) -- Shows new name over player's head
+    local onlineID     = args.onlineID
+    local overheadName = args.overheadName
+    if not onlineID or not overheadName then
+        print("TICS error: OverheadNameChange packet missing data.")
+        return
+    end
+    local targetPlayer = getPlayerByOnlineID(onlineID)
+    if targetPlayer then
+        targetPlayer:setName(overheadName)
+        print("Updated overhead name to: " .. overheadName .. " for onlineID " .. onlineID)
+    else
+        print("TICS error: No player found with onlineID:", onlineID)
+    end
+end
+
+
+
 function OnServerCommand(module, command, args)
     if module == 'TICS' and ClientRecv[command] then
         ClientRecv[command](args)
     end
 end
+
 
 Events.OnServerCommand.Add(OnServerCommand)
 

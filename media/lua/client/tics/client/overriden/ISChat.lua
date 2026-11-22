@@ -43,7 +43,9 @@ ISChat.ticsCommand    = {}
 ISChat.ticsCommand[1] = { name = 'color', command = '/color', shortCommand = nil }
 ISChat.ticsCommand[2] = { name = 'pitch', command = '/pitch', shortCommand = nil }
 ISChat.ticsCommand[3] = { name = 'roll', command = '/roll', shortCommand = nil }
-ISChat.ticsCommand[3] = { name = 'language', command = '/language', shortCommand = '/la' }
+ISChat.ticsCommand[4] = { name = 'language', command = '/language', shortCommand = '/la' }
+ISChat.ticsCommand[5] = { name = 'roll', command = '/roll', shortCommand = nil }
+ISChat.ticsCommand[6] = { name = 'name', command = '/name', shortCommand = nil }
 
 
 ISChat.defaultTabStream    = {}
@@ -530,6 +532,36 @@ local function ProcessLanguageCommand(arguments)
     return true
 end
 
+local function ProcessNameCommand(arguments)
+    -- If no arguments, simply display the current name.
+    if not arguments or arguments == "" then
+        local character = getPlayer()
+        local currentName = character:getDescriptor():getForename() .. " " .. character:getDescriptor():getSurname()
+        ISChat.sendInfoToCurrentTab("Your name is " .. currentName)
+        return true
+    end
+
+    -- The entire argument string is now the full name
+    local fullName = arguments
+
+    -- Validate length: for example, maximum 30 characters.
+    if #fullName > 30 then -- Match server-side limit
+        ISChat.sendErrorToCurrentTab("Your name must be 30 characters or less.")
+        return false
+    end
+
+    -- Validate that names contain only letters and spaces.
+    if not fullName:match("^[%a%s]+$") then -- Allow letters and spaces
+        ISChat.sendErrorToCurrentTab("Name can only contain letters and spaces.")
+        return false
+    end
+
+    -- Send the change to the server.
+    ClientSend.sendChangeName(fullName) -- Send fullName
+    return true
+end
+
+
 local function ProcessTicsCommand(ticsCommand, message)
     local arguments = GetArgumentsFromMessage(ticsCommand, message)
     if ticsCommand['name'] == 'color' then
@@ -555,6 +587,59 @@ local function ProcessTicsCommand(ticsCommand, message)
                 'language command expects the format: "/language en" with "en" the language code')
             return false
         end
+    elseif ticsCommand['name'] == 'name' then
+        -- If name changes are disabled by an admin, then exit.
+        if not SandboxVars.TICS.NameChangeEnabled then
+            getPlayer():addLineChatElement("Name Changing has been disabled by an Admin.", 1, 0, 0)
+            doKeyPress(false)
+            ISChat.instance.timerTextEntry = 20
+            ISChat.instance:unfocus()
+            return false
+        end
+
+        -- Extract the arguments (the new name text)
+        local arguments = GetArgumentsFromMessage(ticsCommand, message)
+        if not arguments or arguments == "" then
+            local character = getPlayer()
+            local currentName = character:getDescriptor():getForename() .. " " .. character:getDescriptor():getSurname()
+            ISChat.sendInfoToCurrentTab("Your name is " .. currentName)
+            return true
+        end
+
+        -- The entire argument string is now the full name
+        local fullName = arguments
+
+        -- Validate lengths.
+        if #fullName > 30 then -- **Increased to 30 characters**
+            ISChat.sendErrorToCurrentTab("Your name must be 30 characters or less.") -- **Updated message**
+            return false
+        end
+
+        -- Validate that names contain only letters and spaces.
+        if not fullName:match("^[%a%d%s%-%(%)%[%]/]+$") then -- **Comprehensive regex WITH parentheses and brackets**
+            ServerSend.ChatErrorMessage(player, nil, "Name is invalid.");
+            return
+        end
+
+        -- Process the name change on the client:
+        local player = getPlayer()
+        local descriptor = player:getDescriptor()
+        if descriptor then
+            descriptor:setForename(fullName) -- Now set forename to fullName directly
+            if descriptor.setSurname then
+                descriptor:setSurname("") -- Clear surname, or set a default surname if you prefer
+            else
+                print("DEBUG: descriptor.setSurname is nil; surname not updated.")
+            end
+        end
+
+        -- Sync with the server so other clients eventually update:
+        sendPlayerStatsChange(player)
+
+        -- Have the player announce the change.
+        player:Say(getText("UI_name_change_roleplaychat") .. fullName) -- Announce with fullName // currently doesn't broadcast, local only
+
+        return true
     end
 end
 

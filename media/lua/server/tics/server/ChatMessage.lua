@@ -286,6 +286,62 @@ local function HasTicsSandboxVarsChanged()
     return false
 end
 
+function ChatMessage.ChangeName(player, fullName) -- Changed from surname forename to fullName to allow flexibility
+    -- Validate the incoming name
+    if not fullName or #fullName == 0 then -- Validate fullName
+        ServerSend.ChatErrorMessage(player, nil, "Invalid name format.")
+        return
+    end
+    if #fullName > 30 then -- **Increased to 30 characters on server-side as well**
+        ServerSend.ChatErrorMessage(player, nil, "Name length is too long (max 30 characters).") -- **Updated message**
+        return
+    end
+    -- Allow spaces and letters, you might want to refine this regex
+    if not fullName:match("^[%a%d%s%-%(%)%[%]/]+$") then -- **Comprehensive regex WITH parentheses and brackets**
+        ServerSend.ChatErrorMessage(player, nil, "Name is invalid.");
+        return
+    end
+
+    -- Update the player's descriptor (server-side)
+    local descriptor = player:getDescriptor()
+    if not descriptor then
+        print("TICS error: player descriptor is nil.")
+        return
+    end
+
+    -- Set the full name. We'll use setForename and setSurname, splitting by space.
+    local nameParts = luautils.split(fullName, " ", 2) -- Split at most into 2 parts
+
+    local forename = nameParts[1] or fullName -- If no space, use the whole name as forename
+    local surname = nameParts[2] or ""        -- Surname will be empty if no space
+
+    descriptor:setForename(forename)
+    if descriptor.setSurname then
+        descriptor:setSurname(surname)
+    else
+        print("DEBUG: descriptor.setSurname is nil; surname not updated.")
+    end
+
+    -- Construct the new overhead name (full name)
+    local newName = fullName
+    ServerSend.ChatInfoMessage(player, "Your name has been changed to " .. newName .. ".")
+    print("Player " .. player:getUsername() .. " changed their name to " .. newName)
+
+    -- Broadcast a custom packet so each client updates the overhead name
+    local playerOnlineID = player:getOnlineID()
+    local onlinePlayers  = getOnlinePlayers()
+    for i = 0, onlinePlayers:size() - 1 do
+        local targetPlayer = onlinePlayers:get(i)
+        ServerSend.Command(targetPlayer, "OverheadNameChange", {
+            onlineID     = playerOnlineID,
+            overheadName = newName
+        })
+    end
+end
+
+
+
+
 local function DetectMessageTypeSettingsUpdate()
     if ChatMessage.MessageTypeSettings == nil then
         return

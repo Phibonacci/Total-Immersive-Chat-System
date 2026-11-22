@@ -1,4 +1,5 @@
 UI_EN = {
+    UI_name_change_roleplaychat = "Name changed to ",
     UI_TICS_chat_enable_voices  = "Enable voices",
     UI_TICS_chat_disable_voices = "Disable voices",
     UI_TICS_enable_radio_icon   = "Show radio icon",

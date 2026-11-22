@@ -309,6 +309,14 @@ option TICS.YellColor
 	page = TICSChannels,
 	translation = TICS_YellColor,
 }
+option TICS.NameChangeEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICSChannels,
+	translation = TICS_NameChangeEnabled,
+}
 
 option TICS.PrivateMessageEnabled
 {
