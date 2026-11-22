@@ -1,4 +1,5 @@
 local ChatTheme = require('tics/client/ui/ChatTheme')
+local LanguageManager = require('tics/client/languages/LanguageManager')
 
 local ChatUI = {}
 ChatUI.tabPanel = {}
@@ -149,6 +150,106 @@ end
 
 -- The text box starts after the channel chip, the box frame drawn by
 -- ChatUI.textEntry.prerender covers both.
+-- Language selector: a button at the right end of the input box showing the code of the
+-- current language, it opens the list of the known languages. Only when languages are enabled.
+local function IsLanguageSelectorEnabled()
+    return TicsServerSettings ~= nil and TicsServerSettings['options'] ~= nil
+        and TicsServerSettings['options']['languages'] == true
+end
+
+local function GetCurrentLanguageCode()
+    local code = LanguageManager.GetCodeFromLanguage(LanguageManager:getCurrentLanguage())
+    return (code or LanguageManager.GetCodeFromLanguage(LanguageManager.DefaultLanguage) or '?'):upper()
+end
+
+local LANGUAGE_ARROW_WIDTH = 5
+
+-- fixed width (two letters) so the input box does not change when the language changes
+local function GetLanguageButtonWidth()
+    return getTextManager():MeasureStringX(UIFont.Small, 'WW') + ChatTheme.chipPaddingX * 2
+        + LANGUAGE_ARROW_WIDTH + 4
+end
+
+local function OnLanguageSelected(chat, language)
+    LanguageManager:setCurrentLanguageFromCode(LanguageManager.GetCodeFromLanguage(language))
+    if ISChat.focused then
+        chat.textEntry:focus() -- the menu took the keyboard focus
+    end
+end
+
+local function OnLanguageButtonClick(chat, button)
+    local x = button:getAbsoluteX()
+    local y = button:getAbsoluteY()
+    local context = ISContextMenu.get(0, x, y)
+    local languages = {}
+    for language in pairs(LanguageManager:getKnownLanguages()) do
+        table.insert(languages, { name = language, translated = LanguageManager.GetLanguageTranslated(language) })
+    end
+    table.sort(languages, function(a, b) return a.translated < b.translated end)
+    local current = LanguageManager:getCurrentLanguage()
+    for _, language in ipairs(languages) do
+        local option = context:addOption(language.translated, chat, OnLanguageSelected, language.name)
+        if language.name == current then
+            context:setOptionChecked(option, true)
+        end
+    end
+    -- open above the button, the input box is at the bottom of the chat
+    context:calcHeight()
+    local menuY = math.max(0, y - context:getHeight())
+    context.requestY = menuY
+    context:setSlideGoalY(menuY, menuY)
+end
+
+local function RenderLanguageButton(self)
+    local chat = ISChat.instance
+    local alpha = chat and chat.chromeAlpha or 1
+    local font = UIFont.Small
+    local chip = ChatTheme.chip
+    local textColor = self:isMouseOver() and ChatTheme.textActive or ChatTheme.textHover
+    self:drawRect(0, 0, self.width, self.height, alpha, chip.r, chip.g, chip.b)
+    local code = GetCurrentLanguageCode()
+    local fontHeight = getTextManager():getFontHeight(font)
+    self:drawText(code, ChatTheme.chipPaddingX, (self.height - fontHeight) / 2,
+        textColor.r, textColor.g, textColor.b, alpha, font)
+    -- small arrow pointing down
+    local arrowX = self.width - ChatTheme.chipPaddingX - LANGUAGE_ARROW_WIDTH
+    local arrowY = math.floor(self.height / 2) - 1
+    for row = 0, 2 do
+        self:drawRect(arrowX + row, arrowY + row, LANGUAGE_ARROW_WIDTH - row * 2, 1,
+            alpha, textColor.r, textColor.g, textColor.b)
+    end
+end
+
+local function UpdateLanguageButton(self, entry, languageWidth)
+    if languageWidth == 0 then
+        if self.languageButton then
+            self.languageButton:setVisible(false)
+        end
+        return
+    end
+    if self.languageButton == nil then
+        local button = ISButton:new(0, 0, 10, 10, '', self, OnLanguageButtonClick)
+        button:initialise()
+        button:instantiate()
+        button.render = RenderLanguageButton
+        button.prerender = function() end
+        button.anchorRight = false
+        button.anchorBottom = false
+        self:addChild(button)
+        self.languageButton = button
+    end
+    local button = self.languageButton
+    local fontHeight = getTextManager():getFontHeight(UIFont.Small)
+    local height = math.min(fontHeight + 2, entry:getHeight() - 6)
+    button:setWidth(languageWidth - ChatTheme.chipMargin - 2)
+    button:setHeight(height)
+    button:setX(entry:getRight() + 2)
+    button:setY(entry:getY() + (entry:getHeight() - height) / 2)
+    -- hidden with the window in HUD mode, a click there then focuses the chat
+    button:setVisible((self.chromeAlpha or 1) > 0.05)
+    button:bringToTop()
+end
+
 function ChatUI.layoutInput(self)
     local entry = self.textEntry
     if entry == nil then
@@ -160,13 +261,19 @@ function ChatUI.layoutInput(self)
         local textWidth = getTextManager():MeasureStringX(UIFont.Small, label)
         chipWidth = ChatTheme.chipMargin + textWidth + ChatTheme.chipPaddingX * 2
     end
+    local languageWidth = 0
+    if IsLanguageSelectorEnabled() then
+        languageWidth = GetLanguageButtonWidth() + ChatTheme.chipMargin
+    end
     local x = ChatTheme.inputPadding + chipWidth
-    local width = self:getWidth() - ChatTheme.inputPadding * 2 - chipWidth
+    local width = self:getWidth() - ChatTheme.inputPadding * 2 - chipWidth - languageWidth
     if entry:getX() ~= x or entry:getWidth() ~= width then
         entry:setX(x)
         entry:setWidth(width)
     end
     entry.chipWidth = chipWidth
+    entry.languageWidth = languageWidth
+    UpdateLanguageButton(self, entry, languageWidth)
 end
 
 function ChatUI:prerender()
@@ -415,11 +522,12 @@ function ChatUI.textEntry:prerender()
         return
     end
     local chipWidth = self.chipWidth or 0
+    local frameWidth = self.width + chipWidth + (self.languageWidth or 0)
     local background = ChatTheme.pill
-    self:drawRect(-chipWidth, 0, self.width + chipWidth, self.height, alpha * ChatTheme.inputOpacity,
+    self:drawRect(-chipWidth, 0, frameWidth, self.height, alpha * ChatTheme.inputOpacity,
         background.r, background.g, background.b)
     local border = ISChat.focused and ChatTheme.accent or ChatTheme.inputBorder
-    self:drawRectBorder(-chipWidth, 0, self.width + chipWidth, self.height, alpha, border.r, border.g, border.b)
+    self:drawRectBorder(-chipWidth, 0, frameWidth, self.height, alpha, border.r, border.g, border.b)
 
     local chip = chat and chat.inputChip
     if chip and chipWidth > 0 then
