@@ -1,6 +1,7 @@
 local AvatarManager = require('tics/server/AvatarManager')
 local Character     = require('tics/shared/utils/Character')
 local ChatMessage   = require('tics/server/ChatMessage')
+local KnownLanguages = require('tics/server/KnownLanguages')
 local ServerSend    = require('tics/server/network/ServerSend')
 local Radio         = require('tics/server/radio/Radio')
 local RadioManager  = require('tics/server/radio/RadioManager')
@@ -308,6 +309,20 @@ RecvServer['Roll'] = function(player, args)
         return
     end
     ChatMessage.RollDice(player, diceCount, diceType, addCount)
+end
+
+RecvServer['AskKnownLanguages'] = function(player, args)
+    ServerSend.KnownLanguages(player, KnownLanguages.get(player))
+end
+
+RecvServer['LearnLanguage'] = function(player, args)
+    KnownLanguages.learn(player, args['language'], args['code'])
+    ServerSend.KnownLanguages(player, KnownLanguages.get(player))
+end
+
+RecvServer['ForgetLanguages'] = function(player, args)
+    KnownLanguages.forgetAll(player)
+    ServerSend.KnownLanguages(player, KnownLanguages.get(player))
 end
 
 local function OnClientCommand(module, command, player, args)

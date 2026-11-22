@@ -1,4 +1,5 @@
 local AvatarManager = require('tics/client/AvatarManager')
+local LanguageManager = require('tics/client/languages/LanguageManager')
 local Radio = require('tics/client/Radio')
 
 local ClientRecv = {}
@@ -31,6 +32,10 @@ end
 
 ClientRecv['ChatError'] = function(args)
     ISChat.onChatErrorPacket(args['type'], args['message'])
+end
+
+ClientRecv['KnownLanguages'] = function(args)
+    LanguageManager:setKnownLanguages(args['languages'])
 end
 
 ClientRecv['ServerPrint'] = function(args)

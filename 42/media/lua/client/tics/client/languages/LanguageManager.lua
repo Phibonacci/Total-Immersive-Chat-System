@@ -1,6 +1,11 @@
+local ClientSend = require('tics/client/network/ClientSend')
+
 local LanguageManager = {}
 
-local LanguageRegister = 'ticsKnownLanguages'
+-- Known languages are stored on the server per character (server/tics/server/KnownLanguages.lua)
+-- and sent to the client on login. The client keeps them in memory and asks the server to
+-- learn / forget languages. This key is the old client side storage, only read to migrate it.
+local OldLanguageRegister = 'ticsKnownLanguages'
 
 LanguageManager.DefaultLanguage = 'English'
 
@@ -188,15 +193,50 @@ local AllLanguages = {
     ['Zulu']           = 'zu',
 }
 
+local function DefaultKnownLanguages()
+    return { [LanguageManager.DefaultLanguage] = AllLanguages[LanguageManager.DefaultLanguage] }
+end
+
 function LanguageManager:getKnownLanguagesAndInitialize()
-    local knownLanguages = ModData.get(LanguageRegister)
-    if knownLanguages == nil or knownLanguages[LanguageManager.DefaultLanguage] == nil then
-        knownLanguages = {
-            [LanguageManager.DefaultLanguage] = AllLanguages[LanguageManager.DefaultLanguage]
-        }
-        ModData.add(LanguageRegister, knownLanguages)
+    if self.knownLanguages == nil or self.knownLanguages[LanguageManager.DefaultLanguage] == nil then
+        self.knownLanguages = DefaultKnownLanguages()
     end
-    return knownLanguages
+    return self.knownLanguages
+end
+
+-- languages learnt before they were stored on the server (only saved in single player)
+local function MigrateOldKnownLanguages(serverLanguages)
+    local old = ModData.get(OldLanguageRegister)
+    if type(old) ~= 'table' then
+        return
+    end
+    for language, code in pairs(old) do
+        if serverLanguages[language] == nil and AllLanguages[language] == code then
+            ClientSend.sendLearnLanguage(language, code)
+        end
+    end
+    ModData.remove(OldLanguageRegister)
+end
+
+-- list sent by the server: language name -> language code
+function LanguageManager:setKnownLanguages(languages)
+    local knownLanguages = DefaultKnownLanguages()
+    for language, code in pairs(languages or {}) do
+        if AllLanguages[language] == code then
+            knownLanguages[language] = code
+        end
+    end
+    self.knownLanguages = knownLanguages
+    if knownLanguages[self.currentLanguage] == nil then
+        self.currentLanguage = LanguageManager.DefaultLanguage
+    end
+    MigrateOldKnownLanguages(knownLanguages)
+end
+
+-- On login this is called once the sandbox vars are received (ISChat.onRecvSandboxVars):
+-- the server drops the commands sent before it is ready to receive them.
+function LanguageManager:askKnownLanguages()
+    ClientSend.sendAskKnownLanguages()
 end
 
 function LanguageManager.GetLanguages()
@@ -231,10 +271,9 @@ function LanguageManager.LanguageExists(languageName)
 end
 
 function LanguageManager:forgetAll()
-    local knownLanguages = {
-        [LanguageManager.DefaultLanguage] = AllLanguages[LanguageManager.DefaultLanguage]
-    }
-    ModData.add(LanguageRegister, knownLanguages)
+    self.knownLanguages = DefaultKnownLanguages()
+    self.currentLanguage = LanguageManager.DefaultLanguage
+    ClientSend.sendForgetLanguages()
 end
 
 function LanguageManager:registerLanguage(language)
@@ -250,7 +289,7 @@ function LanguageManager:registerLanguage(language)
     local knownLanguages = self:getKnownLanguagesAndInitialize()
     knownLanguages[language] = AllLanguages[language]
     print('TICS info: learning language: ' .. knownLanguages[language])
-    ModData.add(LanguageRegister, knownLanguages)
+    ClientSend.sendLearnLanguage(language, AllLanguages[language])
     return true
 end
 
@@ -326,5 +365,8 @@ local function CreateLanguageManager()
 end
 
 local instance = CreateLanguageManager()
+
+-- new character (after a death for example), the login case is handled by ISChat.onRecvSandboxVars
+Events.OnCreatePlayer.Add(function() instance:askKnownLanguages() end)
 
 return instance

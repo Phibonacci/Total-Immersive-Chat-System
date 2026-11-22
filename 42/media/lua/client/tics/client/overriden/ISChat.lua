@@ -1887,6 +1887,8 @@ ISChat.onRecvSandboxVars = function(messageTypeSettings)
 
     local knownAvatars = AvatarManager:getKnownAvatars()
     ClientSend.sendKnownAvatars(knownAvatars)
+    -- the server answered, it is ready to receive commands
+    LanguageManager:askKnownLanguages()
 
     TicsServerSettings = messageTypeSettings -- a global
 

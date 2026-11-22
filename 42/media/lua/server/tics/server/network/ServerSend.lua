@@ -4,6 +4,11 @@ function ServerSend.Command(player, commandName, args)
     sendServerCommand(player, 'TICS', commandName, args)
 end
 
+-- languages: language name -> language code
+function ServerSend.KnownLanguages(player, languages)
+    ServerSend.Command(player, 'KnownLanguages', { languages = languages })
+end
+
 function ServerSend.Print(player, message)
     ServerSend.Command(player, 'ServerPrint', { message = message })
 end

@@ -49,6 +49,18 @@ function ClientSend.sendTyping(author, type)
     })
 end
 
+function ClientSend.sendAskKnownLanguages()
+    ClientSendCommand('AskKnownLanguages', {})
+end
+
+function ClientSend.sendLearnLanguage(language, code)
+    ClientSendCommand('LearnLanguage', { language = language, code = code })
+end
+
+function ClientSend.sendForgetLanguages()
+    ClientSendCommand('ForgetLanguages', {})
+end
+
 function ClientSend.sendAskSandboxVars()
     if not isClient() then return end
     ClientSendCommand('AskSandboxVars', {})
