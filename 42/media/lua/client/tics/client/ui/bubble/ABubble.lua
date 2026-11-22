@@ -94,6 +94,8 @@ function ABubble:parseMessage(length)
 end
 
 function ABubble:updateText(x, y)
+    -- x, y were computed by the caller from the current height
+    local heightBefore = self:getHeight()
     local time = Calendar.getInstance():getTimeInMillis()
     local elapsedTime = time - self.startTime
     local delta = time - self.previousTime
@@ -115,6 +117,8 @@ function ABubble:updateText(x, y)
     self.rawText = rawMessage
     self:paginate()
     self:animateHeight()
+    -- the bubble grows upward: keep its bottom (and the portrait drawn on it) in place
+    y = y - (self:getHeight() - heightBefore)
 
     if self.voice then
         self.voice:subscribe()
