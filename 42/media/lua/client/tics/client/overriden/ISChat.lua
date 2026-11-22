@@ -835,12 +835,22 @@ local function BuildChannelPrefixString(channel)
         return ''
     end
     local color
-    if TicsServerSettings ~= nil then
+    if TicsServerSettings ~= nil and TicsServerSettings[channel] and TicsServerSettings[channel]['color'] then
         color = TicsServerSettings[channel]['color']
     else
         color = { 255, 255, 255 }
     end
-    return StringBuilder.BuildBracketColorString(color) .. '[' .. channel .. '] '
+    -- dimmed so the tag stays secondary to the name and the message
+    local dimmed = {
+        math.floor(color[1] * 0.75), math.floor(color[2] * 0.75), math.floor(color[3] * 0.75),
+    }
+    -- same translated label as the channel label of the input box
+    local key = 'UI_TICS_chip_' .. channel
+    local label = getText(key)
+    if label == nil or label == key then
+        label = channel:sub(1, 1):upper() .. channel:sub(2)
+    end
+    return StringBuilder.BuildBracketColorString(dimmed) .. '[' .. label .. '] '
 end
 
 

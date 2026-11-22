@@ -19,9 +19,13 @@ function StringBuilder.GetCurrentFormatedTime(time)
     return string.format('%02d', h % 24) .. ':' .. string.format('%02d', m % 60) .. ':' .. string.format('%02d', s % 60)
 end
 
+-- chat line prefix: hours and minutes in a dark grey, the message stays the focus
 function StringBuilder.BuildTimePrefixString(time)
-    local formatedTime = StringBuilder.GetCurrentFormatedTime(time)
-    return StringBuilder.BuildBracketColorString({ 130, 130, 130 }) .. formatedTime .. ' '
+    local ms = time
+    local m = ms / 1000 / 60
+    local h = m / 60
+    local formatedTime = string.format('%02d', h % 24) .. ':' .. string.format('%02d', m % 60)
+    return StringBuilder.BuildBracketColorString({ 100, 100, 100 }) .. formatedTime .. ' '
 end
 
 function StringBuilder.BuildFontSizeString(size)

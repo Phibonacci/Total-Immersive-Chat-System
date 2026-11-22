@@ -1,5 +1,13 @@
 local ISTicsRichTextPanel = ISRichTextPanel:derive("ISTicsRichTextPanel");
 
+-- Width a chunk takes on its line. MeasureStringX counts the last character's glyph width
+-- instead of its advance, a chunk ending with a narrow glyph ("1", "l"...) is then measured
+-- too short and the next colored chunk is drawn against it. With a trailing space (no glyph)
+-- every character of the text counts its full advance.
+local function ChunkWidth(font, text)
+	return getTextManager():MeasureStringX(font, text .. ' ')
+end
+
 function ISTicsRichTextPanel:paginate()
 	local lines = 1;
 	self.textDirty = false;
@@ -106,7 +114,7 @@ function ISTicsRichTextPanel:paginate()
 				elseif string.trim(token) ~= '' then
 					chunkText = chunkText .. ' ' .. string.trim(token)
 				end
-				local pixLen = getTextManager():MeasureStringX(self.font, chunkText);
+				local pixLen = ChunkWidth(self.font, chunkText);
 				if chunkX + pixLen > maxLineWidth then
 					if self.lines[lines] and self.lines[lines] ~= '' then
 						lines = lines + 1;
@@ -131,7 +139,7 @@ function ISTicsRichTextPanel:paginate()
 					self.lineX[lines] = x
 					self.lineY[lines] = y
 					self.lineMessage[lines] = messageIndex
-					x = x + getTextManager():MeasureStringX(self.font, self.lines[lines])
+					x = x + ChunkWidth(self.font, self.lines[lines])
 				else
 					if not self.lines[lines] then
 						self.lines[lines] = ''
