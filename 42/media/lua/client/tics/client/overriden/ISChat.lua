@@ -580,7 +580,7 @@ function ISChat:onCommandEntered()
     local command = ISChat.instance.textEntry:getText()
     local chat = ISChat.instance
 
-    ISChat.instance:unfocus()
+    ISChat.instance:unfocus(true) -- the message is sent, nothing to keep
     if not command or command == '' then
         return
     end
@@ -2230,20 +2230,66 @@ function ISChat:focus()
     self.textEntry:focus()
     self.textEntry:ignoreFirstInput()
     local stream = ISChat.lastTabStream[ISChat.instance.currentTabID]
-    self.textEntry:setText(stream['command'])
+    if self.draftText then
+        -- restore what the player was writing before the chat was unfocused
+        self.textEntry:setText(self.draftText)
+        stream = GetCommandFromMessage(self.draftText) or stream
+        self.draftText = nil
+    else
+        self.textEntry:setText(stream['command'])
+    end
     UpdateRangeIndicator(stream)
     self.fade:reset()
     self.fade:update() --reset fraction to start value
 end
 
-function ISChat:unfocus()
+-- `clearText`: true to discard what was written (escape, message sent), otherwise
+-- the text is kept as a draft and restored by the next focus()
+function ISChat:unfocus(clearText)
+    if clearText then
+        self.draftText = nil
+    elseif ISChat.focused then
+        local text = self.textEntry:getText()
+        if text ~= nil and string.trim(text) ~= '' and not IsOnlyCommand(text) then
+            self.draftText = text
+        end
+    end
     self.textEntry:unfocus()
+    -- the box is emptied either way, the text would be drawn over the unfocused chat
     self.textEntry:setText("")
     if ISChat.focused then
         self.fade:reset() -- to begin fade. unfocus called when element was unfocused also.
     end
     ISChat.focused = false
     self.textEntry:setEditable(false)
+end
+
+-- escape discards the text, any other way of unfocusing the chat keeps it as a draft
+function ISChat:onOtherKey(key)
+    if key == Keyboard.KEY_ESCAPE then
+        ISChat.instance:unfocus(true)
+    end
+end
+
+-- Clicking the input box of the unfocused chat focuses it, like the "Toggle chat" key.
+-- While unfocused the input box is not editable so the click goes through to the window,
+-- which uses ISChat.onMouseDown as its own mouse handler (target is then the window).
+local VanillaOnMouseDown = ISChat.onMouseDown
+function ISChat.onMouseDown(target, x, y)
+    local chat = ISChat.instance
+    if target == chat and chat ~= nil and not ISChat.focused and chat.textEntry ~= nil then
+        local entry = chat.textEntry
+        if x >= entry:getX() and x < entry:getX() + entry:getWidth()
+            and y >= entry:getY() and y < entry:getY() + entry:getHeight()
+        then
+            chat:focus()
+            -- focus() ignores the next typed character because it is usually the "Toggle chat"
+            -- key, here the player used the mouse so the first character must be kept
+            entry.javaObject:setIgnoreFirst(false)
+            return true
+        end
+    end
+    return VanillaOnMouseDown(target, x, y)
 end
 
 function ISChat:onGearButtonClick()

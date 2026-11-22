@@ -186,7 +186,8 @@ local function DrawHudHints(self)
     local y = self.textEntry:getY() + (self.textEntry:getHeight() - height) / 2
 
     local keyName = getKeyName(getCore():getKey('Toggle chat')) or 'T'
-    x = x + DrawPill(self, getText('UI_TICS_press_to_chat', keyName), x, y, height, alpha) + 8
+    local hintKey = self.draftText and 'UI_TICS_press_to_continue_writing' or 'UI_TICS_press_to_chat'
+    x = x + DrawPill(self, getText(hintKey, keyName), x, y, height, alpha) + 8
 
     local tabNames = {}
     if self.chatText and self.chatText.tabTitle then
