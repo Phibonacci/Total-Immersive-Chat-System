@@ -215,15 +215,14 @@ local AuthorHasAccessByType = {
     end,
     ['general']   = function(author, args, sendError) return true end,
     ['admin']     = function(author, args, sendError)
-        return author:getAccessLevel() == 'Admin'
+        return Character.isAdmin(author)
     end,
     ['ooc']       = function(author, args, sendError) return true end,
     ['me']        = function(author, args, sendError) return true end,
     ['do']        = function(author, args, sendError)
         if ChatMessage.MessageTypeSettings and
             (not ChatMessage.MessageTypeSettings['do']['adminOnly'] or
-                author:getAccessLevel() == 'Admin' or
-                author:getAccessLevel() == 'Moderator')
+                Character.isAdminOrModerator(author))
         then
             return true
         else
@@ -259,7 +258,7 @@ local ListenerHasAccessByType = {
     end,
     ['general']   = function(author, player, args) return true end,
     ['admin']     = function(author, player, args)
-        return player:getAccessLevel() == 'Admin'
+        return Character.isAdmin(player)
     end,
     ['ooc']       = function(author, player, args) return true end,
     ['me']        = function(author, args, sendError) return true end,

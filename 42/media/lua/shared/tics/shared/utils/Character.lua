@@ -7,6 +7,16 @@ function Character.getFirstAndLastName(player)
     return player:getDescriptor():getForename(), player:getDescriptor():getSurname()
 end
 
+-- In build 42 access levels were replaced by roles and getAccessLevel() returns
+-- the role name in lower case ("admin", "moderator"), isAccessLevel ignores the case.
+function Character.isAdmin(player)
+    return player ~= nil and player:isAccessLevel('admin')
+end
+
+function Character.isAdminOrModerator(player)
+    return player ~= nil and (player:isAccessLevel('admin') or player:isAccessLevel('moderator'))
+end
+
 function Character.getFirstHandItemByGroup(player, group)
     local primary = player:getPrimaryHandItem()
     local secondary = player:getSecondaryHandItem()

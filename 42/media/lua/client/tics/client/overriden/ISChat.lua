@@ -18,6 +18,7 @@ local Parser                 = require('tics/client/parser/Parser')
 local RadioRangeIndicator    = require('tics/client/ui/RadioRangeIndicator')
 local RangeIndicator         = require('tics/client/ui/RangeIndicator')
 local ClientSend             = require('tics/client/network/ClientSend')
+local ClientSettings         = require('tics/client/ClientSettings')
 local StringBuilder          = require('tics/client/parser/StringBuilder')
 local StringFormat           = require('tics/shared/utils/StringFormat')
 local StringParser           = require('tics/shared/utils/StringParser')
@@ -235,14 +236,20 @@ local function GenerateRandomColor()
     return { GetRandomInt(0, 254), GetRandomInt(0, 254), GetRandomInt(0, 254), }
 end
 
+local function SaveTicsModData()
+    ModData.add('tics', ISChat.instance.ticsModData)
+    -- global ModData is not saved to disk by multiplayer clients in build 42
+    ClientSettings.save(ISChat.instance.ticsModData)
+end
+
 local function SetPlayerColor(color)
     ISChat.instance.ticsModData['playerColor'] = color
-    ModData.add('tics', ISChat.instance.ticsModData)
+    SaveTicsModData()
 end
 
 local function SetPlayerPitch(pitch)
     ISChat.instance.ticsModData['voicePitch'] = pitch
-    ModData.add('tics', ISChat.instance.ticsModData)
+    SaveTicsModData()
 end
 
 local function RandomVoicePitch(isFemale)
@@ -255,6 +262,9 @@ end
 
 local function InitGlobalModData()
     local ticsModData = ModData.getOrCreate("tics")
+    for key, value in pairs(ClientSettings.load()) do
+        ticsModData[key] = value
+    end
     ISChat.instance.ticsModData = ticsModData
 
     if ticsModData['playerColor'] == nil then
@@ -1776,7 +1786,7 @@ ISChat.onRecvSandboxVars = function(messageTypeSettings)
     elseif ISChat.instance.tabs[3] ~= nil then
         RemoveTab('Private Message', 3)
     end
-    if getPlayer():getAccessLevel() == 'Admin' and messageTypeSettings['admin']['enabled'] then
+    if Character.isAdmin(getPlayer()) and messageTypeSettings['admin']['enabled'] then
         AddTab('Admin', 4)
     elseif ISChat.instance.tabs[4] ~= nil then
         RemoveTab('Admin', 4)
@@ -1985,8 +1995,7 @@ function ISChat:createValidationWindowButton()
     end
 
     if self.avatarValidationWindowButton == nil then
-        local accessLevel = getPlayer():getAccessLevel()
-        if accessLevel == 'Admin' or accessLevel == 'Moderator' then
+        if Character.isAdminOrModerator(getPlayer()) then
             ISChat.avatarValidationWindowButtonName = 'avatar validation window button'
             self.avatarValidationWindowButton = ISButton:new(self.avatarUploadButton:getX() - th / 2 - th, 1, th, th,
                 '', self, OnAvatarValidationWindowButtonClick)
@@ -2335,13 +2344,13 @@ function ISChat.onToggleVoice()
     -- the player has set this option at least once, that means he is aware of its existence
     -- we'll use this settings in the future instead of the server default behavior
     ISChat.instance.ticsModData['isVoiceEnabled'] = ISChat.instance.isVoiceEnabled
-    ModData.add('tics', ISChat.instance.ticsModData)
+    SaveTicsModData()
 end
 
 function ISChat.onToggleRadioIcon()
     ISChat.instance.isRadioIconEnabled = not ISChat.instance.isRadioIconEnabled
     ISChat.instance.ticsModData['isRadioIconEnabled'] = ISChat.instance.isRadioIconEnabled
-    ModData.add('tics', ISChat.instance.ticsModData)
+    SaveTicsModData()
     if ISChat.instance.radioRangeIndicator then
         ISChat.instance.radioRangeIndicator.showIcon = ISChat.instance.isRadioIconEnabled
     end
@@ -2349,8 +2358,8 @@ end
 
 function ISChat.onTogglePortrait()
     ISChat.instance.isPortraitEnabled = not ISChat.instance.isPortraitEnabled
-    ISChat.instance.ticsModData['isPortraitEnabled'] = ISChat.instance.isRadioIconEnabled
-    ModData.add('tics', ISChat.instance.ticsModData)
+    ISChat.instance.ticsModData['isPortraitEnabled'] = ISChat.instance.isPortraitEnabled
+    SaveTicsModData()
 end
 
 Events.OnChatWindowInit.Add(ISChat.initChat)

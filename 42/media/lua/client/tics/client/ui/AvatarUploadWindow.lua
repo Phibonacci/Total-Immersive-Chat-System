@@ -4,6 +4,7 @@ local AvatarIO = require('tics/shared/utils/AvatarIO')
 local AvatarManager = require('tics/client/AvatarManager')
 local Character = require('tics/shared/utils/Character')
 local ClientSend = require('tics/client/network/ClientSend')
+local File = require('tics/shared/utils/File')
 
 
 local AvatarUploadWindow = ISModalRichText:derive('AvatarUploadWindow')
@@ -178,7 +179,7 @@ function AvatarUploadWindow:drawHelp()
     local player = getPlayer()
     local username = player:getUsername()
     local firstName, lastName = Character.getFirstAndLastName(player)
-    local path = '%userprofile%\\Zomboid\\Lua\\avatars\\client\\' .. getServerIP() .. '\\' .. username .. '\\request\\'
+    local path = File.getAbsolutePath(AvatarIO.getBasePath() .. username .. '/request/')
     local text = getText('SurvivalGuide_TICS_AvatarUploadHelp',
         AvatarIO.createFileName(username, firstName, lastName),
         path

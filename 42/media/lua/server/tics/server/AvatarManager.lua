@@ -134,8 +134,7 @@ function AvatarManager:sendPendingAvatars(playerUsername, playerAvatars)
         print('TICS error: sendPendingAvatars: player not found: ' .. playerUsername)
         return
     end
-    local accessLevel = player:getAccessLevel()
-    if accessLevel ~= 'Admin' and accessLevel ~= 'Moderator' then
+    if not Character.isAdminOrModerator(player) then
         return
     end
     for key, avatar in pairs(self.pendingAvatarsShared) do
@@ -225,8 +224,7 @@ end
 
 function AvatarManager:notifyAvatarProcessed(username, firstName, lastName, checksum)
     for _, player in pairs(self.connectedPlayers) do
-        local accessLevel = player:getAccessLevel()
-        if accessLevel == 'Admin' or accessLevel == 'Moderator' then
+        if Character.isAdminOrModerator(player) then
             ServerSend.AvatarProcessed(player, username, firstName, lastName, checksum)
         end
         local key = AvatarIO.createFileName(username, firstName, lastName)

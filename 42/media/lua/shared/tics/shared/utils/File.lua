@@ -34,18 +34,10 @@ function File.readAllBytes(path)
     end
     local data = {}
     local checksum = CRC32.newcrc32()
-    print(
-        'TICS info: File.readAllBytes: ignore the InvocationTargetException below, it means the file has been read')
-    while true do
+    -- in build 42 a Java exception thrown by readUnsignedByte at the end of the file
+    -- becomes a Lua error, so we check the remaining bytes before each read instead
+    while file:available() > 0 do
         local byte = file:readUnsignedByte()
-        -- an exception will be thrown, it's unavoidable unless we know the size of the file
-        -- and I am not writing my own PNG/JPEG parser to avoid it
-        -- the exception does not stop the execution flow
-        if byte == nil then
-            print(
-                'TICS info: File.readAllBytes: ignore the InvocationTargetException above, it means the file has been read')
-            break
-        end
         checksum:update(byte)
         table.insert(data, byte)
     end
@@ -73,6 +65,20 @@ function File.writeStringWithNewLine(text, path)
     end
     outFile:writeln(text)
     outFile:close()
+end
+
+-- Absolute path of a file stored in the Zomboid/Lua directory.
+function File.getAbsolutePath(path)
+    local absolutePath = getMyDocumentFolder() .. '/Lua/' .. path
+    return (absolutePath:gsub('\\', '/'):gsub('/+', '/'))
+end
+
+-- Loads a texture stored in the Zomboid/Lua directory.
+function File.getTexture(path)
+    if path == nil then
+        return nil
+    end
+    return getTexture(File.getAbsolutePath(path))
 end
 
 function File.remove(path) -- we can only erase the bytes of the file, not the file

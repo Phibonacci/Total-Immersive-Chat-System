@@ -68,7 +68,7 @@ local function SaveAvatar(username, firstName, lastName, extension, checksum, da
         lastName = lastName,
     }
     ModData.add(modDataPath, avatars)
-    local texture = getTextureFromSaveDir(fullPath, '../Lua')
+    local texture = File.getTexture(fullPath)
     if texture then
         Texture.reload(texture:getName())
     end
@@ -114,7 +114,7 @@ function AvatarManager:getRequestAvatar()
     if path == nil then
         return nil
     end
-    local texture = getTextureFromSaveDir(path, '../Lua')
+    local texture = File.getTexture(path)
     if texture == nil then
         print('TICS error: failed to load the request avatar for username "'
             .. username .. '" with character named "'
@@ -133,7 +133,7 @@ function AvatarManager:getAvatar(username, firstName, lastName)
         print('TICS error: AvatarManager:getAvatar: avatar path is null')
         return nil
     end
-    local texture = getTextureFromSaveDir(path, '../Lua')
+    local texture = File.getTexture(path)
     if texture == nil then
         print('TICS error: failed to load the avatar for username "'
             .. username .. '" with character named "'
@@ -176,7 +176,7 @@ function AvatarManager:getFirstAvatarPending()
     local avatarResult = nil
     for key, avatar in pairs(avatars) do
         local path = avatar['path']
-        local texture = getTextureFromSaveDir(path, '../Lua')
+        local texture = File.getTexture(path)
         local checksum = avatar['checksum']
         local username = avatar['username']
         local firstName = avatar['firstName']
@@ -229,7 +229,7 @@ function AvatarManager:getAvatarsPending()
     local toRemove = {}
     for key, avatar in pairs(avatars) do
         local path = avatar['path']
-        local texture = getTextureFromSaveDir(path, '../Lua')
+        local texture = File.getTexture(path)
         local checksum = avatar['checksum']
         local username = avatar['username']
         local firstName = avatar['firstName']
