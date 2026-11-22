@@ -118,7 +118,12 @@ function ISTicsRichTextPanel:paginate()
 					lineImageHeight = 0;
 					y = y + lineHeight;
 					x = 0;
+					-- leading space like any chunk start: lines are drawn trimmed at a position measured
+					-- with it, without it the next colored chunk on this line is glued to the text
 					self.lines[lines] = string.trim(token)
+					if self.lines[lines] ~= "" then
+						self.lines[lines] = ' ' .. self.lines[lines]
+					end
 					if self.lines[lines] ~= "" then
 						-- continuation of a wrapped message
 						x = self.indent + (self.wrapIndent or 0)
