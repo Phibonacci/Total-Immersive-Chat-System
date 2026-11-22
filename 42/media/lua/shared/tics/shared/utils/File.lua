@@ -81,6 +81,33 @@ function File.getTexture(path)
     return getTexture(File.getAbsolutePath(path))
 end
 
+-- true if the file does not exist or has no content (File.remove only empties files)
+function File.isEmpty(path)
+    if not File.exists(path) then
+        return true
+    end
+    local file = getFileInput(path)
+    if file == nil then
+        return true
+    end
+    local empty = file:available() <= 0
+    endFileInput()
+    return empty
+end
+
+-- lists the files (not the directories) of a directory of Zomboid/Lua, nil if it does not exist
+function File.listFiles(directory)
+    local files = listFilesInZomboidLuaDirectory(directory)
+    if files == nil then
+        return nil
+    end
+    local result = {}
+    for i = 0, files:size() - 1 do
+        table.insert(result, files:get(i))
+    end
+    return result
+end
+
 function File.remove(path) -- we can only erase the bytes of the file, not the file
     File.writeAllBytes({}, path)
 end

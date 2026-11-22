@@ -210,6 +210,19 @@ function AvatarManager:registerAvatarRequest(username, firstName, lastName, exte
     self:loadPendingAvatar(key, pendingAvatarInfo)
 end
 
+-- the pending request of the player's current character (nil if none) is sent to them,
+-- it is shown in their avatar window
+function AvatarManager:sendOwnPendingAvatar(player)
+    self:loadPendingAvatars()
+    local key = AvatarIO.createFileNameFromPlayer(player)
+    local avatar = self.pendingAvatarsShared and self.pendingAvatarsShared[key]
+    if avatar then
+        ServerSend.OwnPendingAvatar(player, avatar['checksum'], avatar['extension'], avatar['data'])
+    else
+        ServerSend.OwnPendingAvatar(player, nil, nil, nil)
+    end
+end
+
 function AvatarManager:update()
     local currentTime = Calendar.getInstance():getTimeInMillis()
     local elapsed = currentTime - self.previousTime
@@ -223,6 +236,13 @@ function AvatarManager:update()
 end
 
 function AvatarManager:notifyAvatarProcessed(username, firstName, lastName, checksum)
+    local owner = self.connectedPlayers[username]
+    if owner then
+        local ownerFirstName, ownerLastName = Character.getFirstAndLastName(owner)
+        if ownerFirstName == firstName and ownerLastName == lastName then
+            self:sendOwnPendingAvatar(owner) -- no longer pending
+        end
+    end
     for _, player in pairs(self.connectedPlayers) do
         if Character.isAdminOrModerator(player) then
             ServerSend.AvatarProcessed(player, username, firstName, lastName, checksum)
@@ -234,6 +254,22 @@ function AvatarManager:notifyAvatarProcessed(username, firstName, lastName, chec
         then
             self.players[player:getUsername()]['pending'][key] = nil
         end
+    end
+end
+
+-- the player deletes their own approved avatar, no admin approval needed
+function AvatarManager:deleteAvatar(player)
+    local username = player:getUsername()
+    local firstName, lastName = Character.getFirstAndLastName(player)
+    local key = AvatarIO.createFileName(username, firstName, lastName)
+    AvatarIO.removePlayerAvatar('approved', username, firstName, lastName)
+    self.avatars[key] = nil
+    for connectedUsername, connectedPlayer in pairs(self.connectedPlayers) do
+        -- forget that the player got it, a new avatar for this character will be sent again
+        if self.players[connectedUsername] and self.players[connectedUsername]['approved'] then
+            self.players[connectedUsername]['approved'][key] = nil
+        end
+        ServerSend.AvatarDeleted(connectedPlayer, username, firstName, lastName)
     end
 end
 

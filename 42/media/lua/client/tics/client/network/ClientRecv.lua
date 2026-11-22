@@ -144,6 +144,27 @@ ClientRecv['PendingAvatar'] = function(args)
     AvatarManager:savePendingAvatar(username, firstName, lastName, extension, checksum, data)
 end
 
+ClientRecv['OwnPendingAvatar'] = function(args)
+    args = args or {} -- a table with only nil values is received as nil
+    local data = args['data']
+    if type(data) == 'table' and type(args['checksum']) == 'number' and type(args['extension']) == 'string' then
+        AvatarManager:setOwnPendingAvatar(args['checksum'], args['extension'], data)
+    else
+        AvatarManager:setOwnPendingAvatar(nil)
+    end
+end
+
+ClientRecv['AvatarDeleted'] = function(args)
+    local username  = args['username']
+    local firstName = args['firstName']
+    local lastName  = args['lastName']
+    if type(username) ~= 'string' or type(firstName) ~= 'string' or type(lastName) ~= 'string' then
+        print('TICS error: AvatarDeleted packet does not contain a valid character')
+        return
+    end
+    AvatarManager:deleteApprovedAvatar(username, firstName, lastName)
+end
+
 ClientRecv['AvatarProcessed'] = function(args)
     local username  = args['username']
     local firstName = args['firstName']

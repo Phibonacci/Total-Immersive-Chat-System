@@ -190,6 +190,14 @@ function ClientSend.sendAvatarRequest(avatarRequest)
     ClientSendCommand('AvatarRequest', avatarRequest)
 end
 
+function ClientSend.sendAskOwnPendingAvatar()
+    ClientSendCommand('AskOwnPendingAvatar', {})
+end
+
+function ClientSend.sendDeleteAvatar()
+    ClientSendCommand('DeleteAvatar', {})
+end
+
 function ClientSend.sendApprovePendingAvatar(username, firstName, lastName, checksum)
     ClientSendCommand('ApproveAvatar', {
         username = username,

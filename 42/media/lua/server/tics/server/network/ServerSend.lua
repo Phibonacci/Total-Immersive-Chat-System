@@ -14,6 +14,18 @@ function ServerSend.LanguageBookRead(player, result, language)
     ServerSend.Command(player, 'LanguageBookRead', { result = result, language = language })
 end
 
+-- checksum, extension and data are nil when the player has no pending request
+function ServerSend.OwnPendingAvatar(player, checksum, extension, data)
+    -- 'pending' keeps the table from being empty: empty arguments are received as nil
+    ServerSend.Command(player, 'OwnPendingAvatar', {
+        pending = checksum ~= nil, checksum = checksum, extension = extension, data = data,
+    })
+end
+
+function ServerSend.AvatarDeleted(player, username, firstName, lastName)
+    ServerSend.Command(player, 'AvatarDeleted', { username = username, firstName = firstName, lastName = lastName })
+end
+
 function ServerSend.Print(player, message)
     ServerSend.Command(player, 'ServerPrint', { message = message })
 end

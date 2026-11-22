@@ -1,5 +1,6 @@
 local AvatarIO  = require('tics/shared/utils/AvatarIO')
 local Character = require('tics/shared/utils/Character')
+local ClientSend = require('tics/client/network/ClientSend')
 local File      = require('tics/shared/utils/File')
 
 
@@ -35,24 +36,6 @@ function AvatarManager:createRequestDirectory()
     local path = username .. '/request/'
     local directoryPath = AvatarIO.getBasePath() .. path
     File.createDirectory(directoryPath, 'move_your_avatar_here')
-end
-
-function AvatarManager:loadAvatarRequest()
-    local player = getPlayer()
-    local username = player:getUsername()
-    local path = username .. '/request/'
-    local directoryPath = AvatarIO.getBasePath() .. path
-    File.createDirectory(directoryPath, 'move_your_avatar_here')
-    local avatar = AvatarIO.loadPlayerAvatar(path, player)
-    if avatar == nil then
-        return nil
-    end
-    local firstName, lastName = Character.getFirstAndLastName(player)
-    local knownAvatar = AvatarManager:getAvatarData(username, firstName, lastName)
-    if knownAvatar and knownAvatar.checksum == avatar.checksum then
-        return nil -- avatar already approved
-    end
-    return avatar
 end
 
 local function SaveAvatar(username, firstName, lastName, extension, checksum, data, directory, modDataPath)
@@ -105,22 +88,93 @@ function AvatarManager:removeAvatarData(username, firstName, lastName)
     ModData.add("ticsApprovedAvatars", avatars)
 end
 
-function AvatarManager:getRequestAvatar()
+-- avatar deleted by its owner: forget it and empty the local copy
+function AvatarManager:deleteApprovedAvatar(username, firstName, lastName)
+    local avatars = ModData.getOrCreate('ticsApprovedAvatars')
+    local key = AvatarIO.createFileName(username, firstName, lastName)
+    local avatar = avatars[key]
+    avatars[key] = nil
+    ModData.add('ticsApprovedAvatars', avatars)
+    if avatar and avatar['path'] then
+        File.remove(avatar['path'])
+    end
+end
+
+-- folder (in Zomboid/Lua) where the player puts the images they want to use as avatar
+function AvatarManager:getRequestDirectory()
+    return AvatarIO.getBasePath() .. getPlayer():getUsername() .. '/request/'
+end
+
+-- every PNG / JPG image of the request folder, sorted by name: { fileName, path, extension }
+function AvatarManager:listRequestImages()
+    local directory = self:getRequestDirectory()
+    local images = {}
+    for _, fileName in ipairs(File.listFiles(directory) or {}) do
+        local extension = fileName:match('%.(%w+)$')
+        extension = extension and extension:lower() or nil
+        if extension == 'png' or extension == 'jpg' or extension == 'jpeg' then
+            local path = directory .. fileName
+            if not File.isEmpty(path) then
+                table.insert(images, { fileName = fileName, path = path, extension = extension })
+            end
+        end
+    end
+    table.sort(images, function(a, b) return a.fileName:lower() < b.fileName:lower() end)
+    return images
+end
+
+-- avatar request (as sent to the server) for one of the images of the request folder
+function AvatarManager:loadRequestImage(image)
+    local data, checksum = File.readAllBytes(image.path)
+    if data == nil or checksum == nil or #data == 0 then
+        return nil
+    end
+    local player = getPlayer()
+    local firstName, lastName = Character.getFirstAndLastName(player)
+    return {
+        data = data,
+        checksum = checksum:tonumber(),
+        extension = image.extension,
+        username = player:getUsername(),
+        firstName = firstName,
+        lastName = lastName,
+    }
+end
+
+-- avatar request of the current character waiting for an admin, sent by the server
+-- (nil checksum: no request). Saved in a local file to get a texture.
+function AvatarManager:setOwnPendingAvatar(checksum, extension, data)
     local player = getPlayer()
     local username = player:getUsername()
     local firstName, lastName = Character.getFirstAndLastName(player)
-    local fileName = AvatarIO.createFileName(username, firstName, lastName)
-    local path = AvatarIO.getAvatarPath(username .. '/request/' .. fileName)
-    if path == nil then
-        return nil
+    local path = username .. '/own_pending'
+    if checksum == nil then
+        AvatarIO.removePlayerAvatar(path, username, firstName, lastName)
+        self.ownPendingAvatar = nil
+        return
     end
-    local texture = File.getTexture(path)
-    if texture == nil then
-        print('TICS error: failed to load the request avatar for username "'
-            .. username .. '" with character named "'
-            .. firstName .. ' ' .. lastName .. '"')
+    local fullPath = AvatarIO.savePlayerAvatar(username, firstName, lastName, extension, data, path)
+    local texture = File.getTexture(fullPath)
+    if texture then
+        Texture.reload(texture:getName())
     end
-    return texture
+    self.ownPendingAvatar = { checksum = checksum, texture = texture }
+end
+
+-- texture of the pending request of the current character, nil if none
+function AvatarManager:getOwnPendingAvatar()
+    return self.ownPendingAvatar and self.ownPendingAvatar.texture or nil
+end
+
+function AvatarManager:askOwnPendingAvatar()
+    ClientSend.sendAskOwnPendingAvatar()
+end
+
+-- texture of the approved avatar of the current character, nil if none
+function AvatarManager:getCurrentAvatar()
+    local player = getPlayer()
+    local firstName, lastName = Character.getFirstAndLastName(player)
+    return self:getAvatar(player:getUsername(), firstName, lastName)
 end
 
 function AvatarManager:getAvatar(username, firstName, lastName)

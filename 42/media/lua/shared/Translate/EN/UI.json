@@ -212,5 +212,22 @@
     "UI_TICS_chip_pm"        : "PM",
     "UI_TICS_chip_admin"     : "Admin",
     "UI_TICS_chip_me"        : "Me",
-    "UI_TICS_chip_do"        : "Do"
+    "UI_TICS_chip_do"        : "Do",
+    "UI_TICS_Avatar_title"          : "Avatar",
+    "UI_TICS_Avatar_current"        : "Current avatar",
+    "UI_TICS_Avatar_none"           : "None",
+    "UI_TICS_Avatar_pending"        : "Pending approval",
+    "UI_TICS_Avatar_delete"         : "Delete",
+    "UI_TICS_Avatar_delete_confirm" : "Delete your avatar? Other players will see your character without it.",
+    "UI_TICS_Avatar_deleted"        : "Avatar deleted",
+    "UI_TICS_Avatar_images"         : "Images in your avatar folder",
+    "UI_TICS_Avatar_empty"          : "No image found. Put PNG or JPG images of %1x%2 pixels in your avatar folder (Open folder), then click Refresh.",
+    "UI_TICS_Avatar_wrong_size"     : "The image must be %1x%2 pixels",
+    "UI_TICS_Avatar_send"           : "Send for approval",
+    "UI_TICS_Avatar_sent"           : "Sent for approval: %1",
+    "UI_TICS_Avatar_already_sent"   : "This image was already sent",
+    "UI_TICS_Avatar_read_error"     : "Could not read %1",
+    "UI_TICS_Avatar_open_folder"    : "Open folder",
+    "UI_TICS_Avatar_refresh"        : "Refresh",
+    "UI_TICS_Avatar_path_copied"    : "Folder path copied to the clipboard: %1"
 }

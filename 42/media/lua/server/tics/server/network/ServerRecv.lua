@@ -242,6 +242,15 @@ RecvServer['AvatarRequest'] = function(player, args)
         return
     end
     AvatarManager:registerAvatarRequest(username, firstName, lastName, extension, checksum, data)
+    AvatarManager:sendOwnPendingAvatar(player)
+end
+
+RecvServer['AskOwnPendingAvatar'] = function(player, args)
+    AvatarManager:sendOwnPendingAvatar(player)
+end
+
+RecvServer['DeleteAvatar'] = function(player, args)
+    AvatarManager:deleteAvatar(player)
 end
 
 RecvServer['ApproveAvatar'] = function(player, args)

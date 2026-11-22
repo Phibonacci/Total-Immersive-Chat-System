@@ -18,23 +18,29 @@ function AvatarIO.getBasePath()
     end
 end
 
+AvatarIO.Extensions = { 'png', 'jpg', 'jpeg' }
+
+-- a deleted avatar is an empty file (File.remove can only erase the content), it is skipped
 function AvatarIO.getAvatarPath(partialPath)
     local basePath = AvatarIO.getBasePath()
     local pathPrefix = basePath .. '/' .. partialPath .. '.'
-    local extension = 'png'
-    local path = pathPrefix .. extension
-    if not serverFileExists('../Lua/' .. path) then
-        extension = 'jpg'
-        path = pathPrefix .. extension
-        if not serverFileExists('../Lua/' .. path) then
-            extension = 'jpeg'
-            path = pathPrefix .. extension
-            if not serverFileExists('../Lua/' .. path) then
-                return nil
-            end
+    for _, extension in ipairs(AvatarIO.Extensions) do
+        local path = pathPrefix .. extension
+        if not File.isEmpty(path) then
+            return path, extension
         end
     end
-    return path, extension
+    return nil
+end
+
+-- empties the avatar files of a character, whatever their extension
+function AvatarIO.removePlayerAvatar(path, username, firstName, lastName)
+    local pathPrefix = AvatarIO.getBasePath() .. '/' .. path .. '/' .. AvatarIO.createFileName(username, firstName, lastName) .. '.'
+    for _, extension in ipairs(AvatarIO.Extensions) do
+        if File.exists(pathPrefix .. extension) then
+            File.remove(pathPrefix .. extension)
+        end
+    end
 end
 
 function AvatarIO.createFileName(username, firstName, lastName)
@@ -55,6 +61,9 @@ function AvatarIO.loadPlayerAvatarFromNames(path, username, firstName, lastName)
         return
     end
     local data, checksum = File.readAllBytes(fullPath)
+    if data ~= nil and #data == 0 then
+        return -- deleted avatar
+    end
     if data == nil or checksum == nil then
         print('TICS error: failed to read file at path: "' .. fullPath .. '"')
         return
@@ -79,6 +88,8 @@ function AvatarIO.savePlayerAvatar(username, firstName, lastName, extension, dat
     local basePath = AvatarIO.getBasePath()
     local fileName = AvatarIO.createFileName(username, firstName, lastName)
     local fullPath = basePath .. '/' .. path .. '/' .. fileName .. '.' .. extension
+    -- an avatar with another extension would be found first by getAvatarPath
+    AvatarIO.removePlayerAvatar(path, username, firstName, lastName)
     File.writeAllBytes(data, fullPath)
     return fullPath
 end
