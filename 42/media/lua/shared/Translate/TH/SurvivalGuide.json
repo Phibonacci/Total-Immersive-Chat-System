@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/SurvivalGuide.schema.json",
-    "SurvivalGuide_TICS"           : " <H1> TOTAL IMMERSIVE CHAT SYSTEM <BR> <TEXT> <SIZE:medium> <CENTRE> %1 <BR> <TEXT> <SIZE:small> <IMAGE:media/ui/tics/icons/eye-on.png> แสดงระยะการพูดของช่องปัจจุบันเมื่อกำลังพิมพ์สนทนา <BR> <IMAGE:media/ui/tics/icons/eye-on-plus.png> แสดงระยะการพูดของช่องปัจจุบันตลอดเวลา <BR> <IMAGE:media/ui/tics/icons/mic-on.png> แสดงระยะการรับฟังของวิทยุรอบตัว <BR>",
+    "SurvivalGuide_TICS"           : " <H1> TOTAL IMMERSIVE CHAT SYSTEM <BR> <TEXT> <SIZE:medium> <CENTRE> %1 <BR> <TEXT> <SIZE:small> <IMAGE:media/ui/tics/icons/chat-eye.png,14,14> แสดงระยะการพูดของช่องปัจจุบันเมื่อกำลังพิมพ์สนทนา <BR> <IMAGE:media/ui/tics/icons/chat-eye-plus.png,14,14> แสดงระยะการพูดของช่องปัจจุบันตลอดเวลา <BR> <IMAGE:media/ui/tics/icons/chat-mic.png,14,14> แสดงระยะการรับฟังของวิทยุรอบตัว <BR>",
     "SurvivalGuide_TICS_Markdown"   : " ข้อความที่เขียนระหว่าง * หรือ ** จะแสดงเป็นสีอื่น (**text**) <BR>",
     "SurvivalGuide_TICS_Whisper"   : " /whisper หรือ /w เพื่อกระซิบ <BR>",
     "SurvivalGuide_TICS_Low"       : " /low หรือ /l เพื่อพูดเสียงเบา <BR>",
@@ -18,7 +18,7 @@
     "SurvivalGuide_TICS_Pitch"     : " \"/pitch ค่า\" โดยค่าอยู่ระหว่าง 0.85 ถึง 1.45 เพื่อเปลี่ยนระดับเสียงพูดของผู้เล่น หรือพิมพ์แค่ \"/pitch\" เพื่อดูระดับเสียงปัจจุบัน <BR>",
     "SurvivalGuide_TICS_Roll"      : " \"/roll xdy\" โดย x และ y เป็นตัวเลข และ x อยู่ระหว่าง 1 ถึง 20 เพื่อทอยลูกเต๋า <BR>",
     "SurvivalGuide_TICS_Languages" : " \"/language en\" เพื่อเปลี่ยนภาษา โดย \"en\" คือรหัสภาษาที่คุณเรียนรู้แล้ว <BR>",
-    "SurvivalGuide_TICS_AvatarUploadHelp"   :  " <H1> วิธีอัปโหลดอวาตาร์ของคุณ <BR> <TEXT> <SIZE:small> คุณสามารถอัปโหลดรูปอวาตาร์ของคุณเอง ซึ่งจะแสดงในบับเบิลของผู้เล่นเมื่อพูด แทนภาพตัวละครแบบ 3D <BR> โดยต้องย้ายรูป PNG ที่ตั้งชื่อตามชื่อผู้ใช้และชื่อ-นามสกุลของตัวละคร ( '%1.png' ) ไปไว้ในโฟลเดอร์ Windows ต่อไปนี้: <BR> <CENTRE> %2 <BR> <TEXT> <SIZE:small> รูปต้องมีขนาดกว้าง 60 และสูง 80 พอดีเท่านั้น รองรับและแนะนำให้ใช้พื้นหลังโปร่งใส <BR> <IMAGE:media/ui/tics/icons/upload.png> เมื่อย้ายรูปไปไว้ในโฟลเดอร์ที่ถูกต้องแล้ว ให้คลิกไอคอนอัปโหลดบนหน้าต่างสนทนาเพื่ออัปโหลด เพื่อให้แอดมินอนุมัติอวาตาร์ของคุณ",
+    "SurvivalGuide_TICS_AvatarUploadHelp"   :  " <H1> วิธีอัปโหลดอวาตาร์ของคุณ <BR> <TEXT> <SIZE:small> คุณสามารถอัปโหลดรูปอวาตาร์ของคุณเอง ซึ่งจะแสดงในบับเบิลของผู้เล่นเมื่อพูด แทนภาพตัวละครแบบ 3D <BR> โดยต้องย้ายรูป PNG ที่ตั้งชื่อตามชื่อผู้ใช้และชื่อ-นามสกุลของตัวละคร ( '%1.png' ) ไปไว้ในโฟลเดอร์ Windows ต่อไปนี้: <BR> <CENTRE> %2 <BR> <TEXT> <SIZE:small> รูปต้องมีขนาดกว้าง 60 และสูง 80 พอดีเท่านั้น รองรับและแนะนำให้ใช้พื้นหลังโปร่งใส <BR> <IMAGE:media/ui/tics/icons/chat-upload.png,14,14> เมื่อย้ายรูปไปไว้ในโฟลเดอร์ที่ถูกต้องแล้ว ให้คลิกไอคอนอัปโหลดบนหน้าต่างสนทนาเพื่ออัปโหลด เพื่อให้แอดมินอนุมัติอวาตาร์ของคุณ",
     "SurvivalGuide_TICS_AvatarUploadPrompt" :  " <TEXT> <SIZE:small> คุณต้องการส่งคำขออนุมัติอวาตาร์นี้หรือไม่?",
     "SurvivalGuide_TICS_AvatarSizeError"    :  " <TEXT> <SIZE:small> พบอวาตาร์ที่มีขนาดไม่ถูกต้อง อวาตาร์ต้องมีขนาด %1x%2"
 }

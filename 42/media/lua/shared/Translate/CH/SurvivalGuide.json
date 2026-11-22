@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/SurvivalGuide.schema.json",
-    "SurvivalGuide_TICS"           : " <H1> TOTAL IMMERSIVE CHAT SYSTEM <BR> <TEXT> <SIZE:medium> <CENTRE> %1 <BR> <TEXT> <SIZE:small> <IMAGE:media/ui/tics/icons/eye-on.png> 聊天框啟用時顯示目前頻道的說話範圍 <BR> <IMAGE:media/ui/tics/icons/eye-on-plus.png> 總是顯示目前頻道的說話範圍 <BR> <IMAGE:media/ui/tics/icons/mic-on.png> 顯示周圍無線電的收聽範圍 <BR>",
+    "SurvivalGuide_TICS"           : " <H1> TOTAL IMMERSIVE CHAT SYSTEM <BR> <TEXT> <SIZE:medium> <CENTRE> %1 <BR> <TEXT> <SIZE:small> <IMAGE:media/ui/tics/icons/chat-eye.png,14,14> 聊天框啟用時顯示目前頻道的說話範圍 <BR> <IMAGE:media/ui/tics/icons/chat-eye-plus.png,14,14> 總是顯示目前頻道的說話範圍 <BR> <IMAGE:media/ui/tics/icons/chat-mic.png,14,14> 顯示周圍無線電的收聽範圍 <BR>",
     "SurvivalGuide_TICS_Markdown"   : " 寫在 * 或 ** 之間的文字會以不同顏色顯示 (**text**) <BR>",
     "SurvivalGuide_TICS_Whisper"   : " /whisper 或 /w : 耳語 <BR>",
     "SurvivalGuide_TICS_Low"       : " /low 或 /l : 小聲說話 <BR>",
@@ -18,7 +18,7 @@
     "SurvivalGuide_TICS_Pitch"     : " \"/pitch 數值\" (數值為 0.85 到 1.45) : 變更玩家語音音高, 只輸入 \"/pitch\" 可查看目前音高 <BR>",
     "SurvivalGuide_TICS_Roll"      : " \"/roll xdy\" : 擲骰子, x 和 y 為數字, x 為 1 到 20 <BR>",
     "SurvivalGuide_TICS_Languages" : " \"/language en\" : 切換語言, \"en\" 為你已學會的語言代碼 <BR>",
-    "SurvivalGuide_TICS_AvatarUploadHelp"   :  " <H1> 如何上傳你的頭像 <BR> <TEXT> <SIZE:small> 你可以上傳自訂頭像圖片, 說話時會顯示在玩家對話氣泡中, 取代 3D 肖像. <BR> 為此, 需要將一張以你的使用者名稱和角色姓名命名的 PNG 圖片 ( '%1.png' ) 移動到以下 Windows 資料夾: <BR> <CENTRE> %2 <BR> <TEXT> <SIZE:small> 圖片必須剛好為寬 60, 高 80. 支援並建議使用透明背景. <BR> <IMAGE:media/ui/tics/icons/upload.png> 將圖片放入正確的資料夾後, 點擊聊天視窗上的上傳圖示進行上傳, 讓管理員審核你的頭像.",
+    "SurvivalGuide_TICS_AvatarUploadHelp"   :  " <H1> 如何上傳你的頭像 <BR> <TEXT> <SIZE:small> 你可以上傳自訂頭像圖片, 說話時會顯示在玩家對話氣泡中, 取代 3D 肖像. <BR> 為此, 需要將一張以你的使用者名稱和角色姓名命名的 PNG 圖片 ( '%1.png' ) 移動到以下 Windows 資料夾: <BR> <CENTRE> %2 <BR> <TEXT> <SIZE:small> 圖片必須剛好為寬 60, 高 80. 支援並建議使用透明背景. <BR> <IMAGE:media/ui/tics/icons/chat-upload.png,14,14> 將圖片放入正確的資料夾後, 點擊聊天視窗上的上傳圖示進行上傳, 讓管理員審核你的頭像.",
     "SurvivalGuide_TICS_AvatarUploadPrompt" :  " <TEXT> <SIZE:small> 是否要送出此頭像的審核申請?",
     "SurvivalGuide_TICS_AvatarSizeError"    :  " <TEXT> <SIZE:small> 發現尺寸無效的頭像. 頭像尺寸必須為 %1x%2 ."
 }
