@@ -28,6 +28,11 @@ function ChatText:render()
     if self.textDirty then
         self:paginate()
     end
+    -- the chat can be resized after messages were added (window layout restored at game
+    -- start, player resizing it), keep showing the last messages unless the player scrolled up
+    if self.followBottom ~= false and not self:isScrolledToBottom() then
+        self:scrollToBottom()
+    end
     for c, v in ipairs(self.images) do
         self:drawTextureScaled(v, self.imageX[c] + self.marginLeft, self.imageY[c] + self.marginTop, self.imageW[c],
             self.imageH[c], self.contentTransparency, 1, 1, 1)
@@ -379,13 +384,20 @@ function ChatText:setYScroll(y)
     ISRichTextPanel.setYScroll(self, y)
 end
 
+-- scrolling by the player: new messages are followed again once back at the bottom
 function ChatText:updateScroll(value)
     self:setYScroll(self:getYScroll() - (value * 18))
+    self.followBottom = self:isScrolledToBottom()
     return true
+end
+
+function ChatText:onMouseWheel(del)
+    return self:updateScroll(del)
 end
 
 function ChatText:scrollToTop()
     self:setYScroll(0)
+    self.followBottom = self:isScrolledToBottom()
     return true
 end
 
@@ -399,6 +411,7 @@ function ChatText:isScrolledToBottom()
 end
 
 function ChatText:scrollToBottom()
+    self.followBottom = true
     self:setYScroll(-(self:getScrollHeight() - self:getScrollAreaHeight()))
     return true
 end

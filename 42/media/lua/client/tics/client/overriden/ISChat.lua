@@ -638,6 +638,7 @@ function ISChat:onCommandEntered()
         return
     end
 
+    local fullCommand = command -- with the channel command, for the history
     local stream, commandName = GetCommandFromMessage(command)
     local ticsCommand = GetTicsCommandFromMessage(command)
     if stream then -- chat message
@@ -652,7 +653,7 @@ function ISChat:onCommandEntered()
             return
         end
         chat.chatText.lastChatCommand = commandName
-        chat:logChatCommand(command)
+        chat:logChatCommand(fullCommand)
     elseif ticsCommand ~= nil then
         ProcessTicsCommand(ticsCommand, command)
     elseif luautils.stringStarts(command, '/') then -- server command
@@ -1018,7 +1019,7 @@ local function AddMessageToTab(tabID, language, time, formattedMessage, line, ch
         end
     end
     -- follow the new messages only if the player did not scroll up
-    local scrolledToBottom = chatText:isScrolledToBottom()
+    local scrolledToBottom = chatText.followBottom ~= false
     if #chatText.chatTextLines > ISChat.maxLine then
         local newLines = {}
         for i, v in ipairs(chatText.chatTextLines) do
@@ -2325,6 +2326,31 @@ function ISChat:unfocus(clearText)
     end
     ISChat.focused = false
     self.textEntry:setEditable(false)
+end
+
+-- message history (up / down arrows): setInputText restores the channel label of the message
+function ISChat:onPressUp()
+    local chat = ISChat.instance
+    local chatText = chat.chatText
+    chatText.logIndex = math.min(chatText.logIndex + 1, #chatText.log)
+    if chatText.log[chatText.logIndex] then
+        chat:setInputText(chatText.log[chatText.logIndex])
+        ISChat.onTextChange() -- range indicator of the recalled channel
+    end
+end
+
+function ISChat:onPressDown()
+    local chat = ISChat.instance
+    local chatText = chat.chatText
+    chatText.logIndex = math.max(chatText.logIndex - 1, 0)
+    if chatText.log[chatText.logIndex] then
+        chat:setInputText(chatText.log[chatText.logIndex])
+    else
+        -- back below the most recent message: empty input on the tab channel
+        local stream = ISChat.lastTabStream[chat.currentTabID]
+        chat:setInputText(stream and stream['command'] or '')
+    end
+    ISChat.onTextChange() -- range indicator of the recalled channel
 end
 
 -- escape discards the text, any other way of unfocusing the chat keeps it as a draft
