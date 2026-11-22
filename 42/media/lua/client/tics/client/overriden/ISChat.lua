@@ -210,6 +210,120 @@ function ISChat:updateInputChipBackspace()
     self.inputWasEmpty = isEmpty
 end
 
+-- Extra cursor shortcuts for the input box (the game text box only knows one character moves,
+-- Home/End, Shift selections and Ctrl+A/C/V/X):
+-- - Alt+Left/Right: previous word start / next word end
+-- - Ctrl+Left/Right: start / end of the text
+-- With Shift held the selection is extended, the moves use the text box's own key handlers.
+-- Called every frame: key events are not sent to Lua while typing. The game already moved the
+-- cursor by one character for the key press, the jump continues from there.
+local KEY_LEFT, KEY_RIGHT = 203, 205
+local KEY_LCONTROL, KEY_RCONTROL, KEY_LMENU, KEY_RMENU = 29, 157, 56, 184
+
+local function IsSpace(text, index)
+    local c = text:sub(index, index)
+    return c == ' ' or c == ''
+end
+
+-- cursor positions are between characters: position p is after the p-th character
+local function PreviousWordStart(text, cursor)
+    local p = cursor
+    while p > 0 and IsSpace(text, p) do p = p - 1 end
+    while p > 0 and not IsSpace(text, p) do p = p - 1 end
+    return p
+end
+
+local function NextWordEnd(text, cursor)
+    local p = cursor
+    while p < #text and IsSpace(text, p + 1) do p = p + 1 end
+    while p < #text and not IsSpace(text, p + 1) do p = p + 1 end
+    return p
+end
+
+-- The game selects all with Ctrl + the key at the position of A on a US keyboard (code 30),
+-- with another layout (AZERTY...) the key typing "a" is elsewhere. Key names follow the
+-- active layout, the key named "A" is looked up once.
+local KEY_US_A = 30
+local selectAllKey = nil
+local function GetSelectAllKey()
+    if selectAllKey == nil then
+        selectAllKey = KEY_US_A
+        for code = 1, 255 do
+            local name = getKeyName(code)
+            if type(name) == 'string' and name:upper() == 'A' then
+                selectAllKey = code
+                break
+            end
+        end
+    end
+    return selectAllKey
+end
+
+-- Alt+Backspace: delete the word before the cursor. The game already deleted one character
+-- (or the selection) when this runs, so the text and cursor of the previous frame are used.
+local KEY_BACK = 14
+function ISChat:updateDeleteWord(box)
+    local text = box:getInternalText()
+    local cursor = box:getCursorPos()
+    local backDown = ISChat.focused and GameKeyboard.isKeyDownRaw(KEY_BACK)
+    local alt = GameKeyboard.isKeyDownRaw(KEY_LMENU) or GameKeyboard.isKeyDownRaw(KEY_RMENU)
+    if backDown and not self.backKeyWasDownForWord and alt and self.lastInputText then
+        local before, beforeCursor = self.lastInputText, self.lastInputCursor
+        -- only when the game deleted one character (not a selection)
+        if #text == #before - 1 and cursor == beforeCursor - 1 then
+            local target = PreviousWordStart(before, beforeCursor)
+            local newText = before:sub(1, target) .. before:sub(beforeCursor + 1)
+            self.textEntry:setText(newText)
+            box:setCursorPos(target)
+            ISChat.onTextChange()
+            text, cursor = box:getInternalText(), box:getCursorPos()
+        end
+    end
+    self.backKeyWasDownForWord = backDown
+    self.lastInputText = text
+    self.lastInputCursor = cursor
+end
+
+function ISChat:updateInputShortcuts()
+    self:updateDeleteWord(self.textEntry.javaObject)
+    local selectAllKey = GetSelectAllKey()
+    if selectAllKey ~= KEY_US_A then
+        local selectAllDown = ISChat.focused and GameKeyboard.isKeyDownRaw(selectAllKey)
+        local ctrlDown = GameKeyboard.isKeyDownRaw(29) or GameKeyboard.isKeyDownRaw(157)
+        if selectAllDown and not self.selectAllKeyWasDown and ctrlDown then
+            self.textEntry.javaObject:selectAll()
+        end
+        self.selectAllKeyWasDown = selectAllDown
+    end
+
+    local leftDown = ISChat.focused and GameKeyboard.isKeyDownRaw(KEY_LEFT)
+    local rightDown = ISChat.focused and GameKeyboard.isKeyDownRaw(KEY_RIGHT)
+    local leftPressed = leftDown and not self.leftKeyWasDown
+    local rightPressed = rightDown and not self.rightKeyWasDown
+    self.leftKeyWasDown = leftDown
+    self.rightKeyWasDown = rightDown
+    if not leftPressed and not rightPressed then
+        return
+    end
+    local box = self.textEntry.javaObject
+    local ctrl = GameKeyboard.isKeyDownRaw(KEY_LCONTROL) or GameKeyboard.isKeyDownRaw(KEY_RCONTROL)
+    local alt = GameKeyboard.isKeyDownRaw(KEY_LMENU) or GameKeyboard.isKeyDownRaw(KEY_RMENU)
+    if ctrl then
+        if leftPressed then box:onKeyHome() else box:onKeyEnd() end
+    elseif alt then
+        local text = box:getInternalText()
+        local cursor = box:getCursorPos()
+        -- the jump is computed from the position before the game's one character move
+        if leftPressed then
+            local target = PreviousWordStart(text, math.min(cursor + 1, #text))
+            for _ = 1, math.max(0, cursor - target) do box:onKeyLeft() end
+        else
+            local target = NextWordEnd(text, math.max(cursor - 1, 0))
+            for _ = 1, math.max(0, target - cursor) do box:onKeyRight() end
+        end
+    end
+end
+
 ISChat.onSwitchStream = function()
     if ISChat.focused then
         local internalText = ISChat.instance:getInputText()
@@ -1623,6 +1737,7 @@ function ISChat:prerender()
 
     instance:createValidationWindowButton()
     instance:updateInputChipBackspace()
+    instance:updateInputShortcuts()
 
     if instance.rangeIndicator ~= nil then
         if instance.rangeButtonState == 'visible' then
