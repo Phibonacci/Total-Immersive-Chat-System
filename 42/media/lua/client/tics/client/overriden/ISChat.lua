@@ -341,6 +341,19 @@ local function InitGlobalModData()
     elseif ticsModData['isPortraitEnabled'] ~= nil then
         ISChat.instance.isPortraitEnabled = ticsModData['isPortraitEnabled']
     end
+    -- timestamp and tags: enabled by default (the vanilla game options default to disabled),
+    -- the player's choice is saved with the other TICS settings
+    if ticsModData['showTimestamp'] == nil then
+        ISChat.instance.showTimestamp = true
+    else
+        ISChat.instance.showTimestamp = ticsModData['showTimestamp']
+    end
+    if ticsModData['showTitle'] == nil then
+        ISChat.instance.showTitle = true
+    else
+        ISChat.instance.showTitle = ticsModData['showTitle']
+    end
+    ISChat.instance:updateChatPrefixSettings()
     if ticsModData['isHudEnabled'] == nil then
         ISChat.instance.isHudEnabled = true
     else
@@ -2544,6 +2557,22 @@ function ISChat.onToggleVoice()
     -- we'll use this settings in the future instead of the server default behavior
     ISChat.instance.ticsModData['isVoiceEnabled'] = ISChat.instance.isVoiceEnabled
     SaveTicsModData()
+end
+
+ISChat.onToggleTimestampPrefix = function()
+    local chat = ISChat.instance
+    chat.showTimestamp = not chat.showTimestamp
+    chat.ticsModData['showTimestamp'] = chat.showTimestamp
+    SaveTicsModData()
+    chat:updateChatPrefixSettings()
+end
+
+ISChat.onToggleTagPrefix = function()
+    local chat = ISChat.instance
+    chat.showTitle = not chat.showTitle
+    chat.ticsModData['showTitle'] = chat.showTitle
+    SaveTicsModData()
+    chat:updateChatPrefixSettings()
 end
 
 function ISChat.onToggleHud()
