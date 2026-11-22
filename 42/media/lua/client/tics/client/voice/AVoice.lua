@@ -190,7 +190,10 @@ function AVoice:update()
                     self.pitchVariation = math.min(
                         math.max(self.pitchVariation + updatePitchVariation, MIN_PITCH_VARIATION),
                         MAX_PITCH_VARIATION)
-                    self.soundEmitter:setPitch(self.soundId, self.pitch + self.pitchVariation)
+                    -- setPitch with the sound id logs "Set pitch for ToStart" (FMODSoundEmitter) for each sound;
+                    -- it sets the pitch of every sound of the emitter anyway, and this emitter (a free one) only
+                    -- plays this sound, so an id matching no sound sets the same pitch without the log
+                    self.soundEmitter:setPitch(0, self.pitch + self.pitchVariation)
                     soundPlayed = true
                 end
             end
