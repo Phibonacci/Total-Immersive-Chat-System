@@ -199,5 +199,17 @@
     "UI_TICS_Languages_yi" : "Yiddish",
     "UI_TICS_Languages_yo" : "Yoruba",
     "UI_TICS_Languages_za" : "Zhuang",
-    "UI_TICS_Languages_zu" : "Zulu"
+    "UI_TICS_Languages_zu" : "Zulu",
+    "UI_TICS_chip_say"       : "Say",
+    "UI_TICS_chip_whisper"   : "Whisper",
+    "UI_TICS_chip_low"       : "Low",
+    "UI_TICS_chip_yell"      : "Yell",
+    "UI_TICS_chip_faction"   : "Faction",
+    "UI_TICS_chip_safehouse" : "Safehouse",
+    "UI_TICS_chip_general"   : "General",
+    "UI_TICS_chip_ooc"       : "OOC",
+    "UI_TICS_chip_pm"        : "PM",
+    "UI_TICS_chip_admin"     : "Admin",
+    "UI_TICS_chip_me"        : "Me",
+    "UI_TICS_chip_do"        : "Do"
 }

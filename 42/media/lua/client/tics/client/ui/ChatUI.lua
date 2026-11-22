@@ -128,8 +128,14 @@ local ChipLabels = {
     ooc = 'OOC', pm = 'PM', admin = 'Admin', me = 'Me', ['do'] = 'Do',
 }
 
+-- translated with UI_TICS_chip_<channel>, the English names above are the fallback
 local function GetChipLabel(stream)
-    return ChipLabels[stream.name] or stream.name
+    local key = 'UI_TICS_chip_' .. stream.name
+    local label = getText(key)
+    if label == nil or label == key then
+        return ChipLabels[stream.name] or stream.name
+    end
+    return label
 end
 
 local function GetChipColor(stream)

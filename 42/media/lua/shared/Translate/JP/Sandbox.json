@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Total Immersive Chat System",
+    "Sandbox_TICSChannels"                       : "Total Immersive Chat System: チャンネル",
+
+    "Sandbox_TICS_ShowCharacterName"             : "チャットにユーザー名ではなくキャラクター名を表示",
+
+    "Sandbox_TICS_BoredomReduction"              : "メッセージを聞くごとの退屈の減少量",
+
+    "Sandbox_TICS_Languages"                     : "ロールプレイ用の言語を有効",
+
+    "Sandbox_TICS_BubblePortrait"                : "吹き出しの左側にプレイヤーのポートレートを表示 (カスタム画像はサーバーの Zomboid/Lua/avatars/username.png に配置)",
+    "Sandbox_TICS_BubblePortrait_help"           : "吹き出しの左側にプレイヤーのポートレートを表示します。\nカスタムアバターはサーバーの Zomboid/Lua/avatars/username.png に配置します。\nユーザー名に対応する画像がない場合はバニラのポートレートを使用します。\n1 = なし\n2 = バニラ\n 3 = Steam アバター\n4 = カスタム",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "なし",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "カスタムとバニラ",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam アバター",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "吹き出しの表示時間 (秒)",
+    "Sandbox_TICS_BubbleOpacity"                 : "吹き出しの不透明度",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "プレイヤーの疑似音声を有効",
+
+    "Sandbox_TICS_VerbEnabled"                   : "メッセージに動詞の接頭辞と引用符を追加",
+
+    "Sandbox_TICS_Capitalize"                    : "メッセージの最初の文字を自動で大文字にし、句読点を追加",
+
+    "Sandbox_TICS_HideCallout"                   : "チャットウィンドウで叫び声を非表示 (Q 連打対策)",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdown アスタリスク1つの色",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdown アスタリスク2つの色",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "/general のメッセージと Discord の同期を有効",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "ラジオチャンネルと Discord の同期を有効",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "Discord と同期するラジオ周波数 (100.000MHz は 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "スクリプトによるラジオメッセージの色",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "最大音量のラジオが聞こえる最大範囲",
+
+    "Sandbox_TICS_WhisperEnabled"                : "/whisper チャットを有効",
+    "Sandbox_TICS_LowEnabled"                    : "/low チャットを有効",
+    "Sandbox_TICS_SayEnabled"                    : "/say チャットを有効",
+    "Sandbox_TICS_YellEnabled"                   : "/yell チャットを有効",
+    "Sandbox_TICS_MeEnabled"                     : "/me チャットを有効",
+    "Sandbox_TICS_DoEnabled"                     : "/do チャットを有効",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "/pm (プライベートメッセージ) チャットを有効",
+    "Sandbox_TICS_FactionMessageEnabled"         : "/faction チャットを有効",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "/safehouse チャットを有効",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "/general チャットを有効",
+    "Sandbox_TICS_AdminMessageEnabled"           : "/admin チャットを有効",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "/ooc (キャラクター外) チャットを有効",
+
+    "Sandbox_TICS_WhisperColor"                  : "/whisper の色",
+    "Sandbox_TICS_LowColor"                      : "/low の色",
+    "Sandbox_TICS_SayColor"                      : "/say の色",
+    "Sandbox_TICS_YellColor"                     : "/yell の色",
+    "Sandbox_TICS_MeColor"                       : "/me の色",
+    "Sandbox_TICS_DoColor"                       : "/do の色",
+    "Sandbox_TICS_PrivateMessageColor"           : "/pm (プライベートメッセージ) の色",
+    "Sandbox_TICS_FactionMessageColor"           : "/faction の色",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "/safehouse の色",
+    "Sandbox_TICS_GeneralMessageColor"           : "/general の色",
+    "Sandbox_TICS_AdminMessageColor"             : "/admin の色",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "/ooc (キャラクター外) の色",
+
+    "Sandbox_TICS_WhisperRange"                  : "/whisper チャットの範囲",
+    "Sandbox_TICS_LowRange"                      : "/low チャットの範囲",
+    "Sandbox_TICS_SayRange"                      : "/say チャットの範囲",
+    "Sandbox_TICS_YellRange"                     : "/yell チャットの範囲",
+    "Sandbox_TICS_MeRange"                       : "/me チャットの範囲",
+    "Sandbox_TICS_DoRange"                       : "/do チャットの範囲",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "/ooc (キャラクター外) チャットの範囲",
+
+    "Sandbox_TICS_DoAdminOnly"                   : "/do は管理者権限が必要",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "/whisper チャットがゾンビを引き付ける範囲",
+    "Sandbox_TICS_LowZombieRange"                : "/low チャットがゾンビを引き付ける範囲",
+    "Sandbox_TICS_SayZombieRange"                : "/say チャットがゾンビを引き付ける範囲",
+    "Sandbox_TICS_YellZombieRange"               : "/yell チャットがゾンビを引き付ける範囲"
+}

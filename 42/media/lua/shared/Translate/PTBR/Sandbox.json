@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Total Immersive Chat System",
+    "Sandbox_TICSChannels"                       : "Total Immersive Chat System: Canais",
+
+    "Sandbox_TICS_ShowCharacterName"             : "Mostrar o nome do personagem no chat em vez do nome de usuário",
+
+    "Sandbox_TICS_BoredomReduction"              : "Redução do tédio por mensagem ouvida",
+
+    "Sandbox_TICS_Languages"                     : "Ativar idiomas de roleplay",
+
+    "Sandbox_TICS_BubblePortrait"                : "Mostrar o retrato do jogador à esquerda do balão (os personalizados ficam em: Zomboid/Lua/avatars/username.png no servidor)",
+    "Sandbox_TICS_BubblePortrait_help"           : "Mostrar o retrato do jogador à esquerda do balão.\nOs avatares personalizados ficam em: Zomboid/Lua/avatars/username.png no servidor.\nO retrato vanilla será usado se nenhuma imagem for encontrada para o nome de usuário.\n1 = Nenhum\n2 = Vanilla\n 3 = Avatar da Steam\n4 = Personalizado",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "Nenhum",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalizado e vanilla",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Avatar da Steam",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "Tempo do balão (segundos)",
+    "Sandbox_TICS_BubbleOpacity"                 : "Opacidade do balão",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "Ativar vozes simuladas dos jogadores",
+
+    "Sandbox_TICS_VerbEnabled"                   : "Adicionar um verbo antes das mensagens, e aspas",
+
+    "Sandbox_TICS_Capitalize"                    : "Colocar automaticamente a primeira letra da mensagem em maiúscula e adicionar pontuação",
+
+    "Sandbox_TICS_HideCallout"                   : "Ocultar gritos na janela do chat (spam da tecla Q)",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Cor do markdown com um asterisco",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Cor do markdown com dois asteriscos",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "Ativar sincronização com o Discord para mensagens /general",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "Ativar sincronização com o Discord para um canal de rádio",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "Frequência de rádio sincronizada com o Discord (100.000MHz equivale a 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "Cor das mensagens de rádio pré-programadas",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "Alcance máximo em que um rádio no volume máximo pode ser ouvido",
+
+    "Sandbox_TICS_WhisperEnabled"                : "Ativar chat /whisper",
+    "Sandbox_TICS_LowEnabled"                    : "Ativar chat /low",
+    "Sandbox_TICS_SayEnabled"                    : "Ativar chat /say",
+    "Sandbox_TICS_YellEnabled"                   : "Ativar chat /yell",
+    "Sandbox_TICS_MeEnabled"                     : "Ativar chat /me",
+    "Sandbox_TICS_DoEnabled"                     : "Ativar chat /do",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "Ativar chat /pm (mensagem privada)",
+    "Sandbox_TICS_FactionMessageEnabled"         : "Ativar chat /faction",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "Ativar chat /safehouse",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "Ativar chat /general",
+    "Sandbox_TICS_AdminMessageEnabled"           : "Ativar chat /admin",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Ativar chat /ooc (fora do personagem)",
+
+    "Sandbox_TICS_WhisperColor"                  : "Cor do /whisper",
+    "Sandbox_TICS_LowColor"                      : "Cor do /low",
+    "Sandbox_TICS_SayColor"                      : "Cor do /say",
+    "Sandbox_TICS_YellColor"                     : "Cor do /yell",
+    "Sandbox_TICS_MeColor"                       : "Cor do /me",
+    "Sandbox_TICS_DoColor"                       : "Cor do /do",
+    "Sandbox_TICS_PrivateMessageColor"           : "Cor do /pm (mensagem privada)",
+    "Sandbox_TICS_FactionMessageColor"           : "Cor do /faction",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "Cor do /safehouse",
+    "Sandbox_TICS_GeneralMessageColor"           : "Cor do /general",
+    "Sandbox_TICS_AdminMessageColor"             : "Cor do /admin",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "Cor do /ooc (fora do personagem)",
+
+    "Sandbox_TICS_WhisperRange"                  : "Alcance do chat /whisper",
+    "Sandbox_TICS_LowRange"                      : "Alcance do chat /low",
+    "Sandbox_TICS_SayRange"                      : "Alcance do chat /say",
+    "Sandbox_TICS_YellRange"                     : "Alcance do chat /yell",
+    "Sandbox_TICS_MeRange"                       : "Alcance do chat /me",
+    "Sandbox_TICS_DoRange"                       : "Alcance do chat /do",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "Alcance do chat /ooc (fora do personagem)",
+
+    "Sandbox_TICS_DoAdminOnly"                   : "/do exige privilégios de administrador",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "Alcance em que os zumbis ouvem o /whisper",
+    "Sandbox_TICS_LowZombieRange"                : "Alcance em que os zumbis ouvem o /low",
+    "Sandbox_TICS_SayZombieRange"                : "Alcance em que os zumbis ouvem o /say",
+    "Sandbox_TICS_YellZombieRange"               : "Alcance em que os zumbis ouvem o /yell"
+}

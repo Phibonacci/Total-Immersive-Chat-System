@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Total Immersive Chat System",
+    "Sandbox_TICSChannels"                       : "Total Immersive Chat System: 频道",
+
+    "Sandbox_TICS_ShowCharacterName"             : "在聊天中显示角色名而非用户名",
+
+    "Sandbox_TICS_BoredomReduction"              : "每听到一条消息减少的无聊值",
+
+    "Sandbox_TICS_Languages"                     : "启用角色扮演语言",
+
+    "Sandbox_TICS_BubblePortrait"                : "在气泡左侧显示玩家头像 (自定义头像放在服务器的: Zomboid/Lua/avatars/username.png)",
+    "Sandbox_TICS_BubblePortrait_help"           : "在气泡左侧显示玩家头像.\n自定义头像放在服务器的: Zomboid/Lua/avatars/username.png\n如果找不到该用户名对应的图片, 将使用原版肖像.\n1 = 无\n2 = 原版\n 3 = Steam 头像\n4 = 自定义",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "无",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "自定义和原版",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam 头像",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "气泡显示时间 (秒)",
+    "Sandbox_TICS_BubbleOpacity"                 : "气泡不透明度",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "启用玩家模拟语音",
+
+    "Sandbox_TICS_VerbEnabled"                   : "在消息前添加动词前缀并加上引号",
+
+    "Sandbox_TICS_Capitalize"                    : "自动将消息首字母大写并添加标点",
+
+    "Sandbox_TICS_HideCallout"                   : "在聊天窗口中隐藏呼喊 (Q 键刷屏)",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdown 单星号颜色",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdown 双星号颜色",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "启用 Discord 与 /general 消息同步",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "启用 Discord 与无线电频道同步",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "设置与 Discord 同步的无线电频率 (100.000MHz 填 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "设置脚本无线电消息的颜色",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "满音量无线电可被听到的最大范围",
+
+    "Sandbox_TICS_WhisperEnabled"                : "启用 /whisper 聊天",
+    "Sandbox_TICS_LowEnabled"                    : "启用 /low 聊天",
+    "Sandbox_TICS_SayEnabled"                    : "启用 /say 聊天",
+    "Sandbox_TICS_YellEnabled"                   : "启用 /yell 聊天",
+    "Sandbox_TICS_MeEnabled"                     : "启用 /me 聊天",
+    "Sandbox_TICS_DoEnabled"                     : "启用 /do 聊天",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "启用 /pm (私聊) 聊天",
+    "Sandbox_TICS_FactionMessageEnabled"         : "启用 /faction 聊天",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "启用 /safehouse 聊天",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "启用 /general 聊天",
+    "Sandbox_TICS_AdminMessageEnabled"           : "启用 /admin 聊天",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "启用 /ooc (角色外) 聊天",
+
+    "Sandbox_TICS_WhisperColor"                  : "设置 /whisper 颜色",
+    "Sandbox_TICS_LowColor"                      : "设置 /low 颜色",
+    "Sandbox_TICS_SayColor"                      : "设置 /say 颜色",
+    "Sandbox_TICS_YellColor"                     : "设置 /yell 颜色",
+    "Sandbox_TICS_MeColor"                       : "设置 /me 颜色",
+    "Sandbox_TICS_DoColor"                       : "设置 /do 颜色",
+    "Sandbox_TICS_PrivateMessageColor"           : "设置 /pm (私聊) 颜色",
+    "Sandbox_TICS_FactionMessageColor"           : "设置 /faction 颜色",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "设置 /safehouse 颜色",
+    "Sandbox_TICS_GeneralMessageColor"           : "设置 /general 颜色",
+    "Sandbox_TICS_AdminMessageColor"             : "设置 /admin 颜色",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "设置 /ooc (角色外) 颜色",
+
+    "Sandbox_TICS_WhisperRange"                  : "/whisper 聊天范围",
+    "Sandbox_TICS_LowRange"                      : "/low 聊天范围",
+    "Sandbox_TICS_SayRange"                      : "/say 聊天范围",
+    "Sandbox_TICS_YellRange"                     : "/yell 聊天范围",
+    "Sandbox_TICS_MeRange"                       : "/me 聊天范围",
+    "Sandbox_TICS_DoRange"                       : "/do 聊天范围",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "/ooc (角色外) 聊天范围",
+
+    "Sandbox_TICS_DoAdminOnly"                   : "/do 需要管理员权限",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "/whisper 聊天吸引僵尸范围",
+    "Sandbox_TICS_LowZombieRange"                : "/low 聊天吸引僵尸范围",
+    "Sandbox_TICS_SayZombieRange"                : "/say 聊天吸引僵尸范围",
+    "Sandbox_TICS_YellZombieRange"               : "/yell 聊天吸引僵尸范围"
+}

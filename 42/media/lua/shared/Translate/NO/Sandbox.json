@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Total Immersive Chat System",
+    "Sandbox_TICSChannels"                       : "Total Immersive Chat System: Kanaler",
+
+    "Sandbox_TICS_ShowCharacterName"             : "Vis karakternavn i chatten i stedet for brukernavn",
+
+    "Sandbox_TICS_BoredomReduction"              : "Redusert kjedsomhet per hørt melding",
+
+    "Sandbox_TICS_Languages"                     : "Aktiver rollespillspråk",
+
+    "Sandbox_TICS_BubblePortrait"                : "Vis spillerportrett til venstre for snakkeboblen (egne bilder legges i: Zomboid/Lua/avatars/username.png på serveren)",
+    "Sandbox_TICS_BubblePortrait_help"           : "Vis spillerportrett til venstre for snakkeboblen.\nEgne avatarer legges i: Zomboid/Lua/avatars/username.png på serveren.\nVanilla-portrett brukes hvis det ikke finnes noe bilde for brukernavnet.\n1 = Ingen\n2 = Vanilla\n 3 = Steam-avatar\n4 = Egen",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "Ingen",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "Egen og vanilla",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam-avatar",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "Visningstid for snakkeboble (sekunder)",
+    "Sandbox_TICS_BubbleOpacity"                 : "Snakkeboblens ugjennomsiktighet",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "Aktiver kunstige spillerstemmer",
+
+    "Sandbox_TICS_VerbEnabled"                   : "Legg til et verb foran meldinger, og anførselstegn",
+
+    "Sandbox_TICS_Capitalize"                    : "Gjør automatisk første bokstav i en melding stor og legg til tegnsetting",
+
+    "Sandbox_TICS_HideCallout"                   : "Skjul rop i chattevinduet (Q-spam)",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdown-farge for én stjerne",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdown-farge for to stjerner",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "Aktiver Discord-synkronisering med /general-meldinger",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "Aktiver Discord-synkronisering med en radiokanal",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "Radiofrekvens som synkroniseres med Discord (100.000 MHz er 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "Angi farge for skriptede radiomeldinger",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "Maksimal avstand der en radio på fullt volum kan høres",
+
+    "Sandbox_TICS_WhisperEnabled"                : "Aktiver /whisper-chat",
+    "Sandbox_TICS_LowEnabled"                    : "Aktiver /low-chat",
+    "Sandbox_TICS_SayEnabled"                    : "Aktiver /say-chat",
+    "Sandbox_TICS_YellEnabled"                   : "Aktiver /yell-chat",
+    "Sandbox_TICS_MeEnabled"                     : "Aktiver /me-chat",
+    "Sandbox_TICS_DoEnabled"                     : "Aktiver /do-chat",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "Aktiver /pm-chat (privatmelding)",
+    "Sandbox_TICS_FactionMessageEnabled"         : "Aktiver /faction-chat",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "Aktiver /safehouse-chat",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "Aktiver /general-chat",
+    "Sandbox_TICS_AdminMessageEnabled"           : "Aktiver /admin-chat",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Aktiver /ooc-chat (utenfor rollen)",
+
+    "Sandbox_TICS_WhisperColor"                  : "Angi farge for /whisper",
+    "Sandbox_TICS_LowColor"                      : "Angi farge for /low",
+    "Sandbox_TICS_SayColor"                      : "Angi farge for /say",
+    "Sandbox_TICS_YellColor"                     : "Angi farge for /yell",
+    "Sandbox_TICS_MeColor"                       : "Angi farge for /me",
+    "Sandbox_TICS_DoColor"                       : "Angi farge for /do",
+    "Sandbox_TICS_PrivateMessageColor"           : "Angi farge for /pm (privatmelding)",
+    "Sandbox_TICS_FactionMessageColor"           : "Angi farge for /faction",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "Angi farge for /safehouse",
+    "Sandbox_TICS_GeneralMessageColor"           : "Angi farge for /general",
+    "Sandbox_TICS_AdminMessageColor"             : "Angi farge for /admin",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "Angi farge for /ooc (utenfor rollen)",
+
+    "Sandbox_TICS_WhisperRange"                  : "Rekkevidde for /whisper-chat",
+    "Sandbox_TICS_LowRange"                      : "Rekkevidde for /low-chat",
+    "Sandbox_TICS_SayRange"                      : "Rekkevidde for /say-chat",
+    "Sandbox_TICS_YellRange"                     : "Rekkevidde for /yell-chat",
+    "Sandbox_TICS_MeRange"                       : "Rekkevidde for /me-chat",
+    "Sandbox_TICS_DoRange"                       : "Rekkevidde for /do-chat",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "Rekkevidde for /ooc-chat (utenfor rollen)",
+
+    "Sandbox_TICS_DoAdminOnly"                   : "/do krever administratorrettigheter",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "Rekkevidde for zombier for /whisper-chat",
+    "Sandbox_TICS_LowZombieRange"                : "Rekkevidde for zombier for /low-chat",
+    "Sandbox_TICS_SayZombieRange"                : "Rekkevidde for zombier for /say-chat",
+    "Sandbox_TICS_YellZombieRange"               : "Rekkevidde for zombier for /yell-chat"
+}

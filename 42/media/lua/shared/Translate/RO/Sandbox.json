@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Total Immersive Chat System",
+    "Sandbox_TICSChannels"                       : "Total Immersive Chat System: Canale",
+
+    "Sandbox_TICS_ShowCharacterName"             : "Afișează numele personajului în chat în loc de numele de utilizator",
+
+    "Sandbox_TICS_BoredomReduction"              : "Reducerea plictiselii per mesaj auzit",
+
+    "Sandbox_TICS_Languages"                     : "Activează limbile de roleplay",
+
+    "Sandbox_TICS_BubblePortrait"                : "Afișează portretul jucătorului în stânga bulei (cele personalizate se pun în: Zomboid/Lua/avatars/username.png pe server)",
+    "Sandbox_TICS_BubblePortrait_help"           : "Afișează portretul jucătorului în stânga bulei.\nAvatarele personalizate se pun în: Zomboid/Lua/avatars/username.png pe server.\nDacă nu se găsește nicio imagine pentru numele de utilizator, se folosește portretul vanilla.\n1 = Niciunul\n2 = Vanilla\n 3 = Avatar Steam\n4 = Personalizat",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "Niciunul",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalizat și vanilla",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Avatar Steam",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "Durata bulei (secunde)",
+    "Sandbox_TICS_BubbleOpacity"                 : "Opacitatea bulei",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "Activează vocile simulate ale jucătorilor",
+
+    "Sandbox_TICS_VerbEnabled"                   : "Adaugă un verb ca prefix la mesaje, și ghilimele",
+
+    "Sandbox_TICS_Capitalize"                    : "Pune automat majusculă la prima literă a mesajului și adaugă punctuație",
+
+    "Sandbox_TICS_HideCallout"                   : "Ascunde strigătele din fereastra de chat (spam cu tasta Q)",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Culoarea markdown cu un asterisc",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Culoarea markdown cu două asteriscuri",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "Activează sincronizarea cu Discord a mesajelor /general",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "Activează sincronizarea cu Discord a unui canal radio",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "Setează frecvența radio sincronizată cu Discord (100.000MHz înseamnă 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "Setează culoarea mesajelor radio predefinite",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "Distanța maximă de la care se aude un radio cu volumul la maxim",
+
+    "Sandbox_TICS_WhisperEnabled"                : "Activează chatul /whisper",
+    "Sandbox_TICS_LowEnabled"                    : "Activează chatul /low",
+    "Sandbox_TICS_SayEnabled"                    : "Activează chatul /say",
+    "Sandbox_TICS_YellEnabled"                   : "Activează chatul /yell",
+    "Sandbox_TICS_MeEnabled"                     : "Activează chatul /me",
+    "Sandbox_TICS_DoEnabled"                     : "Activează chatul /do",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "Activează chatul /pm (mesaj privat)",
+    "Sandbox_TICS_FactionMessageEnabled"         : "Activează chatul /faction",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "Activează chatul /safehouse",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "Activează chatul /general",
+    "Sandbox_TICS_AdminMessageEnabled"           : "Activează chatul /admin",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Activează chatul /ooc (în afara personajului)",
+
+    "Sandbox_TICS_WhisperColor"                  : "Setează culoarea pentru /whisper",
+    "Sandbox_TICS_LowColor"                      : "Setează culoarea pentru /low",
+    "Sandbox_TICS_SayColor"                      : "Setează culoarea pentru /say",
+    "Sandbox_TICS_YellColor"                     : "Setează culoarea pentru /yell",
+    "Sandbox_TICS_MeColor"                       : "Setează culoarea pentru /me",
+    "Sandbox_TICS_DoColor"                       : "Setează culoarea pentru /do",
+    "Sandbox_TICS_PrivateMessageColor"           : "Setează culoarea pentru /pm (mesaj privat)",
+    "Sandbox_TICS_FactionMessageColor"           : "Setează culoarea pentru /faction",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "Setează culoarea pentru /safehouse",
+    "Sandbox_TICS_GeneralMessageColor"           : "Setează culoarea pentru /general",
+    "Sandbox_TICS_AdminMessageColor"             : "Setează culoarea pentru /admin",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "Setează culoarea pentru /ooc (în afara personajului)",
+
+    "Sandbox_TICS_WhisperRange"                  : "Raza chatului /whisper",
+    "Sandbox_TICS_LowRange"                      : "Raza chatului /low",
+    "Sandbox_TICS_SayRange"                      : "Raza chatului /say",
+    "Sandbox_TICS_YellRange"                     : "Raza chatului /yell",
+    "Sandbox_TICS_MeRange"                       : "Raza chatului /me",
+    "Sandbox_TICS_DoRange"                       : "Raza chatului /do",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "Raza chatului /ooc (în afara personajului)",
+
+    "Sandbox_TICS_DoAdminOnly"                   : "/do necesită drepturi de administrator",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "Raza în care zombii aud /whisper",
+    "Sandbox_TICS_LowZombieRange"                : "Raza în care zombii aud /low",
+    "Sandbox_TICS_SayZombieRange"                : "Raza în care zombii aud /say",
+    "Sandbox_TICS_YellZombieRange"               : "Raza în care zombii aud /yell"
+}

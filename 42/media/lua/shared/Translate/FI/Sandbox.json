@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
+    "Sandbox_TICS"                               : "Total Immersive Chat System",
+    "Sandbox_TICSChannels"                       : "Total Immersive Chat System: kanavat",
+
+    "Sandbox_TICS_ShowCharacterName"             : "Näytä chatissa hahmon nimi käyttäjänimen sijaan",
+
+    "Sandbox_TICS_BoredomReduction"              : "Tylsistymisen väheneminen kuultua viestiä kohden",
+
+    "Sandbox_TICS_Languages"                     : "Ota roolipelikielet käyttöön",
+
+    "Sandbox_TICS_BubblePortrait"                : "Näytä pelaajan muotokuva puhekuplan vasemmalla puolella (omat kuvat: Zomboid/Lua/avatars/username.png palvelimella)",
+    "Sandbox_TICS_BubblePortrait_help"           : "Näytä pelaajan muotokuva puhekuplan vasemmalla puolella.\nOmat avatarit sijoitetaan palvelimella kohteeseen: Zomboid/Lua/avatars/username.png.\nJos käyttäjänimelle ei löydy kuvaa, käytetään pelin omaa muotokuvaa.\n1 = Ei mitään\n2 = Pelin oma\n 3 = Steam-avatar\n4 = Oma",
+    "Sandbox_TICS_BubblePortrait_Values_option1" : "Ei mitään",
+    "Sandbox_TICS_BubblePortrait_Values_option2" : "Oma ja pelin oma",
+    "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam-avatar",
+
+    "Sandbox_TICS_BubbleTimerInSeconds"          : "Puhekuplan näyttöaika (sekuntia)",
+    "Sandbox_TICS_BubbleOpacity"                 : "Puhekuplan peittävyys",
+
+    "Sandbox_TICS_VoiceEnabled"                  : "Ota käyttöön pelaajien keinotekoiset äänet",
+
+    "Sandbox_TICS_VerbEnabled"                   : "Lisää viestien alkuun verbi ja lainausmerkit",
+
+    "Sandbox_TICS_Capitalize"                    : "Muuta viestin ensimmäinen kirjain automaattisesti isoksi ja lisää välimerkit",
+
+    "Sandbox_TICS_HideCallout"                   : "Piilota huudot chat-ikkunasta (Q-spämmi)",
+
+    "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdownin yhden tähden väri",
+    "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdownin kahden tähden väri",
+
+    "Sandbox_TICS_GeneralDiscordEnabled"         : "Ota käyttöön Discord-synkronointi /general-viesteille",
+    "Sandbox_TICS_RadioDiscordEnabled"           : "Ota käyttöön Discord-synkronointi radiokanavalle",
+    "Sandbox_TICS_RadioDiscordFrequency"         : "Discordiin synkronoitava radiotaajuus (100.000 MHz on 100000)",
+
+    "Sandbox_TICS_RadioColor"                    : "Aseta skriptattujen radioviestien väri",
+    "Sandbox_TICS_RadioSoundMaxRange"            : "Suurin etäisyys, jolta täydellä äänenvoimakkuudella soiva radio kuuluu",
+
+    "Sandbox_TICS_WhisperEnabled"                : "Ota käyttöön /whisper-chat",
+    "Sandbox_TICS_LowEnabled"                    : "Ota käyttöön /low-chat",
+    "Sandbox_TICS_SayEnabled"                    : "Ota käyttöön /say-chat",
+    "Sandbox_TICS_YellEnabled"                   : "Ota käyttöön /yell-chat",
+    "Sandbox_TICS_MeEnabled"                     : "Ota käyttöön /me-chat",
+    "Sandbox_TICS_DoEnabled"                     : "Ota käyttöön /do-chat",
+    "Sandbox_TICS_PrivateMessageEnabled"         : "Ota käyttöön /pm-chat (yksityisviesti)",
+    "Sandbox_TICS_FactionMessageEnabled"         : "Ota käyttöön /faction-chat",
+    "Sandbox_TICS_SafeHouseMessageEnabled"       : "Ota käyttöön /safehouse-chat",
+    "Sandbox_TICS_GeneralMessageEnabled"         : "Ota käyttöön /general-chat",
+    "Sandbox_TICS_AdminMessageEnabled"           : "Ota käyttöön /admin-chat",
+    "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Ota käyttöön /ooc-chat (roolin ulkopuolinen)",
+
+    "Sandbox_TICS_WhisperColor"                  : "Aseta /whisper-väri",
+    "Sandbox_TICS_LowColor"                      : "Aseta /low-väri",
+    "Sandbox_TICS_SayColor"                      : "Aseta /say-väri",
+    "Sandbox_TICS_YellColor"                     : "Aseta /yell-väri",
+    "Sandbox_TICS_MeColor"                       : "Aseta /me-väri",
+    "Sandbox_TICS_DoColor"                       : "Aseta /do-väri",
+    "Sandbox_TICS_PrivateMessageColor"           : "Aseta /pm-väri (yksityisviesti)",
+    "Sandbox_TICS_FactionMessageColor"           : "Aseta /faction-väri",
+    "Sandbox_TICS_SafeHouseMessageColor"         : "Aseta /safehouse-väri",
+    "Sandbox_TICS_GeneralMessageColor"           : "Aseta /general-väri",
+    "Sandbox_TICS_AdminMessageColor"             : "Aseta /admin-väri",
+    "Sandbox_TICS_OutOfCharacterMessageColor"    : "Aseta /ooc-väri (roolin ulkopuolinen)",
+
+    "Sandbox_TICS_WhisperRange"                  : "/whisper-chatin kantama",
+    "Sandbox_TICS_LowRange"                      : "/low-chatin kantama",
+    "Sandbox_TICS_SayRange"                      : "/say-chatin kantama",
+    "Sandbox_TICS_YellRange"                     : "/yell-chatin kantama",
+    "Sandbox_TICS_MeRange"                       : "/me-chatin kantama",
+    "Sandbox_TICS_DoRange"                       : "/do-chatin kantama",
+    "Sandbox_TICS_OutOfCharacterMessageRange"    : "/ooc-chatin kantama (roolin ulkopuolinen)",
+
+    "Sandbox_TICS_DoAdminOnly"                   : "/do vaatii ylläpitäjän oikeudet",
+
+    "Sandbox_TICS_WhisperZombieRange"            : "/whisper-chatin kantama zombeille",
+    "Sandbox_TICS_LowZombieRange"                : "/low-chatin kantama zombeille",
+    "Sandbox_TICS_SayZombieRange"                : "/say-chatin kantama zombeille",
+    "Sandbox_TICS_YellZombieRange"               : "/yell-chatin kantama zombeille"
+}

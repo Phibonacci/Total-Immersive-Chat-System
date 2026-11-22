@@ -72,8 +72,8 @@
 
     "Sandbox_TICS_DoAdminOnly"                   : "/do requires admin privileges",
 
-    "Sandbox_TICS_WhisperZombieRange"            : "/whisper chat rombie range",
-    "Sandbox_TICS_LowZombieRange"                : "/low chat rombie range",
-    "Sandbox_TICS_SayZombieRange"                : "/say chat rombie range",
-    "Sandbox_TICS_YellZombieRange"               : "/yell chat rombie range"
+    "Sandbox_TICS_WhisperZombieRange"            : "/whisper chat zombie range",
+    "Sandbox_TICS_LowZombieRange"                : "/low chat zombie range",
+    "Sandbox_TICS_SayZombieRange"                : "/say chat zombie range",
+    "Sandbox_TICS_YellZombieRange"               : "/yell chat zombie range"
 }
