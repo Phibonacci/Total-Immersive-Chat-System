@@ -22,6 +22,11 @@ function ServerSend.OwnPendingAvatar(player, checksum, extension, data)
     })
 end
 
+-- avatars: array of { username, firstName, lastName }
+function ServerSend.ApprovedAvatarList(player, avatars)
+    ServerSend.Command(player, 'ApprovedAvatarList', { count = #avatars, avatars = avatars })
+end
+
 function ServerSend.AvatarDeleted(player, username, firstName, lastName)
     ServerSend.Command(player, 'AvatarDeleted', { username = username, firstName = firstName, lastName = lastName })
 end

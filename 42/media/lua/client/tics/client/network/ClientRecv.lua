@@ -154,6 +154,18 @@ ClientRecv['OwnPendingAvatar'] = function(args)
     end
 end
 
+ClientRecv['ApprovedAvatarList'] = function(args)
+    local avatars = {}
+    for _, avatar in pairs(args and args['avatars'] or {}) do
+        if type(avatar) == 'table' and type(avatar['username']) == 'string'
+            and type(avatar['firstName']) == 'string' and type(avatar['lastName']) == 'string'
+        then
+            table.insert(avatars, avatar)
+        end
+    end
+    AvatarManager:setApprovedAvatarList(avatars)
+end
+
 ClientRecv['AvatarDeleted'] = function(args)
     local username  = args['username']
     local firstName = args['firstName']

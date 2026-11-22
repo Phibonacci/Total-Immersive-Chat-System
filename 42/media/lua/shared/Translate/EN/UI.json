@@ -229,5 +229,14 @@
     "UI_TICS_Avatar_read_error"     : "Could not read %1",
     "UI_TICS_Avatar_open_folder"    : "Open folder",
     "UI_TICS_Avatar_refresh"        : "Refresh",
-    "UI_TICS_Avatar_path_copied"    : "Folder path copied to the clipboard: %1"
+    "UI_TICS_Avatar_path_copied"    : "Folder path copied to the clipboard: %1",
+    "UI_TICS_AvatarAdmin_title"          : "Avatar management",
+    "UI_TICS_AvatarAdmin_pending"        : "Pending (%1)",
+    "UI_TICS_AvatarAdmin_approved"       : "Approved (%1)",
+    "UI_TICS_AvatarAdmin_approve"        : "Approve",
+    "UI_TICS_AvatarAdmin_reject"         : "Reject",
+    "UI_TICS_AvatarAdmin_no_pending"     : "No avatar waiting for approval",
+    "UI_TICS_AvatarAdmin_no_approved"    : "No approved avatar",
+    "UI_TICS_AvatarAdmin_loading"        : "Loading...",
+    "UI_TICS_AvatarAdmin_delete_confirm" : "Delete the avatar of %1 (%2)?"
 }

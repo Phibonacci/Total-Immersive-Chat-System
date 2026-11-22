@@ -253,6 +253,42 @@ RecvServer['DeleteAvatar'] = function(player, args)
     AvatarManager:deleteAvatar(player)
 end
 
+-- avatar management window (admins and moderators)
+local function GetCharacterArgs(args)
+    if type(args) ~= 'table' or type(args['username']) ~= 'string'
+        or type(args['firstName']) ~= 'string' or type(args['lastName']) ~= 'string'
+    then
+        return nil
+    end
+    return args['username'], args['firstName'], args['lastName']
+end
+
+RecvServer['AskApprovedAvatarList'] = function(player, args)
+    if not Character.isAdminOrModerator(player) then
+        return
+    end
+    ServerSend.ApprovedAvatarList(player, AvatarManager:getApprovedAvatarList())
+end
+
+RecvServer['AskApprovedAvatarImage'] = function(player, args)
+    local username, firstName, lastName = GetCharacterArgs(args)
+    if not Character.isAdminOrModerator(player) or username == nil then
+        return
+    end
+    AvatarManager:sendApprovedAvatarTo(player, username, firstName, lastName)
+end
+
+RecvServer['AdminDeleteAvatar'] = function(player, args)
+    local username, firstName, lastName = GetCharacterArgs(args)
+    if not Character.isAdminOrModerator(player) or username == nil then
+        return
+    end
+    print('TICS info: avatar deleted by ' .. player:getUsername() .. ': ' .. username
+        .. ' "' .. firstName .. ' ' .. lastName .. '"')
+    AvatarManager:deleteAvatarOf(username, firstName, lastName)
+    ServerSend.ApprovedAvatarList(player, AvatarManager:getApprovedAvatarList())
+end
+
 RecvServer['ApproveAvatar'] = function(player, args)
     local username  = args['username']
     local firstName = args['firstName']

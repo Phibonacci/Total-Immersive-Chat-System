@@ -194,6 +194,19 @@ function ClientSend.sendAskOwnPendingAvatar()
     ClientSendCommand('AskOwnPendingAvatar', {})
 end
 
+-- avatar management window (admins and moderators)
+function ClientSend.sendAskApprovedAvatarList()
+    ClientSendCommand('AskApprovedAvatarList', {})
+end
+
+function ClientSend.sendAskApprovedAvatarImage(username, firstName, lastName)
+    ClientSendCommand('AskApprovedAvatarImage', { username = username, firstName = firstName, lastName = lastName })
+end
+
+function ClientSend.sendAdminDeleteAvatar(username, firstName, lastName)
+    ClientSendCommand('AdminDeleteAvatar', { username = username, firstName = firstName, lastName = lastName })
+end
+
 function ClientSend.sendDeleteAvatar()
     ClientSendCommand('DeleteAvatar', {})
 end

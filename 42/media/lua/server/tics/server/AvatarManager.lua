@@ -257,12 +257,84 @@ function AvatarManager:notifyAvatarProcessed(username, firstName, lastName, chec
     end
 end
 
+-- Index of the approved avatars: the file names (username_firstname_lastname) cannot be split
+-- back reliably when a name contains '_'. Avatars without an entry (copied by hand in the
+-- approved directory) are listed from their file name.
+local APPROVED_INDEX_KEY = 'ticsApprovedAvatarIndex'
+
+local function SetApprovedIndex(username, firstName, lastName, present)
+    local index = ModData.getOrCreate(APPROVED_INDEX_KEY)
+    local key = AvatarIO.createFileName(username, firstName, lastName)
+    if present then
+        index[key] = { username = username, firstName = firstName, lastName = lastName }
+    else
+        index[key] = nil
+    end
+    ModData.add(APPROVED_INDEX_KEY, index)
+end
+
+-- every approved avatar: array of { username, firstName, lastName }, sorted by username
+function AvatarManager:getApprovedAvatarList()
+    local index = ModData.getOrCreate(APPROVED_INDEX_KEY)
+    local directory = AvatarIO.getBasePath() .. 'approved'
+    local list = {}
+    local seen = {}
+    for _, fileName in ipairs(File.listFiles(directory) or {}) do
+        local key, extension = fileName:match('^(.+)%.(%w+)$')
+        extension = extension and extension:lower()
+        if key and not seen[key] and (extension == 'png' or extension == 'jpg' or extension == 'jpeg')
+            and not File.isEmpty(directory .. '/' .. fileName)
+        then
+            local entry = index[key]
+            if entry == nil then
+                local username, firstName, lastName = key:match('^(.+)_([^_]*)_([^_]*)$')
+                if username then
+                    entry = { username = username, firstName = firstName, lastName = lastName }
+                end
+            end
+            if entry then
+                seen[key] = true
+                table.insert(list, {
+                    username = entry.username, firstName = entry.firstName, lastName = entry.lastName,
+                })
+            end
+        end
+    end
+    table.sort(list, function(a, b)
+        if a.username:lower() ~= b.username:lower() then
+            return a.username:lower() < b.username:lower()
+        end
+        return (a.firstName .. a.lastName):lower() < (b.firstName .. b.lastName):lower()
+    end)
+    return list
+end
+
+-- an approved avatar sent to an admin for the avatar management window
+function AvatarManager:sendApprovedAvatarTo(admin, username, firstName, lastName)
+    local avatar = AvatarIO.loadPlayerAvatarFromNames('approved', username, firstName, lastName)
+    if avatar == nil then
+        return
+    end
+    ServerSend.ApprovedAvatar(admin, avatar['checksum'], username, firstName, lastName,
+        avatar['data'], avatar['extension'])
+    local key = AvatarIO.createFileName(username, firstName, lastName)
+    local adminData = self.players[admin:getUsername()]
+    if adminData and adminData['approved'] then
+        adminData['approved'][key] = avatar['checksum']
+    end
+end
+
 -- the player deletes their own approved avatar, no admin approval needed
 function AvatarManager:deleteAvatar(player)
-    local username = player:getUsername()
     local firstName, lastName = Character.getFirstAndLastName(player)
+    self:deleteAvatarOf(player:getUsername(), firstName, lastName)
+end
+
+-- deletes the approved avatar of any character (owner or admin)
+function AvatarManager:deleteAvatarOf(username, firstName, lastName)
     local key = AvatarIO.createFileName(username, firstName, lastName)
     AvatarIO.removePlayerAvatar('approved', username, firstName, lastName)
+    SetApprovedIndex(username, firstName, lastName, false)
     self.avatars[key] = nil
     for connectedUsername, connectedPlayer in pairs(self.connectedPlayers) do
         -- forget that the player got it, a new avatar for this character will be sent again
@@ -298,6 +370,7 @@ function AvatarManager:approveAvatar(admin, username, firstName, lastName, check
         username ..
         ' "' .. firstName .. ' ' .. lastName .. '" (' .. checksum .. ')')
     AvatarIO.savePlayerAvatar(username, firstName, lastName, extension, data, 'approved')
+    SetApprovedIndex(username, firstName, lastName, true)
     if self.connectedPlayers[username] then -- players is online so we load the avatar
         local player = self.connectedPlayers[username]
         self:loadPlayerAvatar(player)

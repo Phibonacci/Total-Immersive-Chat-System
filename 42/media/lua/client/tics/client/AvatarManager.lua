@@ -141,6 +141,22 @@ function AvatarManager:loadRequestImage(image)
     }
 end
 
+-- every approved avatar of the server (avatar management window, admins only):
+-- array of { username, firstName, lastName }
+function AvatarManager:setApprovedAvatarList(avatars)
+    table.sort(avatars, function(a, b)
+        if a.username:lower() ~= b.username:lower() then
+            return a.username:lower() < b.username:lower()
+        end
+        return (a.firstName .. a.lastName):lower() < (b.firstName .. b.lastName):lower()
+    end)
+    self.approvedAvatarList = avatars
+end
+
+function AvatarManager:getApprovedAvatarList()
+    return self.approvedAvatarList
+end
+
 -- avatar request of the current character waiting for an admin, sent by the server
 -- (nil checksum: no request). Saved in a local file to get a texture.
 function AvatarManager:setOwnPendingAvatar(checksum, extension, data)
@@ -213,67 +229,6 @@ function AvatarManager:removeAvatarPending(username, firstName, lastName, checks
         ModData.add("ticsPendingAvatars", avatars)
         File.remove(path)
     end
-end
-
-function AvatarManager:isPendingAvatarAlive(username, firstName, lastName, checksum)
-    assert(type(username) == 'string', 'TICS error: rejectAvatar: missing username')
-    assert(type(firstName) == 'string', 'TICS error: rejectAvatar: missing firstName')
-    assert(type(lastName) == 'string', 'TICS error: rejectAvatar: missing lastName')
-    assert(type(checksum) == 'number', 'TICS error: rejectAvatar: missing checksum')
-    local avatar = self:getPendingAvatarData(username, firstName, lastName)
-    return avatar ~= nil and avatar['checksum'] == checksum
-end
-
-function AvatarManager:getFirstAvatarPending()
-    local avatars = ModData.getOrCreate('ticsPendingAvatars')
-    local toRemove = {}
-    local avatarResult = nil
-    for key, avatar in pairs(avatars) do
-        local path = avatar['path']
-        local texture = File.getTexture(path)
-        local checksum = avatar['checksum']
-        local username = avatar['username']
-        local firstName = avatar['firstName']
-        local lastName = avatar['lastName']
-        if path == nil then
-            print('TICS error: no path set for unapproved avatar "' .. key .. '", removing avatar from cache')
-            table.insert(toRemove, key)
-        elseif texture == nil then
-            print('TICS error: failed to load the unapproved avatar texture for "' ..
-                key .. '" at "' .. path .. '", removing texture from cache')
-            table.insert(toRemove, key)
-        elseif checksum == nil then
-            print('TICS error: failed to load the unapproved avatar checksum for "' ..
-                key .. '", removing texture from cache')
-            table.insert(toRemove, key)
-        elseif username == nil then
-            print('TICS error: failed to load the unapproved avatar username for "' ..
-                key .. '", removing texture from cache')
-            table.insert(toRemove, key)
-        elseif firstName == nil then
-            print('TICS error: failed to load the unapproved avatar first name for "' ..
-                key .. '", removing texture from cache')
-            table.insert(toRemove, key)
-        elseif lastName == nil then
-            print('TICS error: failed to load the unapproved avatar last name for "' ..
-                key .. '", removing texture from cache')
-            table.insert(toRemove, key)
-        else
-            avatarResult = {
-                username  = username,
-                texture   = texture,
-                checksum  = checksum,
-                firstName = firstName,
-                lastName  = lastName,
-            }
-            break
-        end
-    end
-    for _, key in pairs(toRemove) do
-        avatars[key] = nil
-        ModData.add("ticsPendingAvatars", avatars)
-    end
-    return avatarResult
 end
 
 function AvatarManager:getAvatarsPending()
