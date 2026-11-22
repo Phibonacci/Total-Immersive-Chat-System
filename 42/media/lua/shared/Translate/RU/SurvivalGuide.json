@@ -14,7 +14,7 @@
     "SurvivalGuide_TICS_Ooc"                : " /ooc или /o, чтобы говорить вне роли <BR>",
     "SurvivalGuide_TICS_Pm"                 : " /pm username или /p username, чтобы отправить личное сообщение (/r для ответа) <BR>",
     "SurvivalGuide_TICS_Admin"              : " /admin или /a, чтобы говорить в админ-канале <BR>",
-    "SurvivalGuide_TICS_Color"              : " \"/color r,g,b\" (где r,g,b — числа от 0 до 255) или \"/color #FFFFFF\", чтобы изменить цвет игрока, либо просто \"/color\", чтобы увидеть текущий цвет <BR>",
+    "SurvivalGuide_TICS_Color"              : " \"/color r,g,b\" (где r,g,b — числа от 0 до 255) или \"/color #FFFFFF\", чтобы изменить цвет игрока, либо просто \"/color\", чтобы выбрать цвет в палитре <BR>",
     "SurvivalGuide_TICS_Pitch"              : " \"/pitch значение\" (где значение от 0.85 до 1.45), чтобы изменить высоту голоса игрока, либо просто \"/pitch\", чтобы увидеть текущее значение <BR>",
     "SurvivalGuide_TICS_Roll"               : " \"/roll xdy\" (где x и y — числа, а x от 1 до 20), чтобы бросить кубики <BR>",
     "SurvivalGuide_TICS_Languages"          : " \"/language en\", чтобы сменить язык, где \"en\" - код изученного вами языка <BR>",

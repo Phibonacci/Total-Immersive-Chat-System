@@ -3,6 +3,7 @@ local TICS_VERSION = require('tics/shared/Version')
 
 local ChatUI                 = require('tics/client/ui/ChatUI')
 local ChatTheme              = require('tics/client/ui/ChatTheme')
+local TicsColorPicker        = require('tics/client/ui/TicsColorPicker')
 local ChatText               = require('tics/client/ui/Chat/ChatText')
 
 local ContextBubble          = require('tics/client/ui/bubble/ContextBubble')
@@ -499,21 +500,58 @@ local function GetArgumentsFromMessage(ticsCommand, message)
     return arguments
 end
 
+local function UpdatePlayerColor(newColor)
+    local currentColor = ISChat.instance.ticsModData['playerColor']
+    SetPlayerColor(newColor)
+    ISChat.sendInfoToCurrentTab('player color updated to '
+        .. StringFormat.color(newColor)
+        .. ' from '
+        .. StringFormat.color(currentColor))
+end
+
+-- "/color" without a value: color picker set to the current color, above the chat window
+local function OpenPlayerColorPicker()
+    local chat = ISChat.instance
+    if chat.playerColorPicker then
+        chat.playerColorPicker:removeSelf()
+    end
+    local current = chat.ticsModData['playerColor']
+    local initial = ColorInfo.new()
+    initial:set(current[1] / 255, current[2] / 255, current[3] / 255, 1.0)
+
+    local picker = TicsColorPicker:new(0, 0, initial)
+    picker:initialise()
+    picker.keepOnScreen = true
+    picker.pickedFunc = function(_, color)
+        UpdatePlayerColor({
+            math.floor(color.r * 255 + 0.5),
+            math.floor(color.g * 255 + 0.5),
+            math.floor(color.b * 255 + 0.5),
+        })
+        picker:removeSelf()
+        chat.playerColorPicker = nil
+    end
+    picker:addToUIManager()
+    picker:setX(chat:getAbsoluteX())
+    picker:setY(math.max(0, chat:getAbsoluteY() - picker:getHeight() - 4))
+    picker:setAlwaysOnTop(true)
+    -- set once the sliders exist so they move to the current color too
+    picker:setInitialColor(initial)
+    chat.playerColorPicker = picker
+end
+
 local function ProcessColorCommand(arguments)
     local currentColor = ISChat.instance.ticsModData['playerColor']
     if arguments == nil then
         ISChat.sendInfoToCurrentTab('color value is ' .. StringFormat.color(currentColor))
+        OpenPlayerColorPicker()
         return true
     end
     local newColor = StringParser.rgbStringToRGB(arguments) or StringParser.hexaStringToRGB(arguments)
     if newColor == nil then
         return false
     end
-    SetPlayerColor(newColor)
-    ISChat.sendInfoToCurrentTab('player color updated to '
-        .. StringFormat.color(newColor)
-        .. ' from '
-        .. StringFormat.color(currentColor))
+    UpdatePlayerColor(newColor)
     return true
 end
 

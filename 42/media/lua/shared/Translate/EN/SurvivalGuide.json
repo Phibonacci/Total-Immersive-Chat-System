@@ -14,7 +14,7 @@
     "SurvivalGuide_TICS_Ooc"       : " /ooc or /o to speak out of character <BR>",
     "SurvivalGuide_TICS_Pm"        : " /pm username or /p username to send a private message (/r to answer) <BR>",
     "SurvivalGuide_TICS_Admin"     : " /admin or /a to speak in admin channel <BR>",
-    "SurvivalGuide_TICS_Color"     : " \"/color r,g,b\" with r,g,b a number from 0 to 255 or /color #FFFFFF to update player color or just \"/color\" to see the current color <BR>",
+    "SurvivalGuide_TICS_Color"     : " \"/color r,g,b\" with r,g,b a number from 0 to 255 or /color #FFFFFF to update player color or just \"/color\" to pick it with a color picker <BR>",
     "SurvivalGuide_TICS_Pitch"     : " \"/pitch value\" with value from 0.85 to 1.45 to update player voice pitch or just \"/pitch\" to see the current pitch <BR>",
     "SurvivalGuide_TICS_Roll"      : " \"/roll xdy\" with x and y numbers and x from 1 to 20 to roll dice <BR>",
     "SurvivalGuide_TICS_Languages" : " \"/language en\" to switch language with \"en\" being a language code you have learnt <BR>",
