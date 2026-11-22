@@ -55,9 +55,11 @@ function ChatText:render()
             alpha = alpha * (1 - hudWeight + hudWeight * recency)
         end
         if hasContentAbove then
+            -- the line cut by the top edge is drawn (clipped) and faded by its hidden part
             local screenY = self.lineY[c] + self.marginTop + yScroll
-            if screenY < ChatTheme.topFadeHeight then
-                alpha = alpha * math.max(0, screenY / ChatTheme.topFadeHeight)
+            if screenY < 0 then
+                local lineHeight = getTextManager():getFontFromEnum(self.font):getLineHeight()
+                alpha = alpha * math.max(0, math.min(1, (screenY + lineHeight) / lineHeight))
             end
         end
         return alpha
