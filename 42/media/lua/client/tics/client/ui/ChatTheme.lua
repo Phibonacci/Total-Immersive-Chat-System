@@ -36,8 +36,9 @@ local ChatTheme = {
 
     -- bubbles: maximum width of the text before it wraps, and a tint applied to the bubble
     -- textures (dark grey fill, white border) to match the chat window palette
-    bubbleMaxTextWidth = 240,
+    bubbleMaxTextWidth = 280,
     bubbleTint     = 0.72,
+    bubbleGrowMs   = 120, -- time for a bubble to grow by one line when a new line starts
 
     -- HUD mode (chat not focused): how fast older messages fade out
     hudFadePerMessage = 0.16,

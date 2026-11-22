@@ -114,6 +114,7 @@ function ABubble:updateText(x, y)
     self.text = StringBuilder.BuildFontSizeString('medium') .. bubbleMessage
     self.rawText = rawMessage
     self:paginate()
+    self:animateHeight()
 
     if self.voice then
         self.voice:subscribe()
@@ -136,6 +137,21 @@ function ABubble:updateText(x, y)
     self.currentX = self:getX()
     self:setY(y + self.heightOffset)
     self.currentY = self:getY()
+end
+
+-- paginate sets the height needed by the text, the bubble grows to it smoothly instead of
+-- jumping when the voice reaches a new line (the text is clipped, the new line is revealed
+-- as the bubble opens)
+function ABubble:animateHeight()
+    local targetHeight = self:getHeight()
+    if self.displayHeight == nil or targetHeight <= self.displayHeight then
+        self.displayHeight = targetHeight
+    else
+        local lineHeight = getTextManager():getFontFromEnum(UIFont.Medium):getLineHeight()
+        local step = UIManager.getMillisSinceLastRender() * lineHeight / ChatTheme.bubbleGrowMs
+        self.displayHeight = math.min(targetHeight, self.displayHeight + step)
+    end
+    self:setHeight(self.displayHeight)
 end
 
 function ABubble:drawBubble()
@@ -238,6 +254,7 @@ function ABubble:new(
     o.fullMessageLength = #rawText
     o.messageFinishedScrolling = false
     o.background = true
+    o.clip = true -- see animateHeight
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.5 }
     o.borderColor = { r = 0.4, g = 0.4, b = 0.4, a = 1 }
     o.anchorLeft = true
