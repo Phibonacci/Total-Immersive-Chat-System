@@ -10,6 +10,7 @@
     "UI_TICS_disable_chat_hud"    : "Sohbet penceresini her zaman göster",
     "UI_TICS_press_to_chat"       : "Sohbet etmek için %1 tuşuna bas",
     "UI_TICS_press_to_continue_writing" : "Yazmaya devam etmek için %1 tuşuna bas",
+    "UI_TICS_pick_color"                : "Renk seç",
     "UI_TICS_Messages_unknown_language_spoken" : "%1 şu dilde konuşuyor: %2",
     "UI_TICS_Messages_language_already_learnt" : "Bu dili zaten biliyorsun: %1",
     "UI_TICS_Messages_language_learnt"         : "Yeni dil öğrenildi: %1",

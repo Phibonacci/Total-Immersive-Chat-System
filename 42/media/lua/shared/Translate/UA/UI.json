@@ -10,6 +10,7 @@
     "UI_TICS_disable_chat_hud"                 : "Завжди показувати вікно чату",
     "UI_TICS_press_to_chat"                    : "Натисніть %1, щоб написати в чат",
     "UI_TICS_press_to_continue_writing"        : "Натисніть %1, щоб дописати повідомлення",
+    "UI_TICS_pick_color"                       : "Вибрати колір",
     "UI_TICS_Messages_unknown_language_spoken" : "%1 говорить мовою: %2",
     "UI_TICS_Messages_language_already_learnt" : "Ви вже знаєте мову: %1",
     "UI_TICS_Messages_language_learnt"         : "Вивчено нову мову: %1",

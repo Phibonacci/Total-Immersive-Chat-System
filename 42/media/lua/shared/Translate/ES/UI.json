@@ -10,6 +10,7 @@
     "UI_TICS_disable_chat_hud"    : "Mantener visible la ventana de chat",
     "UI_TICS_press_to_chat"       : "Pulsa %1 para chatear",
     "UI_TICS_press_to_continue_writing" : "Pulsa %1 para seguir escribiendo",
+    "UI_TICS_pick_color"                : "Elegir un color",
     "UI_TICS_Messages_unknown_language_spoken" : "%1 está hablando en %2",
     "UI_TICS_Messages_language_already_learnt" : "Ya sabes hablar %1",
     "UI_TICS_Messages_language_learnt"         : "Nuevo idioma aprendido: %1",

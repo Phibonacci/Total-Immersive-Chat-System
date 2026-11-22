@@ -10,6 +10,7 @@
     "UI_TICS_disable_chat_hud"    : "แสดงหน้าต่างสนทนาตลอดเวลา",
     "UI_TICS_press_to_chat"       : "กด %1 เพื่อสนทนา",
     "UI_TICS_press_to_continue_writing" : "กด %1 เพื่อพิมพ์ต่อ",
+    "UI_TICS_pick_color"                : "เลือกสี",
     "UI_TICS_Messages_unknown_language_spoken" : "%1 กำลังพูดภาษา %2",
     "UI_TICS_Messages_language_already_learnt" : "คุณพูดภาษา %1 ได้อยู่แล้ว",
     "UI_TICS_Messages_language_learnt"         : "เรียนรู้ภาษาใหม่: %1",

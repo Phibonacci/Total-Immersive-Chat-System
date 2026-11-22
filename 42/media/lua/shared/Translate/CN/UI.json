@@ -10,6 +10,7 @@
     "UI_TICS_disable_chat_hud"    : "保持聊天窗口可见",
     "UI_TICS_press_to_chat"       : "按 %1 聊天",
     "UI_TICS_press_to_continue_writing" : "按 %1 继续输入",
+    "UI_TICS_pick_color"                : "选择颜色",
     "UI_TICS_Messages_unknown_language_spoken" : "%1 正在用 %2 说话",
     "UI_TICS_Messages_language_already_learnt" : "你已经会说 %1 了",
     "UI_TICS_Messages_language_learnt"         : "学会了新语言: %1",
