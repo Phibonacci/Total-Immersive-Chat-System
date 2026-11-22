@@ -9,7 +9,7 @@
 
     "Sandbox_TICS_Languages"                     : "เปิดใช้ภาษาสำหรับโรลเพลย์",
 
-    "Sandbox_TICS_BubblePortrait"                : "แสดงภาพผู้เล่นทางซ้ายของบับเบิล (รูปที่กำหนดเองอยู่ที่: Zomboid/Lua/avatars/username.png บนเซิร์ฟเวอร์)",
+    "Sandbox_TICS_BubblePortrait"                : "แสดงภาพผู้เล่นทางซ้ายของบับเบิล\n(รูปที่กำหนดเองอยู่ที่: Zomboid/Lua/avatars/username.png บนเซิร์ฟเวอร์)",
     "Sandbox_TICS_BubblePortrait_help"           : "แสดงภาพผู้เล่นทางซ้ายของบับเบิล\nอวาตาร์ที่กำหนดเองอยู่ที่: Zomboid/Lua/avatars/username.png บนเซิร์ฟเวอร์\nหากไม่พบรูปของชื่อผู้ใช้นั้น จะใช้ภาพแบบดั้งเดิมของเกม\n1 = ไม่มี\n2 = ดั้งเดิม\n 3 = อวาตาร์ Steam\n4 = กำหนดเอง",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "ไม่มี",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "กำหนดเองและดั้งเดิม",

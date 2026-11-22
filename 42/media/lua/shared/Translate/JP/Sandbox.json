@@ -9,7 +9,7 @@
 
     "Sandbox_TICS_Languages"                     : "ロールプレイ用の言語を有効",
 
-    "Sandbox_TICS_BubblePortrait"                : "吹き出しの左側にプレイヤーのポートレートを表示 (カスタム画像はサーバーの Zomboid/Lua/avatars/username.png に配置)",
+    "Sandbox_TICS_BubblePortrait"                : "吹き出しの左側にプレイヤーのポートレートを表示\n(カスタム画像はサーバーの Zomboid/Lua/avatars/username.png に配置)",
     "Sandbox_TICS_BubblePortrait_help"           : "吹き出しの左側にプレイヤーのポートレートを表示します。\nカスタムアバターはサーバーの Zomboid/Lua/avatars/username.png に配置します。\nユーザー名に対応する画像がない場合はバニラのポートレートを使用します。\n1 = なし\n2 = バニラ\n 3 = Steam アバター\n4 = カスタム",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "なし",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "カスタムとバニラ",

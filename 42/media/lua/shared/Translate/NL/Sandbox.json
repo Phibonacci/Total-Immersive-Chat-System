@@ -9,7 +9,7 @@
 
     "Sandbox_TICS_Languages"                     : "Roleplay-talen inschakelen",
 
-    "Sandbox_TICS_BubblePortrait"                : "Spelersportret links van de tekstballon tonen (eigen afbeeldingen in: Zomboid/Lua/avatars/username.png op de server)",
+    "Sandbox_TICS_BubblePortrait"                : "Spelersportret links van de tekstballon tonen\n(eigen afbeeldingen in: Zomboid/Lua/avatars/username.png op de server)",
     "Sandbox_TICS_BubblePortrait_help"           : "Spelersportret links van de tekstballon tonen.\nEigen avatars horen in: Zomboid/Lua/avatars/username.png op de server.\nAls er geen afbeelding voor de gebruikersnaam is, wordt het vanilla-portret gebruikt.\n1 = Geen\n2 = Vanilla\n 3 = Steam-avatar\n4 = Eigen",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Geen",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Eigen en vanilla",

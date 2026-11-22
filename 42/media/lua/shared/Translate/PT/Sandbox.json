@@ -9,7 +9,7 @@
 
     "Sandbox_TICS_Languages"                     : "Ativar línguas de roleplay",
 
-    "Sandbox_TICS_BubblePortrait"                : "Mostrar o retrato do jogador à esquerda do balão (os personalizados vão para: Zomboid/Lua/avatars/username.png no servidor)",
+    "Sandbox_TICS_BubblePortrait"                : "Mostrar o retrato do jogador à esquerda do balão\n(os personalizados vão para: Zomboid/Lua/avatars/username.png no servidor)",
     "Sandbox_TICS_BubblePortrait_help"           : "Mostrar o retrato do jogador à esquerda do balão.\nOs avatares personalizados vão para: Zomboid/Lua/avatars/username.png no servidor.\nSe não for encontrada nenhuma imagem para o nome de utilizador, é usado o retrato vanilla.\n1 = Nenhum\n2 = Vanilla\n 3 = Avatar Steam\n4 = Personalizado",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Nenhum",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalizado e vanilla",

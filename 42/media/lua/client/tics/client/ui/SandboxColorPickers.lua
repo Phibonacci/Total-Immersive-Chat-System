@@ -1,18 +1,10 @@
 -- Adds a color swatch next to the TICS color sandbox options (text fields holding "#RRGGBB").
 -- The swatch shows the color typed in the field, clicking it opens a color picker (TicsColorPicker)
--- set to that color
--- and the picked color is written back in the field as "#RRGGBB".
---
--- Sandbox options are edited in three screens, all patched here:
--- - ISServerSandboxOptionsUI: in game, admin panel > Sandbox Options
--- - SandboxOptionsScreen: main menu, new game sandbox settings
--- - ServerSettingsScreen: main menu, host > server settings editor
+-- set to that color, and the picked color is written back in the field as "#RRGGBB".
+-- Used by SandboxOptionsUI, which hooks the sandbox options screens.
 
 require 'ISUI/ISButton'
 local TicsColorPicker = require('tics/client/ui/TicsColorPicker')
-require 'ISUI/AdminPanel/ISServerSandboxOptionsUI'
-require 'OptionScreens/SandboxOptions'
-require 'OptionScreens/ServerSettingsScreen'
 
 local SandboxColorPickers = {}
 
@@ -110,40 +102,6 @@ end
 function SandboxColorPickers.attachAll(controls)
     for settingName, control in pairs(controls or {}) do
         SandboxColorPickers.attach(settingName, control)
-    end
-end
-
--- in game admin panel
-local AdminCreatePanel = ISServerSandboxOptionsUI.createPanel
-function ISServerSandboxOptionsUI:createPanel(page)
-    local panel = AdminCreatePanel(self, page)
-    if panel then
-        SandboxColorPickers.attachAll(panel.controls)
-    end
-    return panel
-end
-
--- main menu, new game
-local NewGameCreatePanel = SandboxOptionsScreen.createPanel
-function SandboxOptionsScreen:createPanel(page)
-    local panel = NewGameCreatePanel(self, page)
-    if panel then
-        SandboxColorPickers.attachAll(panel.controls)
-    end
-    return panel
-end
-
--- main menu, server settings editor: its sandbox page builds every panel when created,
--- the controls are stored per category in pageEdit.controls
-local ServerSettingsCreate = ServerSettingsScreen.create
-function ServerSettingsScreen:create()
-    ServerSettingsCreate(self)
-    if self.pageEdit and self.pageEdit.controls then
-        for _, controls in pairs(self.pageEdit.controls) do
-            if type(controls) == 'table' then
-                SandboxColorPickers.attachAll(controls)
-            end
-        end
     end
 end
 

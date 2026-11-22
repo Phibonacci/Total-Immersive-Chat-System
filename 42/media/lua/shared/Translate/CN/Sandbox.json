@@ -9,7 +9,7 @@
 
     "Sandbox_TICS_Languages"                     : "启用角色扮演语言",
 
-    "Sandbox_TICS_BubblePortrait"                : "在气泡左侧显示玩家头像 (自定义头像放在服务器的: Zomboid/Lua/avatars/username.png)",
+    "Sandbox_TICS_BubblePortrait"                : "在气泡左侧显示玩家头像\n(自定义头像放在服务器的: Zomboid/Lua/avatars/username.png)",
     "Sandbox_TICS_BubblePortrait_help"           : "在气泡左侧显示玩家头像.\n自定义头像放在服务器的: Zomboid/Lua/avatars/username.png\n如果找不到该用户名对应的图片, 将使用原版肖像.\n1 = 无\n2 = 原版\n 3 = Steam 头像\n4 = 自定义",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "无",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "自定义和原版",

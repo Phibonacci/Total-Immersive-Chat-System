@@ -9,7 +9,7 @@
 
     "Sandbox_TICS_Languages"                     : "Aktiver rollespillspråk",
 
-    "Sandbox_TICS_BubblePortrait"                : "Vis spillerportrett til venstre for snakkeboblen (egne bilder legges i: Zomboid/Lua/avatars/username.png på serveren)",
+    "Sandbox_TICS_BubblePortrait"                : "Vis spillerportrett til venstre for snakkeboblen\n(egne bilder legges i: Zomboid/Lua/avatars/username.png på serveren)",
     "Sandbox_TICS_BubblePortrait_help"           : "Vis spillerportrett til venstre for snakkeboblen.\nEgne avatarer legges i: Zomboid/Lua/avatars/username.png på serveren.\nVanilla-portrett brukes hvis det ikke finnes noe bilde for brukernavnet.\n1 = Ingen\n2 = Vanilla\n 3 = Steam-avatar\n4 = Egen",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ingen",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Egen og vanilla",

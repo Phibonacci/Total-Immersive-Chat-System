@@ -9,7 +9,7 @@
 
     "Sandbox_TICS_Languages"                     : "Aktifkan bahasa roleplay",
 
-    "Sandbox_TICS_BubblePortrait"                : "Tampilkan potret pemain di sebelah kiri balon (gambar kustom ditaruh di: Zomboid/Lua/avatars/username.png di server)",
+    "Sandbox_TICS_BubblePortrait"                : "Tampilkan potret pemain di sebelah kiri balon\n(gambar kustom ditaruh di: Zomboid/Lua/avatars/username.png di server)",
     "Sandbox_TICS_BubblePortrait_help"           : "Tampilkan potret pemain di sebelah kiri balon.\nAvatar kustom ditaruh di: Zomboid/Lua/avatars/username.png di server.\nPotret bawaan akan dipakai jika tidak ada gambar untuk username tersebut.\n1 = Tidak ada\n2 = Bawaan\n 3 = Avatar Steam\n4 = Kustom",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Tidak ada",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Kustom dan bawaan",
