@@ -240,6 +240,7 @@
     "UI_TICS_AvatarAdmin_reject"         : "Reject",
     "UI_TICS_AvatarAdmin_no_pending"     : "No avatar waiting for approval",
     "UI_TICS_AvatarAdmin_no_approved"    : "No approved avatar",
+    "UI_TICS_AvatarAdmin_new_request"   : "New avatar waiting for approval: %1 (%2)",
     "UI_TICS_AvatarAdmin_loading"        : "Loading...",
     "UI_TICS_AvatarAdmin_delete_confirm" : "Delete the avatar of %1 (%2)?"
 }

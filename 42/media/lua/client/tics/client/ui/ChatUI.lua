@@ -1,5 +1,6 @@
 local ChatTheme = require('tics/client/ui/ChatTheme')
 local LanguageManager = require('tics/client/languages/LanguageManager')
+local AvatarManager = require('tics/client/AvatarManager')
 
 local ChatUI = {}
 ChatUI.tabPanel = {}
@@ -73,8 +74,26 @@ local function IsButtonActive(self, button)
         return self.radioButtonState == true
     elseif button == self.lockButton then
         return self.locked == true
+    elseif button == self.avatarValidationWindowButton then
+        return AvatarManager:getPendingCount() > 0 -- avatars waiting for approval
     end
     return false
+end
+
+-- dot on the avatar validation button while requests are waiting (like an unread tab)
+local function DrawPendingAvatarsBadge(self)
+    local button = self.avatarValidationWindowButton
+    local alpha = self.chromeAlpha or 1
+    if button == nil or alpha <= 0.01 or AvatarManager:getPendingCount() == 0 then
+        return
+    end
+    local accent = ChatTheme.accent
+    local size = 6
+    local x = button:getX() + button:getWidth() / 2 + ChatTheme.iconSize / 2 - size / 2
+    local y = button:getY() + button:getHeight() / 2 - ChatTheme.iconSize / 2 - 1
+    self:drawRect(x, y, size, size, alpha, accent.r, accent.g, accent.b)
+    local titleBar = ChatTheme.titleBar
+    self:drawRectBorder(x - 1, y - 1, size + 2, size + 2, alpha, titleBar.r, titleBar.g, titleBar.b)
 end
 
 local function StyleButton(button, color, alpha)
@@ -386,6 +405,7 @@ function ChatUI:render()
         self:drawRectBorder(1, 1, self:getWidth() - 2, self:getHeight() - 2, 0.4, 0.2, 1.0, 1.0)
     end
 
+    DrawPendingAvatarsBadge(self)
     DrawHudHints(self)
 end
 

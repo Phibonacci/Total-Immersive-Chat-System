@@ -150,6 +150,10 @@ function ClientSend.sendAskRadioState(radio)
         return
     end
     if radioData:isIsoDevice() then
+        -- the device window is also used for TVs, only radios have a TICS state on the server
+        if not instanceof(radio, 'IsoRadio') then
+            return
+        end
         ClientSendCommand('AskSquareRadioState', {
             x = radio:getX(),
             y = radio:getY(),

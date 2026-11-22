@@ -62,7 +62,23 @@ function AvatarManager:saveApprovedAvatar(username, firstName, lastName, extensi
 end
 
 function AvatarManager:savePendingAvatar(username, firstName, lastName, extension, checksum, data)
+    local key = AvatarIO.createFileName(username, firstName, lastName)
+    local known = ModData.getOrCreate('ticsPendingAvatars')[key]
+    local isNew = known == nil or known['checksum'] ~= checksum
     SaveAvatar(username, firstName, lastName, extension, checksum, data, 'pending', 'ticsPendingAvatars')
+    if isNew and ISChat and ISChat.instance and ISChat.sendInfoToCurrentTab then
+        -- admins only receive pending avatars: tell them a request is waiting
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_AvatarAdmin_new_request', username, firstName .. ' ' .. lastName))
+    end
+end
+
+-- number of avatar requests waiting for approval (admins and moderators receive them)
+function AvatarManager:getPendingCount()
+    local count = 0
+    for _ in pairs(ModData.getOrCreate('ticsPendingAvatars')) do
+        count = count + 1
+    end
+    return count
 end
 
 function AvatarManager:getPendingAvatarData(username, firstName, lastName)
