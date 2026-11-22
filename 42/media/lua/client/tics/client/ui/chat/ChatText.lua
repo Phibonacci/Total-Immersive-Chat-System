@@ -190,8 +190,28 @@ function ChatText:render()
                     self:drawTextRight(string.trim(v), self.lineX[c] + self.marginLeft, self.lineY[c] + self.marginTop, r,
                         g, b, alpha, self.font)
                 else
-                    DrawLineText(string.trim(v), self.lineX[c] + self.marginLeft, self.lineY[c] + self.marginTop,
-                        r, g, b, alpha, self.font)
+                    local text = string.trim(v)
+                    if self.lineChip and self.lineChip[c] then
+                        -- channel tag: a label like the input box one, smaller text on a box,
+                        -- vertically centered on the line (see ISTicsRichTextPanel)
+                        local textManager = getTextManager()
+                        local chipFont = self.chipFont or self.font
+                        local padding = ChatTheme.tagChipPadding
+                        local lineHeight = textManager:getFontFromEnum(self.font):getLineHeight()
+                        local chipFontHeight = textManager:getFontHeight(chipFont)
+                        local boxHeight = math.min(chipFontHeight + 2, lineHeight)
+                        local boxY = self.lineY[c] + self.marginTop + math.floor((lineHeight - boxHeight) / 2)
+                        local textX = self.lineX[c] + self.marginLeft
+                        local textWidth = textManager:MeasureStringX(chipFont, text)
+                        local chip = ChatTheme.chip
+                        self:drawRect(textX - padding, boxY, textWidth + padding * 2, boxHeight,
+                            alpha * ChatTheme.tagChipOpacity, chip.r, chip.g, chip.b)
+                        DrawLineText(text, textX, boxY + math.floor((boxHeight - chipFontHeight) / 2),
+                            r, g, b, alpha, chipFont)
+                    else
+                        DrawLineText(text, self.lineX[c] + self.marginLeft, self.lineY[c] + self.marginTop,
+                            r, g, b, alpha, self.font)
+                    end
                 end
             end
         else

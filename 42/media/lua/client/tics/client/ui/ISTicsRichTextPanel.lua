@@ -32,6 +32,14 @@ function ISTicsRichTextPanel:paginate()
 	-- index of the message (separated by <LINE>) each line belongs to
 	self.lineMessage = {}
 	local messageIndex = 1
+	-- <TICSCOL:x> (chat): the rest of the message starts at x, its wrapped lines too
+	self.currentWrapIndent = nil
+	-- <TICSCHIP> (chat): the next text chunk is a label drawn on a box (ChatText), padding
+	-- is reserved around it
+	self.lineChip = {}
+	local pendingChip = false
+	local chipPadding = self.chipPadding or 4
+	local chipFont = self.chipFont -- the label text is drawn smaller (ChatText)
 
 	self.keybinds = {}
 
@@ -96,9 +104,18 @@ function ISTicsRichTextPanel:paginate()
 					lineHeight = lineImageHeight;
 				end
 				self.currentLine = lines;
-				x, y, lineImageHeight = self:processCommand(escSeq, x, y, lineImageHeight, lineHeight);
+				local column = tonumber(escSeq:match('^TICSCOL:([%d%.]+)$') or '')
+				if escSeq == 'TICSCHIP' then
+					pendingChip = true
+				elseif column then
+					x = math.max(x, column)
+					self.currentWrapIndent = column
+				else
+					x, y, lineImageHeight = self:processCommand(escSeq, x, y, lineImageHeight, lineHeight);
+				end
 				if escSeq == 'LINE' then
 					messageIndex = messageIndex + 1
+					self.currentWrapIndent = nil
 				end
 			else
 				if token:contains("&lt;") then
@@ -110,11 +127,17 @@ function ISTicsRichTextPanel:paginate()
 				local chunkText = self.lines[lines] or ''
 				local chunkX = self.lineX[lines] or x
 				if chunkText == '' then
-					chunkText = ' ' .. string.trim(token)
+					-- a blank token starting a chunk takes no space (ChunkWidth would measure a space)
+					if string.trim(token) ~= '' then
+						chunkText = ' ' .. string.trim(token)
+					end
 				elseif string.trim(token) ~= '' then
 					chunkText = chunkText .. ' ' .. string.trim(token)
 				end
-				local pixLen = ChunkWidth(self.font, chunkText);
+				-- a label chunk (current one, or the one this token starts) is measured in its font
+				local isChipChunk = self.lineChip[lines]
+					or (pendingChip and not self.lines[lines] and string.trim(token) ~= '')
+				local pixLen = ChunkWidth((isChipChunk and chipFont) or self.font, chunkText);
 				if chunkX + pixLen > maxLineWidth then
 					if self.lines[lines] and self.lines[lines] ~= '' then
 						lines = lines + 1;
@@ -134,7 +157,7 @@ function ISTicsRichTextPanel:paginate()
 					end
 					if self.lines[lines] ~= "" then
 						-- continuation of a wrapped message
-						x = self.indent + (self.wrapIndent or 0)
+						x = self.indent + (self.currentWrapIndent or self.wrapIndent or 0)
 					end
 					self.lineX[lines] = x
 					self.lineY[lines] = y
@@ -146,12 +169,20 @@ function ISTicsRichTextPanel:paginate()
 						self.lineX[lines] = x
 						self.lineY[lines] = y
 						self.lineMessage[lines] = messageIndex
+						if pendingChip and string.trim(token) ~= '' then
+							pendingChip = false
+							self.lineChip[lines] = true
+							self.lineX[lines] = x + chipPadding
+						end
 					end
 					self.lines[lines] = chunkText
 					if self.lineX[lines] == 0 and self.lines[lines] ~= "" then
 						self.lineX[lines] = self.indent
 					end
 					x = self.lineX[lines] + pixLen
+					if self.lineChip[lines] then
+						x = x + chipPadding
+					end
 				end
 			end
 		else

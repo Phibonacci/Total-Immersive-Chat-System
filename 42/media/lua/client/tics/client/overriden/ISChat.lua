@@ -830,6 +830,51 @@ function ISChat:onCommandEntered()
     ISChat.instance.timerTextEntry = 20
 end
 
+-- same translated label as the channel label of the input box
+local function GetChannelLabel(channel)
+    local key = 'UI_TICS_chip_' .. channel
+    local label = getText(key)
+    if label == nil or label == key then
+        label = channel:sub(1, 1):upper() .. channel:sub(2)
+    end
+    return label
+end
+
+-- Messages are aligned on a column after the timestamp: its x is given to the layout with a
+-- <TICSCOL:x> marker (ISTicsRichTextPanel), wrapped lines are indented to it.
+local columnCache = {}
+
+local function GetChatColumnX(fontSize)
+    local chat = ISChat.instance
+    if not (chat and chat.showTimestamp) then
+        return 0
+    end
+    local cacheKey = tostring(fontSize)
+    if columnCache[cacheKey] then
+        return columnCache[cacheKey]
+    end
+    -- same fonts as FontStringToEnum (defined further down)
+    local font = UIFont.Large
+    if fontSize == 'small' then
+        font = UIFont.NewSmall
+    elseif fontSize == 'medium' or fontSize == nil then
+        font = UIFont.Medium
+    end
+    local textManager = getTextManager()
+    -- measured like the layout measures chunks (leading space, full advance) plus a space
+    local x = textManager:MeasureStringX(font, ' 00:00 ') + textManager:MeasureStringX(font, '  ')
+    columnCache[cacheKey] = x
+    return x
+end
+
+local function BuildColumnMarker(fontSize)
+    local x = GetChatColumnX(fontSize)
+    if x <= 0 then
+        return ''
+    end
+    return '<TICSCOL:' .. x .. '>'
+end
+
 local function BuildChannelPrefixString(channel)
     if channel == nil then
         return ''
@@ -840,17 +885,9 @@ local function BuildChannelPrefixString(channel)
     else
         color = { 255, 255, 255 }
     end
-    -- dimmed so the tag stays secondary to the name and the message
-    local dimmed = {
-        math.floor(color[1] * 0.75), math.floor(color[2] * 0.75), math.floor(color[3] * 0.75),
-    }
-    -- same translated label as the channel label of the input box
-    local key = 'UI_TICS_chip_' .. channel
-    local label = getText(key)
-    if label == nil or label == key then
-        label = channel:sub(1, 1):upper() .. channel:sub(2)
-    end
-    return StringBuilder.BuildBracketColorString(dimmed) .. '[' .. label .. '] '
+    -- drawn as a label (box behind the text) like the channel label of the input box,
+    -- the <TICSCHIP> marker is handled by ISTicsRichTextPanel and ChatText
+    return '<TICSCHIP>' .. StringBuilder.BuildBracketColorString(color) .. GetChannelLabel(channel) .. ' '
 end
 
 
@@ -1007,6 +1044,7 @@ function BuildChatMessage(fontSize, showTimestamp, showTitle, showLanguage, lang
     if showTimestamp and time then
         line = line .. StringBuilder.BuildTimePrefixString(time)
     end
+    line = line .. BuildColumnMarker(fontSize)
     if showTitle and channel ~= nil then
         line = line .. BuildChannelPrefixString(channel)
     end
@@ -1323,6 +1361,7 @@ function BuildServerMessage(fontSize, showTimestamp, showTitle, rawMessage, time
     if showTimestamp then
         line = line .. StringBuilder.BuildTimePrefixString(time)
     end
+    line = line .. BuildColumnMarker(fontSize)
     if showTitle and channel ~= nil then
         line = line .. BuildChannelPrefixString(channel)
     end
@@ -1880,6 +1919,8 @@ function ISChat:createTab()
     chatText.marginLeft = ChatTheme.textPaddingX
     chatText.marginRight = ChatTheme.textPaddingX
     chatText.wrapIndent = ChatTheme.wrapIndent
+    chatText.chipPadding = ChatTheme.tagChipPadding
+    chatText.chipFont = UIFont.Small
     chatText.onRightMouseUp = nil
     chatText.render = RenderChatText
     chatText.autosetheight = false

@@ -35,6 +35,10 @@ local ChatTheme = {
 
     -- bubbles: maximum width of the text before it wraps, and a tint applied to the bubble
     -- textures (dark grey fill, white border) to match the chat window palette
+    -- channel tags of the chat lines: a label like the input box one, lighter
+    tagChipOpacity = 0.55,
+    tagChipPadding = 4,
+
     bubbleMaxTextWidth = 280,
     bubbleTint     = 0.72,
     bubbleGrowMs   = 120, -- time for a bubble to grow by one line when a new line starts
