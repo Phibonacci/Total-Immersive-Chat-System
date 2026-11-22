@@ -1,4 +1,5 @@
 local ABubble       = require('tics/client/ui/bubble/ABubble')
+local ChatTheme           = require('tics/client/ui/ChatTheme')
 local Coordinates   = require('tics/client/utils/Coordinates')
 local Parser        = require('tics/client/parser/Parser')
 local StringBuilder = require('tics/client/parser/StringBuilder')
@@ -88,6 +89,7 @@ function ContextBubble:updateText(x, y)
 end
 
 function ContextBubble:drawBubble()
+    local tint = ChatTheme.bubbleTint
     if self.dead then
         return
     end
@@ -133,26 +135,26 @@ function ContextBubble:drawBubble()
     local centerX = leftX + leftW
     local rightX = centerX + centerW
     local topH = math.floor(10 * 1 / scale)
-    self:drawTextureScaled(self.bubbleTopLeft, leftX, 0, leftW, topH, self.alpha)
-    self:drawTextureScaled(self.bubbleTop, centerX, 0, centerW, topH, self.alpha)
-    self:drawTextureScaled(self.bubbleTopRight, rightX, 0, rightW, topH, self.alpha)
+    self:drawTextureScaled(self.bubbleTopLeft, leftX, 0, leftW, topH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleTop, centerX, 0, centerW, topH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleTopRight, rightX, 0, rightW, topH, self.alpha, tint, tint, tint)
 
     local centerY = topH
     local botH = math.floor(10 * 1 / scale)
     local centerH = math.floor(self.currentHeight) - botH - topH
     local botY = centerY + centerH
 
-    self:drawTextureScaled(self.bubbleCenterLeft, leftX, centerY, leftW, centerH, self.alpha)
-    self:drawTextureScaled(self.bubbleCenter, centerX, centerY, centerW, centerH, self.alpha)
-    self:drawTextureScaled(self.bubbleCenterRight, rightX, centerY, rightW, centerH, self.alpha)
+    self:drawTextureScaled(self.bubbleCenterLeft, leftX, centerY, leftW, centerH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleCenter, centerX, centerY, centerW, centerH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleCenterRight, rightX, centerY, rightW, centerH, self.alpha, tint, tint, tint)
 
     if self.playerAvatar or self.playerModel then
-        self:drawTextureScaled(self.bubbleBotLeftSquare, leftX, botY, leftW, botH, self.alpha)
+        self:drawTextureScaled(self.bubbleBotLeftSquare, leftX, botY, leftW, botH, self.alpha, tint, tint, tint)
     else
-        self:drawTextureScaled(self.bubbleBotLeft, leftX, botY, leftW, botH, self.alpha)
+        self:drawTextureScaled(self.bubbleBotLeft, leftX, botY, leftW, botH, self.alpha, tint, tint, tint)
     end
-    self:drawTextureScaled(self.bubbleBot, centerX, botY, centerW, botH, self.alpha)
-    self:drawTextureScaled(self.bubbleBotRight, rightX, botY, rightW, botH, self.alpha)
+    self:drawTextureScaled(self.bubbleBot, centerX, botY, centerW, botH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleBotRight, rightX, botY, rightW, botH, self.alpha, tint, tint, tint)
 
     ISRichTextPanel.render(self)
     self.previousTime = time

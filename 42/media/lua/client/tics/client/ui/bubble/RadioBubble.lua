@@ -1,4 +1,5 @@
 local ABubble     = require('tics/client/ui/bubble/ABubble')
+local ChatTheme     = require('tics/client/ui/ChatTheme')
 local Coordinates = require('tics/client/utils/Coordinates')
 local Parser      = require('tics/client/parser/Parser')
 local RadioVoice  = require('tics/client/voice/RadioVoice')
@@ -59,7 +60,7 @@ RadioBubble.types = {
 function RadioBubble:new(object, message, messageColor, timer, opacity, type, isVoicesEnabled, voicePitch, offsetY)
     local parsedMessages = Parser.ParseTicsMessage(message, messageColor, 20, 200)
     local textLength = getTextManager():MeasureStringX(UIFont.Medium, parsedMessages['rawMessage'])
-    local width = math.min(textLength * 1.25, 162) + 40
+    local width = math.min(textLength, ChatTheme.bubbleMaxTextWidth) + 40
     local height = 0
     local x, y = RadioBubble.CenterTop(type, object, width, height)
     if x == nil then

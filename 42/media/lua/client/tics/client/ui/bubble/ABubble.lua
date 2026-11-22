@@ -1,4 +1,5 @@
 local ISTicsRichTextPanel = require('tics/client/ui/ISTicsRichTextPanel')
+local ChatTheme           = require('tics/client/ui/ChatTheme')
 local Parser              = require('tics/client/parser/Parser')
 local StringBuilder       = require('tics/client/parser/StringBuilder')
 
@@ -138,6 +139,7 @@ function ABubble:updateText(x, y)
 end
 
 function ABubble:drawBubble()
+    local tint = ChatTheme.bubbleTint
     if self.dead then
         return
     end
@@ -167,26 +169,26 @@ function ABubble:drawBubble()
     local centerX = leftX + leftW
     local rightX = centerX + centerW
     local topH = math.floor(10 * 1 / scale)
-    self:drawTextureScaled(self.bubbleTopLeft, leftX, 0, leftW, topH, self.alpha)
-    self:drawTextureScaled(self.bubbleTop, centerX, 0, centerW, topH, self.alpha)
-    self:drawTextureScaled(self.bubbleTopRight, rightX, 0, rightW, topH, self.alpha)
+    self:drawTextureScaled(self.bubbleTopLeft, leftX, 0, leftW, topH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleTop, centerX, 0, centerW, topH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleTopRight, rightX, 0, rightW, topH, self.alpha, tint, tint, tint)
 
     local centerY = topH
     local botH = math.floor(10 * 1 / scale)
     local centerH = math.floor(self:getHeight()) - botH - topH
     local botY = centerY + centerH
 
-    self:drawTextureScaled(self.bubbleCenterLeft, leftX, centerY, leftW, centerH, self.alpha)
-    self:drawTextureScaled(self.bubbleCenter, centerX, centerY, centerW, centerH, self.alpha)
-    self:drawTextureScaled(self.bubbleCenterRight, rightX, centerY, rightW, centerH, self.alpha)
+    self:drawTextureScaled(self.bubbleCenterLeft, leftX, centerY, leftW, centerH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleCenter, centerX, centerY, centerW, centerH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleCenterRight, rightX, centerY, rightW, centerH, self.alpha, tint, tint, tint)
 
     if self.playerAvatar or self.playerModel then
-        self:drawTextureScaled(self.bubbleBotLeftSquare, leftX, botY, leftW, botH, self.alpha)
+        self:drawTextureScaled(self.bubbleBotLeftSquare, leftX, botY, leftW, botH, self.alpha, tint, tint, tint)
     else
-        self:drawTextureScaled(self.bubbleBotLeft, leftX, botY, leftW, botH, self.alpha)
+        self:drawTextureScaled(self.bubbleBotLeft, leftX, botY, leftW, botH, self.alpha, tint, tint, tint)
     end
-    self:drawTextureScaled(self.bubbleBot, centerX, botY, centerW, botH, self.alpha)
-    self:drawTextureScaled(self.bubbleBotRight, rightX, botY, rightW, botH, self.alpha)
+    self:drawTextureScaled(self.bubbleBot, centerX, botY, centerW, botH, self.alpha, tint, tint, tint)
+    self:drawTextureScaled(self.bubbleBotRight, rightX, botY, rightW, botH, self.alpha, tint, tint, tint)
 
     if self.showArrow and self.currentX > 0 and self.currentY > self.topSpace
         and self.currentX + self:getWidth() < getCore():getScreenWidth()
@@ -197,7 +199,7 @@ function ABubble:drawBubble()
             botY + 4 * botH / 5,
             7 / scale,
             9 / scale,
-            self.alpha)
+            self.alpha, tint, tint, tint)
     end
 
     ISRichTextPanel.render(self)
@@ -222,7 +224,7 @@ function ABubble:new(
     x, y, text, rawText, message, messageColor, timer, opacity, heightOffsetStart,
     showArrow, showPlayerName, playerName, playerColor, maxTextWidth)
     local textLength = getTextManager():MeasureStringX(UIFont.Medium, rawText)
-    local width = math.min(textLength, maxTextWidth or 162) + 40
+    local width = math.min(textLength, maxTextWidth or ChatTheme.bubbleMaxTextWidth) + 40
     local height = 0
     local o = ISTicsRichTextPanel:new(x, y, width, height)
     setmetatable(o, self)
@@ -247,7 +249,7 @@ function ABubble:new(
     o.previousTime = o.startTime
     o.dead = false
     ISUIElement.initialise(o)
-    width = ABubble.computeFittedWidth(o, maxTextWidth or 162)
+    width = ABubble.computeFittedWidth(o, maxTextWidth or ChatTheme.bubbleMaxTextWidth)
     o:setWidth(width)
     o:paginate()
     o.texturesLoaded = false

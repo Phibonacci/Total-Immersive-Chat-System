@@ -1,4 +1,5 @@
 local ABubble       = require('tics/client/ui/bubble/ABubble')
+local ChatTheme     = require('tics/client/ui/ChatTheme')
 local AvatarManager = require('tics/client/AvatarManager')
 local Character     = require('tics/shared/utils/Character')
 local Coordinates   = require('tics/client/utils/Coordinates')
@@ -134,7 +135,7 @@ function PlayerBubble:new(
         bubbleMessage = BuildPlayerNameString(playerName, playerColor) .. ' ' .. bubbleMessage
     end
     local textLength = getTextManager():MeasureStringX(UIFont.Medium, rawMessage)
-    local width = math.min(textLength * 1.25, 162) + 40
+    local width = math.min(textLength, ChatTheme.bubbleMaxTextWidth) + 40
     local height = 0
     local x, y = Coordinates.CenterTopOfPlayer(player, width, height)
     if x == nil then

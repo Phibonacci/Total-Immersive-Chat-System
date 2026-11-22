@@ -34,6 +34,11 @@ local ChatTheme = {
     wrapIndent     = 16, -- continuation lines of a wrapped message
     topFadeHeight  = 18, -- lines scrolling under the tabs fade out over this height
 
+    -- bubbles: maximum width of the text before it wraps, and a tint applied to the bubble
+    -- textures (dark grey fill, white border) to match the chat window palette
+    bubbleMaxTextWidth = 240,
+    bubbleTint     = 0.72,
+
     -- HUD mode (chat not focused): how fast older messages fade out
     hudFadePerMessage = 0.16,
 }
