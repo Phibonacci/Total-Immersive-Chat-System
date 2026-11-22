@@ -1,10 +1,12 @@
+local ChatTheme           = require('tics/client/ui/ChatTheme')
 local ISTicsRichTextPanel = require('tics/client/ui/ISTicsRichTextPanel')
 
 local ChatText = ISTicsRichTextPanel:derive("ChatText")
 
 -- from ISRichTextPanel:render
+-- Additions: one background stripe per message, lines scrolling under the tabs fade out,
+-- and in HUD mode (chat unfocused) the text gets a shadow and older messages fade out.
 function ChatText:render()
-    local drawLineBackground = false
     self.r = 1
     self.g = 1
     self.b = 1
@@ -26,11 +28,43 @@ function ChatText:render()
     if self.textDirty then
         self:paginate()
     end
-    --ISPanel.render(self)
     for c, v in ipairs(self.images) do
         self:drawTextureScaled(v, self.imageX[c] + self.marginLeft, self.imageY[c] + self.marginTop, self.imageW[c],
             self.imageH[c], self.contentTransparency, 1, 1, 1)
     end
+
+    local chat = ISChat.instance
+    local hudWeight = chat and chat.hudWeight or 0
+    local chromeAlpha = chat and chat.chromeAlpha or 1
+    local lineMessage = self.lineMessage or {}
+    local lastMessage = lineMessage[#self.lines] or 1
+    local yScroll = self:getYScroll()
+    local hasContentAbove = yScroll < 0
+
+    -- opacity of a line: scrolled under the tabs and age in HUD mode
+    local function LineAlpha(c)
+        local alpha = self.contentTransparency
+        if hudWeight > 0 then
+            local age = lastMessage - (lineMessage[c] or lastMessage)
+            local recency = math.max(0, math.min(1, 1 - age * ChatTheme.hudFadePerMessage))
+            alpha = alpha * (1 - hudWeight + hudWeight * recency)
+        end
+        if hasContentAbove then
+            local screenY = self.lineY[c] + self.marginTop + yScroll
+            if screenY < ChatTheme.topFadeHeight then
+                alpha = alpha * math.max(0, screenY / ChatTheme.topFadeHeight)
+            end
+        end
+        return alpha
+    end
+
+    local function DrawLineText(text, x, y, r, g, b, alpha, font)
+        if hudWeight > 0 then
+            self:drawText(text, x + 1, y + 1, 0, 0, 0, alpha * hudWeight * 0.85, font)
+        end
+        self:drawText(text, x, y, r, g, b, alpha, font)
+    end
+
     self.font = self.defaultFont
     local orient = "left"
     local c = 1
@@ -44,6 +78,9 @@ function ChatText:render()
         if self.firstPrintableLineOrient then
             orient = self.firstPrintableLineOrient
         end
+        if self.firstPrintableLineFont then
+            self.font = self.firstPrintableLineFont
+        end
     else
         self.firstPrintableLine = 1
     end
@@ -52,7 +89,7 @@ function ChatText:render()
     while c <= #self.lines do
         local v = self.lines[c]
 
-        if self.lineY[c] + self.marginTop + self:getYScroll() >= self:getHeight() then
+        if self.lineY[c] + self.marginTop + yScroll >= self:getHeight() then
             if not self.textHasReachedBottomOnce then
                 self.textHasReachedBottomOnce = true
                 self:scrollToBottom()
@@ -73,7 +110,7 @@ function ChatText:render()
             self.font = self.fonts[c]
         end
 
-        if self.marginTop + self:getYScroll() + self.lineY[c] + getTextManager():getFontHeight(self.font) + self:getHeight() * 2 > 0 then
+        if self.marginTop + yScroll + self.lineY[c] + getTextManager():getFontHeight(self.font) + self:getHeight() * 2 > 0 then
             if not printableLineFound then
                 printableLineFound = true
                 self.firstPrintableLine = c
@@ -83,10 +120,11 @@ function ChatText:render()
                     b = self.b,
                 }
                 self.firstPrintableLineOrient = orient
+                self.firstPrintableLineFont = self.font
             end
         end
 
-        if self.marginTop + self:getYScroll() + self.lineY[c] + getTextManager():getFontHeight(self.font) > 0 then
+        if self.marginTop + yScroll + self.lineY[c] + getTextManager():getFontHeight(self.font) > 0 then
             local r = self.r
             local b = self.b
             local g = self.g
@@ -99,6 +137,21 @@ function ChatText:render()
             end
 
             if string.trim(v) ~= "" then
+                local alpha = LineAlpha(c)
+                -- one stripe per row, every other message
+                if self.lineY[c] ~= previousLineY then
+                    previousLineY = self.lineY[c]
+                    local messageIndex = lineMessage[c] or 1
+                    if messageIndex % 2 == 0 and chromeAlpha > 0.01 then
+                        local lineHeight = getTextManager():getFontFromEnum(self.font):getLineHeight()
+                        local stripeAlpha = ChatTheme.stripeOpacity * chromeAlpha
+                        if self.contentTransparency > 0 then
+                            stripeAlpha = stripeAlpha * alpha / self.contentTransparency
+                        end
+                        self:drawRect(0, self.lineY[c] + self.marginTop, self.width, lineHeight,
+                            stripeAlpha, 1, 1, 1)
+                    end
+                end
                 if orient == "centre" then
                     local lineY = self.lineY[c]
                     local lineLength = 0
@@ -115,40 +168,23 @@ function ChatText:render()
                             self.g = self.rgb[c].g
                             self.b = self.rgb[c].b
                         end
-                        local r = self.r
-                        local b = self.b
-                        local g = self.g
                         if self.orient[c] then
                             orient = self.orient[c]
                         end
                         if self.fonts[c] then
                             self.font = self.fonts[c]
                         end
-                        self:drawText(string.trim(self.lines[c]), lineX + self.lineX[c], self.lineY[c] + self.marginTop,
-                            r, g, b, self.contentTransparency, self.font)
-                        --						lineX = lineX + getTextManager():MeasureStringX(self.font, self.lines[c])
+                        DrawLineText(string.trim(self.lines[c]), lineX + self.lineX[c], self.lineY[c] + self.marginTop,
+                            self.r, self.g, self.b, LineAlpha(c), self.font)
                         c = c + 1
                     end
                     c = c - 1
                 elseif orient == "right" then
                     self:drawTextRight(string.trim(v), self.lineX[c] + self.marginLeft, self.lineY[c] + self.marginTop, r,
-                        g, b, self.contentTransparency, self.font)
+                        g, b, alpha, self.font)
                 else
-                    local lineHeight = getTextManager():getFontHeight(self.font)
-                    if self.lineY[c] ~= previousLineY then
-                        previousLineY = self.lineY[c]
-                        if drawLineBackground then
-                            self:drawRect(
-                                0,
-                                self.lineY[c] + 3,
-                                self.width + self.marginLeft + self.marginRight,
-                                lineHeight,
-                                0.05, 0.5, 0.5, 0.5)
-                        end
-                        drawLineBackground = not drawLineBackground
-                    end
-                    self:drawText(string.trim(v), self.lineX[c] + self.marginLeft, self.lineY[c] + self.marginTop, r, g,
-                        b, self.contentTransparency, self.font)
+                    DrawLineText(string.trim(v), self.lineX[c] + self.marginLeft, self.lineY[c] + self.marginTop,
+                        r, g, b, alpha, self.font)
                 end
             end
         else
@@ -160,15 +196,12 @@ function ChatText:render()
     if ISRichTextPanel.drawMargins then
         self:drawRectBorder(0, 0, self.width, self:getScrollHeight(), 0.5, 1, 1, 1)
         self:drawRect(self.marginLeft, 0, 1, self:getScrollHeight(), 1, 1, 1, 1)
-        local maxLineWidth = self.maxLineWidth or (self.width - self.marginRight - self.marginLeft)
-        --		self:drawRect(self.marginLeft + maxLineWidth, 0, 1, self:getScrollHeight(), 1,1,1,1)
         self:drawRect(self.width - self.marginRight, 0, 1, self:getScrollHeight(), 1, 1, 1, 1)
         self:drawRect(0, self.marginTop, self.width, 1, 1, 1, 1, 1)
         self:drawRect(0, self:getScrollHeight() - self.marginBottom, self.width, 1, 1, 1, 1, 1)
     end
 
     if self.clip then self:clearStencilRect() end
-    --self:setScrollHeight(y)
 end
 
 -- function ChatText:paginate()

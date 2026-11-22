@@ -2,6 +2,7 @@ local TICS_VERSION = require('tics/shared/Version')
 
 
 local ChatUI                 = require('tics/client/ui/ChatUI')
+local ChatTheme              = require('tics/client/ui/ChatTheme')
 local ChatText               = require('tics/client/ui/Chat/ChatText')
 
 local ContextBubble          = require('tics/client/ui/bubble/ContextBubble')
@@ -285,6 +286,11 @@ local function InitGlobalModData()
         ISChat.instance.isPortraitEnabled = true
     elseif ticsModData['isPortraitEnabled'] ~= nil then
         ISChat.instance.isPortraitEnabled = ticsModData['isPortraitEnabled']
+    end
+    if ticsModData['isHudEnabled'] == nil then
+        ISChat.instance.isHudEnabled = true
+    else
+        ISChat.instance.isHudEnabled = ticsModData['isHudEnabled']
     end
     if ticsModData['voicePitch'] == nil then
         local randomPitch = RandomVoicePitch(getPlayer():getVisual():isFemale())
@@ -1503,6 +1509,10 @@ function ISChat:render()
     ChatUI.render(self)
 end
 
+function ISChat:makeFade(fraction)
+    ChatUI.makeFade(self, fraction)
+end
+
 function ISChat:prerender()
     local instance = ISChat.instance
 
@@ -1626,8 +1636,11 @@ function ISChat:createTab()
     chatText:setAnchorLeft(true)
     chatText.log = {}
     chatText.logIndex = 0
-    chatText.marginTop = 2
+    chatText.marginTop = ChatTheme.textPaddingTop
     chatText.marginBottom = 0
+    chatText.marginLeft = ChatTheme.textPaddingX
+    chatText.marginRight = ChatTheme.textPaddingX
+    chatText.wrapIndent = ChatTheme.wrapIndent
     chatText.onRightMouseUp = nil
     chatText.render = RenderChatText
     chatText.autosetheight = false
@@ -1901,13 +1914,13 @@ local function OnRangeButtonClick()
     end
     if ISChat.instance.rangeButtonState == 'visible' then
         ISChat.instance.rangeButtonState = 'always-visible'
-        ISChat.instance.rangeButton:setImage(getTexture("media/ui/tics/icons/eye-on-plus.png"))
+        ISChat.instance.rangeButton:setImage(getTexture(ChatTheme.icons.eyePlus))
     elseif ISChat.instance.rangeButtonState == 'always-visible' then
         ISChat.instance.rangeButtonState = 'hidden'
-        ISChat.instance.rangeButton:setImage(getTexture("media/ui/tics/icons/eye-off.png"))
+        ISChat.instance.rangeButton:setImage(getTexture(ChatTheme.icons.eyeOff))
     else
         ISChat.instance.rangeButtonState = 'visible'
-        ISChat.instance.rangeButton:setImage(getTexture("media/ui/tics/icons/eye-on.png"))
+        ISChat.instance.rangeButton:setImage(getTexture(ChatTheme.icons.eye))
     end
     UpdateRangeIndicator(ISChat.lastTabStream[ISChat.instance.currentTabID])
 end
@@ -1919,10 +1932,10 @@ local function OnRadioButtonClick()
     ISChat.instance.radioButtonState = not ISChat.instance.radioButtonState
     if ISChat.instance.radioButtonState == true then
         ISChat.instance.radioRangeIndicator:subscribe()
-        ISChat.instance.radioButton:setImage(getTexture("media/ui/tics/icons/mic-on.png"))
+        ISChat.instance.radioButton:setImage(getTexture(ChatTheme.icons.mic))
     else
         ISChat.instance.radioRangeIndicator:unsubscribe()
-        ISChat.instance.radioButton:setImage(getTexture("media/ui/tics/icons/mic-off.png"))
+        ISChat.instance.radioButton:setImage(getTexture(ChatTheme.icons.micOff))
     end
 end
 
@@ -1988,7 +2001,7 @@ function ISChat:createValidationWindowButton()
         self.avatarUploadButton.borderColor.a = 0.0
         self.avatarUploadButton.backgroundColor.a = 0
         self.avatarUploadButton.backgroundColorMouseOver.a = 0.5
-        self.avatarUploadButton:setImage(getTexture("media/ui/tics/icons/upload.png"))
+        self.avatarUploadButton:setImage(getTexture(ChatTheme.icons.upload))
         self.avatarUploadButton:setUIName(ISChat.avatarUploadButtonName)
         self:addChild(self.avatarUploadButton)
         self.avatarUploadButton:setVisible(true)
@@ -2005,7 +2018,7 @@ function ISChat:createValidationWindowButton()
             self.avatarValidationWindowButton.borderColor.a = 0.0
             self.avatarValidationWindowButton.backgroundColor.a = 0
             self.avatarValidationWindowButton.backgroundColorMouseOver.a = 0.5
-            self.avatarValidationWindowButton:setImage(getTexture('media/ui/tics/icons/portrait.png'))
+            self.avatarValidationWindowButton:setImage(getTexture(ChatTheme.icons.portrait))
             self.avatarValidationWindowButton:setUIName(ISChat.avatarValidationWindowButtonName)
             self:addChild(self.avatarValidationWindowButton)
             self.avatarValidationWindowButton:setVisible(true)
@@ -2041,6 +2054,9 @@ function ISChat:createChildren()
 
     -- close button
     local th = self:titleBarHeight()
+    self.closeButtonTexture = getTexture(ChatTheme.icons.close)
+    self.chatLockedButtonTexture = getTexture(ChatTheme.icons.lock)
+    self.chatUnLockedButtonTexture = getTexture(ChatTheme.icons.unlock)
     self.closeButton = ISButton:new(3, 0, th, th, "", self, self.close)
     self.closeButton:initialise()
     self.closeButton.borderColor.a = 0.0
@@ -2075,7 +2091,7 @@ function ISChat:createChildren()
     self.gearButton.borderColor.a = 0.0
     self.gearButton.backgroundColor.a = 0
     self.gearButton.backgroundColorMouseOver.a = 0.5
-    self.gearButton:setImage(getTexture("media/ui/Panel_Icon_Gear.png"))
+    self.gearButton:setImage(getTexture(ChatTheme.icons.gear))
     self.gearButton:setUIName(ISChat.gearButtonName)
     self:addChild(self.gearButton)
     self.gearButton:setVisible(true)
@@ -2089,7 +2105,7 @@ function ISChat:createChildren()
     self.infoButton.borderColor.a = 0.0
     self.infoButton.backgroundColor.a = 0
     self.infoButton.backgroundColorMouseOver.a = 0.5
-    self.infoButton:setImage(getTexture("media/ui/Panel_info_button.png"))
+    self.infoButton:setImage(getTexture(ChatTheme.icons.info))
     self.infoButton:setUIName(ISChat.infoButtonName)
     self:addChild(self.infoButton)
     self.infoButton:setVisible(true)
@@ -2107,7 +2123,7 @@ function ISChat:createChildren()
     self.rangeButton.borderColor.a = 0.0
     self.rangeButton.backgroundColor.a = 0
     self.rangeButton.backgroundColorMouseOver.a = 0.5
-    self.rangeButton:setImage(getTexture("media/ui/tics/icons/eye-off.png"))
+    self.rangeButton:setImage(getTexture(ChatTheme.icons.eyeOff))
     self.rangeButton:setUIName(ISChat.rangeButtonName)
     self:addChild(self.rangeButton)
     self.rangeButton:setVisible(true)
@@ -2121,7 +2137,7 @@ function ISChat:createChildren()
     self.radioButton.borderColor.a = 0.0
     self.radioButton.backgroundColor.a = 0
     self.radioButton.backgroundColorMouseOver.a = 0.5
-    self.radioButton:setImage(getTexture("media/ui/tics/icons/mic-off.png"))
+    self.radioButton:setImage(getTexture(ChatTheme.icons.micOff))
     self.radioButton:setUIName(ISChat.radioButtonName)
     self:addChild(self.radioButton)
     self.radioButton:setVisible(true)
@@ -2148,8 +2164,9 @@ function ISChat:createChildren()
 
     -- EdgeSize must match UITextBox2.EdgeSize
     local height = EdgeSize * 2 + fontHgt
-    self.textEntry = ISTextEntryBox:new("", inset, self:getHeight() - 8 - inset - height, self:getWidth() - inset * 2,
-        height)
+    local entryPadding = 6
+    self.textEntry = ISTextEntryBox:new("", entryPadding, self:getHeight() - 8 - inset - height,
+        self:getWidth() - entryPadding * 2, height)
     self.textEntry.font = UIFont.Medium
     self.textEntry:initialise()
     -- self.textEntry:instantiate()
@@ -2184,6 +2201,7 @@ function ISChat:createChildren()
     self.panel:setAnchorRight(true)
     self.panel:setAnchorBottom(true)
     self.panel:setEqualTabWidth(false)
+    self.panel.tabPadX = 28
     self.panel:setVisible(false)
     self.panel.onRightMouseUp = ISChat.onRightMouseUp
     self.panel.onRightMouseDown = ISChat.onRightMouseDown
@@ -2317,6 +2335,12 @@ function ISChat:onGearButtonClick()
     opaqueOnFocusSubMenu:addOption(getText("UI_chat_context_enable"), ISChat.instance, ISChat.onFocusOpaqueChange, true)
     opaqueOnFocusSubMenu:setOptionChecked(opaqueOnFocusSubMenu.options[self.opaqueOnFocus and 2 or 1], true)
 
+    local hudOptionName = getText("UI_TICS_enable_chat_hud")
+    if self.isHudEnabled then
+        hudOptionName = getText("UI_TICS_disable_chat_hud")
+    end
+    context:addOption(hudOptionName, ISChat.instance, ISChat.onToggleHud)
+
     local voiceOptionName = getText("UI_TICS_chat_enable_voices")
     if self.isVoiceEnabled then
         voiceOptionName = getText("UI_TICS_chat_disable_voices")
@@ -2344,6 +2368,12 @@ function ISChat.onToggleVoice()
     -- the player has set this option at least once, that means he is aware of its existence
     -- we'll use this settings in the future instead of the server default behavior
     ISChat.instance.ticsModData['isVoiceEnabled'] = ISChat.instance.isVoiceEnabled
+    SaveTicsModData()
+end
+
+function ISChat.onToggleHud()
+    ISChat.instance.isHudEnabled = not ISChat.instance.isHudEnabled
+    ISChat.instance.ticsModData['isHudEnabled'] = ISChat.instance.isHudEnabled
     SaveTicsModData()
 end
 

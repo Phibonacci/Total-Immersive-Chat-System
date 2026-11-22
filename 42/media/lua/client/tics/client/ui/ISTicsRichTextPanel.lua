@@ -21,6 +21,9 @@ function ISTicsRichTextPanel:paginate()
 	self.lineY = {}
 	self.lineX = {}
 	self.lines = {}
+	-- index of the message (separated by <LINE>) each line belongs to
+	self.lineMessage = {}
+	local messageIndex = 1
 
 	self.keybinds = {}
 
@@ -71,6 +74,7 @@ function ISTicsRichTextPanel:paginate()
 					self.lines[lines] = ''
 					self.lineX[lines] = x
 					self.lineY[lines] = y
+					self.lineMessage[lines] = messageIndex
 				end
 				lines = lines + 1
 				local st = string.find(token, "<");
@@ -85,6 +89,9 @@ function ISTicsRichTextPanel:paginate()
 				end
 				self.currentLine = lines;
 				x, y, lineImageHeight = self:processCommand(escSeq, x, y, lineImageHeight, lineHeight);
+				if escSeq == 'LINE' then
+					messageIndex = messageIndex + 1
+				end
 			else
 				if token:contains("&lt;") then
 					token = token:gsub("&lt;", "<")
@@ -113,16 +120,19 @@ function ISTicsRichTextPanel:paginate()
 					x = 0;
 					self.lines[lines] = string.trim(token)
 					if self.lines[lines] ~= "" then
-						x = self.indent
+						-- continuation of a wrapped message
+						x = self.indent + (self.wrapIndent or 0)
 					end
 					self.lineX[lines] = x
 					self.lineY[lines] = y
+					self.lineMessage[lines] = messageIndex
 					x = x + getTextManager():MeasureStringX(self.font, self.lines[lines])
 				else
 					if not self.lines[lines] then
 						self.lines[lines] = ''
 						self.lineX[lines] = x
 						self.lineY[lines] = y
+						self.lineMessage[lines] = messageIndex
 					end
 					self.lines[lines] = chunkText
 					if self.lineX[lines] == 0 and self.lines[lines] ~= "" then
@@ -146,6 +156,7 @@ function ISTicsRichTextPanel:paginate()
 				end
 				self.lineX[lines] = x;
 				self.lineY[lines] = y;
+				self.lineMessage[lines] = messageIndex
 				local lineHeight = getTextManager():getFontFromEnum(self.font):getLineHeight();
 				y = y + lineHeight
 			elseif self.lines[lines] and self.lines[lines] ~= '' then
