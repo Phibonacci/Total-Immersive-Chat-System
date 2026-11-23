@@ -220,6 +220,12 @@ local function OnLanguageButtonClick(chat, button)
     local menuY = math.max(0, y - context:getHeight())
     context.requestY = menuY
     context:setSlideGoalY(menuY, menuY)
+    -- right edge aligned with the button. ISContextMenu.get kept the menu on screen with the
+    -- width of the previous menu (e.g. the wider gear menu), so the x is set again now that the
+    -- width is known (setX keeps it on screen)
+    local menuX = math.max(0, x + button:getWidth() - context:getWidth())
+    context.requestX = menuX
+    context:setSlideGoalX(menuX, menuX)
 end
 
 local function RenderLanguageButton(self)
