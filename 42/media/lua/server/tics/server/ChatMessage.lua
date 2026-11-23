@@ -497,7 +497,6 @@ local function SendRadioPackets(author, player, args, sourceRadioByFrequencies)
             players = playersRadios[frequency] or {},
             vehicles = vehiclesRadios[frequency] or {},
         }
-        RadioManager:makeNoise(frequency, range)
     end
 
     ServerSend.Command(player, 'RadioMessage', {
@@ -624,6 +623,13 @@ function ChatMessage.ProcessMessage(player, args, packetType, sendError)
             if radioEmission then
                 SendRadioPackets(player, connectedPlayer, args, radioFrequencies)
             end
+        end
+    end
+    -- noise (zombies) at the radios receiving the message, once per message (not per listener)
+    if radioEmission then
+        local noiseRange = ChatMessage.MessageTypeSettings['options']['radio']['soundMaxRange']
+        for frequency, _ in pairs(radioFrequencies) do
+            RadioManager:makeNoise(frequency, noiseRange)
         end
     end
 end

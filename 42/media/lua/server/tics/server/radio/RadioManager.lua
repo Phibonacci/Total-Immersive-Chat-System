@@ -5,111 +5,60 @@ local World = require('tics/shared/utils/World')
 
 local RadioManager = {}
 
-local function FormatCache(squares, vehicles)
-    local cacheSquares = {}
-    for key, square in pairs(squares) do
-        table.insert(
-            cacheSquares,
-            { x = square:getX(), y = square:getY(), z = square:getZ() }
-        )
-    end
-    local cacheVehicles = {}
-    for key, vehicle in pairs(vehicles) do
-        cacheVehicles[key] = { x = vehicle:getX(), y = vehicle:getY(), z = vehicle:getZ() }
-    end
-    return {
-        squares = cacheSquares,
-        vehicles = cacheVehicles,
-    }
+-- Radios on squares and in vehicles that were seen near players, so a radio message makes
+-- noise (zombies) at every radio tuned to its frequency. Only positions are kept: the game
+-- recycles square objects when an area unloads, a kept object could point anywhere. A radio is
+-- looked up from its position when needed: skipped (but kept) while its area is not loaded,
+-- forgotten once its area is loaded and it is not there anymore.
+-- squares: "x,y,z" -> { x, y, z }, vehicles: key id -> { x, y, z } (last known position)
+
+local function SquareKey(x, y, z)
+    return math.abs(x) .. ',' .. math.abs(y) .. ',' .. math.abs(z)
 end
 
 function RadioManager:save()
-    local cacheData = FormatCache(self.squares, self.vehicles)
-    ModData.add('ticsRadioCache', cacheData)
-end
-
-local function ReadCache(cache)
-    local squares = {}
-    local cacheSquares = cache['squares']
-    if cacheSquares == nil then
-        print('TICS error: ReadCache: received cache data without squares object')
-        return
+    local cacheSquares = {}
+    for _, pos in pairs(self.squares) do
+        table.insert(cacheSquares, { x = pos.x, y = pos.y, z = pos.z })
     end
-    local squaresCount = 0
-    for _, pos in pairs(cacheSquares) do
-        local square = getSquare(pos['x'], pos['y'], pos['z'])
-        if square ~= nil then
-            local key = math.abs(pos['x']) .. ',' .. math.abs(pos['y']) .. ',' .. math.abs(pos['z'])
-            squares[key] = square
-            squaresCount = squaresCount + 1
-        else
-            print(
-                'TICS error: ReadCache: found null square in radio cache file at: (' ..
-                pos['x'] .. ', ' .. pos['y'] .. ', ' .. pos['z'] .. ')')
-        end
+    local cacheVehicles = {}
+    for key, pos in pairs(self.vehicles) do
+        cacheVehicles[key] = { x = pos.x, y = pos.y, z = pos.z }
     end
-    print('TICS info: ' .. squaresCount .. ' squares found in cache')
-
-    local vehicles = {}
-    local cacheVehicles = cache['vehicles']
-    if cacheVehicles == nil then
-        print('TICS error: ReadCache: received cache data without vehicles object')
-        return
-    end
-    local vehiclesCount = 0
-    for key, pos in pairs(cacheVehicles) do
-        local square = getSquare(pos['x'], pos['y'], pos['z'])
-        if square ~= nil then
-            local vehicle = square:getVehicleContainer()
-            if vehicle ~= nil then
-                local vehicleId = vehicle:getKeyId()
-                if vehicleId == key then
-                    vehicles[key] = vehicle
-                    vehiclesCount = vehiclesCount + 1
-                else
-                    print(
-                        'TICS error: ReadCache: vehicle has unexpected key id ' ..
-                        vehicleId .. ' on square in radio cache file at: (' ..
-                        pos['x'] .. ', ' .. pos['y'] .. ', ' .. pos['z'] .. ') ' .. key .. ' was expected')
-                end
-            else
-                print(
-                    'TICS error: ReadCache: no vehicle found on square in radio cache file at: (' ..
-                    pos['x'] .. ', ' .. pos['y'] .. ', ' .. pos['z'] .. ')')
-            end
-        else
-            print(
-                'TICS error: ReadCache: found null vehicle square in radio cache file at: (' ..
-                pos['x'] .. ', ' .. pos['y'] .. ', ' .. pos['z'] .. ')')
-        end
-    end
-    print('TICS info: ' .. vehiclesCount .. ' vehicles found in cache')
-
-    return squares, vehicles
+    ModData.add('ticsRadioCache', { squares = cacheSquares, vehicles = cacheVehicles })
 end
 
 function RadioManager:load()
     local cache = ModData.getOrCreate('ticsRadioCache')
-    print('TICS info: loading cache')
-    if cache == nil then
-        print('TICS info: no cache found')
-        return
+    self.squares = {}
+    self.vehicles = {}
+    local squaresCount, vehiclesCount = 0, 0
+    for _, pos in pairs(cache['squares'] or {}) do
+        if type(pos) == 'table' and pos['x'] and pos['y'] and pos['z'] then
+            self.squares[SquareKey(pos['x'], pos['y'], pos['z'])] = { x = pos['x'], y = pos['y'], z = pos['z'] }
+            squaresCount = squaresCount + 1
+        end
     end
-    local squares, vehicles = ReadCache(cache)
-
-    self.squares = squares or {}
-    self.vehicles = vehicles or {}
+    for key, pos in pairs(cache['vehicles'] or {}) do
+        if type(pos) == 'table' and pos['x'] and pos['y'] and pos['z'] then
+            self.vehicles[key] = { x = pos['x'], y = pos['y'], z = pos['z'] }
+            vehiclesCount = vehiclesCount + 1
+        end
+    end
+    print('TICS info: radio cache loaded: ' .. squaresCount .. ' squares, ' .. vehiclesCount .. ' vehicles')
     self.loaded = true
 end
 
 function RadioManager:subscribeSquare(square)
+    if square == nil then
+        return
+    end
     if not self.loaded then
         self:load()
     end
-    local key = math.abs(square:getX()) .. ',' .. math.abs(square:getY()) .. ',' .. math.abs(square:getZ())
-    local squareWasUnassigned = self.squares[key] == nil
-    self.squares[key] = square
-    if squareWasUnassigned then
+    local key = SquareKey(square:getX(), square:getY(), square:getZ())
+    if self.squares[key] == nil then
+        self.squares[key] = { x = square:getX(), y = square:getY(), z = square:getZ() }
         self:save()
     end
 end
@@ -119,66 +68,63 @@ function RadioManager:subscribeVehicle(vehicle)
         self:load()
     end
     local key = vehicle:getKeyId()
-    local vehicleWasUnassigned = self.vehicles[key] == nil
-    self.vehicles[key] = vehicle
-    if vehicleWasUnassigned then
+    local pos = { x = math.floor(vehicle:getX()), y = math.floor(vehicle:getY()), z = math.floor(vehicle:getZ()) }
+    local known = self.vehicles[key]
+    if known == nil or known.x ~= pos.x or known.y ~= pos.y or known.z ~= pos.z then
+        self.vehicles[key] = pos
         self:save()
     end
 end
 
+-- returns true if an entry was forgotten
 function RadioManager:executeSquare(action)
-    local radiosToDelete = {}
-    for key, square in pairs(self.squares) do
-        if square == nil then
-            table.insert(radiosToDelete, key)
-        else
+    local forgotten = {}
+    for key, pos in pairs(self.squares) do
+        local square = getSquare(pos.x, pos.y, pos.z)
+        if square ~= nil then -- nil: area not loaded, kept for later
             local radio = World.getFirstSquareItem(square, 'IsoRadio')
             if radio == nil then
-                table.insert(radiosToDelete, key)
+                table.insert(forgotten, key)
             else
                 action(radio, radio)
             end
         end
     end
-    for _, key in pairs(radiosToDelete) do
+    for _, key in ipairs(forgotten) do
         self.squares[key] = nil
     end
-    if #radiosToDelete > 0 then
-        return true
-    end
-    return false
+    return #forgotten > 0
 end
 
+-- returns true if an entry was forgotten
 function RadioManager:executeVehicle(action)
-    local radiosToDelete = {}
-    for key, vehicle in pairs(self.vehicles) do
-        if vehicle == nil then
-            table.insert(radiosToDelete, key)
-        else
-            local radio = vehicle:getPartById('Radio')
+    local forgotten = {}
+    for key, pos in pairs(self.vehicles) do
+        local square = getSquare(pos.x, pos.y, pos.z)
+        if square ~= nil then -- nil: area not loaded, kept for later
+            local vehicle = square:getVehicleContainer()
+            local radio = vehicle and vehicle:getKeyId() == key and vehicle:getPartById('Radio') or nil
             if radio == nil then
-                table.insert(radiosToDelete, key)
+                -- the vehicle moved or lost its radio, it is cached again when used near a player
+                table.insert(forgotten, key)
             else
                 action(vehicle, radio)
             end
         end
     end
-    for _, key in pairs(radiosToDelete) do
+    for _, key in ipairs(forgotten) do
         self.vehicles[key] = nil
     end
-    if #radiosToDelete > 0 then
-        return true
-    end
-    return false
+    return #forgotten > 0
 end
 
 function RadioManager:execute(action)
     if not self.loaded then
         self:load()
     end
-    local squareDeleted = self:executeSquare(action)
-    local vehicleDeleted = self:executeVehicle(action)
-    if squareDeleted or vehicleDeleted then
+    local squareForgotten = self:executeSquare(action)
+    local vehicleForgotten = self:executeVehicle(action)
+    if squareForgotten or vehicleForgotten then
         self:save()
     end
 end
