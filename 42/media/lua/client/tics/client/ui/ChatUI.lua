@@ -363,19 +363,16 @@ local function DrawHudHints(self)
     local hintKey = self.draftText and 'UI_TICS_press_to_continue_writing' or 'UI_TICS_press_to_chat'
     x = x + DrawPill(self, getText(hintKey, keyName), x, y, height, alpha) + 8
 
-    local tabNames = {}
-    if self.chatText and self.chatText.tabTitle then
-        table.insert(tabNames, self.chatText.tabTitle)
+    -- one pill per tab: the current one, then each unread one with a dot
+    -- (a separator glyph like a middle dot is missing from the game font)
+    local currentTab = self.chatText and self.chatText.tabTitle
+    if currentTab then
+        x = x + DrawPill(self, currentTab, x, y, height, alpha) + 6
     end
-    local hasUnread = false
     for _, name in ipairs(self.panel and self.panel.blinkTabs or {}) do
-        if name ~= tabNames[1] then
-            table.insert(tabNames, name)
-            hasUnread = true
+        if name ~= currentTab then
+            x = x + DrawPill(self, name, x, y, height, alpha, ChatTheme.accent) + 6
         end
-    end
-    if #tabNames > 0 then
-        DrawPill(self, table.concat(tabNames, ' · '), x, y, height, alpha, hasUnread and ChatTheme.accent or nil)
     end
 end
 
