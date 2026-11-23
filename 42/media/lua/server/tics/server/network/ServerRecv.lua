@@ -1,5 +1,6 @@
 local AvatarManager = require('tics/server/AvatarManager')
 local Character     = require('tics/shared/utils/Character')
+local CharacterSheets = require('tics/server/CharacterSheets')
 local ChatMessage   = require('tics/server/ChatMessage')
 local KnownLanguages = require('tics/server/KnownLanguages')
 local ServerSend    = require('tics/server/network/ServerSend')
@@ -261,6 +262,54 @@ local function GetCharacterArgs(args)
         return nil
     end
     return args['username'], args['firstName'], args['lastName']
+end
+
+-- character sheets
+local function IsCharacterSheetEnabled()
+    return SandboxVars.TICS.CharacterSheetEnabled == true
+end
+
+RecvServer['SetCharacterSheet'] = function(player, args)
+    if not IsCharacterSheetEnabled() or type(args) ~= 'table' then
+        return
+    end
+    CharacterSheets.set(player, args)
+    ServerSend.CharacterSheet(player, player, CharacterSheets.get(player))
+end
+
+-- the sheet of a player close enough to be seen (same range as /say)
+RecvServer['AskCharacterSheet'] = function(player, args)
+    if not IsCharacterSheetEnabled() or type(args) ~= 'table' or type(args['username']) ~= 'string' then
+        return
+    end
+    local target = World.getPlayerByUsername(args['username'])
+    if target == nil then
+        return
+    end
+    if target ~= player then
+        local range = ChatMessage.MessageTypeSettings and ChatMessage.MessageTypeSettings['say']['range'] or 15
+        local dx = target:getX() - player:getX()
+        local dy = target:getY() - player:getY()
+        if math.sqrt(dx * dx + dy * dy) > range + 1 then
+            return
+        end
+    end
+    ServerSend.CharacterSheet(player, target, CharacterSheets.get(target))
+end
+
+RecvServer['AdminClearCharacterSheet'] = function(player, args)
+    local username, firstName, lastName = GetCharacterArgs(args)
+    if not Character.isAdminOrModerator(player) or username == nil then
+        return
+    end
+    print('TICS info: character sheet cleared by ' .. player:getUsername() .. ': ' .. username
+        .. ' "' .. firstName .. ' ' .. lastName .. '"')
+    CharacterSheets.clear(username, firstName, lastName)
+    local target = World.getPlayerByUsername(username)
+    if target then
+        ServerSend.CharacterSheet(player, target, CharacterSheets.get(target))
+        ServerSend.CharacterSheet(target, target, CharacterSheets.get(target))
+    end
 end
 
 RecvServer['AskApprovedAvatarList'] = function(player, args)

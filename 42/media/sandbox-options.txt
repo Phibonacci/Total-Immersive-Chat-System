@@ -39,6 +39,14 @@ option TICS.BubblePortrait
 	translation = TICS_BubblePortrait,
 	valueTranslation = TICS_BubblePortrait_Values,
 }
+option TICS.CharacterSheetEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_CharacterSheetEnabled,
+}
 option TICS.BubbleTimerInSeconds
 {
 	type = integer,

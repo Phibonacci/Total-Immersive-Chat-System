@@ -211,6 +211,19 @@ function ClientSend.sendAdminDeleteAvatar(username, firstName, lastName)
     ClientSendCommand('AdminDeleteAvatar', { username = username, firstName = firstName, lastName = lastName })
 end
 
+-- character sheets
+function ClientSend.sendSetCharacterSheet(title, background, ooc)
+    ClientSendCommand('SetCharacterSheet', { title = title, background = background, ooc = ooc })
+end
+
+function ClientSend.sendAskCharacterSheet(username)
+    ClientSendCommand('AskCharacterSheet', { username = username })
+end
+
+function ClientSend.sendAdminClearCharacterSheet(username, firstName, lastName)
+    ClientSendCommand('AdminClearCharacterSheet', { username = username, firstName = firstName, lastName = lastName })
+end
+
 function ClientSend.sendDeleteAvatar()
     ClientSendCommand('DeleteAvatar', {})
 end

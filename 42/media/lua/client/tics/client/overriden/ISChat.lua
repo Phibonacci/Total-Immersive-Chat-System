@@ -3,6 +3,8 @@ local TICS_VERSION = require('tics/shared/Version')
 
 local ChatUI                 = require('tics/client/ui/ChatUI')
 local ChatTheme              = require('tics/client/ui/ChatTheme')
+local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
+local CharacterSheetWindow   = require('tics/client/ui/CharacterSheetWindow')
 local TicsColorPicker        = require('tics/client/ui/TicsColorPicker')
 local ChatText               = require('tics/client/ui/Chat/ChatText')
 
@@ -1057,7 +1059,7 @@ function BuildChatMessage(fontSize, showTimestamp, showTitle, showLanguage, lang
 end
 
 function CreatePlayerBubble(author, type, message, color, voiceEnabled, voicePitch, showPlayerName, authorName,
-                            authorColor)
+                            authorColor, title)
     ISChat.instance.bubble = ISChat.instance.bubble or {}
     ISChat.instance.typingDots = ISChat.instance.typingDots or {}
     if author == nil then
@@ -1084,7 +1086,7 @@ function CreatePlayerBubble(author, type, message, color, voiceEnabled, voicePit
         end
         ISChat.instance.bubble[author] = PlayerBubble:new(
             authorObj, isAction, message, color, timer, opacity, voiceEnabled, voicePitch, portrait, showPlayerName,
-            authorName, authorColor)
+            authorName, authorColor, title)
     else
         if ISChat.instance.contextBubble then
             ISChat.instance.contextBubble.dead = true
@@ -1314,7 +1316,7 @@ local function CapitalizeAndPonctuate(message)
 end
 
 function ISChat.onMessagePacket(type, author, characterName, message, language, color, hideInChat, target, isFromDiscord,
-                                voicePitch, disableVerb)
+                                voicePitch, disableVerb, title)
     if author ~= getPlayer():getUsername() then
         ReduceBoredom()
     end
@@ -1340,7 +1342,7 @@ function ISChat.onMessagePacket(type, author, characterName, message, language, 
         -- ooc should not distract the RP with voices
         local voiceEnabled = ISChat.instance.isVoiceEnabled and type ~= 'ooc'
         CreatePlayerBubble(author, type, updatedMessage, BuildColorFromMessageType(type), voiceEnabled, voicePitch,
-            type == 'me', name, color)
+            type == 'me', name, color, title)
     end
     local formattedMessage, parsedMessage = BuildMessageFromPacket(type, updatedMessage, name, color, nil, disableVerb)
     local time = Calendar.getInstance():getTimeInMillis()
@@ -1785,6 +1787,7 @@ function ISChat:prerender()
     local instance = ISChat.instance
 
     instance:createValidationWindowButton()
+    instance:createCharacterSheetButton()
     instance:updateInputChipBackspace()
     instance:updateInputShortcuts()
 
@@ -2256,6 +2259,30 @@ local function PanelActivateView(panel, viewName)
         end
     end
     return false
+end
+
+-- title bar button opening the player's character sheet, while the server enables them
+function ISChat:createCharacterSheetButton()
+    if not CharacterSheetManager.isEnabled() then
+        if self.characterSheetButton then
+            self:removeChild(self.characterSheetButton)
+            self.characterSheetButton = nil
+        end
+        return
+    end
+    if self.characterSheetButton == nil then
+        local th = self:titleBarHeight()
+        local button = ISButton:new(0, 0, th, th, '', self, function()
+            CharacterSheetWindow.open(getPlayer():getUsername())
+        end)
+        button.anchorRight = true
+        button.anchorLeft = false
+        button:initialise()
+        button:setImage(getTexture(ChatTheme.icons.sheet))
+        button:setUIName('character sheet button')
+        self:addChild(button)
+        self.characterSheetButton = button
+    end
 end
 
 function ISChat:createValidationWindowButton()

@@ -242,5 +242,14 @@
     "UI_TICS_AvatarAdmin_no_approved"    : "No approved avatar",
     "UI_TICS_AvatarAdmin_new_request"   : "New avatar waiting for approval: %1 (%2)",
     "UI_TICS_AvatarAdmin_loading"        : "Loading...",
-    "UI_TICS_AvatarAdmin_delete_confirm" : "Delete the avatar of %1 (%2)?"
+    "UI_TICS_AvatarAdmin_delete_confirm" : "Delete the avatar of %1 (%2)?",
+    "UI_TICS_Sheet_title"            : "Character sheet: %1",
+    "UI_TICS_Sheet_field_title"      : "Title",
+    "UI_TICS_Sheet_field_background" : "Personality & background",
+    "UI_TICS_Sheet_field_ooc"        : "OOC notes",
+    "UI_TICS_Sheet_save"             : "Save",
+    "UI_TICS_Sheet_saved"            : "Saved",
+    "UI_TICS_Sheet_clear"            : "Clear sheet",
+    "UI_TICS_Sheet_clear_confirm"    : "Clear the character sheet of %1?",
+    "UI_TICS_Sheet_examine"          : "Examine %1"
 }

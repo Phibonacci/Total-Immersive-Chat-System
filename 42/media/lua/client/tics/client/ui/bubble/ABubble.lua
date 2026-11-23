@@ -69,6 +69,15 @@ function ABubble.computeFittedWidth(panel, maxTextWidth)
     return math.ceil(marginLeft + maxRight + minLeft + marginLeft)
 end
 
+-- title of the character sheet: a small muted line above the message
+function ABubble.buildTitlePrefix(title)
+    if type(title) ~= 'string' or title == '' then
+        return ''
+    end
+    local cleanTitle = (title:gsub('[<>]', ''))
+    return StringBuilder.BuildFontSizeString('small') .. '<RGB:0.62,0.62,0.62>' .. cleanTitle .. ' <LINE> '
+end
+
 function ABubble:parseMessage(length)
     local messageLength = length
     if length and self.showPlayerName and self.playerName then
@@ -113,7 +122,7 @@ function ABubble:updateText(x, y)
         self.messageFinishedScrolling = true
     end
     local rawMessage, bubbleMessage = self:parseMessage(length)
-    self.text = StringBuilder.BuildFontSizeString('medium') .. bubbleMessage
+    self.text = (self.titlePrefix or '') .. StringBuilder.BuildFontSizeString('medium') .. bubbleMessage
     self.rawText = rawMessage
     self:paginate()
     self:animateHeight()
@@ -242,14 +251,15 @@ end
 
 function ABubble:new(
     x, y, text, rawText, message, messageColor, timer, opacity, heightOffsetStart,
-    showArrow, showPlayerName, playerName, playerColor, maxTextWidth)
+    showArrow, showPlayerName, playerName, playerColor, maxTextWidth, title)
     local textLength = getTextManager():MeasureStringX(UIFont.Medium, rawText)
     local width = math.min(textLength, maxTextWidth or ChatTheme.bubbleMaxTextWidth) + 40
     local height = 0
     local o = ISTicsRichTextPanel:new(x, y, width, height)
     setmetatable(o, self)
     self.__index = self
-    o.text = StringBuilder.BuildFontSizeString('medium') .. text
+    o.titlePrefix = ABubble.buildTitlePrefix(title)
+    o.text = o.titlePrefix .. StringBuilder.BuildFontSizeString('medium') .. text
     o.timer = timer * 1000
     o.opacity = opacity / 100
     o.message = message

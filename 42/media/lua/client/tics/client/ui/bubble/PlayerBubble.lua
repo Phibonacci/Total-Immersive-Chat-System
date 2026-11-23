@@ -126,7 +126,7 @@ end
 function PlayerBubble:new(
     player, isAction, message, messageColor, timer, opacity,
     isVoicesEnabled, voicePitch, portrait,
-    showPlayerName, playerName, playerColor)
+    showPlayerName, playerName, playerColor, title)
     local parsedMessages = Parser.ParseTicsMessage(message, messageColor, 20, 200)
     local rawMessage = parsedMessages['rawMessage']
     local bubbleMessage = parsedMessages['bubble']
@@ -146,7 +146,7 @@ function PlayerBubble:new(
     local showArrow = not isAction
     local o = ABubble:new(
         x, y, bubbleMessage, rawMessage,
-        message, messageColor, timer, opacity, 20, showArrow, showPlayerName, playerName, playerColor)
+        message, messageColor, timer, opacity, 20, showArrow, showPlayerName, playerName, playerColor, nil, title)
     if x == nil then
         self.dead = true
     end

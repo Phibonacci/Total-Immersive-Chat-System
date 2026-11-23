@@ -1,3 +1,4 @@
+local Character = require('tics/shared/utils/Character')
 local ServerSend = {}
 
 function ServerSend.Command(player, commandName, args)
@@ -29,6 +30,19 @@ end
 
 function ServerSend.AvatarDeleted(player, username, firstName, lastName)
     ServerSend.Command(player, 'AvatarDeleted', { username = username, firstName = firstName, lastName = lastName })
+end
+
+-- the character sheet of target, sent to player
+function ServerSend.CharacterSheet(player, target, sheet)
+    local firstName, lastName = Character.getFirstAndLastName(target)
+    ServerSend.Command(player, 'CharacterSheet', {
+        username = target:getUsername(),
+        firstName = firstName,
+        lastName = lastName,
+        title = sheet.title,
+        background = sheet.background,
+        ooc = sheet.ooc,
+    })
 end
 
 function ServerSend.Print(player, message)

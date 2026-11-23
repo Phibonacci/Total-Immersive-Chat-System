@@ -58,6 +58,9 @@ end
 -- Buttons of the title bar, from right to left.
 local function GetTitleButtons(self)
     local buttons = { self.lockButton, false, self.gearButton, self.infoButton, self.rangeButton, self.radioButton }
+    if self.characterSheetButton then
+        table.insert(buttons, self.characterSheetButton)
+    end
     if self.avatarUploadButton then
         table.insert(buttons, self.avatarUploadButton)
     end

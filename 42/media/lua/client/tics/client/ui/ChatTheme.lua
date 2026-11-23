@@ -60,6 +60,7 @@ ChatTheme.icons = {
     micOff  = 'media/ui/tics/icons/chat-mic-off.png',
     upload  = 'media/ui/tics/icons/chat-upload.png',
     portrait = 'media/ui/tics/icons/chat-portrait.png',
+    sheet   = 'media/ui/tics/icons/chat-sheet.png',
 }
 
 return ChatTheme

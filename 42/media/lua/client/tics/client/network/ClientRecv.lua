@@ -1,5 +1,6 @@
 local AvatarManager = require('tics/client/AvatarManager')
 local LanguageManager = require('tics/client/languages/LanguageManager')
+local CharacterSheetManager = require('tics/client/CharacterSheetManager')
 local Radio = require('tics/client/Radio')
 
 local ClientRecv = {}
@@ -7,7 +8,7 @@ local ClientRecv = {}
 ClientRecv['ChatMessage'] = function(args)
     ISChat.onMessagePacket(args['type'], args['author'], args['characterName'],
         args['message'], args['language'], args['color'], args['hideInChat'],
-        args['target'], false, args['pitch'], args['disableVerb'])
+        args['target'], false, args['pitch'], args['disableVerb'], args['title'])
 end
 
 ClientRecv['RadioMessage'] = function(args)
@@ -152,6 +153,10 @@ ClientRecv['OwnPendingAvatar'] = function(args)
     else
         AvatarManager:setOwnPendingAvatar(nil)
     end
+end
+
+ClientRecv['CharacterSheet'] = function(args)
+    CharacterSheetManager.setSheet(args)
 end
 
 ClientRecv['ApprovedAvatarList'] = function(args)

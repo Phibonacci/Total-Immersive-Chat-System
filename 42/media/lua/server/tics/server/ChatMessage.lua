@@ -1,4 +1,5 @@
 local Character    = require('tics/shared/utils/Character')
+local CharacterSheets = require('tics/server/CharacterSheets')
 local Logger       = require('tics/server/Logger')
 local RadioManager = require('tics/server/radio/RadioManager')
 local ServerSend   = require('tics/server/network/ServerSend')
@@ -174,6 +175,7 @@ local function SetMessageTypeSettings()
             ['hideCallout'] = SandboxVars.TICS.HideCallout,
             ['isVoiceEnabled'] = SandboxVars.TICS.VoiceEnabled,
             ['portrait'] = SandboxVars.TICS.BubblePortrait,
+            ['characterSheet'] = SandboxVars.TICS.CharacterSheetEnabled,
         },
     }
 end
@@ -582,6 +584,11 @@ function ChatMessage.ProcessMessage(player, args, packetType, sendError)
 
     if not IsAllowedToTalk(player, args, sendError) then
         return
+    end
+
+    -- title of the author's character sheet, shown in the bubbles
+    if SandboxVars.TICS.CharacterSheetEnabled then
+        args.title = CharacterSheets.getTitle(player)
     end
 
     if args.type == 'general' and
