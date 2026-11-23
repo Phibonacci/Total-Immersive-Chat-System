@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: 頻道",
-
     "Sandbox_TICS_ShowCharacterName"             : "在聊天中顯示角色名稱而非使用者名稱",
-
     "Sandbox_TICS_BoredomReduction"              : "每聽到一則訊息減少的無聊值",
-
     "Sandbox_TICS_Languages"                     : "啟用角色扮演語言",
-
     "Sandbox_TICS_BubblePortrait"                : "在對話氣泡左側顯示玩家頭像\n(自訂頭像放在伺服器的: Zomboid/Lua/avatars/username.png)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "啟用角色卡 (稱號, 背景, OOC 備註)",
     "Sandbox_TICS_BubblePortrait_help"           : "在對話氣泡左側顯示玩家頭像.\n自訂頭像放在伺服器的: Zomboid/Lua/avatars/username.png\n若找不到該使用者名稱對應的圖片, 將使用原版肖像.\n1 = 無\n2 = 原版\n 3 = Steam 頭像\n4 = 自訂",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "無",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "自訂和原版",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam 頭像",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "對話氣泡顯示時間 (秒)",
     "Sandbox_TICS_BubbleOpacity"                 : "對話氣泡不透明度",
-
     "Sandbox_TICS_VoiceEnabled"                  : "啟用玩家模擬語音",
-
     "Sandbox_TICS_VerbEnabled"                   : "在訊息前加上動詞前綴及引號",
-
     "Sandbox_TICS_Capitalize"                    : "自動將訊息首字母大寫並加上標點符號",
-
     "Sandbox_TICS_HideCallout"                   : "在聊天視窗中隱藏喊叫 (Q 鍵洗頻)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdown 單星號顏色",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdown 雙星號顏色",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "啟用 Discord 與 /general 訊息同步",
     "Sandbox_TICS_RadioDiscordEnabled"           : "啟用 Discord 與無線電頻道同步",
     "Sandbox_TICS_RadioDiscordFrequency"         : "設定與 Discord 同步的無線電頻率 (100.000MHz 填 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "設定腳本無線電訊息的顏色",
     "Sandbox_TICS_RadioSoundMaxRange"            : "最大音量的無線電可被聽見的最大範圍",
-
     "Sandbox_TICS_WhisperEnabled"                : "啟用 /whisper 聊天",
     "Sandbox_TICS_LowEnabled"                    : "啟用 /low 聊天",
     "Sandbox_TICS_SayEnabled"                    : "啟用 /say 聊天",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "啟用 /general 聊天",
     "Sandbox_TICS_AdminMessageEnabled"           : "啟用 /admin 聊天",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "啟用 /ooc (角色外) 聊天",
-
     "Sandbox_TICS_WhisperColor"                  : "設定 /whisper 顏色",
     "Sandbox_TICS_LowColor"                      : "設定 /low 顏色",
     "Sandbox_TICS_SayColor"                      : "設定 /say 顏色",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "設定 /general 顏色",
     "Sandbox_TICS_AdminMessageColor"             : "設定 /admin 顏色",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "設定 /ooc (角色外) 顏色",
-
     "Sandbox_TICS_WhisperRange"                  : "/whisper 聊天範圍",
     "Sandbox_TICS_LowRange"                      : "/low 聊天範圍",
     "Sandbox_TICS_SayRange"                      : "/say 聊天範圍",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "/me 聊天範圍",
     "Sandbox_TICS_DoRange"                       : "/do 聊天範圍",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "/ooc (角色外) 聊天範圍",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do 需要管理員權限",
-
     "Sandbox_TICS_WhisperZombieRange"            : "/whisper 聊天吸引殭屍範圍",
     "Sandbox_TICS_LowZombieRange"                : "/low 聊天吸引殭屍範圍",
     "Sandbox_TICS_SayZombieRange"                : "/say 聊天吸引殭屍範圍",

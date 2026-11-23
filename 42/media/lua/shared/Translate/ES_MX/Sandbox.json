@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: canales",
-
     "Sandbox_TICS_ShowCharacterName"             : "Mostrar el nombre del personaje en el chat en lugar del nombre de usuario",
-
     "Sandbox_TICS_BoredomReduction"              : "Reducción del aburrimiento por mensaje oído",
-
     "Sandbox_TICS_Languages"                     : "Activar los idiomas de rol",
-
     "Sandbox_TICS_BubblePortrait"                : "Mostrar el retrato del jugador a la izquierda de la burbuja\n(los personalizados van en: Zomboid/Lua/avatars/username.png en el servidor)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Activar las fichas de personaje (título, trasfondo, notas OOC)",
     "Sandbox_TICS_BubblePortrait_help"           : "Muestra el retrato del jugador a la izquierda de la burbuja.\nLos avatares personalizados van en: Zomboid/Lua/avatars/username.png en el servidor.\nSe usará el retrato original del juego si no se encuentra ninguna imagen para el nombre de usuario.\n1 = Ninguno\n2 = Original\n 3 = Avatar de Steam\n4 = Personalizado",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ninguno",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalizado y original",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Avatar de Steam",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Duración de la burbuja (segundos)",
     "Sandbox_TICS_BubbleOpacity"                 : "Opacidad de la burbuja",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Activar voces simuladas de los jugadores",
-
     "Sandbox_TICS_VerbEnabled"                   : "Agregar un verbo introductorio y comillas a los mensajes",
-
     "Sandbox_TICS_Capitalize"                    : "Poner automáticamente en mayúscula la primera letra del mensaje y agregar puntuación",
-
     "Sandbox_TICS_HideCallout"                   : "Ocultar los gritos (tecla Q) en la ventana de chat (spam de Q)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Color del Markdown con un asterisco",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Color del Markdown con dos asteriscos",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "Activar la sincronización con Discord de los mensajes de /general",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Activar la sincronización con Discord de un canal de radio",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Frecuencia de radio que se sincroniza con Discord (100.000MHz es 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Color de las emisiones de radio programadas",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Alcance máximo al que se oye una radio a todo volumen",
-
     "Sandbox_TICS_WhisperEnabled"                : "Activar el chat /whisper",
     "Sandbox_TICS_LowEnabled"                    : "Activar el chat /low",
     "Sandbox_TICS_SayEnabled"                    : "Activar el chat /say",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "Activar el chat /general",
     "Sandbox_TICS_AdminMessageEnabled"           : "Activar el chat /admin",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Activar el chat /ooc (fuera del personaje)",
-
     "Sandbox_TICS_WhisperColor"                  : "Color de /whisper",
     "Sandbox_TICS_LowColor"                      : "Color de /low",
     "Sandbox_TICS_SayColor"                      : "Color de /say",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "Color de /general",
     "Sandbox_TICS_AdminMessageColor"             : "Color de /admin",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "Color de /ooc (fuera del personaje)",
-
     "Sandbox_TICS_WhisperRange"                  : "Alcance del chat /whisper",
     "Sandbox_TICS_LowRange"                      : "Alcance del chat /low",
     "Sandbox_TICS_SayRange"                      : "Alcance del chat /say",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "Alcance del chat /me",
     "Sandbox_TICS_DoRange"                       : "Alcance del chat /do",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "Alcance del chat /ooc (fuera del personaje)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do requiere privilegios de administrador",
-
     "Sandbox_TICS_WhisperZombieRange"            : "Alcance de atracción de zombies del chat /whisper",
     "Sandbox_TICS_LowZombieRange"                : "Alcance de atracción de zombies del chat /low",
     "Sandbox_TICS_SayZombieRange"                : "Alcance de atracción de zombies del chat /say",

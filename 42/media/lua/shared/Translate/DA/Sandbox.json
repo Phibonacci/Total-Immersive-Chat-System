@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: Kanaler",
-
     "Sandbox_TICS_ShowCharacterName"             : "Vis karakterens navn i chatten i stedet for brugernavnet",
-
     "Sandbox_TICS_BoredomReduction"              : "Reduktion af kedsomhed pr. hørt besked",
-
     "Sandbox_TICS_Languages"                     : "Aktivér rollespilssprog",
-
     "Sandbox_TICS_BubblePortrait"                : "Vis spillerportræt til venstre for taleboblen\n(egne billeder skal ligge i: Zomboid/Lua/avatars/username.png på serveren)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Aktivér karakterark (titel, baggrund, OOC-noter)",
     "Sandbox_TICS_BubblePortrait_help"           : "Vis spillerportræt til venstre for taleboblen.\nEgne avatarer skal ligge i: Zomboid/Lua/avatars/username.png på serveren.\nVanilla-portrættet bruges, hvis der ikke findes et billede til brugernavnet.\n1 = Ingen\n2 = Vanilla\n 3 = Steam-avatar\n4 = Eget",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ingen",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Eget og vanilla",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam-avatar",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Visningstid for taleboble (sekunder)",
     "Sandbox_TICS_BubbleOpacity"                 : "Taleboblens uigennemsigtighed",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Aktivér kunstige spillerstemmer",
-
     "Sandbox_TICS_VerbEnabled"                   : "Tilføj et udsagnsord foran beskeder samt anførselstegn",
-
     "Sandbox_TICS_Capitalize"                    : "Skriv automatisk første bogstav i en besked med stort og tilføj tegnsætning",
-
     "Sandbox_TICS_HideCallout"                   : "Skjul råb i chatvinduet (Q-spam)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdown-farve for én stjerne",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdown-farve for to stjerner",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "Aktivér Discord-synkronisering med /general-beskeder",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Aktivér Discord-synkronisering med en radiokanal",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Radiofrekvens, der synkroniseres med Discord (100.000 MHz er 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Angiv farve for scriptede radiobeskeder",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Maksimal afstand, hvor en radio på fuld lydstyrke kan høres",
-
     "Sandbox_TICS_WhisperEnabled"                : "Aktivér /whisper-chat",
     "Sandbox_TICS_LowEnabled"                    : "Aktivér /low-chat",
     "Sandbox_TICS_SayEnabled"                    : "Aktivér /say-chat",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "Aktivér /general-chat",
     "Sandbox_TICS_AdminMessageEnabled"           : "Aktivér /admin-chat",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Aktivér /ooc-chat (uden for rollen)",
-
     "Sandbox_TICS_WhisperColor"                  : "Angiv farve for /whisper",
     "Sandbox_TICS_LowColor"                      : "Angiv farve for /low",
     "Sandbox_TICS_SayColor"                      : "Angiv farve for /say",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "Angiv farve for /general",
     "Sandbox_TICS_AdminMessageColor"             : "Angiv farve for /admin",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "Angiv farve for /ooc (uden for rollen)",
-
     "Sandbox_TICS_WhisperRange"                  : "Rækkevidde for /whisper-chat",
     "Sandbox_TICS_LowRange"                      : "Rækkevidde for /low-chat",
     "Sandbox_TICS_SayRange"                      : "Rækkevidde for /say-chat",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "Rækkevidde for /me-chat",
     "Sandbox_TICS_DoRange"                       : "Rækkevidde for /do-chat",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "Rækkevidde for /ooc-chat (uden for rollen)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do kræver administratorrettigheder",
-
     "Sandbox_TICS_WhisperZombieRange"            : "Rækkevidde for zombier for /whisper-chat",
     "Sandbox_TICS_LowZombieRange"                : "Rækkevidde for zombier for /low-chat",
     "Sandbox_TICS_SayZombieRange"                : "Rækkevidde for zombier for /say-chat",

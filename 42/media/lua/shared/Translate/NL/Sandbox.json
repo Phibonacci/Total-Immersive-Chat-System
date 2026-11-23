@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: kanalen",
-
     "Sandbox_TICS_ShowCharacterName"             : "Naam van het personage in de chat tonen in plaats van de gebruikersnaam",
-
     "Sandbox_TICS_BoredomReduction"              : "Vermindering van verveling per gehoord bericht",
-
     "Sandbox_TICS_Languages"                     : "Roleplay-talen inschakelen",
-
     "Sandbox_TICS_BubblePortrait"                : "Spelersportret links van de tekstballon tonen\n(eigen afbeeldingen in: Zomboid/Lua/avatars/username.png op de server)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Personagebladen inschakelen (titel, achtergrond, OOC-notities)",
     "Sandbox_TICS_BubblePortrait_help"           : "Spelersportret links van de tekstballon tonen.\nEigen avatars horen in: Zomboid/Lua/avatars/username.png op de server.\nAls er geen afbeelding voor de gebruikersnaam is, wordt het vanilla-portret gebruikt.\n1 = Geen\n2 = Vanilla\n 3 = Steam-avatar\n4 = Eigen",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Geen",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Eigen en vanilla",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam-avatar",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Weergaveduur tekstballon (seconden)",
     "Sandbox_TICS_BubbleOpacity"                 : "Ondoorzichtigheid tekstballon",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Nepstemmen voor spelers inschakelen",
-
     "Sandbox_TICS_VerbEnabled"                   : "Werkwoord en aanhalingstekens aan berichten toevoegen",
-
     "Sandbox_TICS_Capitalize"                    : "Eerste letter van een bericht automatisch als hoofdletter en leestekens toevoegen",
-
     "Sandbox_TICS_HideCallout"                   : "Roepen verbergen in het chatvenster (Q-spam)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Markdown-kleur voor één asterisk",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Markdown-kleur voor twee asterisken",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "Discord-synchronisatie met /general-berichten inschakelen",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Discord-synchronisatie met een radiokanaal inschakelen",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Radiofrequentie voor Discord-synchronisatie (100.000 MHz is 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Kleur van gescripte radioberichten instellen",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Maximaal bereik waarop een radio op vol volume te horen is",
-
     "Sandbox_TICS_WhisperEnabled"                : "/whisper-chat inschakelen",
     "Sandbox_TICS_LowEnabled"                    : "/low-chat inschakelen",
     "Sandbox_TICS_SayEnabled"                    : "/say-chat inschakelen",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "/general-chat inschakelen",
     "Sandbox_TICS_AdminMessageEnabled"           : "/admin-chat inschakelen",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "/ooc-chat (buiten je personage) inschakelen",
-
     "Sandbox_TICS_WhisperColor"                  : "/whisper-kleur instellen",
     "Sandbox_TICS_LowColor"                      : "/low-kleur instellen",
     "Sandbox_TICS_SayColor"                      : "/say-kleur instellen",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "/general-kleur instellen",
     "Sandbox_TICS_AdminMessageColor"             : "/admin-kleur instellen",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "/ooc-kleur (buiten je personage) instellen",
-
     "Sandbox_TICS_WhisperRange"                  : "Bereik van /whisper-chat",
     "Sandbox_TICS_LowRange"                      : "Bereik van /low-chat",
     "Sandbox_TICS_SayRange"                      : "Bereik van /say-chat",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "Bereik van /me-chat",
     "Sandbox_TICS_DoRange"                       : "Bereik van /do-chat",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "Bereik van /ooc-chat (buiten je personage)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do vereist adminrechten",
-
     "Sandbox_TICS_WhisperZombieRange"            : "Bereik van /whisper-chat voor zombies",
     "Sandbox_TICS_LowZombieRange"                : "Bereik van /low-chat voor zombies",
     "Sandbox_TICS_SayZombieRange"                : "Bereik van /say-chat voor zombies",

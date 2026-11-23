@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: canals",
-
     "Sandbox_TICS_ShowCharacterName"             : "Mostrar el nom del personatge al xat en lloc del nom d'usuari",
-
     "Sandbox_TICS_BoredomReduction"              : "Reducció de l'avorriment per missatge escoltat",
-
     "Sandbox_TICS_Languages"                     : "Activar els idiomes de rol",
-
     "Sandbox_TICS_BubblePortrait"                : "Mostrar el retrat del jugador a l'esquerra de la bombolla\n(els personalitzats van a: Zomboid/Lua/avatars/username.png al servidor)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Activar les fitxes de personatge (títol, rerefons, notes OOC)",
     "Sandbox_TICS_BubblePortrait_help"           : "Mostra el retrat del jugador a l'esquerra de la bombolla.\nEls avatars personalitzats van a: Zomboid/Lua/avatars/username.png al servidor.\nS'utilitzarà el retrat original del joc si no es troba cap imatge per al nom d'usuari.\n1 = Cap\n2 = Original\n 3 = Avatar de Steam\n4 = Personalitzat",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Cap",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalitzat i original",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Avatar de Steam",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Durada de la bombolla (segons)",
     "Sandbox_TICS_BubbleOpacity"                 : "Opacitat de la bombolla",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Activar veus simulades dels jugadors",
-
     "Sandbox_TICS_VerbEnabled"                   : "Afegir un verb introductori i cometes als missatges",
-
     "Sandbox_TICS_Capitalize"                    : "Posar automàticament en majúscula la primera lletra del missatge i afegir puntuació",
-
     "Sandbox_TICS_HideCallout"                   : "Amagar els crits (tecla Q) a la finestra de xat (spam de Q)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Color del Markdown amb un asterisc",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Color del Markdown amb dos asteriscs",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "Activar la sincronització amb Discord dels missatges de /general",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Activar la sincronització amb Discord d'un canal de ràdio",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Freqüència de ràdio que es sincronitza amb Discord (100.000MHz és 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Color de les emissions de ràdio programades",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Abast màxim al qual se sent una ràdio a tot volum",
-
     "Sandbox_TICS_WhisperEnabled"                : "Activar el xat /whisper",
     "Sandbox_TICS_LowEnabled"                    : "Activar el xat /low",
     "Sandbox_TICS_SayEnabled"                    : "Activar el xat /say",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "Activar el xat /general",
     "Sandbox_TICS_AdminMessageEnabled"           : "Activar el xat /admin",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Activar el xat /ooc (fora del personatge)",
-
     "Sandbox_TICS_WhisperColor"                  : "Color de /whisper",
     "Sandbox_TICS_LowColor"                      : "Color de /low",
     "Sandbox_TICS_SayColor"                      : "Color de /say",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "Color de /general",
     "Sandbox_TICS_AdminMessageColor"             : "Color de /admin",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "Color de /ooc (fora del personatge)",
-
     "Sandbox_TICS_WhisperRange"                  : "Abast del xat /whisper",
     "Sandbox_TICS_LowRange"                      : "Abast del xat /low",
     "Sandbox_TICS_SayRange"                      : "Abast del xat /say",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "Abast del xat /me",
     "Sandbox_TICS_DoRange"                       : "Abast del xat /do",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "Abast del xat /ooc (fora del personatge)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do requereix privilegis d'administrador",
-
     "Sandbox_TICS_WhisperZombieRange"            : "Abast d'atracció de zombis del xat /whisper",
     "Sandbox_TICS_LowZombieRange"                : "Abast d'atracció de zombis del xat /low",
     "Sandbox_TICS_SayZombieRange"                : "Abast d'atracció de zombis del xat /say",

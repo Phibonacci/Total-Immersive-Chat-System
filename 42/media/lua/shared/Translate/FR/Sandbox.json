@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System : canaux",
-
     "Sandbox_TICS_ShowCharacterName"             : "Afficher le nom du personnage dans le chat au lieu du nom d'utilisateur",
-
     "Sandbox_TICS_BoredomReduction"              : "Réduction de l'ennui par message entendu",
-
     "Sandbox_TICS_Languages"                     : "Activer les langues de roleplay",
-
     "Sandbox_TICS_BubblePortrait"                : "Afficher le portrait du joueur à gauche de la bulle\n(les avatars personnalisés vont dans : Zomboid/Lua/avatars/username.png sur le serveur)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Activer les fiches de personnage (titre, histoire, notes HRP)",
     "Sandbox_TICS_BubblePortrait_help"           : "Afficher le portrait du joueur à gauche de la bulle.\nLes avatars personnalisés vont dans : Zomboid/Lua/avatars/username.png sur le serveur.\nLe portrait vanilla est utilisé si aucune image n'est trouvée pour le nom d'utilisateur.\n1 = Aucun\n2 = Vanilla\n 3 = Avatar Steam\n4 = Personnalisé",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Aucun",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personnalisé et vanilla",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Avatar Steam",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Durée des bulles (secondes)",
     "Sandbox_TICS_BubbleOpacity"                 : "Opacité des bulles",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Activer les voix simulées des joueurs",
-
     "Sandbox_TICS_VerbEnabled"                   : "Ajouter un verbe en préfixe des messages, et des guillemets",
-
     "Sandbox_TICS_Capitalize"                    : "Mettre automatiquement une majuscule au début des messages et ajouter la ponctuation",
-
     "Sandbox_TICS_HideCallout"                   : "Masquer les cris dans la fenêtre de chat (spam de la touche Q)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Couleur du markdown à un astérisque",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Couleur du markdown à deux astérisques",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "Activer la synchronisation Discord avec les messages /general",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Activer la synchronisation Discord avec un canal radio",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Fréquence radio à synchroniser avec Discord (100.000MHz = 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Couleur des messages radio scriptés",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Portée maximale à laquelle une radio à plein volume peut être entendue",
-
     "Sandbox_TICS_WhisperEnabled"                : "Activer le chat /whisper",
     "Sandbox_TICS_LowEnabled"                    : "Activer le chat /low",
     "Sandbox_TICS_SayEnabled"                    : "Activer le chat /say",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "Activer le chat /general",
     "Sandbox_TICS_AdminMessageEnabled"           : "Activer le chat /admin",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Activer le chat /ooc (HRP, hors roleplay)",
-
     "Sandbox_TICS_WhisperColor"                  : "Couleur de /whisper",
     "Sandbox_TICS_LowColor"                      : "Couleur de /low",
     "Sandbox_TICS_SayColor"                      : "Couleur de /say",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "Couleur de /general",
     "Sandbox_TICS_AdminMessageColor"             : "Couleur de /admin",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "Couleur de /ooc (HRP, hors roleplay)",
-
     "Sandbox_TICS_WhisperRange"                  : "Portée du chat /whisper",
     "Sandbox_TICS_LowRange"                      : "Portée du chat /low",
     "Sandbox_TICS_SayRange"                      : "Portée du chat /say",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "Portée du chat /me",
     "Sandbox_TICS_DoRange"                       : "Portée du chat /do",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "Portée du chat /ooc (HRP, hors roleplay)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do nécessite les droits d'admin",
-
     "Sandbox_TICS_WhisperZombieRange"            : "Portée à laquelle les zombies entendent /whisper",
     "Sandbox_TICS_LowZombieRange"                : "Portée à laquelle les zombies entendent /low",
     "Sandbox_TICS_SayZombieRange"                : "Portée à laquelle les zombies entendent /say",

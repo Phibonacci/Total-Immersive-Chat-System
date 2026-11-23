@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: ช่องสนทนา",
-
     "Sandbox_TICS_ShowCharacterName"             : "แสดงชื่อตัวละครในการสนทนาแทนชื่อผู้ใช้",
-
     "Sandbox_TICS_BoredomReduction"              : "ความเบื่อหน่ายที่ลดลงต่อข้อความที่ได้ยิน",
-
     "Sandbox_TICS_Languages"                     : "เปิดใช้ภาษาสำหรับโรลเพลย์",
-
     "Sandbox_TICS_BubblePortrait"                : "แสดงภาพผู้เล่นทางซ้ายของบับเบิล\n(รูปที่กำหนดเองอยู่ที่: Zomboid/Lua/avatars/username.png บนเซิร์ฟเวอร์)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "เปิดใช้ข้อมูลตัวละคร (ฉายา ภูมิหลัง บันทึก OOC)",
     "Sandbox_TICS_BubblePortrait_help"           : "แสดงภาพผู้เล่นทางซ้ายของบับเบิล\nอวาตาร์ที่กำหนดเองอยู่ที่: Zomboid/Lua/avatars/username.png บนเซิร์ฟเวอร์\nหากไม่พบรูปของชื่อผู้ใช้นั้น จะใช้ภาพแบบดั้งเดิมของเกม\n1 = ไม่มี\n2 = ดั้งเดิม\n 3 = อวาตาร์ Steam\n4 = กำหนดเอง",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "ไม่มี",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "กำหนดเองและดั้งเดิม",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "อวาตาร์ Steam",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "เวลาแสดงบับเบิล (วินาที)",
     "Sandbox_TICS_BubbleOpacity"                 : "ความทึบของบับเบิล",
-
     "Sandbox_TICS_VoiceEnabled"                  : "เปิดใช้เสียงพูดจำลองของผู้เล่น",
-
     "Sandbox_TICS_VerbEnabled"                   : "เพิ่มคำกริยานำหน้าข้อความและเครื่องหมายคำพูด",
-
     "Sandbox_TICS_Capitalize"                    : "ปรับอักษรตัวแรกของข้อความเป็นตัวพิมพ์ใหญ่และเติมเครื่องหมายวรรคตอนโดยอัตโนมัติ",
-
     "Sandbox_TICS_HideCallout"                   : "ซ่อนการตะโกนในหน้าต่างสนทนา (สแปมปุ่ม Q)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "สีของ Markdown ดอกจันหนึ่งตัว",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "สีของ Markdown ดอกจันสองตัว",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "เปิดใช้การซิงค์ Discord กับข้อความ /general",
     "Sandbox_TICS_RadioDiscordEnabled"           : "เปิดใช้การซิงค์ Discord กับช่องวิทยุ",
     "Sandbox_TICS_RadioDiscordFrequency"         : "ตั้งความถี่วิทยุที่จะซิงค์กับ Discord (100.000MHz คือ 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "ตั้งสีของข้อความวิทยุที่เป็นสคริปต์",
     "Sandbox_TICS_RadioSoundMaxRange"            : "ระยะสูงสุดที่ได้ยินวิทยุซึ่งเปิดเสียงเต็มที่",
-
     "Sandbox_TICS_WhisperEnabled"                : "เปิดใช้การสนทนา /whisper",
     "Sandbox_TICS_LowEnabled"                    : "เปิดใช้การสนทนา /low",
     "Sandbox_TICS_SayEnabled"                    : "เปิดใช้การสนทนา /say",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "เปิดใช้การสนทนา /general",
     "Sandbox_TICS_AdminMessageEnabled"           : "เปิดใช้การสนทนา /admin",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "เปิดใช้การสนทนา /ooc (นอกบทบาท)",
-
     "Sandbox_TICS_WhisperColor"                  : "ตั้งสีของ /whisper",
     "Sandbox_TICS_LowColor"                      : "ตั้งสีของ /low",
     "Sandbox_TICS_SayColor"                      : "ตั้งสีของ /say",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "ตั้งสีของ /general",
     "Sandbox_TICS_AdminMessageColor"             : "ตั้งสีของ /admin",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "ตั้งสีของ /ooc (นอกบทบาท)",
-
     "Sandbox_TICS_WhisperRange"                  : "ระยะการสนทนา /whisper",
     "Sandbox_TICS_LowRange"                      : "ระยะการสนทนา /low",
     "Sandbox_TICS_SayRange"                      : "ระยะการสนทนา /say",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "ระยะการสนทนา /me",
     "Sandbox_TICS_DoRange"                       : "ระยะการสนทนา /do",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "ระยะการสนทนา /ooc (นอกบทบาท)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do ต้องใช้สิทธิ์แอดมิน",
-
     "Sandbox_TICS_WhisperZombieRange"            : "ระยะดึงดูดซอมบี้ของการสนทนา /whisper",
     "Sandbox_TICS_LowZombieRange"                : "ระยะดึงดูดซอมบี้ของการสนทนา /low",
     "Sandbox_TICS_SayZombieRange"                : "ระยะดึงดูดซอมบี้ของการสนทนา /say",

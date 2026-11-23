@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: Kanallar",
-
     "Sandbox_TICS_ShowCharacterName"             : "Sohbette kullanıcı adı yerine karakter adını göster",
-
     "Sandbox_TICS_BoredomReduction"              : "Duyulan mesaj başına can sıkıntısı azalması",
-
     "Sandbox_TICS_Languages"                     : "Rol yapma dillerini etkinleştir",
-
     "Sandbox_TICS_BubblePortrait"                : "Oyuncu portresini balonun solunda göster\n(özel resimler sunucuda şuraya konur: Zomboid/Lua/avatars/username.png)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Karakter sayfalarını etkinleştir (unvan, geçmiş, OOC notları)",
     "Sandbox_TICS_BubblePortrait_help"           : "Oyuncu portresini balonun solunda gösterir.\nÖzel avatarlar sunucuda şuraya konur: Zomboid/Lua/avatars/username.png\nKullanıcı adı için resim bulunamazsa varsayılan portre kullanılır.\n1 = Yok\n2 = Varsayılan\n 3 = Steam avatarı\n4 = Özel",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Yok",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Özel ve varsayılan",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam avatarı",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Balon süresi (saniye)",
     "Sandbox_TICS_BubbleOpacity"                 : "Balon opaklığı",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Oyuncuların yapay seslerini etkinleştir",
-
     "Sandbox_TICS_VerbEnabled"                   : "Mesajlara fiil öneki ve tırnak işaretleri ekle",
-
     "Sandbox_TICS_Capitalize"                    : "Mesajın ilk harfini otomatik olarak büyük yap ve noktalama ekle",
-
     "Sandbox_TICS_HideCallout"                   : "Sohbet penceresinde bağırmaları gizle (Q spam)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Tek yıldızlı Markdown rengi",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Çift yıldızlı Markdown rengi",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "/general mesajlarının Discord ile senkronizasyonunu etkinleştir",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Bir radyo kanalının Discord ile senkronizasyonunu etkinleştir",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Discord ile senkronize edilecek radyo frekansı (100.000MHz = 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Senaryolu radyo mesajlarının rengi",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Tam ses seviyesindeki bir radyonun duyulabileceği maksimum mesafe",
-
     "Sandbox_TICS_WhisperEnabled"                : "/whisper sohbetini etkinleştir",
     "Sandbox_TICS_LowEnabled"                    : "/low sohbetini etkinleştir",
     "Sandbox_TICS_SayEnabled"                    : "/say sohbetini etkinleştir",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "/general sohbetini etkinleştir",
     "Sandbox_TICS_AdminMessageEnabled"           : "/admin sohbetini etkinleştir",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "/ooc (karakter dışı) sohbetini etkinleştir",
-
     "Sandbox_TICS_WhisperColor"                  : "/whisper rengi",
     "Sandbox_TICS_LowColor"                      : "/low rengi",
     "Sandbox_TICS_SayColor"                      : "/say rengi",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "/general rengi",
     "Sandbox_TICS_AdminMessageColor"             : "/admin rengi",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "/ooc (karakter dışı) rengi",
-
     "Sandbox_TICS_WhisperRange"                  : "/whisper sohbet menzili",
     "Sandbox_TICS_LowRange"                      : "/low sohbet menzili",
     "Sandbox_TICS_SayRange"                      : "/say sohbet menzili",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "/me sohbet menzili",
     "Sandbox_TICS_DoRange"                       : "/do sohbet menzili",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "/ooc (karakter dışı) sohbet menzili",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do için admin yetkisi gerekir",
-
     "Sandbox_TICS_WhisperZombieRange"            : "/whisper sohbetinin zombi menzili",
     "Sandbox_TICS_LowZombieRange"                : "/low sohbetinin zombi menzili",
     "Sandbox_TICS_SayZombieRange"                : "/say sohbetinin zombi menzili",

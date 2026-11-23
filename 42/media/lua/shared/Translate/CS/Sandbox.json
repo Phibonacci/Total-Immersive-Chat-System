@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: kanály",
-
     "Sandbox_TICS_ShowCharacterName"             : "Zobrazovat v chatu jméno postavy místo uživatelského jména",
-
     "Sandbox_TICS_BoredomReduction"              : "Snížení nudy za každou vyslechnutou zprávu",
-
     "Sandbox_TICS_Languages"                     : "Povolit roleplay jazyky",
-
     "Sandbox_TICS_BubblePortrait"                : "Zobrazovat portrét hráče vlevo od bubliny\n(vlastní obrázky patří do: Zomboid/Lua/avatars/username.png na serveru)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Povolit karty postav (popisek, minulost, poznámky OOC)",
     "Sandbox_TICS_BubblePortrait_help"           : "Zobrazuje portrét hráče vlevo od bubliny.\nVlastní avatary patří do: Zomboid/Lua/avatars/username.png na serveru.\nPokud pro uživatelské jméno není nalezen žádný obrázek, použije se výchozí portrét.\n1 = Žádný\n2 = Výchozí\n 3 = Steam avatar\n4 = Vlastní",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Žádný",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Vlastní a výchozí",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Steam avatar",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Doba zobrazení bubliny (sekundy)",
     "Sandbox_TICS_BubbleOpacity"                 : "Neprůhlednost bubliny",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Povolit umělé hlasy hráčů",
-
     "Sandbox_TICS_VerbEnabled"                   : "Přidávat ke zprávám úvodní sloveso a uvozovky",
-
     "Sandbox_TICS_Capitalize"                    : "Automaticky psát první písmeno zprávy velké a doplnit interpunkci",
-
     "Sandbox_TICS_HideCallout"                   : "Skrýt výkřiky v okně chatu (spam klávesou Q)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Barva Markdownu s jednou hvězdičkou",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Barva Markdownu se dvěma hvězdičkami",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "Povolit synchronizaci zpráv /general s Discordem",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Povolit synchronizaci rádiového kanálu s Discordem",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Rádiová frekvence synchronizovaná s Discordem (100.000MHz je 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Barva skriptovaných rádiových zpráv",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Maximální dosah, na který je slyšet rádio s plnou hlasitostí",
-
     "Sandbox_TICS_WhisperEnabled"                : "Povolit chat /whisper",
     "Sandbox_TICS_LowEnabled"                    : "Povolit chat /low",
     "Sandbox_TICS_SayEnabled"                    : "Povolit chat /say",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "Povolit chat /general",
     "Sandbox_TICS_AdminMessageEnabled"           : "Povolit chat /admin",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Povolit chat /ooc (mimo postavu)",
-
     "Sandbox_TICS_WhisperColor"                  : "Barva /whisper",
     "Sandbox_TICS_LowColor"                      : "Barva /low",
     "Sandbox_TICS_SayColor"                      : "Barva /say",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "Barva /general",
     "Sandbox_TICS_AdminMessageColor"             : "Barva /admin",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "Barva /ooc (mimo postavu)",
-
     "Sandbox_TICS_WhisperRange"                  : "Dosah chatu /whisper",
     "Sandbox_TICS_LowRange"                      : "Dosah chatu /low",
     "Sandbox_TICS_SayRange"                      : "Dosah chatu /say",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "Dosah chatu /me",
     "Sandbox_TICS_DoRange"                       : "Dosah chatu /do",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "Dosah chatu /ooc (mimo postavu)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do vyžaduje práva admina",
-
     "Sandbox_TICS_WhisperZombieRange"            : "Dosah chatu /whisper pro zombíky",
     "Sandbox_TICS_LowZombieRange"                : "Dosah chatu /low pro zombíky",
     "Sandbox_TICS_SayZombieRange"                : "Dosah chatu /say pro zombíky",

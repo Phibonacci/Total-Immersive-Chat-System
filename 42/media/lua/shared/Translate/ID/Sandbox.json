@@ -2,40 +2,28 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Sandbox.schema.json",
     "Sandbox_TICS"                               : "Total Immersive Chat System",
     "Sandbox_TICSChannels"                       : "Total Immersive Chat System: Channel",
-
     "Sandbox_TICS_ShowCharacterName"             : "Tampilkan nama karakter di chat, bukan username",
-
     "Sandbox_TICS_BoredomReduction"              : "Pengurangan kebosanan per pesan yang didengar",
-
     "Sandbox_TICS_Languages"                     : "Aktifkan bahasa roleplay",
-
     "Sandbox_TICS_BubblePortrait"                : "Tampilkan potret pemain di sebelah kiri balon\n(gambar kustom ditaruh di: Zomboid/Lua/avatars/username.png di server)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Aktifkan lembar karakter (gelar, latar belakang, catatan OOC)",
     "Sandbox_TICS_BubblePortrait_help"           : "Tampilkan potret pemain di sebelah kiri balon.\nAvatar kustom ditaruh di: Zomboid/Lua/avatars/username.png di server.\nPotret bawaan akan dipakai jika tidak ada gambar untuk username tersebut.\n1 = Tidak ada\n2 = Bawaan\n 3 = Avatar Steam\n4 = Kustom",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Tidak ada",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Kustom dan bawaan",
     "Sandbox_TICS_BubblePortrait_Values_option3" : "Avatar Steam",
-
     "Sandbox_TICS_BubbleTimerInSeconds"          : "Durasi balon (detik)",
     "Sandbox_TICS_BubbleOpacity"                 : "Opasitas balon",
-
     "Sandbox_TICS_VoiceEnabled"                  : "Aktifkan suara buatan pemain",
-
     "Sandbox_TICS_VerbEnabled"                   : "Tambahkan kata kerja di awal pesan, serta tanda kutip",
-
     "Sandbox_TICS_Capitalize"                    : "Otomatis kapitalkan huruf pertama pesan dan tambahkan tanda baca",
-
     "Sandbox_TICS_HideCallout"                   : "Sembunyikan teriakan di jendela chat (spam Q)",
-
     "Sandbox_TICS_MarkdownOneAsteriskColor"      : "Warna Markdown satu bintang",
     "Sandbox_TICS_MarkdownTwoAsterisksColor"     : "Warna Markdown dua bintang",
-
     "Sandbox_TICS_GeneralDiscordEnabled"         : "Aktifkan sinkronisasi Discord dengan pesan /general",
     "Sandbox_TICS_RadioDiscordEnabled"           : "Aktifkan sinkronisasi Discord dengan satu channel radio",
     "Sandbox_TICS_RadioDiscordFrequency"         : "Frekuensi radio yang disinkronkan dengan Discord (100.000MHz adalah 100000)",
-
     "Sandbox_TICS_RadioColor"                    : "Warna pesan radio berskrip",
     "Sandbox_TICS_RadioSoundMaxRange"            : "Jarak maksimum radio dengan volume penuh dapat terdengar",
-
     "Sandbox_TICS_WhisperEnabled"                : "Aktifkan chat /whisper",
     "Sandbox_TICS_LowEnabled"                    : "Aktifkan chat /low",
     "Sandbox_TICS_SayEnabled"                    : "Aktifkan chat /say",
@@ -48,7 +36,6 @@
     "Sandbox_TICS_GeneralMessageEnabled"         : "Aktifkan chat /general",
     "Sandbox_TICS_AdminMessageEnabled"           : "Aktifkan chat /admin",
     "Sandbox_TICS_OutOfCharacterMessageEnabled"  : "Aktifkan chat /ooc (di luar karakter)",
-
     "Sandbox_TICS_WhisperColor"                  : "Warna /whisper",
     "Sandbox_TICS_LowColor"                      : "Warna /low",
     "Sandbox_TICS_SayColor"                      : "Warna /say",
@@ -61,7 +48,6 @@
     "Sandbox_TICS_GeneralMessageColor"           : "Warna /general",
     "Sandbox_TICS_AdminMessageColor"             : "Warna /admin",
     "Sandbox_TICS_OutOfCharacterMessageColor"    : "Warna /ooc (di luar karakter)",
-
     "Sandbox_TICS_WhisperRange"                  : "Jangkauan chat /whisper",
     "Sandbox_TICS_LowRange"                      : "Jangkauan chat /low",
     "Sandbox_TICS_SayRange"                      : "Jangkauan chat /say",
@@ -69,9 +55,7 @@
     "Sandbox_TICS_MeRange"                       : "Jangkauan chat /me",
     "Sandbox_TICS_DoRange"                       : "Jangkauan chat /do",
     "Sandbox_TICS_OutOfCharacterMessageRange"    : "Jangkauan chat /ooc (di luar karakter)",
-
     "Sandbox_TICS_DoAdminOnly"                   : "/do memerlukan hak akses admin",
-
     "Sandbox_TICS_WhisperZombieRange"            : "Jangkauan zombie chat /whisper",
     "Sandbox_TICS_LowZombieRange"                : "Jangkauan zombie chat /low",
     "Sandbox_TICS_SayZombieRange"                : "Jangkauan zombie chat /say",

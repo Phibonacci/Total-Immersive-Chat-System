@@ -6,6 +6,7 @@
     "Sandbox_TICS_BoredomReduction"              : "Снижение скуки за каждое услышанное сообщение",
     "Sandbox_TICS_Languages"                     : "Включить ролевые языки",
     "Sandbox_TICS_BubblePortrait"                : "Отображать портрет игрока слева от «пузырька»\n(пользовательские аватары помещаются в: Zomboid/Lua/avatars/username.png на сервере)",
+    "Sandbox_TICS_CharacterSheetEnabled"         : "Включить анкеты персонажей (титул, предыстория, OOC-заметки)",
     "Sandbox_TICS_BubblePortrait_help"           : "Отображать портрет игрока слева от «пузырька».\nПользовательские аватары должны находиться в: Zomboid/Lua/avatars/username.png на сервере.\nЕсли для имени пользователя не найдено изображение, будет использован стандартный портрет.\n1 = Нет\n2 = Стандартный\n3 = Аватар Steam\n4 = Пользовательский",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Нет",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Стандартный и пользовательский",
