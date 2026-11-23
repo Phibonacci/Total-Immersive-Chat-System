@@ -386,11 +386,7 @@ function ChatUI:render()
     if self.isCollapsed then
         height = th
     end
-    if not self.isCollapsed and self.resizable and self.drawFrame and self.resizeWidget:getIsVisible() then
-        local rh = self:resizeWidgetHeight()
-        local icon = ChatTheme.iconIdle
-        self:drawTexture(self.resizeimage, self:getWidth() - 9, height - rh, alpha * 0.6, icon.r, icon.g, icon.b)
-    end
+    -- no resize grip is drawn: the bottom right corner still resizes the window
 
     if self.clearStentil then
         self:clearStencilRect()
