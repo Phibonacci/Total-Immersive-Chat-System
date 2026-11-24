@@ -6,6 +6,8 @@ local ChatPopup              = require('tics/client/ui/ChatPopup')
 local ChatSettingsPanel      = require('tics/client/ui/ChatSettingsPanel')
 local ChatHelpPanel          = require('tics/client/ui/ChatHelpPanel')
 local RpLog                  = require('tics/client/RpLog')
+local Journal                = require('tics/client/journal/Journal')
+local JournalWindow          = require('tics/client/ui/JournalWindow')
 local File                   = require('tics/shared/utils/File')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
 local CharacterSheetWindow   = require('tics/client/ui/CharacterSheetWindow')
@@ -1203,8 +1205,24 @@ local function GetStreamFromType(type)
     return nil
 end
 
-local function AddMessageToTab(tabID, language, time, formattedMessage, line, channel)
-    RpLog.addChatLine(channel, language, formattedMessage)
+-- in-character lines go to the RP log and to the journal (scenes of the people around)
+local function RecordInCharacterLine(channel, language, formattedMessage, author, characterName, isRadio)
+    local text = RpLog.inCharacterText(channel, language, formattedMessage)
+    if text == nil then
+        return
+    end
+    local ok, err = pcall(RpLog.write, text)
+    if not ok then
+        print('TICS error: RpLog: ' .. tostring(err))
+    end
+    ok, err = pcall(Journal.addLine, text, author, characterName, isRadio)
+    if not ok then
+        print('TICS error: Journal: ' .. tostring(err))
+    end
+end
+
+local function AddMessageToTab(tabID, language, time, formattedMessage, line, channel, author, characterName, isRadio)
+    RecordInCharacterLine(channel, language, formattedMessage, author, characterName, isRadio)
     if not ISChat.instance.chatText then
         ISChat.instance.chatText = ISChat.instance.defaultTab
         ISChat.instance:onActivateView()
@@ -1310,7 +1328,7 @@ function ISChat.onDiceResult(author, characterName, diceCount, diceType, addCoun
         message = message .. '+' .. addCount
     end
     message = message .. ' = ' .. finalResult
-    RpLog.addRoll(message)
+    RecordInCharacterLine('roll', nil, message, author, characterName)
     ISChat.sendInfoToCurrentTab(message)
 end
 
@@ -1362,7 +1380,7 @@ function ISChat.onMessagePacket(type, author, characterName, message, language, 
         return
     end
     if not hideInChat then
-        AddMessageToTab(stream['tabID'], language, time, formattedMessage, line, stream['name'])
+        AddMessageToTab(stream['tabID'], language, time, formattedMessage, line, stream['name'], author, characterName)
     end
 end
 
@@ -1525,7 +1543,7 @@ function ISChat.onRadioEmittingPacket(type, author, characterName, message, lang
     local showLanguage = TicsServerSettings and TicsServerSettings['options']['languages']
     local line = BuildChatMessage(ISChat.instance.chatFont, ISChat.instance.showTimestamp, ISChat.instance.showTitle,
         showLanguage, language, formattedMessage, time, type)
-    AddMessageToTab(stream['tabID'], language, time, formattedMessage, line, stream['name'])
+    AddMessageToTab(stream['tabID'], language, time, formattedMessage, line, stream['name'], author, characterName, true)
 end
 
 function ISChat.onRadioPacket(type, author, characterName, message, language, color, radiosInfo, voicePitch, disableVerb)
@@ -1566,7 +1584,8 @@ function ISChat.onRadioPacket(type, author, characterName, message, language, co
         -- useful in case the listening range and emitting range of the radio differs
         -- this is to avoid any confusion from players thinking the radios mights not work
         if author ~= playerName then
-            AddMessageToTab(stream['tabID'], language, time, formattedMessage, line, stream['name'])
+            AddMessageToTab(stream['tabID'], language, time, formattedMessage, line, stream['name'], author,
+                characterName, true)
         end
     end
 end
@@ -2406,6 +2425,15 @@ function ISChat:createChildren()
     self.radioButton:setUIName(ISChat.radioButtonName)
     self:addChild(self.radioButton)
     self.radioButton:setVisible(true)
+
+    --journal button
+    self.journalButton = ISButton:new(0, 1, th, th, "", self, function() JournalWindow.toggle() end)
+    self.journalButton.anchorRight = true
+    self.journalButton.anchorLeft = false
+    self.journalButton:initialise()
+    self.journalButton:setImage(getTexture(ChatTheme.icons.book))
+    self.journalButton:setUIName('chat journal button')
+    self:addChild(self.journalButton)
 
     --avatar validation window button
     self:createValidationWindowButton()

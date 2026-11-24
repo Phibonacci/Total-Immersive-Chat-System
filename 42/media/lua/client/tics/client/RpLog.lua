@@ -80,27 +80,30 @@ local function Append(path, text)
     File.writeStringWithNewLine(text, path)
 end
 
--- Called for every line added to the chat. `channel` is the stream name ('say', 'me'...)
--- or nil for the TICS info and error lines.
-function RpLog.addChatLine(channel, language, formattedMessage)
-    if channel == nil or not IN_CHARACTER[channel] or not IsEnabled() then
-        return
+-- Plain text of a line added to the chat when it is in character, nil otherwise.
+-- `channel` is the stream name ('say', 'me'...), 'roll' for dice rolls, nil for the TICS
+-- info and error lines. A language other than the default one is prefixed with its code.
+function RpLog.inCharacterText(channel, language, formattedMessage)
+    if channel == nil or not IN_CHARACTER[channel] then
+        return nil
     end
     local text = PlainText(formattedMessage)
     if text == '' then
-        return
+        return nil
     end
     local code = language and language ~= LanguageManager.DefaultLanguage
         and LanguageManager.GetCodeFromLanguage(language)
     if code then
         text = '[' .. code:upper() .. '] ' .. text
     end
-    Append(GetPath(), '[' .. FormatRealTime('HH:mm') .. '] ' .. text)
+    return text
 end
 
--- Dice rolls are shown as info lines in the chat, they are logged from here.
-function RpLog.addRoll(message)
-    RpLog.addChatLine('roll', nil, message)
+-- Appends an in-character line (from RpLog.inCharacterText) when the log is enabled.
+function RpLog.write(text)
+    if IsEnabled() then
+        Append(GetPath(), '[' .. FormatRealTime('HH:mm') .. '] ' .. text)
+    end
 end
 
 return RpLog

@@ -3,6 +3,7 @@ local LanguageManager = require('tics/client/languages/LanguageManager')
 local AvatarManager = require('tics/client/AvatarManager')
 local ChatPopup = require('tics/client/ui/ChatPopup')
 local ChatDropdown = require('tics/client/ui/ChatDropdown')
+local JournalWindow = require('tics/client/ui/JournalWindow')
 
 local ChatUI = {}
 ChatUI.tabPanel = {}
@@ -60,6 +61,9 @@ end
 -- Buttons of the title bar, from right to left.
 local function GetTitleButtons(self)
     local buttons = { self.lockButton, false, self.gearButton, self.infoButton, self.rangeButton, self.radioButton }
+    if self.journalButton then
+        table.insert(buttons, self.journalButton)
+    end
     if self.characterSheetButton then
         table.insert(buttons, self.characterSheetButton)
     end
@@ -83,6 +87,8 @@ local function IsButtonActive(self, button)
         return self.settingsPanel ~= nil and self.settingsPanel:isOpen() -- settings panel open
     elseif button == self.infoButton then
         return self.helpPanel ~= nil and self.helpPanel:isOpen() -- help open
+    elseif button == self.journalButton then
+        return JournalWindow.isOpen()
     elseif button == self.avatarValidationWindowButton then
         return AvatarManager:getPendingCount() > 0 -- avatars waiting for approval
     end

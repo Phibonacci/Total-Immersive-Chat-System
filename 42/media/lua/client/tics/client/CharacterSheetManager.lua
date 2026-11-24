@@ -13,6 +13,12 @@ CharacterSheetManager.MaxLengths = {
 }
 
 local sheets = {}
+local listeners = {}
+
+-- function(sheet) called for every sheet received (the journal saves them)
+function CharacterSheetManager.addListener(listener)
+    table.insert(listeners, listener)
+end
 
 -- received from the server: { username, firstName, lastName, title, background, ooc }
 function CharacterSheetManager.setSheet(sheet)
@@ -24,6 +30,9 @@ function CharacterSheetManager.setSheet(sheet)
     sheet.ooc = sheet.ooc or ''
     sheet.receivedAt = getTimestampMs()
     sheets[sheet.username:lower()] = sheet
+    for _, listener in ipairs(listeners) do
+        listener(sheet)
+    end
 end
 
 function CharacterSheetManager.getSheet(username)
