@@ -1190,9 +1190,9 @@ function ISChat.onTypingPacket(author, type)
         return
     end
     if ISChat.instance.typingDots[author] then
-        ISChat.instance.typingDots[author]:refresh()
+        ISChat.instance.typingDots[author]:refresh(type)
     else
-        ISChat.instance.typingDots[author] = TypingDots:new(authorObj, 1)
+        ISChat.instance.typingDots[author] = TypingDots:new(authorObj, 1, type)
     end
 end
 
