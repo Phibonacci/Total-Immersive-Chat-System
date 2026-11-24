@@ -71,6 +71,11 @@ local SWITCHES = {
             return options ~= nil and options['portrait'] ~= 1
         end,
     },
+    rpLog = {
+        text = 'UI_TICS_Settings_rp_log',
+        get = function(chat) return chat.isRpLogEnabled end,
+        toggle = function() ISChat.onToggleRpLog() end,
+    },
 }
 
 -- settings with a few values, shown as a row of buttons under their label
@@ -128,6 +133,7 @@ local COLUMNS = {
         { switch = 'voices' },
         { switch = 'radioIcon' },
         { switch = 'portrait' },
+        { switch = 'rpLog' },
     },
     {
         { section = 'UI_TICS_Settings_transparency' },

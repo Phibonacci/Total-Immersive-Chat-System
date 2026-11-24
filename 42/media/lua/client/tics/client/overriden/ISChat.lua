@@ -5,6 +5,8 @@ local ChatTheme              = require('tics/client/ui/ChatTheme')
 local ChatPopup              = require('tics/client/ui/ChatPopup')
 local ChatSettingsPanel      = require('tics/client/ui/ChatSettingsPanel')
 local ChatHelpPanel          = require('tics/client/ui/ChatHelpPanel')
+local RpLog                  = require('tics/client/RpLog')
+local File                   = require('tics/shared/utils/File')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
 local CharacterSheetWindow   = require('tics/client/ui/CharacterSheetWindow')
 local TicsColorPicker        = require('tics/client/ui/TicsColorPicker')
@@ -459,6 +461,8 @@ local function InitGlobalModData()
     elseif ticsModData['isPortraitEnabled'] ~= nil then
         ISChat.instance.isPortraitEnabled = ticsModData['isPortraitEnabled']
     end
+    -- personal RP log: enabled by default
+    ISChat.instance.isRpLogEnabled = ticsModData['isRpLogEnabled'] ~= false
     -- timestamp and tags: enabled by default (the vanilla game options default to disabled),
     -- the player's choice is saved with the other TICS settings
     if ticsModData['showTimestamp'] == nil then
@@ -1200,6 +1204,7 @@ local function GetStreamFromType(type)
 end
 
 local function AddMessageToTab(tabID, language, time, formattedMessage, line, channel)
+    RpLog.addChatLine(channel, language, formattedMessage)
     if not ISChat.instance.chatText then
         ISChat.instance.chatText = ISChat.instance.defaultTab
         ISChat.instance:onActivateView()
@@ -1305,6 +1310,7 @@ function ISChat.onDiceResult(author, characterName, diceCount, diceType, addCoun
         message = message .. '+' .. addCount
     end
     message = message .. ' = ' .. finalResult
+    RpLog.addRoll(message)
     ISChat.sendInfoToCurrentTab(message)
 end
 
@@ -2635,6 +2641,17 @@ function ISChat.onTogglePortrait()
     ISChat.instance.isPortraitEnabled = not ISChat.instance.isPortraitEnabled
     ISChat.instance.ticsModData['isPortraitEnabled'] = ISChat.instance.isPortraitEnabled
     SaveTicsModData()
+end
+
+function ISChat.onToggleRpLog()
+    ISChat.instance.isRpLogEnabled = not ISChat.instance.isRpLogEnabled
+    ISChat.instance.ticsModData['isRpLogEnabled'] = ISChat.instance.isRpLogEnabled
+    SaveTicsModData()
+    if ISChat.instance.isRpLogEnabled then
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Messages_rp_log_enabled', File.getAbsolutePath(RpLog.getDirectory())))
+    else
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Messages_rp_log_disabled'))
+    end
 end
 
 Events.OnChatWindowInit.Add(ISChat.initChat)

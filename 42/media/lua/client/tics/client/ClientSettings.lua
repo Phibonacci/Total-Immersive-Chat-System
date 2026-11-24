@@ -11,14 +11,18 @@ local ClientSettings = {}
 
 local SETTINGS_DIRECTORY = 'TICS/settings/'
 
-local function GetSettingsPath()
+-- name of the current save ('<ip>_<port>_<hashed username>' in multiplayer), usable in a path
+function ClientSettings.getSaveName()
     local world = getWorld()
     local saveName = world and world:getWorld() or nil
     if saveName == nil or saveName == '' then
         saveName = 'default'
     end
-    saveName = saveName:gsub('[^%w%-_%.]', '_')
-    return SETTINGS_DIRECTORY .. saveName .. '.txt'
+    return (saveName:gsub('[^%w%-_%.]', '_'))
+end
+
+local function GetSettingsPath()
+    return SETTINGS_DIRECTORY .. ClientSettings.getSaveName() .. '.txt'
 end
 
 local function SerializeValue(value)
