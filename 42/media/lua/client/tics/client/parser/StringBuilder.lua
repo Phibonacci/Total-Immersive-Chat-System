@@ -11,21 +11,27 @@ function StringBuilder.BuildBracketColorString(color)
         .. string.format('%.3f', color[3] / 255) .. '>'
 end
 
+-- milliseconds to add to a timestamp (UTC) to get the player's local time, daylight saving included
+local function LocalOffsetMs()
+    local calendar = Calendar.getInstance()
+    return calendar:get(Calendar.ZONE_OFFSET) + calendar:get(Calendar.DST_OFFSET)
+end
+
+-- local hours, minutes and seconds of a timestamp in milliseconds
+local function LocalTime(time)
+    local seconds = math.floor((time + LocalOffsetMs()) / 1000)
+    return math.floor(seconds / 3600) % 24, math.floor(seconds / 60) % 60, seconds % 60
+end
+
 function StringBuilder.GetCurrentFormatedTime(time)
-    local ms = time
-    local s = ms / 1000
-    local m = s / 60
-    local h = m / 60
-    return string.format('%02d', h % 24) .. ':' .. string.format('%02d', m % 60) .. ':' .. string.format('%02d', s % 60)
+    local h, m, s = LocalTime(time)
+    return string.format('%02d:%02d:%02d', h, m, s)
 end
 
 -- chat line prefix: hours and minutes in a dark grey, the message stays the focus
 function StringBuilder.BuildTimePrefixString(time)
-    local ms = time
-    local m = ms / 1000 / 60
-    local h = m / 60
-    local formatedTime = string.format('%02d', h % 24) .. ':' .. string.format('%02d', m % 60)
-    return StringBuilder.BuildBracketColorString({ 100, 100, 100 }) .. formatedTime .. ' '
+    local h, m = LocalTime(time)
+    return StringBuilder.BuildBracketColorString({ 100, 100, 100 }) .. string.format('%02d:%02d', h, m) .. ' '
 end
 
 function StringBuilder.BuildFontSizeString(size)
