@@ -16,14 +16,21 @@ local SpeechEffects = {}
 
 local SPEECH = { whisper = true, low = true, say = true, yell = true }
 
+-- The effects must stay fun to read: players who struggle to understand each other end up
+-- asking their admin to disable them. Changes that keep the word readable (slur, stutter, half
+-- muffled word) can be more frequent than lost words.
+
 -- chance for each word to be changed, by moodle level (1 to 4)
-local DRUNK_CHANCE = { 0.12, 0.25, 0.45, 0.65 }
-local PANIC_CHANCE = { 0.08, 0.16, 0.3, 0.45 }
+local DRUNK_CHANCE = { 0.08, 0.15, 0.25, 0.35 }
+local DRUNK_HICCUP_CHANCE = 0.35 -- per line, from level 3
+local PANIC_CHANCE = { 0.05, 0.1, 0.18, 0.25 }
 local MASK_CHANCE = 0.1 -- about 1 word in 10
+-- drunk, panic and mask together never change more than this share of the words of a line
+local MAX_CHANGED_SHARE = 1 / 3
 -- Hard of Hearing: chance for each word to be lost, by volume, plus up to DISTANCE_LOSS at the
 -- edge of the range of the channel
-local HEARING_LOSS = { whisper = 0.55, low = 0.4, say = 0.22, yell = 0.08 }
-local DISTANCE_LOSS = 0.2
+local HEARING_LOSS = { whisper = 0.35, low = 0.2, say = 0.1, yell = 0.03 }
+local DISTANCE_LOSS = 0.1
 -- walls: chance for each word to be lost, by number of barriers (wall, closed door or window,
 -- floor) from 1. Past the end of a list nothing is understood ("(muffled voices)").
 local WALL_LOSS = {
@@ -56,13 +63,20 @@ end
 
 -- Calls change(core) for the words of the text and puts back what it returns, the
 -- punctuation and markdown asterisks around the words are kept as they are.
+-- words the speaker effects may still change in the line being said (nil: no limit)
+local changesLeft = nil
+
 local function MapWords(text, change)
     return (text:gsub('%S+', function(word)
         local before, core, after = word:match('^(%p*)(.-)(%p*)$')
-        if core == nil or core == '' then
+        if core == nil or core == '' or (changesLeft and changesLeft <= 0) then
             return word
         end
-        return before .. change(core) .. after
+        local changed = change(core)
+        if changed ~= core and changesLeft then
+            changesLeft = changesLeft - 1
+        end
+        return before .. changed .. after
     end))
 end
 
@@ -70,14 +84,14 @@ end
 
 local function Slur(text, level)
     local chance = DRUNK_CHANCE[level]
-    local hiccups = level >= 3 and not text:find('*', 1, true)
-    local result = MapWords(text, function(word)
+    return MapWords(text, function(word)
         if not Chance(chance) then
             return word
         end
         if word:find('[sS]') and Chance(0.6) then
-            -- "so" -> "sho", "SO" -> "SHO"
-            return (word:gsub('([sS])', function(s) return s == 's' and 'sh' or 'SH' end, 1))
+            -- "so" -> "sho", "So" -> "Sho", "SO" -> "SHO"
+            local h = word == word:upper() and 'H' or 'h'
+            return (word:gsub('([sS])', '%1' .. h, 1))
         end
         -- stretch the first vowel: "yeah" -> "yeaah"
         local index = word:find('[' .. VOWELS .. ']')
@@ -87,19 +101,24 @@ local function Slur(text, level)
         end
         return word
     end)
-    if hiccups and Chance(0.5) then
-        -- after a random word, as an emphasized aside (markdown)
-        local words = {}
-        for word in result:gmatch('%S+') do
-            table.insert(words, word)
-        end
-        if #words > 1 then
-            local index = ZombRand(#words - 1) + 1
-            words[index] = words[index] .. ' *hic*'
-            result = table.concat(words, ' ')
-        end
+end
+
+-- very drunk: sometimes a hiccup after a random word, as an emphasized aside (markdown), added
+-- after the other effects so it is not stuttered or muffled
+local function Hiccup(text)
+    if text:find('*', 1, true) or not Chance(DRUNK_HICCUP_CHANCE) then
+        return text
     end
-    return result
+    local words = {}
+    for word in text:gmatch('%S+') do
+        table.insert(words, word)
+    end
+    if #words < 2 then
+        return text
+    end
+    local index = ZombRand(#words - 1) + 1
+    words[index] = words[index] .. ' *hic*'
+    return table.concat(words, ' ')
 end
 
 local function Stutter(text, level)
@@ -114,10 +133,15 @@ local function Stutter(text, level)
     end)
 end
 
+-- the start of the word stays, the end is lost in the mask: "station" -> "stamph"
 local function Muffle(text)
     return MapWords(text, function(word)
         if #word > 2 and Chance(MASK_CHANCE) then
-            return Pick(MUFFLED)
+            local sound = Pick(MUFFLED)
+            if word == word:upper() then
+                sound = sound:upper()
+            end
+            return word:sub(1, math.floor(#word / 2)) .. sound
         end
         return word
     end)
@@ -146,11 +170,17 @@ function SpeechEffects.speak(player, text, channel)
     if not SpeechEffects.isSpeech(channel) or player == nil then
         return text
     end
+    local words = 0
+    for _ in text:gmatch('%S+') do
+        words = words + 1
+    end
+    changesLeft = math.max(1, math.floor(words * MAX_CHANGED_SHARE))
     local moodles = player:getMoodles()
+    local drunkLevel = 0
     if IsEnabled('drunk') then
-        local level = moodles:getMoodleLevel(MoodleType.DRUNK)
-        if level > 0 then
-            text = Slur(text, math.min(level, 4))
+        drunkLevel = math.min(moodles:getMoodleLevel(MoodleType.DRUNK), 4)
+        if drunkLevel > 0 then
+            text = Slur(text, drunkLevel)
         end
     end
     if IsEnabled('panic') then
@@ -161,6 +191,10 @@ function SpeechEffects.speak(player, text, channel)
     end
     if IsEnabled('mask') and WearsMask(player) then
         text = Muffle(text)
+    end
+    changesLeft = nil
+    if drunkLevel >= 3 then
+        text = Hiccup(text)
     end
     return text
 end
