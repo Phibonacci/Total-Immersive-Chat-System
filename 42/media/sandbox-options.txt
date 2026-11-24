@@ -55,6 +55,38 @@ option TICS.JournalEnabled
 	page = TICS,
 	translation = TICS_JournalEnabled,
 }
+option TICS.SpeechDrunkEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_SpeechDrunkEnabled,
+}
+option TICS.SpeechPanicEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_SpeechPanicEnabled,
+}
+option TICS.SpeechMaskEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_SpeechMaskEnabled,
+}
+option TICS.HearingTraitsEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_HearingTraitsEnabled,
+}
 option TICS.BubbleTimerInSeconds
 {
 	type = integer,

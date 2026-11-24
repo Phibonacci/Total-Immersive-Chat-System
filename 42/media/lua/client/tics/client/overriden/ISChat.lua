@@ -7,6 +7,7 @@ local ChatSettingsPanel      = require('tics/client/ui/ChatSettingsPanel')
 local ChatHelpPanel          = require('tics/client/ui/ChatHelpPanel')
 local RpLog                  = require('tics/client/RpLog')
 local Journal                = require('tics/client/journal/Journal')
+local SpeechEffects          = require('tics/client/speech/SpeechEffects')
 local JournalWindow          = require('tics/client/ui/JournalWindow')
 local File                   = require('tics/shared/utils/File')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
@@ -564,6 +565,8 @@ local function ProcessChatCommand(stream, command)
         return false
     end
     local language = LanguageManager:getCurrentLanguage()
+    -- drunk, panicking or masked: the words come out changed, for everyone
+    command = SpeechEffects.speak(getPlayer(), command, stream.name)
     if stream.name == 'yell' then
         ClientSend.sendChatMessage(command, language, playerColor, 'yell', pitch, false)
     elseif stream.name == 'say' then
@@ -1361,15 +1364,35 @@ function ISChat.onMessagePacket(type, author, characterName, message, language, 
     ISChat.instance.chatFont = ISChat.instance.chatFont or 'medium'
     local showLanguage = TicsServerSettings and TicsServerSettings['options']['languages']
     local showBubble = TicsServerSettings and TicsServerSettings[type] and TicsServerSettings[type]['bubble']
+    -- Hard of Hearing / Deaf: what the player hears of someone else's speech (after the
+    -- language, so "(inaudible)" is not scrambled)
+    local heard = false
+    local canHearVoice = true
+    local function Hear()
+        if heard or isFromDiscord or author == getPlayer():getUsername() then
+            return
+        end
+        heard = true
+        local me = getPlayer()
+        local speaker = World.getPlayerByUsername(author)
+        local distance = nil
+        if speaker then
+            local dx, dy = speaker:getX() - me:getX(), speaker:getY() - me:getY()
+            distance = math.sqrt(dx * dx + dy * dy)
+        end
+        updatedMessage, canHearVoice = SpeechEffects.hear(me, updatedMessage, type, distance)
+    end
     if not isFromDiscord and voicePitch ~= nil and showBubble then
         if showLanguage and not LanguageManager:isKnown(language) and type ~= 'me' and type ~= 'do' then
             updatedMessage = LanguageManager:getRandomMessage(updatedMessage)
         end
+        Hear()
         -- ooc should not distract the RP with voices
-        local voiceEnabled = ISChat.instance.isVoiceEnabled and type ~= 'ooc'
+        local voiceEnabled = ISChat.instance.isVoiceEnabled and type ~= 'ooc' and canHearVoice
         CreatePlayerBubble(author, type, updatedMessage, BuildColorFromMessageType(type), voiceEnabled, voicePitch,
             type == 'me', name, color, title)
     end
+    Hear()
     local formattedMessage, parsedMessage = BuildMessageFromPacket(type, updatedMessage, name, color, nil, disableVerb)
     local time = Calendar.getInstance():getTimeInMillis()
     local line = BuildChatMessage(ISChat.instance.chatFont, ISChat.instance.showTimestamp, ISChat.instance.showTitle,
@@ -1571,12 +1594,25 @@ function ISChat.onRadioPacket(type, author, characterName, message, language, co
         if showLanguage and not LanguageManager:isKnown(language) then
             updatedMessage = LanguageManager:getRandomMessage(updatedMessage)
         end
+        -- Hard of Hearing / Deaf listener (not for the radio feedback of one's own message)
+        local heardMessage, canHearVoice = updatedMessage, true
+        if author ~= playerName then
+            heardMessage, canHearVoice = SpeechEffects.hear(getPlayer(), updatedMessage, type, nil)
+        end
         local messageColor = BuildColorFromMessageType(type)
-        CreateSquaresRadiosBubbles(updatedMessage, messageColor, radios['squares'], voicePitch)
-        CreatePlayersRadiosBubbles(updatedMessage, messageColor, radios['players'], voicePitch)
-        CreateVehiclesRadiosBubbles(updatedMessage, messageColor, radios['vehicles'], voicePitch)
+        local voiceSetting = ISChat.instance.isVoiceEnabled
+        ISChat.instance.isVoiceEnabled = voiceSetting and canHearVoice -- radio bubbles read it
+        local ok, err = pcall(function()
+            CreateSquaresRadiosBubbles(heardMessage, messageColor, radios['squares'], voicePitch)
+            CreatePlayersRadiosBubbles(heardMessage, messageColor, radios['players'], voicePitch)
+            CreateVehiclesRadiosBubbles(heardMessage, messageColor, radios['vehicles'], voicePitch)
+        end)
+        ISChat.instance.isVoiceEnabled = voiceSetting
+        if not ok then
+            print('TICS error: onRadioPacket: ' .. tostring(err))
+        end
 
-        local formattedMessage, parsedMessages = BuildMessageFromPacket(type, updatedMessage, name, color, frequency,
+        local formattedMessage, parsedMessages = BuildMessageFromPacket(type, heardMessage, name, color, frequency,
             disableVerb)
         local line = BuildChatMessage(ISChat.instance.chatFont, ISChat.instance.showTimestamp, ISChat.instance.showTitle,
             showLanguage, language, formattedMessage, time, type)

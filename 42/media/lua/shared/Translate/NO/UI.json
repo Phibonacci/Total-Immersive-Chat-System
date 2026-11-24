@@ -82,6 +82,7 @@
     "UI_TICS_Avatar_empty"                     : "Fant ingen bilder. Legg PNG- eller JPG-bilder på %1x%2 piksler i avatarmappen din (Åpne mappe), og klikk deretter på Oppdater.",
     "UI_TICS_Avatar_wrong_size"                : "Bildet må være %1x%2 piksler",
     "UI_TICS_Avatar_format"                    : "PNG eller JPG, %1x%2 piksler",
+    "UI_TICS_Speech_inaudible"                 : "(uhørbart)",
     "UI_TICS_Avatar_send"                      : "Send til godkjenning",
     "UI_TICS_Avatar_sent"                      : "Sendt til godkjenning: %1",
     "UI_TICS_Avatar_already_sent"              : "Dette bildet er allerede sendt",

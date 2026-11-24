@@ -82,6 +82,7 @@
     "UI_TICS_Avatar_empty"                     : "未找到图片. 请将 %1x%2 像素的 PNG 或 JPG 图片放入你的头像文件夹 (打开文件夹), 然后点击刷新.",
     "UI_TICS_Avatar_wrong_size"                : "图片必须为 %1x%2 像素",
     "UI_TICS_Avatar_format"                    : "PNG 或 JPG, %1x%2 像素",
+    "UI_TICS_Speech_inaudible"                 : "(听不清)",
     "UI_TICS_Avatar_send"                      : "提交审核",
     "UI_TICS_Avatar_sent"                      : "已提交审核: %1",
     "UI_TICS_Avatar_already_sent"              : "此图片已经提交过",

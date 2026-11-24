@@ -82,6 +82,7 @@
     "UI_TICS_Avatar_empty"                     : "No se encontró ninguna imagen. Poné imágenes PNG o JPG de %1x%2 píxeles en tu carpeta de avatar (Abrir carpeta) y después hacé clic en Actualizar.",
     "UI_TICS_Avatar_wrong_size"                : "La imagen debe medir %1x%2 píxeles",
     "UI_TICS_Avatar_format"                    : "PNG o JPG, %1x%2 píxeles",
+    "UI_TICS_Speech_inaudible"                 : "(inaudible)",
     "UI_TICS_Avatar_send"                      : "Enviar a aprobación",
     "UI_TICS_Avatar_sent"                      : "Enviado a aprobación: %1",
     "UI_TICS_Avatar_already_sent"              : "Esta imagen ya se envió",

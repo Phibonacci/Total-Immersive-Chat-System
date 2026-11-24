@@ -82,6 +82,7 @@
     "UI_TICS_Avatar_empty"                     : "Geen afbeelding gevonden. Plaats PNG- of JPG-afbeeldingen van %1x%2 pixels in je avatarmap (Map openen) en klik daarna op Vernieuwen.",
     "UI_TICS_Avatar_wrong_size"                : "De afbeelding moet %1x%2 pixels zijn",
     "UI_TICS_Avatar_format"                    : "PNG of JPG, %1x%2 pixels",
+    "UI_TICS_Speech_inaudible"                 : "(onverstaanbaar)",
     "UI_TICS_Avatar_send"                      : "Ter goedkeuring sturen",
     "UI_TICS_Avatar_sent"                      : "Ter goedkeuring verstuurd: %1",
     "UI_TICS_Avatar_already_sent"              : "Deze afbeelding is al verstuurd",

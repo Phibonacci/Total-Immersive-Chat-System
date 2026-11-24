@@ -82,6 +82,7 @@
     "UI_TICS_Avatar_empty"                     : "Nem található kép. Tegyél %1x%2 pixeles PNG vagy JPG képeket az avatarmappádba (Mappa megnyitása), majd kattints a Frissítés gombra.",
     "UI_TICS_Avatar_wrong_size"                : "A kép méretének %1x%2 pixelnek kell lennie",
     "UI_TICS_Avatar_format"                    : "PNG vagy JPG, %1x%2 képpont",
+    "UI_TICS_Speech_inaudible"                 : "(nem hallható)",
     "UI_TICS_Avatar_send"                      : "Küldés jóváhagyásra",
     "UI_TICS_Avatar_sent"                      : "Jóváhagyásra elküldve: %1",
     "UI_TICS_Avatar_already_sent"              : "Ezt a képet már elküldted",

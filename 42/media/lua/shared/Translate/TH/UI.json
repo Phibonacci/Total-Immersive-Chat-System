@@ -82,6 +82,7 @@
     "UI_TICS_Avatar_empty"                     : "ไม่พบรูปภาพ ใส่รูป PNG หรือ JPG ขนาด %1x%2 พิกเซล ลงในโฟลเดอร์อวาตาร์ (เปิดโฟลเดอร์) แล้วคลิก รีเฟรช",
     "UI_TICS_Avatar_wrong_size"                : "รูปภาพต้องมีขนาด %1x%2 พิกเซล",
     "UI_TICS_Avatar_format"                    : "PNG หรือ JPG ขนาด %1x%2 พิกเซล",
+    "UI_TICS_Speech_inaudible"                 : "(ไม่ได้ยิน)",
     "UI_TICS_Avatar_send"                      : "ส่งขออนุมัติ",
     "UI_TICS_Avatar_sent"                      : "ส่งขออนุมัติแล้ว: %1",
     "UI_TICS_Avatar_already_sent"              : "รูปภาพนี้ถูกส่งไปแล้ว",

@@ -82,6 +82,7 @@
     "UI_TICS_Avatar_empty"                     : "Kein Bild gefunden. Lege PNG- oder JPG-Bilder mit %1x%2 Pixeln in deinen Avatar-Ordner (Ordner öffnen) und klicke dann auf Aktualisieren.",
     "UI_TICS_Avatar_wrong_size"                : "Das Bild muss %1x%2 Pixel groß sein",
     "UI_TICS_Avatar_format"                    : "PNG oder JPG, %1x%2 Pixel",
+    "UI_TICS_Speech_inaudible"                 : "(unverständlich)",
     "UI_TICS_Avatar_send"                      : "Zur Freigabe senden",
     "UI_TICS_Avatar_sent"                      : "Zur Freigabe gesendet: %1",
     "UI_TICS_Avatar_already_sent"              : "Dieses Bild wurde bereits gesendet",
