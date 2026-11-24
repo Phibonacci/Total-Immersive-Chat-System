@@ -1,10 +1,10 @@
-local TICS_VERSION = require('tics/shared/Version')
 
 
 local ChatUI                 = require('tics/client/ui/ChatUI')
 local ChatTheme              = require('tics/client/ui/ChatTheme')
 local ChatPopup              = require('tics/client/ui/ChatPopup')
 local ChatSettingsPanel      = require('tics/client/ui/ChatSettingsPanel')
+local ChatHelpPanel          = require('tics/client/ui/ChatHelpPanel')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
 local CharacterSheetWindow   = require('tics/client/ui/CharacterSheetWindow')
 local TicsColorPicker        = require('tics/client/ui/TicsColorPicker')
@@ -52,7 +52,7 @@ ISChat.ticsCommand    = {}
 ISChat.ticsCommand[1] = { name = 'color', command = '/color', shortCommand = nil }
 ISChat.ticsCommand[2] = { name = 'pitch', command = '/pitch', shortCommand = nil }
 ISChat.ticsCommand[3] = { name = 'roll', command = '/roll', shortCommand = nil }
-ISChat.ticsCommand[3] = { name = 'language', command = '/language', shortCommand = '/la' }
+ISChat.ticsCommand[4] = { name = 'language', command = '/language', shortCommand = '/la' }
 
 
 ISChat.defaultTabStream    = {}
@@ -1964,54 +1964,6 @@ local function GetFirstTab()
     end
 end
 
-local function UpdateInfoWindow()
-    local info = getText('SurvivalGuide_TICS', TICS_VERSION)
-    info = info .. getText('SurvivalGuide_TICS_Markdown')
-    if TicsServerSettings['whisper']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Whisper')
-    end
-    if TicsServerSettings['low']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Low')
-    end
-    if TicsServerSettings['say']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Say')
-    end
-    if TicsServerSettings['yell']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Yell')
-    end
-    if TicsServerSettings['me']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Me')
-    end
-    if TicsServerSettings['do']['enabled'] and not TicsServerSettings['do']['adminOnly'] then
-        info = info .. getText('SurvivalGuide_TICS_Do')
-    end
-    if TicsServerSettings['pm']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Pm')
-    end
-    if TicsServerSettings['faction']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Faction')
-    end
-    if TicsServerSettings['safehouse']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_SafeHouse')
-    end
-    if TicsServerSettings['general']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_General')
-    end
-    if TicsServerSettings['admin']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Admin')
-    end
-    if TicsServerSettings['ooc']['enabled'] then
-        info = info .. getText('SurvivalGuide_TICS_Ooc')
-    end
-    info = info .. getText('SurvivalGuide_TICS_Color')
-    info = info .. getText('SurvivalGuide_TICS_Pitch')
-    info = info .. getText('SurvivalGuide_TICS_Roll')
-    if TicsServerSettings['options']['languages'] then
-        info = info .. getText('SurvivalGuide_TICS_Languages')
-    end
-    ISChat.instance:setInfo(info)
-end
-
 local function HasAtLeastOneChanelEnabled(tabId)
     if TicsServerSettings == nil then
         return false
@@ -2098,7 +2050,6 @@ ISChat.onRecvSandboxVars = function(messageTypeSettings)
     end
 
     UpdateRangeIndicator(ISChat.defaultTabStream[ISChat.instance.currentTabID])
-    UpdateInfoWindow()
     if ISChat.instance.ticsModData == nil or ISChat.instance.ticsModData['isVoiceEnabled'] == nil then
         ISChat.instance.isVoiceEnabled = messageTypeSettings['options']['isVoiceEnabled']
     end
@@ -2409,7 +2360,7 @@ function ISChat:createChildren()
 
     --info button
     ISChat.infoButtonName = "chat info button"
-    self.infoButton = ISButton:new(self.gearButton:getX() - th / 2 - th, 1, th, th, "", self, ISCollapsableWindow.onInfo)
+    self.infoButton = ISButton:new(self.gearButton:getX() - th / 2 - th, 1, th, th, "", self, ISChat.onInfoButtonClick)
     self.infoButton.anchorRight = true
     self.infoButton.anchorLeft = false
     self.infoButton:initialise()
@@ -2420,9 +2371,6 @@ function ISChat:createChildren()
     self.infoButton:setUIName(ISChat.infoButtonName)
     self:addChild(self.infoButton)
     self.infoButton:setVisible(true)
-    local info = getText('SurvivalGuide_TICS', TICS_VERSION)
-    info = info .. getText('SurvivalGuide_TICS_Color')
-    self:setInfo(info)
 
 
     --range button
@@ -2637,6 +2585,10 @@ end
 -- the gear button opens the chat settings panel (a second click closes it)
 function ISChat:onGearButtonClick()
     ChatSettingsPanel.toggle(self)
+end
+
+function ISChat:onInfoButtonClick()
+    ChatHelpPanel.toggle(self)
 end
 
 function ISChat.onToggleVoice()

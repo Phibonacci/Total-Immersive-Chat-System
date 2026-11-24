@@ -81,6 +81,8 @@ local function IsButtonActive(self, button)
         return self.locked == true
     elseif button == self.gearButton then
         return self.settingsPanel ~= nil and self.settingsPanel:isOpen() -- settings panel open
+    elseif button == self.infoButton then
+        return self.helpPanel ~= nil and self.helpPanel:isOpen() -- help open
     elseif button == self.avatarValidationWindowButton then
         return AvatarManager:getPendingCount() > 0 -- avatars waiting for approval
     end
