@@ -17,7 +17,7 @@ local SPEECH = { whisper = true, low = true, say = true, yell = true }
 -- chance for each word to be changed, by moodle level (1 to 4)
 local DRUNK_CHANCE = { 0.12, 0.25, 0.45, 0.65 }
 local PANIC_CHANCE = { 0.08, 0.16, 0.3, 0.45 }
-local MASK_CHANCE = 0.3
+local MASK_CHANCE = 0.1 -- about 1 word in 10
 -- Hard of Hearing: chance for each word to be lost, by volume, plus up to DISTANCE_LOSS at the
 -- edge of the range of the channel
 local HEARING_LOSS = { whisper = 0.55, low = 0.4, say = 0.22, yell = 0.08 }
