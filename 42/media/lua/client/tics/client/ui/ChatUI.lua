@@ -4,6 +4,7 @@ local AvatarManager = require('tics/client/AvatarManager')
 local ChatPopup = require('tics/client/ui/ChatPopup')
 local ChatDropdown = require('tics/client/ui/ChatDropdown')
 local JournalWindow = require('tics/client/ui/JournalWindow')
+local CharacterSheetWindow = require('tics/client/ui/CharacterSheetWindow')
 
 local ChatUI = {}
 ChatUI.tabPanel = {}
@@ -89,6 +90,10 @@ local function IsButtonActive(self, button)
         return self.helpPanel ~= nil and self.helpPanel:isOpen() -- help open
     elseif button == self.journalButton then
         return JournalWindow.isOpen()
+    elseif button == self.characterSheetButton then
+        return CharacterSheetWindow.isOpen(getPlayer():getUsername())
+    elseif button == self.avatarUploadButton then
+        return self.avatarUploadWindow ~= nil and self.avatarUploadWindow:getIsVisible()
     elseif button == self.avatarValidationWindowButton then
         return AvatarManager:getPendingCount() > 0 -- avatars waiting for approval
     end

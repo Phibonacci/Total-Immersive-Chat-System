@@ -2202,17 +2202,30 @@ local function OnRadioButtonClick()
     end
 end
 
+-- the title bar buttons opening a window close it when it is open
 local function OnAvatarUploadButtonClick()
-    if ISChat.instance.avatarUploadWindow then
-        ISChat.instance.avatarUploadWindow:unsubscribe()
+    local window = ISChat.instance.avatarUploadWindow
+    ISChat.instance.avatarUploadWindow = nil
+    if window then
+        local wasOpen = window:getIsVisible()
+        window:unsubscribe()
+        if wasOpen then
+            return
+        end
     end
     ISChat.instance.avatarUploadWindow = AvatarUploadWindow:new()
     ISChat.instance.avatarUploadWindow:subscribe()
 end
 
 local function OnAvatarValidationWindowButtonClick()
-    if ISChat.instance.avatarValidationWindow then
-        ISChat.instance.avatarValidationWindow:unsubscribe()
+    local window = ISChat.instance.avatarValidationWindow
+    ISChat.instance.avatarValidationWindow = nil
+    if window then
+        local wasOpen = window:getIsVisible()
+        window:unsubscribe()
+        if wasOpen then
+            return
+        end
     end
     ISChat.instance.avatarValidationWindow = AvatarValidationWindow:new()
     ISChat.instance.avatarValidationWindow:subscribe()
@@ -2251,7 +2264,7 @@ function ISChat:createCharacterSheetButton()
     if self.characterSheetButton == nil then
         local th = self:titleBarHeight()
         local button = ISButton:new(0, 0, th, th, '', self, function()
-            CharacterSheetWindow.open(getPlayer():getUsername())
+            CharacterSheetWindow.toggle(getPlayer():getUsername())
         end)
         button.anchorRight = true
         button.anchorLeft = false

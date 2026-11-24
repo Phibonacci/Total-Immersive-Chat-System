@@ -266,6 +266,20 @@ function CharacterSheetWindow:new(username, isOwn)
     return o
 end
 
+function CharacterSheetWindow.isOpen(username)
+    return openWindows[username:lower()] ~= nil
+end
+
+-- closes the sheet of a player when it is open, opens it otherwise (title bar button)
+function CharacterSheetWindow.toggle(username)
+    local existing = openWindows[username:lower()]
+    if existing then
+        existing:close()
+        return nil
+    end
+    return CharacterSheetWindow.open(username)
+end
+
 -- opens the sheet of a player (own one: editable), brings it to the front if already open
 function CharacterSheetWindow.open(username)
     local existing = openWindows[username:lower()]
