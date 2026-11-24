@@ -170,6 +170,13 @@ function Journal.save()
     lastSaveMs = getTimestampMs()
 end
 
+-- the journal is a sandbox option (enabled by default); nothing is recorded while disabled,
+-- what was recorded before stays on the player's disk
+function Journal.isEnabled()
+    return TicsServerSettings ~= nil and TicsServerSettings['options'] ~= nil
+        and TicsServerSettings['options']['journal'] == true
+end
+
 local function Notify()
     for _, listener in ipairs(listeners) do
         listener()
@@ -296,7 +303,7 @@ function Journal.loadAllSheets()
 end
 
 local function OnSheetReceived(sheet)
-    if not EnsureLoaded() then
+    if not Journal.isEnabled() or not EnsureLoaded() then
         return
     end
     local myUsername = MyCharacter()
@@ -476,7 +483,7 @@ end
 -- username / name: its author, nil for lines without one. A line heard on the radio goes to
 -- the scenes of its author and of the people around, but its author is not in the scene.
 function Journal.addLine(text, username, name, isRadio)
-    if not EnsureLoaded() then
+    if not Journal.isEnabled() or not EnsureLoaded() then
         return
     end
     local me = getPlayer()

@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Rollenspiel-Sprachen aktivieren",
     "Sandbox_TICS_BubblePortrait"                : "Spielerporträt links neben der Sprechblase anzeigen\n(eigene Bilder in: Zomboid/Lua/avatars/username.png auf dem Server)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Charakterbögen aktivieren (Titel, Hintergrund, OOC-Notizen)",
+    "Sandbox_TICS_JournalEnabled"                : "Tagebuch aktivieren (getroffene Personen, ihre Charakterbögen und gemeinsame Szenen, von jedem Spieler gespeichert)",
     "Sandbox_TICS_BubblePortrait_help"           : "Spielerporträt links neben der Sprechblase anzeigen.\nEigene Avatare gehören in: Zomboid/Lua/avatars/username.png auf dem Server.\nWird für den Benutzernamen kein Bild gefunden, wird das Vanilla-Porträt verwendet.\n1 = Keins\n2 = Vanilla\n 3 = Steam-Avatar\n4 = Eigenes",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Keins",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Eigenes und Vanilla",

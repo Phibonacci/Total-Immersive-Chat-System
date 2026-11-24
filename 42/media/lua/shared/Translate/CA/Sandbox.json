@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Activar els idiomes de rol",
     "Sandbox_TICS_BubblePortrait"                : "Mostrar el retrat del jugador a l'esquerra de la bombolla\n(els personalitzats van a: Zomboid/Lua/avatars/username.png al servidor)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Activar les fitxes de personatge (títol, rerefons, notes OOC)",
+    "Sandbox_TICS_JournalEnabled"                : "Activar el diari (persones conegudes, les seves fitxes i escenes compartides, desat per cada jugador)",
     "Sandbox_TICS_BubblePortrait_help"           : "Mostra el retrat del jugador a l'esquerra de la bombolla.\nEls avatars personalitzats van a: Zomboid/Lua/avatars/username.png al servidor.\nS'utilitzarà el retrat original del joc si no es troba cap imatge per al nom d'usuari.\n1 = Cap\n2 = Original\n 3 = Avatar de Steam\n4 = Personalitzat",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Cap",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalitzat i original",

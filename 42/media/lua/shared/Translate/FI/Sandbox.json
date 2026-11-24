@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Ota roolipelikielet käyttöön",
     "Sandbox_TICS_BubblePortrait"                : "Näytä pelaajan muotokuva puhekuplan vasemmalla puolella\n(omat kuvat: Zomboid/Lua/avatars/username.png palvelimella)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Ota käyttöön hahmolomakkeet (titteli, tausta, OOC-muistiinpanot)",
+    "Sandbox_TICS_JournalEnabled"                : "Ota käyttöön päiväkirja (tavatut hahmot, heidän hahmolomakkeensa ja yhteiset kohtaukset, jokainen pelaaja tallentaa omansa)",
     "Sandbox_TICS_BubblePortrait_help"           : "Näytä pelaajan muotokuva puhekuplan vasemmalla puolella.\nOmat avatarit sijoitetaan palvelimella kohteeseen: Zomboid/Lua/avatars/username.png.\nJos käyttäjänimelle ei löydy kuvaa, käytetään pelin omaa muotokuvaa.\n1 = Ei mitään\n2 = Pelin oma\n 3 = Steam-avatar\n4 = Oma",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ei mitään",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Oma ja pelin oma",

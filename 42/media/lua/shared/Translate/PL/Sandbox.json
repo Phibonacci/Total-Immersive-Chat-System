@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Włącz języki do odgrywania ról",
     "Sandbox_TICS_BubblePortrait"                : "Pokazuj portret gracza po lewej stronie dymku\n(własne obrazy: Zomboid/Lua/avatars/username.png na serwerze)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Włącz karty postaci (tytuł, historia, notatki OOC)",
+    "Sandbox_TICS_JournalEnabled"                : "Włącz dziennik (poznane osoby, ich karty postaci i wspólne sceny, zapisywany przez każdego gracza)",
     "Sandbox_TICS_BubblePortrait_help"           : "Pokazuje portret gracza po lewej stronie dymku.\nWłasne awatary umieść w: Zomboid/Lua/avatars/username.png na serwerze.\nJeśli nie ma obrazu dla danej nazwy użytkownika, zostanie użyty domyślny portret.\n1 = Brak\n2 = Domyślny\n 3 = Awatar Steam\n4 = Własny",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Brak",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Własny i domyślny",

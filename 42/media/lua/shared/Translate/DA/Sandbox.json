@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Aktivér rollespilssprog",
     "Sandbox_TICS_BubblePortrait"                : "Vis spillerportræt til venstre for taleboblen\n(egne billeder skal ligge i: Zomboid/Lua/avatars/username.png på serveren)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Aktivér karakterark (titel, baggrund, OOC-noter)",
+    "Sandbox_TICS_JournalEnabled"                : "Aktivér dagbogen (mødte personer, deres karakterark og fælles scener, gemt af hver spiller)",
     "Sandbox_TICS_BubblePortrait_help"           : "Vis spillerportræt til venstre for taleboblen.\nEgne avatarer skal ligge i: Zomboid/Lua/avatars/username.png på serveren.\nVanilla-portrættet bruges, hvis der ikke findes et billede til brugernavnet.\n1 = Ingen\n2 = Vanilla\n 3 = Steam-avatar\n4 = Eget",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ingen",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Eget og vanilla",

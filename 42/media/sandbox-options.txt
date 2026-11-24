@@ -47,6 +47,14 @@ option TICS.CharacterSheetEnabled
 	page = TICS,
 	translation = TICS_CharacterSheetEnabled,
 }
+option TICS.JournalEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_JournalEnabled,
+}
 option TICS.BubbleTimerInSeconds
 {
 	type = integer,

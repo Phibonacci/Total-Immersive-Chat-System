@@ -176,6 +176,7 @@ local function SetMessageTypeSettings()
             ['isVoiceEnabled'] = SandboxVars.TICS.VoiceEnabled,
             ['portrait'] = SandboxVars.TICS.BubblePortrait,
             ['characterSheet'] = SandboxVars.TICS.CharacterSheetEnabled,
+            ['journal'] = SandboxVars.TICS.JournalEnabled,
         },
     }
 end

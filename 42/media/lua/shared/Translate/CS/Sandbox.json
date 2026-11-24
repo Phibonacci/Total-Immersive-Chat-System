@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Povolit roleplay jazyky",
     "Sandbox_TICS_BubblePortrait"                : "Zobrazovat portrét hráče vlevo od bubliny\n(vlastní obrázky patří do: Zomboid/Lua/avatars/username.png na serveru)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Povolit karty postav (popisek, minulost, poznámky OOC)",
+    "Sandbox_TICS_JournalEnabled"                : "Povolit deník (potkané postavy, jejich karty a společné scény, ukládá si každý hráč)",
     "Sandbox_TICS_BubblePortrait_help"           : "Zobrazuje portrét hráče vlevo od bubliny.\nVlastní avatary patří do: Zomboid/Lua/avatars/username.png na serveru.\nPokud pro uživatelské jméno není nalezen žádný obrázek, použije se výchozí portrét.\n1 = Žádný\n2 = Výchozí\n 3 = Steam avatar\n4 = Vlastní",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Žádný",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Vlastní a výchozí",

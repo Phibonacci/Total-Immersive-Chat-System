@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "啟用角色扮演語言",
     "Sandbox_TICS_BubblePortrait"                : "在對話氣泡左側顯示玩家頭像\n(自訂頭像放在伺服器的: Zomboid/Lua/avatars/username.png)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "啟用角色卡 (稱號, 背景, OOC 備註)",
+    "Sandbox_TICS_JournalEnabled"                : "啟用日誌 (遇見的人、他們的角色卡與共同場景, 由每位玩家各自保存)",
     "Sandbox_TICS_BubblePortrait_help"           : "在對話氣泡左側顯示玩家頭像.\n自訂頭像放在伺服器的: Zomboid/Lua/avatars/username.png\n若找不到該使用者名稱對應的圖片, 將使用原版肖像.\n1 = 無\n2 = 原版\n 3 = Steam 頭像\n4 = 自訂",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "無",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "自訂和原版",

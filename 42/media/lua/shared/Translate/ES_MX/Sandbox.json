@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Activar los idiomas de rol",
     "Sandbox_TICS_BubblePortrait"                : "Mostrar el retrato del jugador a la izquierda de la burbuja\n(los personalizados van en: Zomboid/Lua/avatars/username.png en el servidor)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Activar las fichas de personaje (título, trasfondo, notas OOC)",
+    "Sandbox_TICS_JournalEnabled"                : "Activar el diario (personas conocidas, sus fichas y escenas compartidas, guardado por cada jugador)",
     "Sandbox_TICS_BubblePortrait_help"           : "Muestra el retrato del jugador a la izquierda de la burbuja.\nLos avatares personalizados van en: Zomboid/Lua/avatars/username.png en el servidor.\nSe usará el retrato original del juego si no se encuentra ninguna imagen para el nombre de usuario.\n1 = Ninguno\n2 = Original\n 3 = Avatar de Steam\n4 = Personalizado",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ninguno",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalizado y original",

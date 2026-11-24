@@ -1815,6 +1815,7 @@ function ISChat:prerender()
 
     instance:createValidationWindowButton()
     instance:createCharacterSheetButton()
+    instance:createJournalButton()
     instance:updateInputChipBackspace()
     instance:updateInputShortcuts()
 
@@ -2276,6 +2277,31 @@ function ISChat:createCharacterSheetButton()
     end
 end
 
+-- title bar button opening the journal, while the server enables it
+function ISChat:createJournalButton()
+    if not Journal.isEnabled() then
+        if self.journalButton then
+            self:removeChild(self.journalButton)
+            self.journalButton = nil
+        end
+        if JournalWindow.isOpen() then
+            JournalWindow.toggle()
+        end
+        return
+    end
+    if self.journalButton == nil then
+        local th = self:titleBarHeight()
+        local button = ISButton:new(0, 1, th, th, '', self, function() JournalWindow.toggle() end)
+        button.anchorRight = true
+        button.anchorLeft = false
+        button:initialise()
+        button:setImage(getTexture(ChatTheme.icons.book))
+        button:setUIName('chat journal button')
+        self:addChild(button)
+        self.journalButton = button
+    end
+end
+
 function ISChat:createValidationWindowButton()
     if TicsServerSettings == nil or TicsServerSettings['options']['portrait'] ~= 2 then
         if self.avatarUploadButton then
@@ -2438,15 +2464,6 @@ function ISChat:createChildren()
     self.radioButton:setUIName(ISChat.radioButtonName)
     self:addChild(self.radioButton)
     self.radioButton:setVisible(true)
-
-    --journal button
-    self.journalButton = ISButton:new(0, 1, th, th, "", self, function() JournalWindow.toggle() end)
-    self.journalButton.anchorRight = true
-    self.journalButton.anchorLeft = false
-    self.journalButton:initialise()
-    self.journalButton:setImage(getTexture(ChatTheme.icons.book))
-    self.journalButton:setUIName('chat journal button')
-    self:addChild(self.journalButton)
 
     --avatar validation window button
     self:createValidationWindowButton()

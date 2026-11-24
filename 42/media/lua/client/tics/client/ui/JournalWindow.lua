@@ -875,6 +875,9 @@ function JournalWindow.toggle()
         instance:close()
         return
     end
+    if not Journal.isEnabled() then
+        return nil
+    end
     local window = JournalWindow:new()
     window:initialise()
     window:addToUIManager()
