@@ -1590,9 +1590,10 @@ function ISChat.onRadioPacket(type, author, characterName, message, language, co
     end
 end
 
-function ISChat.sendInfoToCurrentTab(message)
+-- color: 0-255 color of the line, the TICS information color by default
+function ISChat.sendInfoToCurrentTab(message, color)
     local time = Calendar.getInstance():getTimeInMillis()
-    local formattedMessage = StringBuilder.BuildBracketColorString({ 70, 70, 255 }) .. message
+    local formattedMessage = StringBuilder.BuildBracketColorString(color or ChatTheme.systemInfo) .. message
     local line = BuildChatMessage(ISChat.instance.chatFont, ISChat.instance.showTimestamp, false,
         false, nil, formattedMessage, time, nil)
     local tabID = ISChat.defaultTabStream[ISChat.instance.currentTabID]['tabID']
@@ -1601,8 +1602,8 @@ end
 
 function ISChat.sendErrorToCurrentTab(message)
     local time = Calendar.getInstance():getTimeInMillis()
-    local formattedMessage = StringBuilder.BuildBracketColorString({ 255, 40, 40 }) ..
-        'error: ' .. StringBuilder.BuildBracketColorString({ 255, 70, 70 }) .. message
+    local formattedMessage = StringBuilder.BuildBracketColorString(ChatTheme.systemErrorLabel) ..
+        'error: ' .. StringBuilder.BuildBracketColorString(ChatTheme.systemError) .. message
     local line = BuildChatMessage(ISChat.instance.chatFont, ISChat.instance.showTimestamp, false,
         false, nil, formattedMessage, time, nil)
     local tabID = ISChat.defaultTabStream[ISChat.instance.currentTabID]['tabID']
@@ -1611,8 +1612,8 @@ end
 
 function ISChat.onChatErrorPacket(type, message)
     local time = Calendar.getInstance():getTimeInMillis()
-    local formattedMessage = StringBuilder.BuildBracketColorString({ 255, 50, 50 }) ..
-        'error: ' .. StringBuilder.BuildBracketColorString({ 255, 60, 60 }) .. message
+    local formattedMessage = StringBuilder.BuildBracketColorString(ChatTheme.systemErrorLabel) ..
+        'error: ' .. StringBuilder.BuildBracketColorString(ChatTheme.systemError) .. message
     local line = BuildChatMessage(ISChat.instance.chatFont, ISChat.instance.showTimestamp, ISChat.instance.showTitle,
         false, nil, formattedMessage, time, type)
     local stream
@@ -1673,7 +1674,7 @@ ISChat.addLineInChat = function(message, tabID)
     end
 
     if message:getAuthor() == 'Server' then
-        ISChat.sendInfoToCurrentTab(line)
+        ISChat.sendInfoToCurrentTab(line, ChatTheme.systemServer)
     elseif message:getRadioChannel() ~= -1 then -- scripted radio message
         local messageWithoutColorPrefix = message:getText():gsub('*%d+,%d+,%d+*', '')
         message:setText(messageWithoutColorPrefix)

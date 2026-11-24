@@ -47,6 +47,14 @@ local ChatTheme = {
     -- HUD mode (chat not focused): how fast older messages fade out
     hudFadePerMessage = 0.16,
 
+    -- system lines of the chat, in 0-255 like the channel colors (rich text <RGB> tags):
+    -- TICS information (rolls, command answers...), server announcements (welcome message),
+    -- errors (a label then the message)
+    systemInfo     = { 168, 186, 214 }, -- pale steel blue
+    systemServer   = { 222, 196, 140 }, -- pale gold, the accent of the chat
+    systemErrorLabel = { 232, 112, 98 },
+    systemError    = { 236, 166, 156 },
+
     -- popups opened from the chat (language list, settings panel)
     popupOpacity   = 0.97,
     popupGap       = 4, -- space between a popup and what opened it
