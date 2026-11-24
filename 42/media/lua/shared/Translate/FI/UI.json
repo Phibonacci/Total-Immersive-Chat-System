@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "Kuvan on oltava %1x%2 pikseliä",
     "UI_TICS_Avatar_format"                    : "PNG tai JPG, %1x%2 pikseliä",
     "UI_TICS_Speech_inaudible"                 : "(ei kuulu)",
+    "UI_TICS_Speech_muffled"                   : "(vaimea)",
+    "UI_TICS_Speech_muffled_voices"            : "(vaimeita ääniä)",
     "UI_TICS_Avatar_send"                      : "Lähetä hyväksyttäväksi",
     "UI_TICS_Avatar_sent"                      : "Lähetetty hyväksyttäväksi: %1",
     "UI_TICS_Avatar_already_sent"              : "Tämä kuva on jo lähetetty",

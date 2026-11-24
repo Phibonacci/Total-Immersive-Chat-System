@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "画像は %1x%2 ピクセルである必要があります",
     "UI_TICS_Avatar_format"                    : "PNG または JPG、%1x%2 ピクセル",
     "UI_TICS_Speech_inaudible"                 : "(聞き取れない)",
+    "UI_TICS_Speech_muffled"                   : "(こもった声)",
+    "UI_TICS_Speech_muffled_voices"            : "(こもった話し声)",
     "UI_TICS_Avatar_send"                      : "承認を申請",
     "UI_TICS_Avatar_sent"                      : "承認を申請しました: %1",
     "UI_TICS_Avatar_already_sent"              : "この画像は申請済みです",

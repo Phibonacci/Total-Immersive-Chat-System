@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "Изображение должно быть размером %1x%2 пикселей",
     "UI_TICS_Avatar_format"                    : "PNG или JPG, %1x%2 пикселей",
     "UI_TICS_Speech_inaudible"                 : "(неразборчиво)",
+    "UI_TICS_Speech_muffled"                   : "(приглушённо)",
+    "UI_TICS_Speech_muffled_voices"            : "(приглушённые голоса)",
     "UI_TICS_Avatar_send"                      : "Отправить на одобрение",
     "UI_TICS_Avatar_sent"                      : "Отправлено на одобрение: %1",
     "UI_TICS_Avatar_already_sent"              : "Это изображение уже отправлено",

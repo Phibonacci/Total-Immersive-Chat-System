@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Karakterer i panik stammer",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Gasmasker og åndedrætsværn dæmper stemmen",
     "Sandbox_TICS_HearingTraitsEnabled"          : "Karakterer med \"Dårlig hørelse\" og \"Døv\" går glip af det, der bliver sagt",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Vægge, lukkede døre og vinduer dæmper stemmen",
     "Sandbox_TICS_BubblePortrait_help"           : "Vis spillerportræt til venstre for taleboblen.\nEgne avatarer skal ligge i: Zomboid/Lua/avatars/username.png på serveren.\nVanilla-portrættet bruges, hvis der ikke findes et billede til brugernavnet.\n1 = Ingen\n2 = Vanilla\n 3 = Steam-avatar\n4 = Eget",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ingen",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Eget og vanilla",

@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "A pánikoló karakterek dadognak",
     "Sandbox_TICS_SpeechMaskEnabled"             : "A gázmaszkok és légzőkészülékek tompítják a hangot",
     "Sandbox_TICS_HearingTraitsEnabled"          : "A „Nagyothalló” és „Süket” karakterek nem hallanak mindent",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "A falak, csukott ajtók és ablakok tompítják a hangot",
     "Sandbox_TICS_BubblePortrait_help"           : "Játékosportré megjelenítése a buborék bal oldalán.\nAz egyéni avatarok helye: Zomboid/Lua/avatars/username.png a szerveren.\nHa a felhasználónévhez nem található kép, az alapértelmezett portré jelenik meg.\n1 = Nincs\n2 = Alapértelmezett\n 3 = Steam avatar\n4 = Egyéni",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Nincs",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Egyéni és alapértelmezett",

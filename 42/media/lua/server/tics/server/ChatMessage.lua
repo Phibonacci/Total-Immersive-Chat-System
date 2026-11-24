@@ -182,6 +182,7 @@ local function SetMessageTypeSettings()
                 ['panic'] = SandboxVars.TICS.SpeechPanicEnabled,
                 ['mask'] = SandboxVars.TICS.SpeechMaskEnabled,
                 ['hearing'] = SandboxVars.TICS.HearingTraitsEnabled,
+                ['walls'] = SandboxVars.TICS.WallsMuffleSpeechEnabled,
             },
         },
     }

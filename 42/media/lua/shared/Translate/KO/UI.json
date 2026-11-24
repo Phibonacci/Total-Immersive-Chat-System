@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "이미지는 %1x%2 픽셀이어야 합니다",
     "UI_TICS_Avatar_format"                    : "PNG 또는 JPG, %1x%2 픽셀",
     "UI_TICS_Speech_inaudible"                 : "(들리지 않음)",
+    "UI_TICS_Speech_muffled"                   : "(먹먹함)",
+    "UI_TICS_Speech_muffled_voices"            : "(먹먹한 목소리)",
     "UI_TICS_Avatar_send"                      : "승인 요청",
     "UI_TICS_Avatar_sent"                      : "승인 요청됨: %1",
     "UI_TICS_Avatar_already_sent"              : "이미 보낸 이미지입니다",

@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "A imagem tem de ter %1x%2 píxeis",
     "UI_TICS_Avatar_format"                    : "PNG ou JPG, %1x%2 píxeis",
     "UI_TICS_Speech_inaudible"                 : "(inaudível)",
+    "UI_TICS_Speech_muffled"                   : "(abafado)",
+    "UI_TICS_Speech_muffled_voices"            : "(vozes abafadas)",
     "UI_TICS_Avatar_send"                      : "Enviar para aprovação",
     "UI_TICS_Avatar_sent"                      : "Enviada para aprovação: %1",
     "UI_TICS_Avatar_already_sent"              : "Esta imagem já foi enviada",

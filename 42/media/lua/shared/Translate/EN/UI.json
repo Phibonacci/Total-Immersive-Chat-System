@@ -264,6 +264,8 @@
     "UI_TICS_Avatar_wrong_size"                : "The image must be %1x%2 pixels",
     "UI_TICS_Avatar_format"                    : "PNG or JPG, %1x%2 pixels",
     "UI_TICS_Speech_inaudible"                 : "(inaudible)",
+    "UI_TICS_Speech_muffled"                   : "(muffled)",
+    "UI_TICS_Speech_muffled_voices"            : "(muffled voices)",
     "UI_TICS_Avatar_send"                      : "Send for approval",
     "UI_TICS_Avatar_sent"                      : "Sent for approval: %1",
     "UI_TICS_Avatar_already_sent"              : "This image was already sent",

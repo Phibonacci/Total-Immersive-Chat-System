@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Postavy v panice koktají",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Plynové masky a respirátory tlumí hlas",
     "Sandbox_TICS_HearingTraitsEnabled"          : "Postavy s vlastností „Nedoslýchavý“ nebo „Hluchý“ neslyší vše, co se říká",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Zdi, zavřené dveře a okna tlumí hlas",
     "Sandbox_TICS_BubblePortrait_help"           : "Zobrazuje portrét hráče vlevo od bubliny.\nVlastní avatary patří do: Zomboid/Lua/avatars/username.png na serveru.\nPokud pro uživatelské jméno není nalezen žádný obrázek, použije se výchozí portrét.\n1 = Žádný\n2 = Výchozí\n 3 = Steam avatar\n4 = Vlastní",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Žádný",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Vlastní a výchozí",

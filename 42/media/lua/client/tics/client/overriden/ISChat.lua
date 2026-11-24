@@ -1364,8 +1364,8 @@ function ISChat.onMessagePacket(type, author, characterName, message, language, 
     ISChat.instance.chatFont = ISChat.instance.chatFont or 'medium'
     local showLanguage = TicsServerSettings and TicsServerSettings['options']['languages']
     local showBubble = TicsServerSettings and TicsServerSettings[type] and TicsServerSettings[type]['bubble']
-    -- Hard of Hearing / Deaf: what the player hears of someone else's speech (after the
-    -- language, so "(inaudible)" is not scrambled)
+    -- walls, Hard of Hearing, Deaf: what the player hears of someone else's speech (after
+    -- the language, so "(inaudible)" or "(muffled)" are not scrambled)
     local heard = false
     local canHearVoice = true
     local function Hear()
@@ -1380,7 +1380,7 @@ function ISChat.onMessagePacket(type, author, characterName, message, language, 
             local dx, dy = speaker:getX() - me:getX(), speaker:getY() - me:getY()
             distance = math.sqrt(dx * dx + dy * dy)
         end
-        updatedMessage, canHearVoice = SpeechEffects.hear(me, updatedMessage, type, distance)
+        updatedMessage, canHearVoice = SpeechEffects.hear(me, updatedMessage, type, distance, speaker)
     end
     if not isFromDiscord and voicePitch ~= nil and showBubble then
         if showLanguage and not LanguageManager:isKnown(language) and type ~= 'me' and type ~= 'do' then

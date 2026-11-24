@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Персонажі в паніці заїкаються",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Протигази та респіратори приглушують голос",
     "Sandbox_TICS_HearingTraitsEnabled"          : "Персонажі з рисою «Слабкослухість» або «Глухість» чують не все",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Стіни, зачинені двері та вікна приглушують голос",
     "Sandbox_TICS_BubblePortrait_help"           : "Відображати портрет гравця ліворуч від «бульбашки».\nКористувацькі аватари мають знаходитися в: Zomboid/Lua/avatars/username.png на сервері.\nЯкщо для імені користувача не знайдено зображення, буде використано стандартний портрет.\n1 = Ні\n2 = Стандартний\n3 = Аватар Steam\n4 = Користувацький",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ні",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Стандартний і користувацький",

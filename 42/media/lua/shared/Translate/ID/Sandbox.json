@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Karakter yang panik tergagap",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Masker gas dan respirator meredam suara",
     "Sandbox_TICS_HearingTraitsEnabled"          : "Karakter \"Kurang Pendengaran\" dan \"Tuli\" tidak mendengar semua yang diucapkan",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Dinding, pintu dan jendela tertutup meredam suara",
     "Sandbox_TICS_BubblePortrait_help"           : "Tampilkan potret pemain di sebelah kiri balon.\nAvatar kustom ditaruh di: Zomboid/Lua/avatars/username.png di server.\nPotret bawaan akan dipakai jika tidak ada gambar untuk username tersebut.\n1 = Tidak ada\n2 = Bawaan\n 3 = Avatar Steam\n4 = Kustom",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Tidak ada",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Kustom dan bawaan",

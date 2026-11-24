@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "Gambar harus berukuran %1x%2 piksel",
     "UI_TICS_Avatar_format"                    : "PNG atau JPG, %1x%2 piksel",
     "UI_TICS_Speech_inaudible"                 : "(tidak terdengar)",
+    "UI_TICS_Speech_muffled"                   : "(teredam)",
+    "UI_TICS_Speech_muffled_voices"            : "(suara teredam)",
     "UI_TICS_Avatar_send"                      : "Kirim untuk disetujui",
     "UI_TICS_Avatar_sent"                      : "Dikirim untuk disetujui: %1",
     "UI_TICS_Avatar_already_sent"              : "Gambar ini sudah pernah dikirim",

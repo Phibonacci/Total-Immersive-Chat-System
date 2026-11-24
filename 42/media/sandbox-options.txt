@@ -87,6 +87,14 @@ option TICS.HearingTraitsEnabled
 	page = TICS,
 	translation = TICS_HearingTraitsEnabled,
 }
+option TICS.WallsMuffleSpeechEnabled
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_WallsMuffleSpeechEnabled,
+}
 option TICS.BubbleTimerInSeconds
 {
 	type = integer,

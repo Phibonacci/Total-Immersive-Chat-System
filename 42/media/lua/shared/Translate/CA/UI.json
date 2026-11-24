@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "La imatge ha de fer %1x%2 píxels",
     "UI_TICS_Avatar_format"                    : "PNG o JPG, %1x%2 píxels",
     "UI_TICS_Speech_inaudible"                 : "(inaudible)",
+    "UI_TICS_Speech_muffled"                   : "(esmorteït)",
+    "UI_TICS_Speech_muffled_voices"            : "(veus esmorteïdes)",
     "UI_TICS_Avatar_send"                      : "Enviar per a aprovació",
     "UI_TICS_Avatar_sent"                      : "Enviat per a aprovació: %1",
     "UI_TICS_Avatar_already_sent"              : "Aquesta imatge ja s'ha enviat",

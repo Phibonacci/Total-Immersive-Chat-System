@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "圖片必須為 %1x%2 像素",
     "UI_TICS_Avatar_format"                    : "PNG 或 JPG, %1x%2 像素",
     "UI_TICS_Speech_inaudible"                 : "(聽不清)",
+    "UI_TICS_Speech_muffled"                   : "(模糊不清)",
+    "UI_TICS_Speech_muffled_voices"            : "(模糊的說話聲)",
     "UI_TICS_Avatar_send"                      : "送出審核",
     "UI_TICS_Avatar_sent"                      : "已送出審核: %1",
     "UI_TICS_Avatar_already_sent"              : "此圖片已經送出過",

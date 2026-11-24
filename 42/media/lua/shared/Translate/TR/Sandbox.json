@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Panik içindeki karakterler kekeler",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Gaz maskeleri ve solunum maskeleri sesi boğar",
     "Sandbox_TICS_HearingTraitsEnabled"          : "\"Ağır İşiten\" ve \"Sağır\" karakterler söyleneni tam duymaz",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Duvarlar, kapalı kapılar ve pencereler sesi boğar",
     "Sandbox_TICS_BubblePortrait_help"           : "Oyuncu portresini balonun solunda gösterir.\nÖzel avatarlar sunucuda şuraya konur: Zomboid/Lua/avatars/username.png\nKullanıcı adı için resim bulunamazsa varsayılan portre kullanılır.\n1 = Yok\n2 = Varsayılan\n 3 = Steam avatarı\n4 = Özel",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Yok",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Özel ve varsayılan",

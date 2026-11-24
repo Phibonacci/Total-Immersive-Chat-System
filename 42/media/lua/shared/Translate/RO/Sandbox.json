@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Personajele în panică se bâlbâie",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Măștile de gaze și respiratoarele înăbușă vocea",
     "Sandbox_TICS_HearingTraitsEnabled"          : "Personajele „Dificultate de Auzire” și „Surd” aud greu ce se spune",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Pereții, ușile și ferestrele închise înăbușă vocea",
     "Sandbox_TICS_BubblePortrait_help"           : "Afișează portretul jucătorului în stânga bulei.\nAvatarele personalizate se pun în: Zomboid/Lua/avatars/username.png pe server.\nDacă nu se găsește nicio imagine pentru numele de utilizator, se folosește portretul vanilla.\n1 = Niciunul\n2 = Vanilla\n 3 = Avatar Steam\n4 = Personalizat",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Niciunul",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personalizat și vanilla",

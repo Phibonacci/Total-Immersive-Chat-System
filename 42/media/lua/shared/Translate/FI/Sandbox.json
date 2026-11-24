@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Paniikissa olevat hahmot änkyttävät",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Kaasunaamarit ja hengityssuojaimet vaimentavat puheen",
     "Sandbox_TICS_HearingTraitsEnabled"          : "Hahmot, joilla on \"Huonokuuloinen\" tai \"Kuuro\", eivät kuule kaikkea sanottua",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Seinät sekä suljetut ovet ja ikkunat vaimentavat puheen",
     "Sandbox_TICS_BubblePortrait_help"           : "Näytä pelaajan muotokuva puhekuplan vasemmalla puolella.\nOmat avatarit sijoitetaan palvelimella kohteeseen: Zomboid/Lua/avatars/username.png.\nJos käyttäjänimelle ei löydy kuvaa, käytetään pelin omaa muotokuvaa.\n1 = Ei mitään\n2 = Pelin oma\n 3 = Steam-avatar\n4 = Oma",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Ei mitään",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Oma ja pelin oma",

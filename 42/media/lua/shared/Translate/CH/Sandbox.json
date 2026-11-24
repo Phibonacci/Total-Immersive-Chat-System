@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "驚慌的角色說話結巴",
     "Sandbox_TICS_SpeechMaskEnabled"             : "防毒面具和呼吸器會讓聲音變得模糊",
     "Sandbox_TICS_HearingTraitsEnabled"          : "「聽力較差」和「耳聾」的角色聽不全別人說的話",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "牆壁、關閉的門窗會讓聲音變得模糊",
     "Sandbox_TICS_BubblePortrait_help"           : "在對話氣泡左側顯示玩家頭像.\n自訂頭像放在伺服器的: Zomboid/Lua/avatars/username.png\n若找不到該使用者名稱對應的圖片, 將使用原版肖像.\n1 = 無\n2 = 原版\n 3 = Steam 頭像\n4 = 自訂",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "無",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "自訂和原版",

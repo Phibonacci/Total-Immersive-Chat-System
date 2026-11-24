@@ -5,6 +5,8 @@
 --   panic:  stuttering ("I-I saw them")
 --   mask:   a gas mask, respirator, welding mask or hazmat hood muffles words ("mmf")
 -- Listener, applied to what the player receives:
+--   walls: walls, closed doors and windows, floors between the speaker and the player muffle
+--          the speech, "(muffled)" with lost words, "(muffled voices)" when nothing gets through
 --   Hard of Hearing: some words are lost ("..."), more for a whisper or a far speaker
 --   Deaf: speech is not heard at all, only "(inaudible)"
 -- Only speech is changed (whisper, low, say, yell and their radio versions), never /me, /do,
@@ -22,6 +24,14 @@ local MASK_CHANCE = 0.1 -- about 1 word in 10
 -- edge of the range of the channel
 local HEARING_LOSS = { whisper = 0.55, low = 0.4, say = 0.22, yell = 0.08 }
 local DISTANCE_LOSS = 0.2
+-- walls: chance for each word to be lost, by number of barriers (wall, closed door or window,
+-- floor) from 1. Past the end of a list nothing is understood ("(muffled voices)").
+local WALL_LOSS = {
+    whisper = {},
+    low = { 0.5 },
+    say = { 0.2, 0.4, 0.8 },
+    yell = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 },
+}
 
 local MUFFLED = { 'mmf', 'mph', 'mmh' }
 local VOWELS = 'aeiouyAEIOUY'
@@ -178,22 +188,134 @@ local function LoseWords(text, chance)
     return table.concat(words, ' ')
 end
 
--- What the player hears of a message (nil distance: heard on a radio).
--- Returns the text and whether the voice can be heard.
-function SpeechEffects.hear(player, text, channel, distance)
-    if not SpeechEffects.isSpeech(channel) or player == nil or not IsEnabled('hearing') then
+-- materials of the walls sound goes through: wire mesh fences, bar fences and railings
+local OPEN_MATERIALS = { MetalWire = true, MetalBars = true }
+
+-- true when the walls on one edge of a square (its north or west side, where the game stores
+-- them) are all open (wire mesh, bars): sound goes through them
+local function IsOpenEdge(square, collideFlag)
+    local objects = square:getObjects()
+    local open = false
+    for index = 0, objects:size() - 1 do
+        local properties = objects:get(index):getProperties()
+        if properties and properties:has(collideFlag) then
+            if not OPEN_MATERIALS[properties:get('Material')] then
+                return false
+            end
+            open = true
+        end
+    end
+    return open
+end
+
+-- A blocked step between two side by side squares, unless only wire mesh or bars are in the way.
+local function IsBarrier(from, to)
+    if not from:isBlockedTo(to) then
+        return false
+    end
+    -- the wall between them is on the north or west side of the one further south or east
+    if to:getX() > from:getX() then
+        return not IsOpenEdge(to, IsoFlagType.collideW)
+    elseif to:getX() < from:getX() then
+        return not IsOpenEdge(from, IsoFlagType.collideW)
+    elseif to:getY() > from:getY() then
+        return not IsOpenEdge(to, IsoFlagType.collideN)
+    end
+    return not IsOpenEdge(from, IsoFlagType.collideN)
+end
+
+local STAIRS_RADIUS = 2 -- squares around a character where stairs let the sound between two floors
+
+-- true when the character is on or near stairs: a stairs square, or the opening above one
+local function NearStairs(cell, character)
+    local x, y, z = math.floor(character:getX()), math.floor(character:getY()), math.floor(character:getZ())
+    for dx = -STAIRS_RADIUS, STAIRS_RADIUS do
+        for dy = -STAIRS_RADIUS, STAIRS_RADIUS do
+            local square = cell:getGridSquare(x + dx, y + dy, z)
+            if square and (square:HasStairs() or square:HasStairsBelow()) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+-- Walls, closed doors and closed windows between two characters: the line between their
+-- squares is walked one square at a time along x or y (the game only tells what is between
+-- two side by side squares), each floor of difference counts as one more barrier, except the
+-- one the stairs cross when one of them is on or near stairs. Wire mesh and bar fences do not
+-- count.
+-- Squares that are not loaded are not checked.
+function SpeechEffects.countBarriers(from, to)
+    local cell = getCell()
+    local z = math.floor(from:getZ())
+    local barriers = math.abs(math.floor(to:getZ()) - z)
+    -- someone on or near the stairs hears, and is heard from, the next floor
+    if barriers > 0 and (NearStairs(cell, from) or NearStairs(cell, to)) then
+        barriers = barriers - 1
+    end
+    local x, y = math.floor(from:getX()), math.floor(from:getY())
+    local x1, y1 = math.floor(to:getX()), math.floor(to:getY())
+    local dx, dy = math.abs(x1 - x), math.abs(y1 - y)
+    local sx = x < x1 and 1 or -1
+    local sy = y < y1 and 1 or -1
+    local ix, iy = 0, 0
+    local current = cell:getGridSquare(x, y, z)
+    for _ = 1, math.min(dx + dy, 200) do
+        -- step along the axis whose next square border the line crosses first
+        local tx = dx > 0 and (ix + 0.5) / dx or 1e9
+        local ty = dy > 0 and (iy + 0.5) / dy or 1e9
+        if tx < ty then
+            x = x + sx
+            ix = ix + 1
+        else
+            y = y + sy
+            iy = iy + 1
+        end
+        local nextSquare = cell:getGridSquare(x, y, z)
+        if current and nextSquare and IsBarrier(current, nextSquare) then
+            barriers = barriers + 1
+        end
+        current = nextSquare
+    end
+    return barriers
+end
+
+-- What the player hears of a message. speaker: the IsoPlayer speaking, nil on a radio;
+-- distance: between them, nil on a radio. Returns the text and whether the voice is heard.
+function SpeechEffects.hear(player, text, channel, distance, speaker)
+    if not SpeechEffects.isSpeech(channel) or player == nil then
         return text, true
     end
-    if player:hasTrait(CharacterTrait.DEAF) then
+    local hearing = IsEnabled('hearing')
+    if hearing and player:hasTrait(CharacterTrait.DEAF) then
         return getText('UI_TICS_Speech_inaudible'), false
     end
-    if player:hasTrait(CharacterTrait.HARD_OF_HEARING) then
-        local chance = HEARING_LOSS[channel]
+    local loss = 0
+    if hearing and player:hasTrait(CharacterTrait.HARD_OF_HEARING) then
+        loss = HEARING_LOSS[channel]
         local range = TicsServerSettings and TicsServerSettings[channel] and TicsServerSettings[channel]['range']
         if distance and range and range > 0 then
-            chance = chance + DISTANCE_LOSS * math.min(1, distance / range)
+            loss = loss + DISTANCE_LOSS * math.min(1, distance / range)
         end
-        return LoseWords(text, chance), true
+    end
+    local barriers = 0
+    if speaker and IsEnabled('walls') then
+        barriers = SpeechEffects.countBarriers(speaker, player)
+        if barriers > 0 then
+            local wallLoss = WALL_LOSS[channel][barriers]
+            if wallLoss == nil then
+                return getText('UI_TICS_Speech_muffled_voices'), false
+            end
+            -- a word lost to the walls or to the ears
+            loss = 1 - (1 - loss) * (1 - wallLoss)
+        end
+    end
+    if loss > 0 then
+        text = LoseWords(text, loss)
+    end
+    if barriers > 0 then
+        text = getText('UI_TICS_Speech_muffled') .. ' ' .. text
     end
     return text, true
 end

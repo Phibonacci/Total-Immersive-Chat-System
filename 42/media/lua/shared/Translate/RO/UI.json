@@ -83,6 +83,8 @@
     "UI_TICS_Avatar_wrong_size"                : "Imaginea trebuie să aibă %1x%2 pixeli",
     "UI_TICS_Avatar_format"                    : "PNG sau JPG, %1x%2 pixeli",
     "UI_TICS_Speech_inaudible"                 : "(neinteligibil)",
+    "UI_TICS_Speech_muffled"                   : "(înăbușit)",
+    "UI_TICS_Speech_muffled_voices"            : "(voci înăbușite)",
     "UI_TICS_Avatar_send"                      : "Trimite spre aprobare",
     "UI_TICS_Avatar_sent"                      : "Trimisă spre aprobare: %1",
     "UI_TICS_Avatar_already_sent"              : "Această imagine a fost deja trimisă",

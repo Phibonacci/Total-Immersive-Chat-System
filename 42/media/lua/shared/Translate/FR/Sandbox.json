@@ -12,6 +12,7 @@
     "Sandbox_TICS_SpeechPanicEnabled"            : "Les personnages paniqués bégaient",
     "Sandbox_TICS_SpeechMaskEnabled"             : "Les masques à gaz et respirateurs étouffent la voix",
     "Sandbox_TICS_HearingTraitsEnabled"          : "Les personnages « Dur d'oreille » et « Sourd » entendent mal ce qui est dit",
+    "Sandbox_TICS_WallsMuffleSpeechEnabled"      : "Les murs, portes et fenêtres fermées étouffent la voix",
     "Sandbox_TICS_BubblePortrait_help"           : "Afficher le portrait du joueur à gauche de la bulle.\nLes avatars personnalisés vont dans : Zomboid/Lua/avatars/username.png sur le serveur.\nLe portrait vanilla est utilisé si aucune image n'est trouvée pour le nom d'utilisateur.\n1 = Aucun\n2 = Vanilla\n 3 = Avatar Steam\n4 = Personnalisé",
     "Sandbox_TICS_BubblePortrait_Values_option1" : "Aucun",
     "Sandbox_TICS_BubblePortrait_Values_option2" : "Personnalisé et vanilla",
