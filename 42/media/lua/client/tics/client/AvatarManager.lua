@@ -30,12 +30,12 @@ function AvatarManager:getKnownAvatars()
     return toSend
 end
 
+-- Folder (in Zomboid/Lua) where players put the images they may send as avatar: any image
+-- can be picked in the avatar window, so one folder serves every server and character.
+AvatarManager.REQUEST_DIRECTORY = 'avatars/request/'
+
 function AvatarManager:createRequestDirectory()
-    local player = getPlayer()
-    local username = player:getUsername()
-    local path = username .. '/request/'
-    local directoryPath = AvatarIO.getBasePath() .. path
-    File.createDirectory(directoryPath, 'move_your_avatar_here')
+    File.createDirectory(AvatarManager.REQUEST_DIRECTORY, 'move_your_avatar_here')
 end
 
 local function SaveAvatar(username, firstName, lastName, extension, checksum, data, directory, modDataPath)
@@ -118,7 +118,7 @@ end
 
 -- folder (in Zomboid/Lua) where the player puts the images they want to use as avatar
 function AvatarManager:getRequestDirectory()
-    return AvatarIO.getBasePath() .. getPlayer():getUsername() .. '/request/'
+    return AvatarManager.REQUEST_DIRECTORY
 end
 
 -- every PNG / JPG image of the request folder, sorted by name: { fileName, path, extension }
