@@ -1,6 +1,8 @@
 local ChatTheme = require('tics/client/ui/ChatTheme')
 local LanguageManager = require('tics/client/languages/LanguageManager')
 local AvatarManager = require('tics/client/AvatarManager')
+local ChatPopup = require('tics/client/ui/ChatPopup')
+local ChatDropdown = require('tics/client/ui/ChatDropdown')
 
 local ChatUI = {}
 ChatUI.tabPanel = {}
@@ -77,6 +79,8 @@ local function IsButtonActive(self, button)
         return self.radioButtonState == true
     elseif button == self.lockButton then
         return self.locked == true
+    elseif button == self.gearButton then
+        return self.settingsPanel ~= nil and self.settingsPanel:isOpen() -- settings panel open
     elseif button == self.avatarValidationWindowButton then
         return AvatarManager:getPendingCount() > 0 -- avatars waiting for approval
     end
@@ -192,40 +196,31 @@ local function GetLanguageButtonWidth()
         + LANGUAGE_ARROW_WIDTH + 4
 end
 
-local function OnLanguageSelected(chat, language)
+local function OnLanguageSelected(language)
     LanguageManager:setCurrentLanguageFromCode(LanguageManager.GetCodeFromLanguage(language))
-    if ISChat.focused then
-        chat.textEntry:focus() -- the menu took the keyboard focus
-    end
 end
 
+-- the list of the known languages, opened above the button (a second click closes it)
 local function OnLanguageButtonClick(chat, button)
-    local x = button:getAbsoluteX()
-    local y = button:getAbsoluteY()
-    local context = ISContextMenu.get(0, x, y)
-    local languages = {}
-    for language in pairs(LanguageManager:getKnownLanguages()) do
-        table.insert(languages, { name = language, translated = LanguageManager.GetLanguageTranslated(language) })
+    if chat.languageDropdown and chat.languageDropdown:isOpen() then
+        chat.languageDropdown:close()
+        ChatPopup.restoreChatFocus()
+        return
     end
-    table.sort(languages, function(a, b) return a.translated < b.translated end)
     local current = LanguageManager:getCurrentLanguage()
-    for _, language in ipairs(languages) do
-        local option = context:addOption(language.translated, chat, OnLanguageSelected, language.name)
-        if language.name == current then
-            context:setOptionChecked(option, true)
-        end
+    local items = {}
+    for language in pairs(LanguageManager:getKnownLanguages()) do
+        local code = LanguageManager.GetCodeFromLanguage(language)
+        table.insert(items, {
+            label = LanguageManager.GetLanguageTranslated(language),
+            value = language,
+            detail = code and code:upper() or nil,
+            checked = language == current,
+        })
     end
-    -- open above the button, the input box is at the bottom of the chat
-    context:calcHeight()
-    local menuY = math.max(0, y - context:getHeight())
-    context.requestY = menuY
-    context:setSlideGoalY(menuY, menuY)
-    -- right edge aligned with the button. ISContextMenu.get kept the menu on screen with the
-    -- width of the previous menu (e.g. the wider gear menu), so the x is set again now that the
-    -- width is known (setX keeps it on screen)
-    local menuX = math.max(0, x + button:getWidth() - context:getWidth())
-    context.requestX = menuX
-    context:setSlideGoalX(menuX, menuX)
+    table.sort(items, function(a, b) return a.label < b.label end)
+    chat.languageDropdown = ChatDropdown.open(button, items, OnLanguageSelected)
+    ChatPopup.restoreChatFocus()
 end
 
 local function RenderLanguageButton(self)
@@ -233,7 +228,8 @@ local function RenderLanguageButton(self)
     local alpha = chat and chat.chromeAlpha or 1
     local font = UIFont.Small
     local chip = ChatTheme.chip
-    local textColor = self:isMouseOver() and ChatTheme.textActive or ChatTheme.textHover
+    local isOpen = chat and chat.languageDropdown and chat.languageDropdown:isOpen()
+    local textColor = (isOpen or self:isMouseOver()) and ChatTheme.textActive or ChatTheme.textHover
     self:drawRect(0, 0, self.width, self.height, alpha, chip.r, chip.g, chip.b)
     local code = GetCurrentLanguageCode()
     local fontHeight = getTextManager():getFontHeight(font)

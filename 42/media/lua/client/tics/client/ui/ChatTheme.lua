@@ -18,6 +18,7 @@ local ChatTheme = {
     iconIdle       = rgb(169, 169, 169),
     pill           = rgb(0, 0, 0),
     chip           = rgb(58, 58, 58),  -- channel label in the input box
+    rowHover       = rgb(42, 42, 42),  -- hovered row of the chat popups (language list, settings)
 
     bodyOpacity    = 0.92, -- multiplied by the player's chat opacity settings
     stripeOpacity  = 0.045,
@@ -45,6 +46,10 @@ local ChatTheme = {
 
     -- HUD mode (chat not focused): how fast older messages fade out
     hudFadePerMessage = 0.16,
+
+    -- popups opened from the chat (language list, settings panel)
+    popupOpacity   = 0.97,
+    popupGap       = 4, -- space between a popup and what opened it
 }
 
 ChatTheme.icons = {
@@ -61,6 +66,7 @@ ChatTheme.icons = {
     upload  = 'media/ui/tics/icons/chat-upload.png',
     portrait = 'media/ui/tics/icons/chat-portrait.png',
     sheet   = 'media/ui/tics/icons/chat-sheet.png',
+    check   = 'media/ui/tics/icons/chat-check.png',
 }
 
 return ChatTheme

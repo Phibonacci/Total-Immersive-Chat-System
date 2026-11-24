@@ -3,6 +3,8 @@ local TICS_VERSION = require('tics/shared/Version')
 
 local ChatUI                 = require('tics/client/ui/ChatUI')
 local ChatTheme              = require('tics/client/ui/ChatTheme')
+local ChatPopup              = require('tics/client/ui/ChatPopup')
+local ChatSettingsPanel      = require('tics/client/ui/ChatSettingsPanel')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
 local CharacterSheetWindow   = require('tics/client/ui/CharacterSheetWindow')
 local TicsColorPicker        = require('tics/client/ui/TicsColorPicker')
@@ -2602,6 +2604,11 @@ end
 -- escape discards the text, any other way of unfocusing the chat keeps it as a draft
 function ISChat:onOtherKey(key)
     if key == Keyboard.KEY_ESCAPE then
+        -- a popup of the chat (language list, settings) is closed first, the player keeps typing
+        if ChatPopup.closeAll() or ChatPopup.closedRecently() then
+            ChatPopup.restoreChatFocus()
+            return
+        end
         ISChat.instance:unfocus(true)
     end
 end
@@ -2627,120 +2634,9 @@ function ISChat.onMouseDown(target, x, y)
     return VanillaOnMouseDown(target, x, y)
 end
 
+-- the gear button opens the chat settings panel (a second click closes it)
 function ISChat:onGearButtonClick()
-    local context = ISContextMenu.get(0, self:getAbsoluteX() + self:getWidth() / 2,
-        self:getAbsoluteY() + self.gearButton:getY())
-    if context == nil then
-        print('TICS error: ISChat:onGearButtonClick: gear button context is null')
-        return
-    end
-
-    local timestampOptionName = getText("UI_chat_context_enable_timestamp")
-    if self.showTimestamp then
-        timestampOptionName = getText("UI_chat_context_disable_timestamp")
-    end
-    context:addOption(timestampOptionName, ISChat.instance, ISChat.onToggleTimestampPrefix)
-
-    local tagOptionName = getText("UI_chat_context_enable_tags")
-    if self.showTitle then
-        tagOptionName = getText("UI_chat_context_disable_tags")
-    end
-    context:addOption(tagOptionName, ISChat.instance, ISChat.onToggleTagPrefix)
-
-    local fontSizeOption = context:addOption(getText("UI_chat_context_font_submenu_name"), ISChat.instance)
-    local fontSubMenu = context:getNew(context)
-    context:addSubMenu(fontSizeOption, fontSubMenu)
-    fontSubMenu:addOption(getText("UI_chat_context_font_small"), ISChat.instance, ISChat.onFontSizeChange, "small")
-    fontSubMenu:addOption(getText("UI_chat_context_font_medium"), ISChat.instance, ISChat.onFontSizeChange, "medium")
-    fontSubMenu:addOption(getText("UI_chat_context_font_large"), ISChat.instance, ISChat.onFontSizeChange, "large")
-    if self.chatFont == "small" then
-        fontSubMenu:setOptionChecked(fontSubMenu.options[1], true)
-    elseif self.chatFont == "medium" then
-        fontSubMenu:setOptionChecked(fontSubMenu.options[2], true)
-    elseif self.chatFont == "large" then
-        fontSubMenu:setOptionChecked(fontSubMenu.options[3], true)
-    end
-
-    local minOpaqueOption = context:addOption(getText("UI_chat_context_opaque_min"), ISChat.instance)
-    local minOpaqueSubMenu = context:getNew(context)
-    context:addSubMenu(minOpaqueOption, minOpaqueSubMenu)
-    local opaques = { 0, 0.25, 0.5, 0.6, 0.75, 1 }
-    for i = 1, #opaques do
-        if logTo01(opaques[i]) <= self.maxOpaque then
-            local option = minOpaqueSubMenu:addOption((opaques[i] * 100) .. "%", ISChat.instance,
-                ISChat.onMinOpaqueChange, opaques[i])
-            local current = math.floor(self.minOpaque * 1000)
-            local value = math.floor(logTo01(opaques[i]) * 1000)
-            if current == value then
-                minOpaqueSubMenu:setOptionChecked(option, true)
-            end
-        end
-    end
-
-    local maxOpaqueOption = context:addOption(getText("UI_chat_context_opaque_max"), ISChat.instance)
-    local maxOpaqueSubMenu = context:getNew(context)
-    context:addSubMenu(maxOpaqueOption, maxOpaqueSubMenu)
-    for i = 1, #opaques do
-        if logTo01(opaques[i]) >= self.minOpaque then
-            local option = maxOpaqueSubMenu:addOption((opaques[i] * 100) .. "%", ISChat.instance,
-                ISChat.onMaxOpaqueChange, opaques[i])
-            local current = math.floor(self.maxOpaque * 1000)
-            local value = math.floor(logTo01(opaques[i]) * 1000)
-            if current == value then
-                maxOpaqueSubMenu:setOptionChecked(option, true)
-            end
-        end
-    end
-
-    local fadeTimeOption = context:addOption(getText("UI_chat_context_opaque_fade_time_submenu_name"), ISChat.instance)
-    local fadeTimeSubMenu = context:getNew(context)
-    context:addSubMenu(fadeTimeOption, fadeTimeSubMenu)
-    local availFadeTime = { 0, 1, 2, 3, 5, 10 }
-    local option = fadeTimeSubMenu:addOption(getText("UI_chat_context_disable"), ISChat.instance, ISChat
-        .onFadeTimeChange, 0)
-    if 0 == self.fadeTime then
-        fadeTimeSubMenu:setOptionChecked(option, true)
-    end
-    for i = 2, #availFadeTime do
-        local time = availFadeTime[i]
-        option = fadeTimeSubMenu:addOption(time .. " s", ISChat.instance, ISChat.onFadeTimeChange, time)
-        if time == self.fadeTime then
-            fadeTimeSubMenu:setOptionChecked(option, true)
-        end
-    end
-
-    local opaqueOnFocusOption = context:addOption(getText("UI_chat_context_opaque_on_focus"), ISChat.instance)
-    local opaqueOnFocusSubMenu = context:getNew(context)
-    context:addSubMenu(opaqueOnFocusOption, opaqueOnFocusSubMenu)
-    opaqueOnFocusSubMenu:addOption(getText("UI_chat_context_disable"), ISChat.instance, ISChat.onFocusOpaqueChange, false)
-    opaqueOnFocusSubMenu:addOption(getText("UI_chat_context_enable"), ISChat.instance, ISChat.onFocusOpaqueChange, true)
-    opaqueOnFocusSubMenu:setOptionChecked(opaqueOnFocusSubMenu.options[self.opaqueOnFocus and 2 or 1], true)
-
-    local hudOptionName = getText("UI_TICS_enable_chat_hud")
-    if self.isHudEnabled then
-        hudOptionName = getText("UI_TICS_disable_chat_hud")
-    end
-    context:addOption(hudOptionName, ISChat.instance, ISChat.onToggleHud)
-
-    local voiceOptionName = getText("UI_TICS_chat_enable_voices")
-    if self.isVoiceEnabled then
-        voiceOptionName = getText("UI_TICS_chat_disable_voices")
-    end
-    context:addOption(voiceOptionName, ISChat.instance, ISChat.onToggleVoice)
-
-    local radioIconOptionName = getText("UI_TICS_enable_radio_icon")
-    if self.isRadioIconEnabled then
-        radioIconOptionName = getText("UI_TICS_disable_radio_icon")
-    end
-    context:addOption(radioIconOptionName, ISChat.instance, ISChat.onToggleRadioIcon)
-
-    if TicsServerSettings and TicsServerSettings['options']['portrait'] ~= 1 then
-        local portraitOptionName = getText("UI_TICS_enable_portrait")
-        if self.isPortraitEnabled then
-            portraitOptionName = getText("UI_TICS_disable_portrait")
-        end
-        context:addOption(portraitOptionName, ISChat.instance, ISChat.onTogglePortrait)
-    end
+    ChatSettingsPanel.toggle(self)
 end
 
 function ISChat.onToggleVoice()
