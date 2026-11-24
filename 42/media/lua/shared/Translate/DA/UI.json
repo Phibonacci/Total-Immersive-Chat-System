@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Billeder i din avatarmappe",
     "UI_TICS_Avatar_empty"                     : "Intet billede fundet. Læg PNG- eller JPG-billeder på %1x%2 pixels i din avatarmappe (Åbn mappe), og klik derefter på Opdatér.",
     "UI_TICS_Avatar_wrong_size"                : "Billedet skal være %1x%2 pixels",
+    "UI_TICS_Avatar_format"                    : "PNG eller JPG, %1x%2 pixels",
     "UI_TICS_Avatar_send"                      : "Send til godkendelse",
     "UI_TICS_Avatar_sent"                      : "Sendt til godkendelse: %1",
     "UI_TICS_Avatar_already_sent"              : "Dette billede er allerede sendt",

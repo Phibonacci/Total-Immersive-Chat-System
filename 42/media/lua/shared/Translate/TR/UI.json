@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Avatar klasöründeki resimler",
     "UI_TICS_Avatar_empty"                     : "Resim bulunamadı. Avatar klasörüne %1x%2 piksel boyutunda PNG veya JPG resimler koy (Klasörü aç), ardından Yenile'ye tıkla.",
     "UI_TICS_Avatar_wrong_size"                : "Resim %1x%2 piksel boyutunda olmalıdır",
+    "UI_TICS_Avatar_format"                    : "PNG veya JPG, %1x%2 piksel",
     "UI_TICS_Avatar_send"                      : "Onaya gönder",
     "UI_TICS_Avatar_sent"                      : "Onaya gönderildi: %1",
     "UI_TICS_Avatar_already_sent"              : "Bu resim zaten gönderildi",

@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "아바타 폴더의 이미지",
     "UI_TICS_Avatar_empty"                     : "이미지가 없습니다. %1x%2 픽셀 크기의 PNG 또는 JPG 이미지를 아바타 폴더 (폴더 열기) 에 넣은 뒤 새로고침을 누르세요.",
     "UI_TICS_Avatar_wrong_size"                : "이미지는 %1x%2 픽셀이어야 합니다",
+    "UI_TICS_Avatar_format"                    : "PNG 또는 JPG, %1x%2 픽셀",
     "UI_TICS_Avatar_send"                      : "승인 요청",
     "UI_TICS_Avatar_sent"                      : "승인 요청됨: %1",
     "UI_TICS_Avatar_already_sent"              : "이미 보낸 이미지입니다",

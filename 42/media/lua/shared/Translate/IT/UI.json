@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Immagini nella tua cartella avatar",
     "UI_TICS_Avatar_empty"                     : "Nessuna immagine trovata. Metti immagini PNG o JPG di %1x%2 pixel nella tua cartella avatar (Apri cartella), poi clicca su Aggiorna.",
     "UI_TICS_Avatar_wrong_size"                : "L'immagine deve essere di %1x%2 pixel",
+    "UI_TICS_Avatar_format"                    : "PNG o JPG, %1x%2 pixel",
     "UI_TICS_Avatar_send"                      : "Invia per approvazione",
     "UI_TICS_Avatar_sent"                      : "Inviata per approvazione: %1",
     "UI_TICS_Avatar_already_sent"              : "Questa immagine è già stata inviata",

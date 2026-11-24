@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "アバターフォルダ内の画像",
     "UI_TICS_Avatar_empty"                     : "画像が見つかりません。 %1x%2 ピクセルの PNG または JPG 画像をアバターフォルダ (フォルダを開く) に入れてから、 更新 をクリックしてください。",
     "UI_TICS_Avatar_wrong_size"                : "画像は %1x%2 ピクセルである必要があります",
+    "UI_TICS_Avatar_format"                    : "PNG または JPG、%1x%2 ピクセル",
     "UI_TICS_Avatar_send"                      : "承認を申請",
     "UI_TICS_Avatar_sent"                      : "承認を申請しました: %1",
     "UI_TICS_Avatar_already_sent"              : "この画像は申請済みです",

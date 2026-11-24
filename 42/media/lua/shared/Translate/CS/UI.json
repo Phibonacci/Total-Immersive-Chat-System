@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Obrázky ve složce avatarů",
     "UI_TICS_Avatar_empty"                     : "Nebyl nalezen žádný obrázek. Vlož obrázky PNG nebo JPG o rozměrech %1x%2 pixelů do složky avatarů (Otevřít složku) a pak klikni na Obnovit.",
     "UI_TICS_Avatar_wrong_size"                : "Obrázek musí mít rozměry %1x%2 pixelů",
+    "UI_TICS_Avatar_format"                    : "PNG nebo JPG, %1x%2 pixelů",
     "UI_TICS_Avatar_send"                      : "Odeslat ke schválení",
     "UI_TICS_Avatar_sent"                      : "Odesláno ke schválení: %1",
     "UI_TICS_Avatar_already_sent"              : "Tento obrázek už byl odeslán",

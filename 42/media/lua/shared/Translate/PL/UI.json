@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Obrazy w folderze awatarów",
     "UI_TICS_Avatar_empty"                     : "Nie znaleziono obrazu. Umieść obrazy PNG lub JPG o wymiarach %1x%2 pikseli w folderze awatarów (Otwórz folder), a następnie kliknij Odśwież.",
     "UI_TICS_Avatar_wrong_size"                : "Obraz musi mieć wymiary %1x%2 pikseli",
+    "UI_TICS_Avatar_format"                    : "PNG lub JPG, %1x%2 pikseli",
     "UI_TICS_Avatar_send"                      : "Wyślij do zatwierdzenia",
     "UI_TICS_Avatar_sent"                      : "Wysłano do zatwierdzenia: %1",
     "UI_TICS_Avatar_already_sent"              : "Ten obraz został już wysłany",

@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Imagens na tua pasta de avatares",
     "UI_TICS_Avatar_empty"                     : "Nenhuma imagem encontrada. Coloca imagens PNG ou JPG de %1x%2 píxeis na tua pasta de avatares (Abrir pasta) e depois clica em Atualizar.",
     "UI_TICS_Avatar_wrong_size"                : "A imagem tem de ter %1x%2 píxeis",
+    "UI_TICS_Avatar_format"                    : "PNG ou JPG, %1x%2 píxeis",
     "UI_TICS_Avatar_send"                      : "Enviar para aprovação",
     "UI_TICS_Avatar_sent"                      : "Enviada para aprovação: %1",
     "UI_TICS_Avatar_already_sent"              : "Esta imagem já foi enviada",

@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Gambar di folder avatarmu",
     "UI_TICS_Avatar_empty"                     : "Gambar tidak ditemukan. Taruh gambar PNG atau JPG berukuran %1x%2 piksel di folder avatarmu (Buka folder), lalu klik Muat ulang.",
     "UI_TICS_Avatar_wrong_size"                : "Gambar harus berukuran %1x%2 piksel",
+    "UI_TICS_Avatar_format"                    : "PNG atau JPG, %1x%2 piksel",
     "UI_TICS_Avatar_send"                      : "Kirim untuk disetujui",
     "UI_TICS_Avatar_sent"                      : "Dikirim untuk disetujui: %1",
     "UI_TICS_Avatar_already_sent"              : "Gambar ini sudah pernah dikirim",

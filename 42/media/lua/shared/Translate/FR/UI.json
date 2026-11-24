@@ -81,6 +81,7 @@
     "UI_TICS_Avatar_images"                    : "Images de votre dossier d'avatar",
     "UI_TICS_Avatar_empty"                     : "Aucune image trouvée. Placez des images PNG ou JPG de %1x%2 pixels dans votre dossier d'avatar (Ouvrir le dossier), puis cliquez sur Actualiser.",
     "UI_TICS_Avatar_wrong_size"                : "L'image doit faire %1x%2 pixels",
+    "UI_TICS_Avatar_format"                    : "PNG ou JPG, %1x%2 pixels",
     "UI_TICS_Avatar_send"                      : "Envoyer pour approbation",
     "UI_TICS_Avatar_sent"                      : "Envoyée pour approbation : %1",
     "UI_TICS_Avatar_already_sent"              : "Cette image a déjà été envoyée",

@@ -391,14 +391,21 @@ function AvatarUploadWindow:prerender()
 
     -- images of the folder
     y = TITLE_HGT + PADDING + CURRENT_SECTION_HGT + PADDING
-    self:drawText(getText('UI_TICS_Avatar_images'), PADDING, y, muted.r, muted.g, muted.b, 1, FONT)
+    local imagesLabel = getText('UI_TICS_Avatar_images')
+    self:drawText(imagesLabel, PADDING, y, muted.r, muted.g, muted.b, 1, FONT)
+    -- on the right: the format the images must have, a warning when the selected one has not
     local selected = self.selectedImage
     local texture = selected and self.grid:getTexture(selected) or nil
+    local text, color
     if selected and texture and texture:getWidth() > 0 and not IsValidSize(texture) then
-        local text = getText('UI_TICS_Avatar_wrong_size', AVATAR_WIDTH, AVATAR_HEIGHT)
-        local width = getTextManager():MeasureStringX(FONT, text)
-        self:drawText(text, self.width - PADDING - width, y, WARNING.r, WARNING.g, WARNING.b, 1, FONT)
+        text, color = getText('UI_TICS_Avatar_wrong_size', AVATAR_WIDTH, AVATAR_HEIGHT), WARNING
+    else
+        text, color = getText('UI_TICS_Avatar_format', AVATAR_WIDTH, AVATAR_HEIGHT), muted
     end
+    local maxWidth = self.width - PADDING * 3 - getTextManager():MeasureStringX(FONT, imagesLabel)
+    text = TruncateText(text, maxWidth)
+    local width = getTextManager():MeasureStringX(FONT, text)
+    self:drawText(text, self.width - PADDING - width, y, color.r, color.g, color.b, 1, FONT)
     self.sendButton:setEnable(self:canSend())
 end
 
