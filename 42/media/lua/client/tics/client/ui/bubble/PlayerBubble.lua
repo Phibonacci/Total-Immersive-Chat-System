@@ -95,8 +95,9 @@ function PlayerBubble:render()
         self:drawTextureScaled(self.playerAvatar,
             2, self:getHeight() - self.avatarHeight - 2,
             self.avatarWidth, self.avatarHeight,
-            math.min(1, self.fadingProgression + 0.35))
-    elseif self.playerModel then
+            self.fadingProgression) -- fades out with the bubble
+    elseif self.playerModel and self.fadingProgression >= 0.5 then
+        -- a 3D model cannot be transparent: it goes away halfway through the fade of the bubble
         local width = self:getWidth()
         local height = self:getHeight()
         local screenWidth = getCore():getScreenWidth()
