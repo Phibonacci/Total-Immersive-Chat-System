@@ -16,7 +16,7 @@ local RANGE = 25          -- squares around the player where names are shown
 local PADDING_X = 4
 local BACKGROUND_ALPHA = 0.45
 local LABEL_REFRESH_MS = 500 -- names and faction tags are looked up again twice a second
-local HOVER_LINGER_MS = 500  -- 'hover' mode: the name stays a moment after the mouse leaves
+local HOVER_FADE_MS = 600    -- 'hover' mode: the name fades out as soon as the mouse leaves
 local HOVER_HALF_WIDTH = 22  -- 'hover' mode: half the width of a character on screen, at zoom 1
 -- staff colors (sandbox option)
 local ADMIN_COLOR = { r = 0.92, g = 0.36, b = 0.32 }
@@ -172,12 +172,15 @@ function NameTags.render()
         local alpha = isMe and 1 or other:getAlpha(playerNum)
         local username = other:getUsername()
         local hovered = true
+        local fade = 1
         if mode == 'hover' then
             local now = getTimestampMs()
             if IsMouseOver(other) then
                 hoveredAt[username] = now
             end
-            hovered = now - (hoveredAt[username] or 0) <= HOVER_LINGER_MS
+            -- fully shown while the mouse is on them, then fading out
+            fade = 1 - (now - (hoveredAt[username] or 0)) / HOVER_FADE_MS
+            hovered = fade > 0
         end
         if hovered and (not isMe or showMine) and (seesInvisible or not other:isInvisible()) and alpha > 0.05
             and dx * dx + dy * dy <= RANGE * RANGE
@@ -192,7 +195,7 @@ function NameTags.render()
                 tag.labelAt = now
                 tag:setLabel(Label(other), StaffColor(other), FactionTag(other, me))
             end
-            tag.alpha = math.min(1, alpha)
+            tag.alpha = math.min(1, alpha) * math.min(1, fade)
             tag:render()
             shown[username] = true
         end
