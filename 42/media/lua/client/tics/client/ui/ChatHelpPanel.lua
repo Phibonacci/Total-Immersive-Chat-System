@@ -55,6 +55,13 @@ local COMMANDS = {
         command = 'language', example = 'en', text = 'UI_TICS_Help_language',
         visible = function(settings) return settings['options']['languages'] end,
     },
+    {
+        command = 'introduce', text = 'UI_TICS_Help_introduce',
+        visible = function(settings)
+            local introductions = settings['options']['introductions']
+            return introductions ~= nil and introductions['enabled'] == true
+        end,
+    },
 }
 
 local BUTTONS = {
@@ -158,7 +165,7 @@ local function CommandRows()
     for _, entry in ipairs(COMMANDS) do
         if entry.visible == nil or (settings ~= nil and entry.visible(settings)) then
             local command = FindByName(ISChat.ticsCommand, entry.command)
-            local chips = { { text = '/' .. entry.command .. ' ' .. entry.example } }
+            local chips = { { text = '/' .. entry.command .. (entry.example and (' ' .. entry.example) or '') } }
             if command and command.shortCommand then
                 table.insert(chips, { text = Trim(command.shortCommand), alias = true })
             end

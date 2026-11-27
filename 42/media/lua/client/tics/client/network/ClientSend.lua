@@ -212,8 +212,23 @@ function ClientSend.sendAdminDeleteAvatar(username, firstName, lastName)
 end
 
 -- character sheets
-function ClientSend.sendSetCharacterSheet(title, background, ooc)
-    ClientSendCommand('SetCharacterSheet', { title = title, background = background, ooc = ooc })
+function ClientSend.sendSetCharacterSheet(title, background, ooc, stranger)
+    ClientSendCommand('SetCharacterSheet', { title = title, background = background, ooc = ooc, stranger = stranger })
+end
+
+function ClientSend.sendAskIntroductions()
+    ClientSendCommand('AskIntroductions', {})
+end
+
+-- name: a false name, nil for the character name; target: one username, nil for everyone near
+function ClientSend.sendIntroduce(name, target)
+    -- 'introduce' keeps the table from being empty: empty arguments are received as nil
+    ClientSendCommand('Introduce', { introduce = true, name = name, target = target })
+end
+
+function ClientSend.sendAdminResetIntroductions()
+    -- 'reset' keeps the table from being empty: empty arguments are received as nil
+    ClientSendCommand('AdminResetIntroductions', { reset = true })
 end
 
 function ClientSend.sendAskCharacterSheet(username)

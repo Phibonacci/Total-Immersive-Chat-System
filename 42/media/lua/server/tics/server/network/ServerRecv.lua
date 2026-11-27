@@ -2,6 +2,7 @@ local AvatarManager = require('tics/server/AvatarManager')
 local Character     = require('tics/shared/utils/Character')
 local CharacterSheets = require('tics/server/CharacterSheets')
 local ChatMessage   = require('tics/server/ChatMessage')
+local Introductions = require('tics/server/Introductions')
 local KnownLanguages = require('tics/server/KnownLanguages')
 local ServerSend    = require('tics/server/network/ServerSend')
 local Radio         = require('tics/server/radio/Radio')
@@ -414,6 +415,70 @@ end
 RecvServer['LearnLanguage'] = function(player, args)
     KnownLanguages.learn(player, args['language'])
     ServerSend.KnownLanguages(player, KnownLanguages.get(player))
+end
+
+-- introductions: the characters the player's character knows
+RecvServer['AskIntroductions'] = function(player, args)
+    if Introductions.isEnabled() then
+        ServerSend.Introductions(player, Introductions.getKnown(player), Introductions.getKnownBy(player))
+    else
+        ServerSend.Introductions(player, {}, {})
+    end
+end
+
+local function IsInSayRange(player, other)
+    local range = ChatMessage.MessageTypeSettings and ChatMessage.MessageTypeSettings['say']['range'] or 15
+    local dx = other:getX() - player:getX()
+    local dy = other:getY() - player:getY()
+    return math.sqrt(dx * dx + dy * dy) <= range + 1
+end
+
+-- /introduce [name]: the players in /say range (or only args.target) now know the
+-- character by the given name, the character name when none is given
+RecvServer['Introduce'] = function(player, args)
+    if not Introductions.isEnabled() or type(args) ~= 'table' then
+        return
+    end
+    local knownAs = Introductions.cleanName(args['name'], player)
+    local listeners = {}
+    if type(args['target']) == 'string' then
+        local target = World.getPlayerByUsername(args['target'])
+        if target and target ~= player and IsInSayRange(player, target) then
+            table.insert(listeners, target)
+        end
+    else
+        local players = getOnlinePlayers()
+        for index = 0, players:size() - 1 do
+            local other = players:get(index)
+            if other:getOnlineID() ~= player:getOnlineID() and IsInSayRange(player, other) then
+                table.insert(listeners, other)
+            end
+        end
+    end
+    local stranger = CharacterSheets.getStranger(player)
+    local recipients = {}
+    for _, listener in ipairs(listeners) do
+        local entry, reverse = Introductions.introduce(player, listener, knownAs)
+        entry.stranger = stranger
+        ServerSend.Command(listener, 'Introduced', entry)
+        table.insert(recipients, reverse)
+    end
+    -- the author learns who knows them now (the introduce panel shows it)
+    ServerSend.Command(player, 'IntroductionSent', { knownAs = knownAs, count = #listeners, recipients = recipients })
+end
+
+-- /resetintroductions (admins): everybody forgets every introduction, the connected clients too
+RecvServer['AdminResetIntroductions'] = function(player, args)
+    if not Character.isAdmin(player) then
+        return
+    end
+    print('TICS info: every introduction was reset by ' .. player:getUsername())
+    Introductions.resetAll()
+    local players = getOnlinePlayers()
+    for index = 0, players:size() - 1 do
+        ServerSend.Introductions(players:get(index), {}, {})
+    end
+    ServerSend.Command(player, 'IntroductionsReset', { reset = true })
 end
 
 local function OnClientCommand(module, command, player, args)

@@ -1,11 +1,14 @@
 local AvatarManager = require('tics/client/AvatarManager')
 local LanguageManager = require('tics/client/languages/LanguageManager')
 local CharacterSheetManager = require('tics/client/CharacterSheetManager')
+local Introductions = require('tics/client/Introductions')
 local Radio = require('tics/client/Radio')
 
 local ClientRecv = {}
 
 ClientRecv['ChatMessage'] = function(args)
+    -- how strangers see the author (introductions)
+    Introductions.rememberDescription(args['author'], args['characterName'], args['stranger'])
     ISChat.onMessagePacket(args['type'], args['author'], args['characterName'],
         args['message'], args['language'], args['color'], args['hideInChat'],
         args['target'], false, args['pitch'], args['disableVerb'], args['title'])
@@ -156,7 +159,52 @@ ClientRecv['OwnPendingAvatar'] = function(args)
 end
 
 ClientRecv['CharacterSheet'] = function(args)
+    if type(args) == 'table' and type(args['firstName']) == 'string' and type(args['lastName']) == 'string' then
+        Introductions.rememberDescription(args['username'], args['firstName'] .. ' ' .. args['lastName'], args['stranger'])
+    end
     CharacterSheetManager.setSheet(args)
+end
+
+-- introductions: every character the player's character knows
+ClientRecv['Introductions'] = function(args)
+    Introductions.setKnown(args and args['known'] or {}, args and args['knownBy'] or {})
+end
+
+-- someone introduced themselves to the player's character
+ClientRecv['Introduced'] = function(args)
+    if type(args) ~= 'table' or type(args['firstName']) ~= 'string' or type(args['lastName']) ~= 'string' then
+        return
+    end
+    local name = args['firstName'] .. ' ' .. args['lastName']
+    Introductions.rememberDescription(args['username'], name, args['stranger'])
+    -- as they were seen before the introduction
+    local before = Introductions.displayName(args['username'], name)
+    Introductions.addKnown(args)
+    if ISChat.instance and before ~= args['knownAs'] then
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Intro_received', before, args['knownAs']))
+    end
+end
+
+-- answer to /resetintroductions (admins)
+ClientRecv['IntroductionsReset'] = function(args)
+    if ISChat.instance then
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Intro_reset_done'))
+    end
+end
+
+-- answer to /introduce: how many players heard it
+ClientRecv['IntroductionSent'] = function(args)
+    if type(args) ~= 'table' or ISChat.instance == nil then
+        return
+    end
+    for _, entry in pairs(args['recipients'] or {}) do
+        Introductions.addKnownBy(entry)
+    end
+    if (args['count'] or 0) == 0 then
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Intro_nobody'))
+    else
+        ISChat.sendInfoToCurrentTab(getText('UI_TICS_Intro_sent', args['knownAs'], args['count']))
+    end
 end
 
 ClientRecv['ApprovedAvatarList'] = function(args)

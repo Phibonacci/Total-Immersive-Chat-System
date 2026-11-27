@@ -95,6 +95,46 @@ option TICS.WallsMuffleSpeechEnabled
 	page = TICS,
 	translation = TICS_WallsMuffleSpeechEnabled,
 }
+option TICS.IntroductionsEnabled
+{
+	type = boolean,
+	default = false,
+
+	page = TICS,
+	translation = TICS_IntroductionsEnabled,
+}
+option TICS.IntroductionsFactionKnown
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_IntroductionsFactionKnown,
+}
+option TICS.IntroductionsStaffSeeNames
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_IntroductionsStaffSeeNames,
+}
+option TICS.NameTagsEnabled
+{
+	type = boolean,
+	default = false,
+
+	page = TICS,
+	translation = TICS_NameTagsEnabled,
+}
+option TICS.NameTagsStaffColors
+{
+	type = boolean,
+	default = false,
+
+	page = TICS,
+	translation = TICS_NameTagsStaffColors,
+}
 option TICS.BubbleTimerInSeconds
 {
 	type = integer,

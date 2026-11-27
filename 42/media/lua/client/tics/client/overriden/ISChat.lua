@@ -8,6 +8,9 @@ local ChatHelpPanel          = require('tics/client/ui/ChatHelpPanel')
 local RpLog                  = require('tics/client/RpLog')
 local Journal                = require('tics/client/journal/Journal')
 local SpeechEffects          = require('tics/client/speech/SpeechEffects')
+local Introductions          = require('tics/client/Introductions')
+local NameTags               = require('tics/client/ui/NameTags')
+local IntroducePanel         = require('tics/client/ui/IntroducePanel')
 local JournalWindow          = require('tics/client/ui/JournalWindow')
 local File                   = require('tics/shared/utils/File')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
@@ -58,6 +61,14 @@ ISChat.ticsCommand[1] = { name = 'color', command = '/color', shortCommand = nil
 ISChat.ticsCommand[2] = { name = 'pitch', command = '/pitch', shortCommand = nil }
 ISChat.ticsCommand[3] = { name = 'roll', command = '/roll', shortCommand = nil }
 ISChat.ticsCommand[4] = { name = 'language', command = '/language', shortCommand = '/la' }
+ISChat.ticsCommand[5] = { name = 'introduce', command = '/introduce', shortCommand = nil }
+ISChat.ticsCommand[6] = { name = 'resetintroductions', command = '/resetintroductions', shortCommand = nil }
+
+-- channels where characters are called by the name they gave (introductions)
+local IntroductionChannels = {
+    whisper = true, low = true, say = true, yell = true, me = true, ['do'] = true,
+    faction = true, safehouse = true,
+}
 
 
 ISChat.defaultTabStream    = {}
@@ -466,6 +477,8 @@ local function InitGlobalModData()
     end
     -- personal RP log: enabled by default
     ISChat.instance.isRpLogEnabled = ticsModData['isRpLogEnabled'] ~= false
+    -- names above characters (when the server draws them): 'always', 'hover' or 'never'
+    ISChat.instance.nameTagsMode = ticsModData['nameTagsMode'] or 'always'
     -- timestamp and tags: enabled by default (the vanilla game options default to disabled),
     -- the player's choice is saved with the other TICS settings
     if ticsModData['showTimestamp'] == nil then
@@ -553,6 +566,13 @@ local function CreateChat()
 end
 
 Events.OnGameStart.Add(CreateChat)
+
+-- a new character (after a death) knows nobody: ask the server again (introductions)
+Events.OnCreatePlayer.Add(function()
+    if TicsServerSettings ~= nil then
+        ClientSend.sendAskIntroductions()
+    end
+end)
 
 local function ProcessChatCommand(stream, command)
     if TicsServerSettings and TicsServerSettings[stream.name] == false then
@@ -798,6 +818,20 @@ local function ProcessTicsCommand(ticsCommand, message)
                 'roll command expects the format: "/roll xdy" with x and y numbers and x from 1 to 20')
             return false
         end
+    elseif ticsCommand['name'] == 'introduce' then
+        -- /introduce: the name of the character, /introduce Johnny: a false name
+        if not Introductions.isEnabled() then
+            ISChat.sendErrorToCurrentTab(getText('UI_TICS_Intro_disabled'))
+            return false
+        end
+        ClientSend.sendIntroduce(arguments, nil)
+    elseif ticsCommand['name'] == 'resetintroductions' then
+        -- admins: everybody forgets every introduction (tests, fresh start)
+        if not Character.isAdmin(getPlayer()) then
+            ISChat.sendErrorToCurrentTab(getText('UI_TICS_Intro_admin_only'))
+            return false
+        end
+        ClientSend.sendAdminResetIntroductions()
     elseif ticsCommand['name'] == 'language' then
         if ProcessLanguageCommand(arguments) == false then
             ISChat.sendErrorToCurrentTab(
@@ -1312,6 +1346,9 @@ function ISChat.onDiceResult(author, characterName, diceCount, diceType, addCoun
     if TicsServerSettings and not TicsServerSettings['options']['showCharacterName'] then
         name = author
     end
+    if Introductions.isEnabled() then
+        name = Introductions.displayName(author, characterName) or name
+    end
     local message = name .. ' rolled ' .. diceCount .. 'd' .. diceType
     if addCount ~= nil then
         message = message .. '+' .. addCount
@@ -1352,6 +1389,9 @@ function ISChat.onMessagePacket(type, author, characterName, message, language, 
     local name = characterName
     if TicsServerSettings and not TicsServerSettings['options']['showCharacterName'] then
         name = author
+    end
+    if IntroductionChannels[type] and Introductions.isEnabled() and not isFromDiscord then
+        name = Introductions.displayName(author, characterName) or name
     end
 
     local updatedMessage = message
@@ -1584,6 +1624,10 @@ function ISChat.onRadioPacket(type, author, characterName, message, language, co
     local name = characterName
     if TicsServerSettings and not TicsServerSettings['options']['showCharacterName'] then
         name = author
+    end
+    -- a voice on the radio: known by the name it gave, "unknown voice" otherwise (introductions)
+    if Introductions.isEnabled() then
+        name = Introductions.displayName(author, characterName, { radio = true }) or name
     end
     local updatedMessage = message
     if TicsServerSettings ~= nil and TicsServerSettings['options']['capitalize'] == true then
@@ -1853,6 +1897,7 @@ function ISChat:prerender()
     instance:createValidationWindowButton()
     instance:createCharacterSheetButton()
     instance:createJournalButton()
+    instance:createIntroduceButton()
     instance:updateInputChipBackspace()
     instance:updateInputShortcuts()
 
@@ -1892,6 +1937,10 @@ function ISChat:prerender()
     end
     if instance.contextBubble then
         instance.contextBubble:render()
+    end
+    local ok, err = pcall(NameTags.render)
+    if not ok then
+        print('TICS error: NameTags: ' .. tostring(err))
     end
     ChatUI.prerender(self)
 end
@@ -2088,6 +2137,7 @@ ISChat.onRecvSandboxVars = function(messageTypeSettings)
     ClientSend.sendKnownAvatars(knownAvatars)
     -- the server answered, it is ready to receive commands
     LanguageManager:askKnownLanguages()
+    ClientSend.sendAskIntroductions()
 
     TicsServerSettings = messageTypeSettings -- a global
 
@@ -2311,6 +2361,31 @@ function ISChat:createCharacterSheetButton()
         button:setUIName('character sheet button')
         self:addChild(button)
         self.characterSheetButton = button
+    end
+end
+
+-- title bar button opening the introduce panel, while the server enables introductions
+function ISChat:createIntroduceButton()
+    if not Introductions.isEnabled() then
+        if self.introduceButton then
+            self:removeChild(self.introduceButton)
+            self.introduceButton = nil
+        end
+        if self.introducePanel and self.introducePanel:isOpen() then
+            self.introducePanel:close()
+        end
+        return
+    end
+    if self.introduceButton == nil then
+        local th = self:titleBarHeight()
+        local button = ISButton:new(0, 1, th, th, '', self, function() IntroducePanel.toggle(self) end)
+        button.anchorRight = true
+        button.anchorLeft = false
+        button:initialise()
+        button:setImage(getTexture(ChatTheme.icons.introduce))
+        button:setUIName('chat introduce button')
+        self:addChild(button)
+        self.introduceButton = button
     end
 end
 
@@ -2730,6 +2805,33 @@ function ISChat.onToggleRadioIcon()
     if ISChat.instance.radioRangeIndicator then
         ISChat.instance.radioRangeIndicator.showIcon = ISChat.instance.isRadioIconEnabled
     end
+end
+
+-- name given in the introduce panel, remembered per character (a false identity stays one
+-- click away), the character name by default
+local function IntroduceNameKey()
+    local firstName, lastName = Character.getFirstAndLastName(getPlayer())
+    return 'introduceAs_' .. firstName .. '_' .. lastName, firstName .. ' ' .. lastName
+end
+
+function ISChat.getIntroduceName()
+    local key, characterName = IntroduceNameKey()
+    local saved = ISChat.instance and ISChat.instance.ticsModData and ISChat.instance.ticsModData[key]
+    return (saved ~= nil and saved ~= '') and saved or characterName
+end
+
+function ISChat.setIntroduceName(name)
+    local key = IntroduceNameKey()
+    if ISChat.instance and ISChat.instance.ticsModData and ISChat.instance.ticsModData[key] ~= name then
+        ISChat.instance.ticsModData[key] = name
+        SaveTicsModData()
+    end
+end
+
+function ISChat.onNameTagsModeChange(mode)
+    ISChat.instance.nameTagsMode = mode
+    ISChat.instance.ticsModData['nameTagsMode'] = mode
+    SaveTicsModData()
 end
 
 function ISChat.onTogglePortrait()

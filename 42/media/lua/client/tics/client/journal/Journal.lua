@@ -16,6 +16,7 @@ local Appearance = require('tics/client/journal/Appearance')
 local CharacterSheetManager = require('tics/client/CharacterSheetManager')
 local ClientSettings = require('tics/client/ClientSettings')
 local Character = require('tics/shared/utils/Character')
+local Introductions = require('tics/client/Introductions')
 local World = require('tics/shared/utils/World')
 
 local Journal = {}
@@ -128,12 +129,14 @@ function Journal.makeId(username, name)
     return SafeName(username .. '_' .. name)
 end
 
+-- description (added later, optional): how they look to strangers, for introductions
 local INDEX_FIELDS = { 'id', 'username', 'name', 'firstSeen', 'lastSeen', 'favorite', 'sceneLines',
-    'hasSheet', 'title', 'sheetUpdated', 'sheetGameDate' }
+    'hasSheet', 'title', 'sheetUpdated', 'sheetGameDate', 'description' }
+local REQUIRED_FIELDS = 11
 
 local function ParsePerson(line)
     local fields = Split(line)
-    if #fields < #INDEX_FIELDS then
+    if #fields < REQUIRED_FIELDS then
         return nil
     end
     return {
@@ -148,13 +151,14 @@ local function ParsePerson(line)
         title = fields[9],
         sheetUpdated = tonumber(fields[10]) or 0,
         sheetGameDate = fields[11],
+        description = fields[12] or '',
     }
 end
 
 local function FormatPerson(person)
     return Join({ person.id, person.username, person.name, person.firstSeen, person.lastSeen,
         person.favorite and 1 or 0, person.sceneLines, person.hasSheet and 1 or 0, person.title,
-        person.sheetUpdated, person.sheetGameDate })
+        person.sheetUpdated, person.sheetGameDate, person.description or '' })
 end
 
 function Journal.save()
@@ -219,6 +223,7 @@ local function GetOrCreate(username, name, now)
         person = {
             id = id, username = username, name = name, firstSeen = now, lastSeen = now,
             favorite = false, sceneLines = 0, hasSheet = false, title = '', sheetUpdated = 0, sheetGameDate = '',
+            description = '',
         }
         people[id] = person
         dirty = true
@@ -493,6 +498,11 @@ function Journal.addLine(text, username, name, isRadio)
         local person = GetOrCreate(username, name, now)
         person.lastSeen = now
         authorId = person.id
+        -- how they look to strangers, kept for when they are offline (introductions)
+        local description = Introductions.getDescription(username, name)
+        if description and description ~= person.description then
+            person.description = description
+        end
         if not isRadio then
             recentSpeakers[authorId] = now
             RefreshSheet(person)

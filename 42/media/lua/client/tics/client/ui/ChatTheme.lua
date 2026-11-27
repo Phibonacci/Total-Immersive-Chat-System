@@ -78,6 +78,7 @@ ChatTheme.icons = {
     book    = 'media/ui/tics/icons/chat-book.png',
     star    = 'media/ui/tics/icons/chat-star.png',
     search  = 'media/ui/tics/icons/chat-search.png',
+    introduce = 'media/ui/tics/icons/chat-introduce.png',
 }
 
 return ChatTheme

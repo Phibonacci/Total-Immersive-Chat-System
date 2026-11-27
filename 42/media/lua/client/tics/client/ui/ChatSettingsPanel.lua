@@ -5,6 +5,7 @@
 
 local ChatTheme = require('tics/client/ui/ChatTheme')
 local ChatPopup = require('tics/client/ui/ChatPopup')
+local NameTags = require('tics/client/ui/NameTags')
 
 local ChatSettingsPanel = ChatPopup:derive('TicsChatSettingsPanel')
 
@@ -92,6 +93,20 @@ local CHOICES = {
         isCurrent = function(chat, value) return chat.chatFont == value end,
         set = function(chat, value) ISChat.onFontSizeChange(chat, value) end,
     },
+    -- names above characters, only while the server draws them
+    nameTags = {
+        text = 'UI_TICS_Settings_name_tags',
+        options = function()
+            return {
+                { value = 'always', label = getText('UI_TICS_Settings_always') },
+                { value = 'hover', label = getText('UI_TICS_Settings_hover') },
+                { value = 'never', label = getText('UI_TICS_Settings_never') },
+            }
+        end,
+        isCurrent = function(chat, value) return (chat.nameTagsMode or 'always') == value end,
+        set = function(chat, value) ISChat.onNameTagsModeChange(value) end,
+        visible = function() return NameTags.isEnabled() end,
+    },
     minOpacity = {
         text = 'UI_TICS_Settings_min_opacity',
         options = OpacityOptions,
@@ -128,6 +143,7 @@ local COLUMNS = {
         { switch = 'timestamps' },
         { switch = 'tags' },
         { choice = 'font' },
+        { choice = 'nameTags' },
         { section = 'UI_TICS_Settings_behaviour' },
         { switch = 'hideWindow' },
         { switch = 'voices' },
@@ -173,14 +189,16 @@ function ChatSettingsPanel:layout()
                 end
             elseif row.choice then
                 local def = CHOICES[row.choice]
-                local text = getText(def.text)
-                local options = def.options()
-                local segmentWidth = 0
-                for _, option in ipairs(options) do
-                    segmentWidth = math.max(segmentWidth, textManager:MeasureStringX(FONT, option.label) + SEGMENT_PADDING)
+                if def.visible == nil or def.visible() then
+                    local text = getText(def.text)
+                    local options = def.options()
+                    local segmentWidth = 0
+                    for _, option in ipairs(options) do
+                        segmentWidth = math.max(segmentWidth, textManager:MeasureStringX(FONT, option.label) + SEGMENT_PADDING)
+                    end
+                    table.insert(rows, { choice = def, text = text, options = options })
+                    width = math.max(width, textManager:MeasureStringX(FONT, text), segmentWidth * #options)
                 end
-                table.insert(rows, { choice = def, text = text, options = options })
-                width = math.max(width, textManager:MeasureStringX(FONT, text), segmentWidth * #options)
             end
         end
         table.insert(columns, { rows = rows, width = width })

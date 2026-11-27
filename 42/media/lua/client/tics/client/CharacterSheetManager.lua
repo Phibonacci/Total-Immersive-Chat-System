@@ -10,6 +10,7 @@ CharacterSheetManager.MaxLengths = {
     title = 60,
     background = 3000,
     ooc = 1000,
+    stranger = 60, -- how strangers see the character (introductions)
 }
 
 local sheets = {}
@@ -28,6 +29,7 @@ function CharacterSheetManager.setSheet(sheet)
     sheet.title = sheet.title or ''
     sheet.background = sheet.background or ''
     sheet.ooc = sheet.ooc or ''
+    sheet.stranger = sheet.stranger or ''
     sheet.receivedAt = getTimestampMs()
     sheets[sheet.username:lower()] = sheet
     for _, listener in ipairs(listeners) do
@@ -43,8 +45,8 @@ function CharacterSheetManager.ask(username)
     ClientSend.sendAskCharacterSheet(username)
 end
 
-function CharacterSheetManager.save(title, background, ooc)
-    ClientSend.sendSetCharacterSheet(title, background, ooc)
+function CharacterSheetManager.save(title, background, ooc, stranger)
+    ClientSend.sendSetCharacterSheet(title, background, ooc, stranger)
 end
 
 function CharacterSheetManager.isEnabled()

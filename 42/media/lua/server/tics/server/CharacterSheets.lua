@@ -12,6 +12,7 @@ CharacterSheets.MaxLengths = {
     title = 60,
     background = 3000,
     ooc = 1000,
+    stranger = 60, -- how strangers see the character (introductions)
 }
 
 local function GetKey(username, firstName, lastName)
@@ -39,14 +40,21 @@ local function Clean(text, maxLength, singleLine)
     return text
 end
 
--- { title, background, ooc }, empty strings when not written
+-- { title, background, ooc, stranger }, empty strings when not written
 function CharacterSheets.get(player)
     local sheet = ModData.getOrCreate(MOD_DATA_KEY)[GetPlayerKey(player)]
     return {
         title = sheet and sheet.title or '',
         background = sheet and sheet.background or '',
         ooc = sheet and sheet.ooc or '',
+        stranger = sheet and sheet.stranger or '',
     }
+end
+
+-- how strangers see the character, '' when not written (introductions)
+function CharacterSheets.getStranger(player)
+    local sheet = ModData.getOrCreate(MOD_DATA_KEY)[GetPlayerKey(player)]
+    return sheet and sheet.stranger or ''
 end
 
 function CharacterSheets.getTitle(player)
@@ -60,8 +68,9 @@ function CharacterSheets.set(player, sheet)
         title = Clean(sheet.title, CharacterSheets.MaxLengths.title, true),
         background = Clean(sheet.background, CharacterSheets.MaxLengths.background, false),
         ooc = Clean(sheet.ooc, CharacterSheets.MaxLengths.ooc, false),
+        stranger = Clean(sheet.stranger, CharacterSheets.MaxLengths.stranger, true),
     }
-    if cleaned.title == '' and cleaned.background == '' and cleaned.ooc == '' then
+    if cleaned.title == '' and cleaned.background == '' and cleaned.ooc == '' and cleaned.stranger == '' then
         all[GetPlayerKey(player)] = nil
     else
         all[GetPlayerKey(player)] = cleaned

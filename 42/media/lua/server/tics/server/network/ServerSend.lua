@@ -42,7 +42,15 @@ function ServerSend.CharacterSheet(player, target, sheet)
         title = sheet.title,
         background = sheet.background,
         ooc = sheet.ooc,
+        stranger = sheet.stranger,
     })
+end
+
+-- known: the characters the character of player was introduced to, knownBy: the characters
+-- who know them; arrays of { username, firstName, lastName, knownAs }
+function ServerSend.Introductions(player, known, knownBy)
+    knownBy = knownBy or {}
+    ServerSend.Command(player, 'Introductions', { count = #known, known = known, knownByCount = #knownBy, knownBy = knownBy })
 end
 
 function ServerSend.Print(player, message)

@@ -4,6 +4,8 @@
 local Character = require('tics/shared/utils/Character')
 local CharacterSheetManager = require('tics/client/CharacterSheetManager')
 local CharacterSheetWindow = require('tics/client/ui/CharacterSheetWindow')
+local ClientSend = require('tics/client/network/ClientSend')
+local Introductions = require('tics/client/Introductions')
 
 local function GetSayRange()
     return TicsServerSettings and TicsServerSettings['say'] and TicsServerSettings['say']['range'] or 15
@@ -39,7 +41,9 @@ local function FindPlayers(me, worldobjects)
 end
 
 local function OnFillWorldObjectContextMenu(playerNum, context, worldobjects, test)
-    if test or not CharacterSheetManager.isEnabled() then
+    local sheets = CharacterSheetManager.isEnabled()
+    local introductions = Introductions.isEnabled()
+    if test or not (sheets or introductions) then
         return
     end
     local me = getSpecificPlayer(playerNum)
@@ -51,15 +55,26 @@ local function OnFillWorldObjectContextMenu(playerNum, context, worldobjects, te
         local dx = other:getX() - me:getX()
         local dy = other:getY() - me:getY()
         if math.sqrt(dx * dx + dy * dy) <= range then
-            local name = other:getUsername()
-            if TicsServerSettings and TicsServerSettings['options']['showCharacterName'] then
-                local firstName, lastName = Character.getFirstAndLastName(other)
-                name = firstName .. ' ' .. lastName
-            end
             local username = other:getUsername()
-            context:addOption(getText('UI_TICS_Sheet_examine', name), nil, function()
-                CharacterSheetWindow.open(username)
-            end)
+            local firstName, lastName = Character.getFirstAndLastName(other)
+            local characterName = firstName .. ' ' .. lastName
+            local name = username
+            if introductions then
+                -- the name the player's character knows them by, or how they look
+                name = Introductions.displayName(username, characterName, { lowercase = true })
+            elseif TicsServerSettings and TicsServerSettings['options']['showCharacterName'] then
+                name = characterName
+            end
+            if sheets then
+                context:addOption(getText('UI_TICS_Sheet_examine', name), nil, function()
+                    CharacterSheetWindow.open(username)
+                end)
+            end
+            if introductions then
+                context:addOption(getText('UI_TICS_Intro_context', name), nil, function()
+                    ClientSend.sendIntroduce(nil, username)
+                end)
+            end
         end
     end
 end

@@ -78,14 +78,21 @@ function ChatPopup:isOverOwner()
     return self.owner ~= nil and self.owner:isVisible() and self.owner:isMouseOver()
 end
 
+-- a click on a child of the popup (a text field) reaches the popup as a click outside
+function ChatPopup:isMouseInside()
+    local mouseX, mouseY = getMouseX(), getMouseY()
+    local x, y = self:getAbsoluteX(), self:getAbsoluteY()
+    return mouseX >= x and mouseX < x + self.width and mouseY >= y and mouseY < y + self.height
+end
+
 function ChatPopup:onMouseDownOutside(x, y)
-    if not self:isOverOwner() then
+    if not self:isOverOwner() and not self:isMouseInside() then
         self:close()
     end
 end
 
 function ChatPopup:onRightMouseDownOutside(x, y)
-    if not self:isOverOwner() then
+    if not self:isOverOwner() and not self:isMouseInside() then
         self:close()
     end
 end

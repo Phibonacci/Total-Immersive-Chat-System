@@ -65,6 +65,9 @@ local function GetTitleButtons(self)
     if self.journalButton then
         table.insert(buttons, self.journalButton)
     end
+    if self.introduceButton then
+        table.insert(buttons, self.introduceButton)
+    end
     if self.characterSheetButton then
         table.insert(buttons, self.characterSheetButton)
     end
@@ -90,6 +93,8 @@ local function IsButtonActive(self, button)
         return self.helpPanel ~= nil and self.helpPanel:isOpen() -- help open
     elseif button == self.journalButton then
         return JournalWindow.isOpen()
+    elseif button == self.introduceButton then
+        return self.introducePanel ~= nil and self.introducePanel:isOpen()
     elseif button == self.characterSheetButton then
         return CharacterSheetWindow.isOpen(getPlayer():getUsername())
     elseif button == self.avatarUploadButton then

@@ -12,6 +12,7 @@ local AvatarManager = require('tics/client/AvatarManager')
 local ChatTheme = require('tics/client/ui/ChatTheme')
 local AvatarIO = require('tics/shared/utils/AvatarIO')
 local File = require('tics/shared/utils/File')
+local Introductions = require('tics/client/Introductions')
 local Journal = require('tics/client/journal/Journal')
 
 local JournalWindow = ISPanel:derive('TicsJournalWindow')
@@ -113,6 +114,13 @@ local function TimeAgo(ms, now)
         return getText('UI_TICS_Journal_weeks', math.floor(diff / (7 * DAY_MS)))
     end
     return getText('UI_TICS_Journal_months', math.floor(diff / (30 * DAY_MS)))
+end
+
+-- the name the player's character knows them by, their description for strangers
+-- (introductions), their character name otherwise
+local function Shown(person, lowercase)
+    return Introductions.displayName(person.username, person.name,
+        { description = person.description, lowercase = lowercase }) or person.name
 end
 
 local function Initials(name)
@@ -309,7 +317,7 @@ local function Matches(person, query)
     local function Has(text)
         return text ~= nil and text:lower():find(query, 1, true) ~= nil
     end
-    return Has(person.name) or Has(person.title) or Has(person.background) or Has(person.ooc)
+    return Has(Shown(person)) or Has(person.title) or Has(person.background) or Has(person.ooc)
 end
 
 -- rows of the list: { group = text } and { person = person }, with their y position
@@ -459,7 +467,7 @@ function JournalWindow:buildPane(resetScroll)
             Paragraphs(ooc ~= '' and ooc or '-')
         else
             y = y + 4
-            for _, line in ipairs(WrapText(getText('UI_TICS_Journal_no_sheet_text', person.name), width)) do
+            for _, line in ipairs(WrapText(getText('UI_TICS_Journal_no_sheet_text', Shown(person, true)), width)) do
                 table.insert(items, { text = line, x = 0, y = y, muted = true })
                 y = y + fontHeight
             end
@@ -618,7 +626,7 @@ function JournalWindow:renderRow(person, y, hovered, mouseX)
     self:drawTextRight(seen, self.sideWidth - 10, y + 4, muted.r, muted.g, muted.b, 1, FONT)
     local textX = 28
     local active = ChatTheme.textActive
-    self:drawText(Truncate(person.name, self.sideWidth - textX - seenWidth - 18), textX, y + 4, active.r, active.g, active.b, 1, FONT)
+    self:drawText(Truncate(Shown(person), self.sideWidth - textX - seenWidth - 18), textX, y + 4, active.r, active.g, active.b, 1, FONT)
     local title = person.hasSheet and (person.title ~= '' and person.title or '-') or getText('UI_TICS_Journal_no_sheet_row')
     self:drawText(Truncate(title, self.sideWidth - textX - 10), textX, y + 4 + fontHeight, muted.r, muted.g, muted.b, 1, FONT)
 end
@@ -646,14 +654,14 @@ function JournalWindow:renderMain(mouseX, mouseY)
         self:drawTextureScaled(self.avatar, portrait.x, portrait.y, portrait.width, portrait.height, 1, 1, 1, 1)
     elseif self.portraitMode == 'initials' then
         self:drawRect(portrait.x, portrait.y, portrait.width, portrait.height, 1, SetColor(ChatTheme.chip))
-        self:drawTextCentre(Initials(person.name), portrait.x + portrait.width / 2, portrait.y + (portrait.height - getTextManager():getFontHeight(NAME_FONT)) / 2,
+        self:drawTextCentre(Initials(Shown(person)), portrait.x + portrait.width / 2, portrait.y + (portrait.height - getTextManager():getFontHeight(NAME_FONT)) / 2,
             muted.r, muted.g, muted.b, 1, NAME_FONT)
     end
     local x = portrait.x + portrait.width + 12
     local width = self.starArea.x - x - 8
     local y = self.whoY
     local active = ChatTheme.textActive
-    self:drawText(Truncate(person.name, width, NAME_FONT), x, y, active.r, active.g, active.b, 1, NAME_FONT)
+    self:drawText(Truncate(Shown(person), width, NAME_FONT), x, y, active.r, active.g, active.b, 1, NAME_FONT)
     y = y + getTextManager():getFontHeight(NAME_FONT) + 2
     if person.hasSheet and person.title ~= '' then
         local hover = ChatTheme.textHover

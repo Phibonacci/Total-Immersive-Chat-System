@@ -14,6 +14,7 @@ local AvatarManager = require('tics/client/AvatarManager')
 local Character = require('tics/shared/utils/Character')
 local CharacterSheetManager = require('tics/client/CharacterSheetManager')
 local ChatTheme = require('tics/client/ui/ChatTheme')
+local Introductions = require('tics/client/Introductions')
 local ClientSend = require('tics/client/network/ClientSend')
 local World = require('tics/shared/utils/World')
 
@@ -34,6 +35,8 @@ local AVATAR_HEIGHT = 80
 local LABEL_HGT = FONT_HGT + 4
 local BACKGROUND_HGT = 170
 local OOC_HGT = 90
+-- "How strangers see you", shown while introductions are enabled
+local STRANGER_ROW_HGT = LABEL_HGT + BUTTON_HGT + PADDING
 
 -- the window open on each sheet (one per username)
 local openWindows = {}
@@ -86,6 +89,15 @@ local function SetReadOnlyText(panel, text)
     panel:setYScroll(0)
 end
 
+-- the name in the title: the one the player's character knows them by (introductions)
+function CharacterSheetWindow:getShownName()
+    local name = self:getCharacterName()
+    if self.isOwn or name == self.username then
+        return name
+    end
+    return Introductions.displayName(self.username, name, { lowercase = true })
+end
+
 function CharacterSheetWindow:getCharacterName()
     local sheet = CharacterSheetManager.getSheet(self.username)
     if sheet and sheet.firstName then
@@ -118,12 +130,20 @@ function CharacterSheetWindow:createChildren()
     if self.isOwn then
         self.titleEntry = CreateEntry(self, x, y, width, BUTTON_HGT, limits.title, false)
         y = y + BUTTON_HGT + PADDING + LABEL_HGT
+        if self.showStranger then
+            self.strangerEntry = CreateEntry(self, x, y, width, BUTTON_HGT, limits.stranger, false)
+            y = y + STRANGER_ROW_HGT
+        end
         self.backgroundEntry = CreateEntry(self, x, y, width, BACKGROUND_HGT, limits.background, true)
         y = y + BACKGROUND_HGT + PADDING + LABEL_HGT
         self.oocEntry = CreateEntry(self, x, y, width, OOC_HGT, limits.ooc, true)
     else
         self.titleY = y
         y = y + BUTTON_HGT + PADDING + LABEL_HGT
+        if self.showStranger then
+            self.strangerY = y
+            y = y + STRANGER_ROW_HGT
+        end
         self.backgroundText = CreateReadOnlyText(self, x, y, width, BACKGROUND_HGT)
         y = y + BACKGROUND_HGT + PADDING + LABEL_HGT
         self.oocText = CreateReadOnlyText(self, x, y, width, OOC_HGT)
@@ -153,6 +173,9 @@ function CharacterSheetWindow:updateFromSheet()
         if not self.filled then
             self.filled = true
             self.titleEntry:setText(sheet.title)
+            if self.strangerEntry then
+                self.strangerEntry:setText(sheet.stranger or '')
+            end
             self.backgroundEntry:setText(sheet.background)
             self.oocEntry:setText(sheet.ooc)
         end
@@ -164,7 +187,14 @@ function CharacterSheetWindow:updateFromSheet()
 end
 
 function CharacterSheetWindow:onSave()
-    CharacterSheetManager.save(self.titleEntry:getText(), self.backgroundEntry:getText(), self.oocEntry:getText())
+    local stranger = self.strangerEntry and self.strangerEntry:getText() or nil
+    if stranger == nil then
+        -- not shown (introductions disabled): keep the saved one
+        local sheet = CharacterSheetManager.getSheet(self.username)
+        stranger = sheet and sheet.stranger or ''
+    end
+    CharacterSheetManager.save(self.titleEntry:getText(), self.backgroundEntry:getText(), self.oocEntry:getText(),
+        stranger)
     self.status = getText('UI_TICS_Sheet_saved')
 end
 
@@ -198,7 +228,7 @@ function CharacterSheetWindow:prerender()
     self:drawRect(0, 0, self.width, TITLE_HGT, 1, titleBar.r, titleBar.g, titleBar.b)
     self:drawRect(0, TITLE_HGT - 1, self.width, 1, 1, border.r, border.g, border.b)
     self:drawRectBorder(0, 0, self.width, self.height, 1, border.r, border.g, border.b)
-    self:drawText(getText('UI_TICS_Sheet_title', self:getCharacterName()), PADDING, (TITLE_HGT - FONT_HGT) / 2,
+    self:drawText(getText('UI_TICS_Sheet_title', self:getShownName()), PADDING, (TITLE_HGT - FONT_HGT) / 2,
         active.r, active.g, active.b, 1, FONT)
 
     -- appearance: 3D model, and the avatar when custom portraits are used
@@ -227,6 +257,10 @@ function CharacterSheetWindow:prerender()
     local y = TITLE_HGT + PADDING
     self:drawText(getText('UI_TICS_Sheet_field_title'), x, y, muted.r, muted.g, muted.b, 1, FONT)
     y = y + LABEL_HGT + BUTTON_HGT + PADDING
+    if self.showStranger then
+        self:drawText(getText('UI_TICS_Sheet_field_stranger'), x, y, muted.r, muted.g, muted.b, 1, FONT)
+        y = y + STRANGER_ROW_HGT
+    end
     self:drawText(getText('UI_TICS_Sheet_field_background'), x, y, muted.r, muted.g, muted.b, 1, FONT)
     y = y + LABEL_HGT + BACKGROUND_HGT + PADDING
     self:drawText(getText('UI_TICS_Sheet_field_ooc'), x, y, muted.r, muted.g, muted.b, 1, FONT)
@@ -239,6 +273,10 @@ function CharacterSheetWindow:prerender()
             titleText = '-'
         end
         self:drawText(titleText, x, self.titleY + (BUTTON_HGT - FONT_HGT) / 2, active.r, active.g, active.b, 1, FONT)
+        if self.strangerY then
+            local stranger = loaded and (sheet.stranger ~= '' and sheet.stranger or '-') or ''
+            self:drawText(stranger, x, self.strangerY + (BUTTON_HGT - FONT_HGT) / 2, active.r, active.g, active.b, 1, FONT)
+        end
     end
 
     if self.status then
@@ -256,9 +294,12 @@ end
 function CharacterSheetWindow:new(username, isOwn)
     local x = getCore():getScreenWidth() / 2 - WIDTH / 2
     local y = getCore():getScreenHeight() / 2 - HEIGHT / 2
-    local o = ISPanel.new(self, x, y, WIDTH, HEIGHT)
+    local showStranger = Introductions.isEnabled()
+    local height = HEIGHT + (showStranger and STRANGER_ROW_HGT or 0)
+    local o = ISPanel.new(self, x, y - (height - HEIGHT) / 2, WIDTH, height)
     o.moveWithMouse = true
     o.background = false
+    o.showStranger = showStranger
     o.username = username
     o.isOwn = isOwn
     o.character = World.getPlayerByUsername(username)

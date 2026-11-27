@@ -177,6 +177,13 @@ local function SetMessageTypeSettings()
             ['portrait'] = SandboxVars.TICS.BubblePortrait,
             ['characterSheet'] = SandboxVars.TICS.CharacterSheetEnabled,
             ['journal'] = SandboxVars.TICS.JournalEnabled,
+            ['nameTags'] = SandboxVars.TICS.NameTagsEnabled,
+            ['nameTagsStaffColors'] = SandboxVars.TICS.NameTagsStaffColors,
+            ['introductions'] = {
+                ['enabled'] = SandboxVars.TICS.IntroductionsEnabled,
+                ['factionKnown'] = SandboxVars.TICS.IntroductionsFactionKnown,
+                ['staffSeeNames'] = SandboxVars.TICS.IntroductionsStaffSeeNames,
+            },
             ['speechEffects'] = {
                 ['drunk'] = SandboxVars.TICS.SpeechDrunkEnabled,
                 ['panic'] = SandboxVars.TICS.SpeechPanicEnabled,
@@ -597,6 +604,10 @@ function ChatMessage.ProcessMessage(player, args, packetType, sendError)
     -- title of the author's character sheet, shown in the bubbles
     if SandboxVars.TICS.CharacterSheetEnabled then
         args.title = CharacterSheets.getTitle(player)
+    end
+    -- how strangers see the author (introductions)
+    if SandboxVars.TICS.IntroductionsEnabled then
+        args.stranger = CharacterSheets.getStranger(player)
     end
 
     if args.type == 'general' and
