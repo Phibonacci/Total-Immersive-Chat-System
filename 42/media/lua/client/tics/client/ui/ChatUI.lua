@@ -27,10 +27,14 @@ end
 -- - chromeAlpha: opacity of the window itself (background, title bar, tabs, buttons, input)
 -- - hudWeight: 0 when the window is shown, 1 when only the messages are shown (HUD mode)
 function ChatUI.makeFade(self, fraction)
+    -- the tutorial points at the window and its buttons: the window stays shown meanwhile
+    if ChatUI.forceVisible then
+        fraction = 1
+    end
     local chromeAlpha = self:calcAlpha(0, 1, fraction)
 
     local hudTarget = 0
-    if self.isHudEnabled and not ISChat.focused and not self:isMouseOver() then
+    if self.isHudEnabled and not ISChat.focused and not self:isMouseOver() and not ChatUI.forceVisible then
         hudTarget = 1 - fraction
         if self.fadeTime == nil or self.fadeTime <= 0 then
             hudTarget = 1 -- no fade time: hide the window as soon as the chat is unfocused

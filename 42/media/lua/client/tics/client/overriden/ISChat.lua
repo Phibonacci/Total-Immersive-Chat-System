@@ -12,6 +12,7 @@ local Introductions          = require('tics/client/Introductions')
 local NameTags               = require('tics/client/ui/NameTags')
 local IntroducePanel         = require('tics/client/ui/IntroducePanel')
 local CommandSuggestions     = require('tics/client/ui/CommandSuggestions')
+local ChatTutorial           = require('tics/client/ui/ChatTutorial')
 local JournalWindow          = require('tics/client/ui/JournalWindow')
 local File                   = require('tics/shared/utils/File')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
@@ -2209,6 +2210,8 @@ ISChat.onRecvSandboxVars = function(messageTypeSettings)
         ISChat.instance.radioRangeIndicator:subscribe()
     end
     ISChat.instance.online = true
+    -- first time on this server: the tutorial, a few seconds later
+    ChatTutorial.scheduleStart()
 end
 
 ISChat.onTabRemoved = function(tabTitle, tabID)
@@ -2865,6 +2868,19 @@ function ISChat.setIntroduceName(name)
     local key = IntroduceNameKey()
     if ISChat.instance and ISChat.instance.ticsModData and ISChat.instance.ticsModData[key] ~= name then
         ISChat.instance.ticsModData[key] = name
+        SaveTicsModData()
+    end
+end
+
+-- the tutorial is shown once per server (the chat settings restart it)
+function ISChat.isTutorialDone()
+    local data = ISChat.instance and ISChat.instance.ticsModData
+    return data ~= nil and data['tutorialDone'] == true
+end
+
+function ISChat.setTutorialDone()
+    if ISChat.instance and ISChat.instance.ticsModData and ISChat.instance.ticsModData['tutorialDone'] ~= true then
+        ISChat.instance.ticsModData['tutorialDone'] = true
         SaveTicsModData()
     end
 end

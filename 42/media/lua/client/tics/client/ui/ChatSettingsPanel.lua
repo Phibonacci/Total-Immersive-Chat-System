@@ -6,6 +6,7 @@
 local ChatTheme = require('tics/client/ui/ChatTheme')
 local ChatPopup = require('tics/client/ui/ChatPopup')
 local NameTags = require('tics/client/ui/NameTags')
+local ChatTutorial = require('tics/client/ui/ChatTutorial')
 
 local ChatSettingsPanel = ChatPopup:derive('TicsChatSettingsPanel')
 
@@ -137,6 +138,17 @@ local CHOICES = {
     },
 }
 
+-- buttons doing something once (a full width button)
+local ACTIONS = {
+    tutorial = {
+        text = 'UI_TICS_Settings_tutorial',
+        run = function(panel, chat)
+            panel:close()
+            ChatTutorial.start(chat)
+        end,
+    },
+}
+
 local COLUMNS = {
     {
         { section = 'UI_TICS_Settings_display' },
@@ -156,6 +168,7 @@ local COLUMNS = {
         { choice = 'minOpacity' },
         { choice = 'maxOpacity' },
         { choice = 'fadeTime' },
+        { action = 'tutorial' },
     },
 }
 
@@ -199,6 +212,11 @@ function ChatSettingsPanel:layout()
                     table.insert(rows, { choice = def, text = text, options = options })
                     width = math.max(width, textManager:MeasureStringX(FONT, text), segmentWidth * #options)
                 end
+            elseif row.action then
+                local def = ACTIONS[row.action]
+                local text = getText(def.text)
+                table.insert(rows, { action = def, text = text })
+                width = math.max(width, textManager:MeasureStringX(FONT, text) + SEGMENT_PADDING * 2)
             end
         end
         table.insert(columns, { rows = rows, width = width })
@@ -207,6 +225,7 @@ function ChatSettingsPanel:layout()
     self.labels = {}
     self.switches = {}
     self.segments = {}
+    self.actions = {}
     local x = PADDING_X
     local bottom = 0
     for _, column in ipairs(columns) do
@@ -233,6 +252,10 @@ function ChatSettingsPanel:layout()
                     })
                     segmentX = nextX
                 end
+                y = y + segmentHeight + 6
+            elseif row.action then
+                y = y + 8
+                table.insert(self.actions, { def = row.action, text = row.text, x = x, y = y, width = column.width, height = segmentHeight })
                 y = y + segmentHeight + 6
             end
         end
@@ -334,6 +357,18 @@ function ChatSettingsPanel:render()
     for _, area in ipairs(self.segments) do
         self:renderSegment(area, chat, mouseX ~= nil and IsInside(area, mouseX, mouseY))
     end
+    for _, area in ipairs(self.actions) do
+        local hovered = mouseX ~= nil and IsInside(area, mouseX, mouseY)
+        if hovered then
+            local hover = ChatTheme.rowHover
+            self:drawRect(area.x, area.y, area.width, area.height, 1, hover.r, hover.g, hover.b)
+        end
+        local border = ChatTheme.inputBorder
+        self:drawRectBorder(area.x, area.y, area.width, area.height, 1, border.r, border.g, border.b)
+        local color = hovered and ChatTheme.textActive or ChatTheme.textHover
+        self:drawTextCentre(area.text, area.x + area.width / 2, area.y + (area.height - self.fontHeight) / 2,
+            color.r, color.g, color.b, 1, FONT)
+    end
 end
 
 function ChatSettingsPanel:onMouseUp(x, y)
@@ -350,6 +385,12 @@ function ChatSettingsPanel:onMouseUp(x, y)
         if IsInside(area, x, y) then
             area.def.toggle(chat)
             ChatPopup.restoreChatFocus()
+            return true
+        end
+    end
+    for _, area in ipairs(self.actions) do
+        if IsInside(area, x, y) then
+            area.def.run(self, chat)
             return true
         end
     end
