@@ -156,13 +156,16 @@ function AVoice:unsubscribe()
     self.event = nil
 end
 
--- Rhythm and melody of the voice. The phoneme clips (100 ms) overlap and crossfade (their
--- fades are in the files): consonants are short and soft, vowels carry the voice.
+-- Rhythm and melody of the voice. The phoneme clips (100 ms) overlap and crossfade: their
+-- fades (25 ms in, 45 ms out) and a high cut at 5 kHz are in the files (prepared offline, the
+-- game only starts sounds). Consonants are short and softer, vowels carry the voice.
 local VOWEL_STEP_MS = 70
 local CONSONANT_STEP_MS = 40
-local PAUSE_MS = { space = 30, comma = 200, sentence = 320 }
-local CONSONANT_VOLUME = 0.45
-local PLOSIVE_VOLUME = 0.7 -- times the consonant volume: t, b, p, d... are the harshest
+-- words run into each other like in real speech, only commas and sentence ends pause
+local PAUSE_MS = { space = 0, comma = 200, sentence = 320 }
+-- softer consonants, not so soft that they leave a dip between two vowels
+local CONSONANT_VOLUME = 0.6
+local PLOSIVE_VOLUME = 0.75 -- times the consonant volume: t, b, p, d... are the harshest
 local PLOSIVES = { T = true, TH = true, B = true, P = true, D = true, G = true, C = true, K = true, Q = true,
     CH = true, J = true }
 local MAX_DURATION_MS = 4000 -- a long message is spoken faster rather than babbling for ages
