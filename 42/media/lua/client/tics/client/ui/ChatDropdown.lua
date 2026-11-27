@@ -27,6 +27,10 @@ end
 
 function ChatDropdown:render()
     local hovered = self:isMouseOver() and self:getRowAt(self:getMouseY()) or nil
+    -- the row chosen with the keyboard (command suggestions), when the mouse is not on a row
+    if hovered == nil then
+        hovered = self.selected
+    end
     local check = getTexture(ChatTheme.icons.check)
     for index, item in ipairs(self.items) do
         local y = PADDING_Y + (index - 1) * self.rowHeight
@@ -60,7 +64,8 @@ function ChatDropdown:onMouseUp(x, y)
     return true
 end
 
-function ChatDropdown:new(items, owner, onSelect)
+-- size of the list for its items; at least as wide as the owner unless fitContent
+local function MeasureItems(items, owner, fitContent)
     local textManager = getTextManager()
     local fontHeight = textManager:getFontHeight(FONT)
     local labelWidth, detailWidth = 0, 0
@@ -75,14 +80,28 @@ function ChatDropdown:new(items, owner, onSelect)
     if detailWidth > 0 then
         width = width + DETAIL_GAP + detailWidth
     end
-    width = math.max(width, owner:getWidth())
-    local height = PADDING_Y * 2 + rowHeight * #items
+    if not fitContent then
+        width = math.max(width, owner:getWidth())
+    end
+    return width, PADDING_Y * 2 + rowHeight * #items, fontHeight, rowHeight
+end
 
+-- replaces the items of an open list (command suggestions while typing)
+function ChatDropdown:setItems(items)
+    local width, height = MeasureItems(items, self.owner, self.fitContent)
+    self.items = items
+    self:setWidth(width)
+    self:setHeight(height)
+end
+
+function ChatDropdown:new(items, owner, onSelect, fitContent)
+    local width, height, fontHeight, rowHeight = MeasureItems(items, owner, fitContent)
     local o = ChatPopup.new(self, 0, 0, width, height, owner)
     o.items = items
     o.onSelect = onSelect
     o.fontHeight = fontHeight
     o.rowHeight = rowHeight
+    o.fitContent = fitContent
     return o
 end
 

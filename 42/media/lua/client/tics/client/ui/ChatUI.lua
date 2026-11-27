@@ -192,6 +192,9 @@ local function GetChipColor(stream)
     return ChatTheme.textActive
 end
 
+ChatUI.getChipLabel = GetChipLabel
+ChatUI.getChipColor = GetChipColor
+
 -- Channel chip: a click opens the list of the channels of the current tab the player may use
 -- (faction and safehouse only for their members). The chip shows a small arrow when there is
 -- another channel to pick.

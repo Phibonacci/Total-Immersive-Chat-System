@@ -11,6 +11,7 @@ local SpeechEffects          = require('tics/client/speech/SpeechEffects')
 local Introductions          = require('tics/client/Introductions')
 local NameTags               = require('tics/client/ui/NameTags')
 local IntroducePanel         = require('tics/client/ui/IntroducePanel')
+local CommandSuggestions     = require('tics/client/ui/CommandSuggestions')
 local JournalWindow          = require('tics/client/ui/JournalWindow')
 local File                   = require('tics/shared/utils/File')
 local CharacterSheetManager  = require('tics/client/CharacterSheetManager')
@@ -365,6 +366,10 @@ function ISChat.switchToStream(stream)
 end
 
 ISChat.onSwitchStream = function()
+    -- tab completes the chosen command suggestion when the list is shown
+    if ISChat.focused and CommandSuggestions.accept() then
+        return
+    end
     if ISChat.focused then
         local internalText = ISChat.instance:getInputText()
         local data = luautils.split(internalText, " ")
@@ -1969,7 +1974,7 @@ function IsOnlyCommand(text)
     return text:match('/%a* *') == text
 end
 
-function ISChat.onTextChange()
+local function UpdateInput()
     local chat = ISChat.instance
     local t = chat.textEntry
     local typed = t:getInternalText()
@@ -2018,6 +2023,15 @@ function ISChat.onTextChange()
         ISChat.instance.rangeIndicator = nil
     end
     ISChat.instance.lastStream = stream
+end
+
+function ISChat.onTextChange()
+    UpdateInput()
+    -- the commands matching what is typed, above the input box
+    local ok, err = pcall(CommandSuggestions.update, ISChat.instance)
+    if not ok then
+        print('TICS error: CommandSuggestions: ' .. tostring(err))
+    end
 end
 
 function ISChat:onActivateView()
@@ -2701,6 +2715,7 @@ end
 -- `clearText`: true to discard what was written (escape, message sent), otherwise
 -- the text is kept as a draft and restored by the next focus()
 function ISChat:unfocus(clearText)
+    CommandSuggestions.hide()
     if clearText then
         self.draftText = nil
     elseif ISChat.focused then
@@ -2722,6 +2737,9 @@ end
 
 -- message history (up / down arrows): setInputText restores the channel label of the message
 function ISChat:onPressUp()
+    if CommandSuggestions.move(-1) then -- choosing a command suggestion
+        return
+    end
     local chat = ISChat.instance
     local chatText = chat.chatText
     chatText.logIndex = math.min(chatText.logIndex + 1, #chatText.log)
@@ -2732,6 +2750,9 @@ function ISChat:onPressUp()
 end
 
 function ISChat:onPressDown()
+    if CommandSuggestions.move(1) then -- choosing a command suggestion
+        return
+    end
     local chat = ISChat.instance
     local chatText = chat.chatText
     chatText.logIndex = math.max(chatText.logIndex - 1, 0)
