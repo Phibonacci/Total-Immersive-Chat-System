@@ -1157,7 +1157,7 @@ function CreatePlayerBubble(author, type, message, color, voiceEnabled, voicePit
         end
         ISChat.instance.bubble[author] = PlayerBubble:new(
             authorObj, isAction, message, color, timer, opacity, voiceEnabled, voicePitch, portrait, showPlayerName,
-            authorName, authorColor, title)
+            authorName, authorColor, title, type)
     else
         if ISChat.instance.contextBubble then
             ISChat.instance.contextBubble.dead = true

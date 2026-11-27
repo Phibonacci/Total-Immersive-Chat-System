@@ -124,10 +124,11 @@ local function BuildPlayerNameString(playerName, playerColor)
     return StringBuilder.BuildBracketColorString(playerColor) .. playerName
 end
 
+-- channel: 'whisper', 'low', 'say' or 'yell', the voice follows it
 function PlayerBubble:new(
     player, isAction, message, messageColor, timer, opacity,
     isVoicesEnabled, voicePitch, portrait,
-    showPlayerName, playerName, playerColor, title)
+    showPlayerName, playerName, playerColor, title, channel)
     local parsedMessages = Parser.ParseTicsMessage(message, messageColor, 20, 200)
     local rawMessage = parsedMessages['rawMessage']
     local bubbleMessage = parsedMessages['bubble']
@@ -158,7 +159,7 @@ function PlayerBubble:new(
         if isAction then
             o.voice = KeyboardSound:new(rawMessage, player, voicePitch)
         else
-            o.voice = PlayerVoice:new(rawMessage, player, voicePitch)
+            o.voice = PlayerVoice:new(rawMessage, player, voicePitch, channel, message)
         end
     end
     o.portrait = portrait
