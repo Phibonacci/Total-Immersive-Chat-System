@@ -344,6 +344,26 @@ function ISChat:updateInputShortcuts()
     end
 end
 
+-- Switches the input to a channel, keeping what was typed (the list opened by the channel
+-- chip of the input box). Remembered for the tab like the Tab key does, except /me and /do.
+function ISChat.switchToStream(stream)
+    local chat = ISChat.instance
+    local typed = chat.textEntry:getInternalText() or ''
+    chat:setInputText(stream.command .. typed)
+    if not stream.forget then
+        ISChat.lastTabStream[chat.currentTabID] = stream
+    end
+    local panel = chat.chatText
+    if panel and panel.chatStreams then
+        for index, tabStream in ipairs(panel.chatStreams) do
+            if tabStream == stream then
+                panel.streamID = index
+            end
+        end
+    end
+    UpdateRangeIndicator(stream)
+end
+
 ISChat.onSwitchStream = function()
     if ISChat.focused then
         local internalText = ISChat.instance:getInputText()

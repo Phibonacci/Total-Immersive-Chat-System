@@ -192,6 +192,86 @@ local function GetChipColor(stream)
     return ChatTheme.textActive
 end
 
+-- Channel chip: a click opens the list of the channels of the current tab the player may use
+-- (faction and safehouse only for their members). The chip shows a small arrow when there is
+-- another channel to pick.
+local CHIP_ARROW_WIDTH = 5
+
+local function GetSwitchableStreams(chat)
+    local panel = chat and chat.chatText
+    local streams = {}
+    if panel == nil or panel.chatStreams == nil then
+        return streams
+    end
+    local username = getPlayer():getUsername()
+    for _, stream in ipairs(panel.chatStreams) do
+        local allowed = stream.command ~= nil
+        if stream.name == 'faction' then
+            allowed = allowed and Faction.getPlayerFaction(username) ~= nil
+        elseif stream.name == 'safehouse' then
+            allowed = allowed and SafeHouse.hasSafehouse(username) ~= nil
+        end
+        if allowed then
+            table.insert(streams, stream)
+        end
+    end
+    return streams
+end
+
+local function OnChipButtonClick(chat, button)
+    if chat.channelDropdown and chat.channelDropdown:isOpen() then
+        chat.channelDropdown:close()
+        ChatPopup.restoreChatFocus()
+        return
+    end
+    local current = chat.inputChip and chat.inputChip.stream
+    local items = {}
+    for _, stream in ipairs(GetSwitchableStreams(chat)) do
+        table.insert(items, {
+            label = GetChipLabel(stream),
+            value = stream,
+            detail = (stream.shortCommand or stream.command):gsub('%s+$', ''),
+            checked = stream == current,
+            color = GetChipColor(stream),
+        })
+    end
+    if #items == 0 then
+        return
+    end
+    chat.channelDropdown = ChatDropdown.open(button, items, function(stream) ISChat.switchToStream(stream) end, true)
+    ChatPopup.restoreChatFocus()
+end
+
+-- invisible button over the chip (the chip is drawn by the input box)
+local function UpdateChipButton(self, entry, chipWidth)
+    local button = self.chipButton
+    if chipWidth == 0 or (self.chromeAlpha or 1) <= 0.05 then
+        if button then
+            button:setVisible(false)
+        end
+        return
+    end
+    if button == nil then
+        button = ISButton:new(0, 0, 10, 10, '', self, OnChipButtonClick)
+        button:initialise()
+        button:instantiate()
+        button.render = function() end
+        button.prerender = function() end
+        button.anchorRight = false
+        button.anchorBottom = false
+        self:addChild(button)
+        self.chipButton = button
+    end
+    local fontHeight = getTextManager():getFontHeight(UIFont.Small)
+    local height = math.min(fontHeight + 2, entry:getHeight() - 6)
+    button:setWidth(chipWidth - ChatTheme.chipMargin - 2)
+    button:setHeight(height)
+    button:setX(entry:getX() - chipWidth + ChatTheme.chipMargin)
+    button:setY(entry:getY() + (entry:getHeight() - height) / 2)
+    button:setVisible(true)
+    button:bringToTop()
+end
+
 -- The text box starts after the channel chip, the box frame drawn by
 -- ChatUI.textEntry.prerender covers both.
 -- Language selector: a button at the right end of the input box showing the code of the
@@ -298,10 +378,15 @@ function ChatUI.layoutInput(self)
         return
     end
     local chipWidth = 0
+    self.chipSwitchable = false
     if self.inputChip then
         local label = GetChipLabel(self.inputChip.stream)
         local textWidth = getTextManager():MeasureStringX(UIFont.Small, label)
         chipWidth = ChatTheme.chipMargin + textWidth + ChatTheme.chipPaddingX * 2
+        if #GetSwitchableStreams(self) > 1 then
+            self.chipSwitchable = true
+            chipWidth = chipWidth + CHIP_ARROW_WIDTH + 4
+        end
     end
     local languageWidth = 0
     if IsLanguageSelectorEnabled() then
@@ -316,6 +401,7 @@ function ChatUI.layoutInput(self)
     entry.chipWidth = chipWidth
     entry.languageWidth = languageWidth
     UpdateLanguageButton(self, entry, languageWidth)
+    UpdateChipButton(self, entry, chipWidth)
 end
 
 function ChatUI:prerender()
@@ -577,8 +663,22 @@ function ChatUI.textEntry:prerender()
         self:drawRect(chipX, chipY, chipWidth - ChatTheme.chipMargin - 2, chipHeight, alpha,
             chipBackground.r, chipBackground.g, chipBackground.b)
         local color = GetChipColor(chip.stream)
+        local button = chat.chipButton
+        local open = chat.channelDropdown and chat.channelDropdown:isOpen()
+        if chat.chipSwitchable and button and button:isVisible() and (open or button:isMouseOver()) then
+            -- hovered or open: a lighter label, like the language button
+            color = ChatTheme.textActive
+        end
         self:drawText(label, chipX + ChatTheme.chipPaddingX, chipY + (chipHeight - fontHeight) / 2,
             color.r, color.g, color.b, alpha, font)
+        if chat.chipSwitchable then
+            -- small arrow pointing down: the chip opens the list of the channels
+            local arrowX = chipX + chipWidth - ChatTheme.chipMargin - 2 - ChatTheme.chipPaddingX - CHIP_ARROW_WIDTH
+            local arrowY = chipY + math.floor(chipHeight / 2) - 1
+            for row = 0, 2 do
+                self:drawRect(arrowX + row, arrowY + row, CHIP_ARROW_WIDTH - row * 2, 1, alpha, color.r, color.g, color.b)
+            end
+        end
     end
 end
 

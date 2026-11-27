@@ -1,6 +1,7 @@
 -- List of choices opened from a button of the chat (the language label of the input box),
--- above the button with the right edges aligned. Each item: { label, value, detail, checked }
--- (`detail` is drawn on the right in a muted color, `checked` shows a tick).
+-- above the button with the right edges aligned. Each item: { label, value, detail, checked, color }
+-- (`detail` is drawn on the right in a muted color, `checked` shows a tick, `color` is the
+-- color of the label, when the label is not hovered).
 -- Closes on a choice, on Escape or on a click outside.
 
 local ChatTheme = require('tics/client/ui/ChatTheme')
@@ -39,7 +40,7 @@ function ChatDropdown:render()
                 y + (self.rowHeight - CHECK_SIZE) / 2, CHECK_SIZE, CHECK_SIZE, 1, accent.r, accent.g, accent.b)
         end
         local textY = y + (self.rowHeight - self.fontHeight) / 2
-        local color = index == hovered and ChatTheme.textActive or ChatTheme.textHover
+        local color = index == hovered and ChatTheme.textActive or (item.color or ChatTheme.textHover)
         self:drawText(item.label, PADDING_LEFT + CHECK_WIDTH, textY, color.r, color.g, color.b, 1, FONT)
         if item.detail then
             local muted = ChatTheme.textMuted
@@ -85,13 +86,18 @@ function ChatDropdown:new(items, owner, onSelect)
     return o
 end
 
--- Opens the list above `button` (right edges aligned), below it when there is no room above.
-function ChatDropdown.open(button, items, onSelect)
+-- Opens the list above `button` (right edges aligned, left edges with alignLeft), below it
+-- when there is no room above.
+function ChatDropdown.open(button, items, onSelect, alignLeft)
     local dropdown = ChatDropdown:new(items, button, onSelect)
     dropdown:initialise()
     dropdown:show()
     local top = button:getAbsoluteY()
-    dropdown:placeAbove(button:getAbsoluteX() + button:getWidth(), top, top + button:getHeight())
+    local right = button:getAbsoluteX() + button:getWidth()
+    if alignLeft then
+        right = button:getAbsoluteX() + dropdown.width
+    end
+    dropdown:placeAbove(right, top, top + button:getHeight())
     return dropdown
 end
 
