@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Включить ролевые языки",
     "Sandbox_TICS_BubblePortrait"                : "Отображать портрет игрока слева от «пузырька»\n(пользовательские аватары помещаются в: Zomboid/Lua/avatars/username.png на сервере)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Включить анкеты персонажей (титул, предыстория, OOC-заметки)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Модераторы могут одобрять и отклонять запросы аватаров (админы — всегда)",
     "Sandbox_TICS_JournalEnabled"                : "Включить журнал (встреченные персонажи, их анкеты и общие сцены, хранится у каждого игрока)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Пьяные персонажи говорят невнятно",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Персонажи в панике заикаются",

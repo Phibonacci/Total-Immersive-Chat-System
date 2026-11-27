@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Roleplay-talen inschakelen",
     "Sandbox_TICS_BubblePortrait"                : "Spelersportret links van de tekstballon tonen\n(eigen afbeeldingen in: Zomboid/Lua/avatars/username.png op de server)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Personagebladen inschakelen (titel, achtergrond, OOC-notities)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Moderators mogen avatarverzoeken goedkeuren en afwijzen (admins altijd)",
     "Sandbox_TICS_JournalEnabled"                : "Dagboek inschakelen (ontmoete personen, hun personagebladen en gedeelde scènes, door elke speler bewaard)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Dronken personages praten met dubbele tong",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Personages in paniek stotteren",

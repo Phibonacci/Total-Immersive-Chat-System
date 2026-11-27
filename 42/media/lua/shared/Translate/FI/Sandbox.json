@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Ota roolipelikielet käyttöön",
     "Sandbox_TICS_BubblePortrait"                : "Näytä pelaajan muotokuva puhekuplan vasemmalla puolella\n(omat kuvat: Zomboid/Lua/avatars/username.png palvelimella)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Ota käyttöön hahmolomakkeet (titteli, tausta, OOC-muistiinpanot)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Moderaattorit voivat hyväksyä ja hylätä avatar-pyynnöt (ylläpitäjät aina)",
     "Sandbox_TICS_JournalEnabled"                : "Ota käyttöön päiväkirja (tavatut hahmot, heidän hahmolomakkeensa ja yhteiset kohtaukset, jokainen pelaaja tallentaa omansa)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Humalaiset hahmot sammaltavat",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Paniikissa olevat hahmot änkyttävät",

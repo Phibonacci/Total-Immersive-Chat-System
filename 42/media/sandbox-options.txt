@@ -47,6 +47,14 @@ option TICS.CharacterSheetEnabled
 	page = TICS,
 	translation = TICS_CharacterSheetEnabled,
 }
+option TICS.ModeratorsValidateAvatars
+{
+	type = boolean,
+	default = true,
+
+	page = TICS,
+	translation = TICS_ModeratorsValidateAvatars,
+}
 option TICS.JournalEnabled
 {
 	type = boolean,

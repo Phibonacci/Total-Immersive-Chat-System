@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "启用角色扮演语言",
     "Sandbox_TICS_BubblePortrait"                : "在气泡左侧显示玩家头像\n(自定义头像放在服务器的: Zomboid/Lua/avatars/username.png)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "启用角色卡 (称号, 背景, OOC 备注)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "版主可以批准和拒绝头像申请 (管理员始终可以)",
     "Sandbox_TICS_JournalEnabled"                : "启用日志 (遇见的人、他们的角色卡与共同场景, 由每位玩家各自保存)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "醉酒的角色说话含糊不清",
     "Sandbox_TICS_SpeechPanicEnabled"            : "惊慌的角色说话结巴",

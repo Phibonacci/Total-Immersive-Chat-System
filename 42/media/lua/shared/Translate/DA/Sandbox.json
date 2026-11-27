@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Aktivér rollespilssprog",
     "Sandbox_TICS_BubblePortrait"                : "Vis spillerportræt til venstre for taleboblen\n(egne billeder skal ligge i: Zomboid/Lua/avatars/username.png på serveren)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Aktivér karakterark (titel, baggrund, OOC-noter)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Moderatorer kan godkende og afvise avatar-anmodninger (administratorer kan altid)",
     "Sandbox_TICS_JournalEnabled"                : "Aktivér dagbogen (mødte personer, deres karakterark og fælles scener, gemt af hver spiller)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Fulde karakterer snøvler",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Karakterer i panik stammer",

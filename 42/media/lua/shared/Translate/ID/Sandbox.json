@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Aktifkan bahasa roleplay",
     "Sandbox_TICS_BubblePortrait"                : "Tampilkan potret pemain di sebelah kiri balon\n(gambar kustom ditaruh di: Zomboid/Lua/avatars/username.png di server)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Aktifkan lembar karakter (gelar, latar belakang, catatan OOC)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Moderator boleh menyetujui dan menolak permintaan avatar (admin selalu bisa)",
     "Sandbox_TICS_JournalEnabled"                : "Aktifkan jurnal (orang yang ditemui, lembar karakter mereka dan adegan bersama, disimpan oleh tiap pemain)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Karakter mabuk bicaranya cadel",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Karakter yang panik tergagap",

@@ -2482,8 +2482,14 @@ function ISChat:createValidationWindowButton()
         self.avatarUploadButton:setVisible(true)
     end
 
+    -- admins, and moderators when the sandbox option allows it
+    local canValidate = Character.canValidateAvatars(getPlayer())
+    if self.avatarValidationWindowButton and not canValidate then
+        self:removeChild(self.avatarValidationWindowButton)
+        self.avatarValidationWindowButton = nil
+    end
     if self.avatarValidationWindowButton == nil then
-        if Character.isAdminOrModerator(getPlayer()) then
+        if canValidate then
             ISChat.avatarValidationWindowButtonName = 'avatar validation window button'
             self.avatarValidationWindowButton = ISButton:new(self.avatarUploadButton:getX() - th / 2 - th, 1, th, th,
                 '', self, OnAvatarValidationWindowButtonClick)

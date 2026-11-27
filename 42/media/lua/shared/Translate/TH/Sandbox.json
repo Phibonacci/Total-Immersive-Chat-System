@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "เปิดใช้ภาษาสำหรับโรลเพลย์",
     "Sandbox_TICS_BubblePortrait"                : "แสดงภาพผู้เล่นทางซ้ายของบับเบิล\n(รูปที่กำหนดเองอยู่ที่: Zomboid/Lua/avatars/username.png บนเซิร์ฟเวอร์)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "เปิดใช้ข้อมูลตัวละคร (ฉายา ภูมิหลัง บันทึก OOC)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "ผู้ดูแลสามารถอนุมัติและปฏิเสธคำขออวตารได้ (แอดมินทำได้เสมอ)",
     "Sandbox_TICS_JournalEnabled"                : "เปิดใช้สมุดบันทึก (คนที่เคยพบ ข้อมูลตัวละครและฉากที่เล่นร่วมกัน ผู้เล่นแต่ละคนเก็บไว้เอง)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "ตัวละครที่เมาพูดไม่ชัด",
     "Sandbox_TICS_SpeechPanicEnabled"            : "ตัวละครที่ตื่นตระหนกพูดติดอ่าง",

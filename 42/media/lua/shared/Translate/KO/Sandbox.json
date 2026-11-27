@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "롤플레이 언어 활성화",
     "Sandbox_TICS_BubblePortrait"                : "말풍선 왼쪽에 플레이어 초상화 표시\n(사용자 지정 이미지 위치: 서버의 Zomboid/Lua/avatars/username.png)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "캐릭터 시트 활성화 (칭호, 배경, OOC 메모)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "운영자가 아바타 요청을 승인하고 거절할 수 있음 (관리자는 항상 가능)",
     "Sandbox_TICS_JournalEnabled"                : "일지 활성화 (만난 사람, 그들의 캐릭터 시트와 함께한 장면, 각 플레이어가 저장)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "술에 취한 캐릭터는 발음이 꼬인다",
     "Sandbox_TICS_SpeechPanicEnabled"            : "공황 상태의 캐릭터는 말을 더듬는다",

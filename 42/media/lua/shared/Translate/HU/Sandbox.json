@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Szerepjátékos nyelvek engedélyezése",
     "Sandbox_TICS_BubblePortrait"                : "Játékosportré megjelenítése a buborék bal oldalán\n(egyéni képek helye: Zomboid/Lua/avatars/username.png a szerveren)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Karakterlapok engedélyezése (cím, háttér, OOC jegyzetek)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "A moderátorok jóváhagyhatják és elutasíthatják az avatárkéréseket (az adminok mindig)",
     "Sandbox_TICS_JournalEnabled"                : "Napló engedélyezése (megismert személyek, karakterlapjaik és közös jeleneteik, minden játékos maga tárolja)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "A részeg karakterek összemossák a szavakat",
     "Sandbox_TICS_SpeechPanicEnabled"            : "A pánikoló karakterek dadognak",

@@ -55,7 +55,8 @@ local STEPS = {
     {
         key = 'admin_avatars', target = function(chat) return chat.avatarValidationWindowButton end,
         visible = function()
-            return Admin() and TicsServerSettings ~= nil and TicsServerSettings['options']['portrait'] == 2
+            return Character.canValidateAvatars(getPlayer()) and TicsServerSettings ~= nil
+                and TicsServerSettings['options']['portrait'] == 2
         end,
     },
 }

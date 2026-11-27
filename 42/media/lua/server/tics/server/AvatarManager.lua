@@ -134,7 +134,7 @@ function AvatarManager:sendPendingAvatars(playerUsername, playerAvatars)
         print('TICS error: sendPendingAvatars: player not found: ' .. playerUsername)
         return
     end
-    if not Character.isAdminOrModerator(player) then
+    if not Character.canValidateAvatars(player) then
         return
     end
     for key, avatar in pairs(self.pendingAvatarsShared) do
@@ -244,7 +244,7 @@ function AvatarManager:notifyAvatarProcessed(username, firstName, lastName, chec
         end
     end
     for _, player in pairs(self.connectedPlayers) do
-        if Character.isAdminOrModerator(player) then
+        if Character.canValidateAvatars(player) then
             ServerSend.AvatarProcessed(player, username, firstName, lastName, checksum)
         end
         local key = AvatarIO.createFileName(username, firstName, lastName)

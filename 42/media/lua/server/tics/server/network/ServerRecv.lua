@@ -314,7 +314,7 @@ RecvServer['AdminClearCharacterSheet'] = function(player, args)
 end
 
 RecvServer['AskApprovedAvatarList'] = function(player, args)
-    if not Character.isAdminOrModerator(player) then
+    if not Character.canValidateAvatars(player) then
         return
     end
     ServerSend.ApprovedAvatarList(player, AvatarManager:getApprovedAvatarList())
@@ -322,7 +322,7 @@ end
 
 RecvServer['AskApprovedAvatarImage'] = function(player, args)
     local username, firstName, lastName = GetCharacterArgs(args)
-    if not Character.isAdminOrModerator(player) or username == nil then
+    if not Character.canValidateAvatars(player) or username == nil then
         return
     end
     AvatarManager:sendApprovedAvatarTo(player, username, firstName, lastName)
@@ -330,7 +330,7 @@ end
 
 RecvServer['AdminDeleteAvatar'] = function(player, args)
     local username, firstName, lastName = GetCharacterArgs(args)
-    if not Character.isAdminOrModerator(player) or username == nil then
+    if not Character.canValidateAvatars(player) or username == nil then
         return
     end
     print('TICS info: avatar deleted by ' .. player:getUsername() .. ': ' .. username
@@ -340,6 +340,10 @@ RecvServer['AdminDeleteAvatar'] = function(player, args)
 end
 
 RecvServer['ApproveAvatar'] = function(player, args)
+    -- only admins, and moderators when the sandbox option allows it
+    if not Character.canValidateAvatars(player) then
+        return
+    end
     local username  = args['username']
     local firstName = args['firstName']
     local lastName  = args['lastName']
@@ -364,6 +368,10 @@ RecvServer['ApproveAvatar'] = function(player, args)
 end
 
 RecvServer['RejectAvatar'] = function(player, args)
+    -- only admins, and moderators when the sandbox option allows it
+    if not Character.canValidateAvatars(player) then
+        return
+    end
     local username  = args['username']
     local firstName = args['firstName']
     local lastName  = args['lastName']

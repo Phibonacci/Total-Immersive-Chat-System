@@ -17,6 +17,18 @@ function Character.isAdminOrModerator(player)
     return player ~= nil and (player:isAccessLevel('admin') or player:isAccessLevel('moderator'))
 end
 
+-- avatar requests (custom portraits): admins, and moderators when the sandbox option allows
+-- it (SandboxVars are known by the server and the clients)
+function Character.canValidateAvatars(player)
+    if player == nil then
+        return false
+    end
+    if player:isAccessLevel('admin') then
+        return true
+    end
+    return player:isAccessLevel('moderator') and SandboxVars.TICS.ModeratorsValidateAvatars ~= false
+end
+
 function Character.getFirstHandItemByGroup(player, group)
     local primary = player:getPrimaryHandItem()
     local secondary = player:getSecondaryHandItem()

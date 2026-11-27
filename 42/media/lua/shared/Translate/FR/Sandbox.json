@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Activer les langues de roleplay",
     "Sandbox_TICS_BubblePortrait"                : "Afficher le portrait du joueur à gauche de la bulle\n(les avatars personnalisés vont dans : Zomboid/Lua/avatars/username.png sur le serveur)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Activer les fiches de personnage (titre, histoire, notes HRP)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Les modérateurs peuvent valider et refuser les demandes d'avatar (les admins le peuvent toujours)",
     "Sandbox_TICS_JournalEnabled"                : "Activer le journal (personnes rencontrées, leurs fiches et scènes partagées, conservé par chaque joueur)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Les personnages ivres parlent d'une voix pâteuse",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Les personnages paniqués bégaient",

@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Activează limbile de roleplay",
     "Sandbox_TICS_BubblePortrait"                : "Afișează portretul jucătorului în stânga bulei\n(cele personalizate se pun în: Zomboid/Lua/avatars/username.png pe server)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Activează fișele de personaj (titlu, trecut, note OOC)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Moderatorii pot aproba și respinge cererile de avatar (administratorii pot oricând)",
     "Sandbox_TICS_JournalEnabled"                : "Activează jurnalul (persoane întâlnite, fișele lor și scenele comune, păstrat de fiecare jucător)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Personajele beate își încurcă cuvintele",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Personajele în panică se bâlbâie",

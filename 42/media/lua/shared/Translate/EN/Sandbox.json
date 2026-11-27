@@ -11,6 +11,7 @@
 
     "Sandbox_TICS_BubblePortrait"                : "Show player portrait on the left of the Bubble\n(custom goes in: Zomboid/Lua/avatars/username.png on server)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Enable character sheets (title, background, OOC notes)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "Moderators can approve and reject avatar requests (admins always can)",
     "Sandbox_TICS_JournalEnabled"                : "Enable the journal (people met, their sheets and shared scenes, kept by each player)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "Drunk characters slur their words",
     "Sandbox_TICS_SpeechPanicEnabled"            : "Panicking characters stutter",

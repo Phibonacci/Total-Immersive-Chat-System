@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "Abilita le lingue di roleplay",
     "Sandbox_TICS_BubblePortrait"                : "Mostra il ritratto del giocatore a sinistra del fumetto\n(quelli personalizzati vanno in: Zomboid/Lua/avatars/username.png sul server)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "Abilita le schede personaggio (titolo, storia, note OOC)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "I moderatori possono approvare e rifiutare le richieste di avatar (gli admin possono sempre)",
     "Sandbox_TICS_JournalEnabled"                : "Abilita il diario (persone incontrate, le loro schede e le scene condivise, salvato da ogni giocatore)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "I personaggi ubriachi biascicano le parole",
     "Sandbox_TICS_SpeechPanicEnabled"            : "I personaggi in preda al panico balbettano",

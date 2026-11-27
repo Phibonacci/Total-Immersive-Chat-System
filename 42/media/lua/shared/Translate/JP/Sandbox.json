@@ -7,6 +7,7 @@
     "Sandbox_TICS_Languages"                     : "ロールプレイ用の言語を有効",
     "Sandbox_TICS_BubblePortrait"                : "吹き出しの左側にプレイヤーのポートレートを表示\n(カスタム画像はサーバーの Zomboid/Lua/avatars/username.png に配置)",
     "Sandbox_TICS_CharacterSheetEnabled"         : "キャラクターシートを有効 (肩書き、経歴、OOC メモ)",
+    "Sandbox_TICS_ModeratorsValidateAvatars"     : "モデレーターがアバター申請を承認・却下できる (管理者は常に可能)",
     "Sandbox_TICS_JournalEnabled"                : "日誌を有効 (出会った人物、そのキャラクターシートと共有したシーン、各プレイヤーが保存)",
     "Sandbox_TICS_SpeechDrunkEnabled"            : "酔ったキャラクターはろれつが回らない",
     "Sandbox_TICS_SpeechPanicEnabled"            : "パニック状態のキャラクターはどもる",
