@@ -87,7 +87,7 @@ function ABubble:parseMessage(length)
             messageLength = 0
         end
     end
-    local parsedMessages = Parser.ParseTicsMessage(self.message, self.color, 20, messageLength)
+    local parsedMessages = Parser.ParseTicsMessage(self.message, self.color, nil, messageLength)
     local rawMessage = parsedMessages['rawMessage']
     local bubbleMessage = parsedMessages['bubble']
     if self.showPlayerName then

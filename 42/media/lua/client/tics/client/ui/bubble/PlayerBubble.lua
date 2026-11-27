@@ -129,7 +129,7 @@ function PlayerBubble:new(
     player, isAction, message, messageColor, timer, opacity,
     isVoicesEnabled, voicePitch, portrait,
     showPlayerName, playerName, playerColor, title, channel)
-    local parsedMessages = Parser.ParseTicsMessage(message, messageColor, 20, 200)
+    local parsedMessages = Parser.ParseTicsMessage(message, messageColor, nil, 200)
     local rawMessage = parsedMessages['rawMessage']
     local bubbleMessage = parsedMessages['bubble']
     if showPlayerName then

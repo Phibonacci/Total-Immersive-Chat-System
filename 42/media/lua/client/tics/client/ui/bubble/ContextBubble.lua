@@ -46,7 +46,7 @@ local function Lerp(start, target, progression)
 end
 
 function ContextBubble:parseMessage(length)
-    local parsedMessages = Parser.ParseTicsMessage(self.message, self.color, 20, length)
+    local parsedMessages = Parser.ParseTicsMessage(self.message, self.color, nil, length)
     return parsedMessages['rawMessage'], parsedMessages['bubble']
 end
 
@@ -180,7 +180,7 @@ function ContextBubble:render()
 end
 
 function ContextBubble:new(message, messageColor, timer, opacity, isVoiceEnabled, voicePitch)
-    local parsedMessages = Parser.ParseTicsMessage(message, messageColor, 40, 200)
+    local parsedMessages = Parser.ParseTicsMessage(message, messageColor, nil, 200)
     local rawMessage = parsedMessages['rawMessage']
     local bubbleMessage = parsedMessages['bubble']
 

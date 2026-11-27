@@ -118,6 +118,18 @@ function ISTicsRichTextPanel:paginate()
 					self.currentWrapIndent = nil
 				end
 			else
+				-- a word wider than a whole line is cut where the line ends, with a dash, the rest
+				-- goes back to the text and continues on the next line
+				local word = string.trim(token)
+				local available = maxLineWidth - self.indent - (self.currentWrapIndent or self.wrapIndent or 0)
+				if not pendingChip and #word > 1 and ChunkWidth(self.font, ' ' .. word) > available then
+					local cut = #word - 1
+					while cut > 1 and ChunkWidth(self.font, ' ' .. word:sub(1, cut) .. '-') > available do
+						cut = cut - 1
+					end
+					token = ' ' .. word:sub(1, cut) .. '- '
+					leftText = ' ' .. word:sub(cut + 1) .. leftText
+				end
 				if token:contains("&lt;") then
 					token = token:gsub("&lt;", "<")
 				end

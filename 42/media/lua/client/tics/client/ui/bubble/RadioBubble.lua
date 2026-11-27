@@ -58,7 +58,7 @@ RadioBubble.types = {
 }
 
 function RadioBubble:new(object, message, messageColor, timer, opacity, type, isVoicesEnabled, voicePitch, offsetY)
-    local parsedMessages = Parser.ParseTicsMessage(message, messageColor, 20, 200)
+    local parsedMessages = Parser.ParseTicsMessage(message, messageColor, nil, 200)
     local textLength = getTextManager():MeasureStringX(UIFont.Medium, parsedMessages['rawMessage'])
     local width = math.min(textLength, ChatTheme.bubbleMaxTextWidth) + 40
     local height = 0
