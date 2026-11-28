@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "ieri",
     "UI_TICS_Journal_days"                     : "%1 z",
     "UI_TICS_Journal_weeks"                    : "%1 săpt.",
-    "UI_TICS_Journal_months"                   : "%1 luni"
+    "UI_TICS_Journal_months"                   : "%1 luni",
+    "UI_TICS_Options_voiceVolume"              : "Volumul vocilor din chat",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Volumul vocilor din bulele de chat. Se aplică și „%1” din joc."
 }

@@ -363,5 +363,7 @@
     "UI_TICS_Journal_yesterday"                : "yesterday",
     "UI_TICS_Journal_days"                     : "%1 d",
     "UI_TICS_Journal_weeks"                    : "%1 wk",
-    "UI_TICS_Journal_months"                   : "%1 mo"
+    "UI_TICS_Journal_months"                   : "%1 mo",
+    "UI_TICS_Options_voiceVolume"              : "Chat voices volume",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Volume of the voices of the chat bubbles. The game's \"%1\" applies too."
 }

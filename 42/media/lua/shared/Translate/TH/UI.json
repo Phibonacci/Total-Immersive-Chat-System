@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "เมื่อวาน",
     "UI_TICS_Journal_days"                     : "%1 วัน",
     "UI_TICS_Journal_weeks"                    : "%1 สัปดาห์",
-    "UI_TICS_Journal_months"                   : "%1 เดือน"
+    "UI_TICS_Journal_months"                   : "%1 เดือน",
+    "UI_TICS_Options_voiceVolume"              : "ระดับเสียงพูดในแชท",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "ระดับเสียงพูดของบับเบิลแชท \"%1\" ของเกมก็มีผลด้วย"
 }

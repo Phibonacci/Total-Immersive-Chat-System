@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "어제",
     "UI_TICS_Journal_days"                     : "%1일",
     "UI_TICS_Journal_weeks"                    : "%1주",
-    "UI_TICS_Journal_months"                   : "%1개월"
+    "UI_TICS_Journal_months"                   : "%1개월",
+    "UI_TICS_Options_voiceVolume"              : "채팅 음성 크기",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "채팅 말풍선 음성의 크기입니다. 게임의 \"%1\"도 적용됩니다."
 }

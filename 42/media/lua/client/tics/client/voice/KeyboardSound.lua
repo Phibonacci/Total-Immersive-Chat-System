@@ -1,4 +1,5 @@
 local AVoice = require('tics/client/voice/AVoice')
+local VoiceVolume = require('tics/client/voice/VoiceVolume')
 
 local KeyboardSound = {}
 
@@ -56,6 +57,8 @@ function KeyboardSound:update()
                     -- it sets the pitch of every sound of the emitter anyway, and this emitter (a free one) only
                     -- plays this sound, so an id matching no sound sets the same pitch without the log
                     self.soundEmitter:setPitch(0, self.pitch + pitchVariation)
+                    -- the game's sound volume does not reach the sound files of mods
+                    self.soundEmitter:setVolume(self.soundId, VoiceVolume.sound())
                     soundPlayed = true
                 end
             end

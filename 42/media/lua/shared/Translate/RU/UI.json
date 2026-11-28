@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "вчера",
     "UI_TICS_Journal_days"                     : "%1 дн.",
     "UI_TICS_Journal_weeks"                    : "%1 нед.",
-    "UI_TICS_Journal_months"                   : "%1 мес."
+    "UI_TICS_Journal_months"                   : "%1 мес.",
+    "UI_TICS_Options_voiceVolume"              : "Громкость голосов чата",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Громкость голосов в облачках чата. «%1» игры тоже действует."
 }

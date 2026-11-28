@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "gisteren",
     "UI_TICS_Journal_days"                     : "%1 d",
     "UI_TICS_Journal_weeks"                    : "%1 wk",
-    "UI_TICS_Journal_months"                   : "%1 mnd"
+    "UI_TICS_Journal_months"                   : "%1 mnd",
+    "UI_TICS_Options_voiceVolume"              : "Volume chatstemmen",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Volume van de stemmen van de chatballonnen. Het \"%1\" van het spel geldt ook."
 }

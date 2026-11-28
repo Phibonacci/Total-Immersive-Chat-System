@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "昨日",
     "UI_TICS_Journal_days"                     : "%1 日",
     "UI_TICS_Journal_weeks"                    : "%1 週間",
-    "UI_TICS_Journal_months"                   : "%1 か月"
+    "UI_TICS_Journal_months"                   : "%1 か月",
+    "UI_TICS_Options_voiceVolume"              : "チャットボイスの音量",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "チャット吹き出しのボイスの音量。ゲームの「%1」も適用されます。"
 }

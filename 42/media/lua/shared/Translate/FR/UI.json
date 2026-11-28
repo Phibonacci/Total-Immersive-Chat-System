@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "hier",
     "UI_TICS_Journal_days"                     : "%1 j",
     "UI_TICS_Journal_weeks"                    : "%1 sem",
-    "UI_TICS_Journal_months"                   : "%1 mois"
+    "UI_TICS_Journal_months"                   : "%1 mois",
+    "UI_TICS_Options_voiceVolume"              : "Volume des voix du chat",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Volume des voix des bulles du chat. Le « %1 » du jeu s'applique aussi."
 }

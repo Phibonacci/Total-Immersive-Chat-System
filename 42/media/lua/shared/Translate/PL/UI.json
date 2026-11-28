@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "wczoraj",
     "UI_TICS_Journal_days"                     : "%1 d.",
     "UI_TICS_Journal_weeks"                    : "%1 tyg.",
-    "UI_TICS_Journal_months"                   : "%1 mies."
+    "UI_TICS_Journal_months"                   : "%1 mies.",
+    "UI_TICS_Options_voiceVolume"              : "Głośność głosów czatu",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Głośność głosów dymków czatu. Działa też „%1” gry."
 }

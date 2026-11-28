@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "kemarin",
     "UI_TICS_Journal_days"                     : "%1 h",
     "UI_TICS_Journal_weeks"                    : "%1 mgg",
-    "UI_TICS_Journal_months"                   : "%1 bln"
+    "UI_TICS_Journal_months"                   : "%1 bln",
+    "UI_TICS_Options_voiceVolume"              : "Volume suara obrolan",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Volume suara gelembung obrolan. \"%1\" dari game juga berlaku."
 }

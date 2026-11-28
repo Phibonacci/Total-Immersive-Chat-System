@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "ahir",
     "UI_TICS_Journal_days"                     : "%1 d",
     "UI_TICS_Journal_weeks"                    : "%1 setm.",
-    "UI_TICS_Journal_months"                   : "%1 mesos"
+    "UI_TICS_Journal_months"                   : "%1 mesos",
+    "UI_TICS_Options_voiceVolume"              : "Volum de les veus del xat",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Volum de les veus de les bombolles del xat. També s'hi aplica el \"%1\" del joc."
 }

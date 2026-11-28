@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "gestern",
     "UI_TICS_Journal_days"                     : "%1 T.",
     "UI_TICS_Journal_weeks"                    : "%1 Wo.",
-    "UI_TICS_Journal_months"                   : "%1 Mon."
+    "UI_TICS_Journal_months"                   : "%1 Mon.",
+    "UI_TICS_Options_voiceVolume"              : "Lautstärke der Chatstimmen",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Lautstärke der Stimmen der Chatblasen. Die „%1“ des Spiels gilt ebenfalls."
 }

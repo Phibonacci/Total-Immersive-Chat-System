@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "ieri",
     "UI_TICS_Journal_days"                     : "%1 g",
     "UI_TICS_Journal_weeks"                    : "%1 sett.",
-    "UI_TICS_Journal_months"                   : "%1 mesi"
+    "UI_TICS_Journal_months"                   : "%1 mesi",
+    "UI_TICS_Options_voiceVolume"              : "Volume delle voci della chat",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Volume delle voci dei fumetti della chat. Si applica anche il \"%1\" del gioco."
 }

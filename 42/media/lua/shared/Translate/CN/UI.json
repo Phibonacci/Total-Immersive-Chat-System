@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "昨天",
     "UI_TICS_Journal_days"                     : "%1 天",
     "UI_TICS_Journal_weeks"                    : "%1 周",
-    "UI_TICS_Journal_months"                   : "%1 个月"
+    "UI_TICS_Journal_months"                   : "%1 个月",
+    "UI_TICS_Options_voiceVolume"              : "聊天语音音量",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "聊天气泡语音的音量。游戏的“%1”也会生效。"
 }

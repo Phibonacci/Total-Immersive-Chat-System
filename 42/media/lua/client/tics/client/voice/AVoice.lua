@@ -1,4 +1,5 @@
 local LanguageManager = require('tics/client/languages/LanguageManager')
+local VoiceVolume = require('tics/client/voice/VoiceVolume')
 
 
 local AVoice = {}
@@ -193,7 +194,8 @@ function AVoice:update()
             return
         end
         self.nextSoundTableIndex = self.nextSoundTableIndex + 1
-        if nextSound.sound ~= nil then
+        local volume = VoiceVolume.voice()
+        if nextSound.sound ~= nil and volume > 0 then
             local emitter = getWorld():getFreeEmitter()
             -- Is object already a square or a player? We don't care, they both have getX/Y/Z, we get the square anyway.
             local square = getSquare(self.object:getX(), self.object:getY(), self.object:getZ())
@@ -210,7 +212,7 @@ function AVoice:update()
                 -- it sets the pitch of every sound of the emitter anyway, and this emitter (a free one) only
                 -- plays this sound, so an id matching no sound sets the same pitch without the log
                 emitter:setPitch(0, self.pitch + nextSound.pitch)
-                emitter:setVolume(soundId, nextSound.volume)
+                emitter:setVolume(soundId, nextSound.volume * volume)
             end
         end
     end

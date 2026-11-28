@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "вчора",
     "UI_TICS_Journal_days"                     : "%1 дн.",
     "UI_TICS_Journal_weeks"                    : "%1 тиж.",
-    "UI_TICS_Journal_months"                   : "%1 міс."
+    "UI_TICS_Journal_months"                   : "%1 міс.",
+    "UI_TICS_Options_voiceVolume"              : "Гучність голосів чату",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Гучність голосів у хмаринках чату. «%1» гри теж діє."
 }

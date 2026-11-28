@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "i går",
     "UI_TICS_Journal_days"                     : "%1 d",
     "UI_TICS_Journal_weeks"                    : "%1 u",
-    "UI_TICS_Journal_months"                   : "%1 md"
+    "UI_TICS_Journal_months"                   : "%1 md",
+    "UI_TICS_Options_voiceVolume"              : "Lydstyrke for chatstemmer",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Lydstyrken for stemmerne i chatboblerne. Spillets \"%1\" gælder også."
 }

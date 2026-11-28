@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "eilen",
     "UI_TICS_Journal_days"                     : "%1 pv",
     "UI_TICS_Journal_weeks"                    : "%1 vk",
-    "UI_TICS_Journal_months"                   : "%1 kk"
+    "UI_TICS_Journal_months"                   : "%1 kk",
+    "UI_TICS_Options_voiceVolume"              : "Chat-äänien voimakkuus",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Chat-kuplien äänten voimakkuus. Myös pelin \"%1\" vaikuttaa."
 }

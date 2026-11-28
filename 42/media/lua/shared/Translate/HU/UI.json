@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "tegnap",
     "UI_TICS_Journal_days"                     : "%1 nap",
     "UI_TICS_Journal_weeks"                    : "%1 hét",
-    "UI_TICS_Journal_months"                   : "%1 hó"
+    "UI_TICS_Journal_months"                   : "%1 hó",
+    "UI_TICS_Options_voiceVolume"              : "Csevegőhangok hangereje",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "A csevegőbuborékok hangjainak hangereje. A játék „%1” beállítása is érvényes."
 }

@@ -182,5 +182,7 @@
     "UI_TICS_Journal_yesterday"                : "včera",
     "UI_TICS_Journal_days"                     : "%1 d",
     "UI_TICS_Journal_weeks"                    : "%1 týd.",
-    "UI_TICS_Journal_months"                   : "%1 měs."
+    "UI_TICS_Journal_months"                   : "%1 měs.",
+    "UI_TICS_Options_voiceVolume"              : "Hlasitost hlasů chatu",
+    "UI_TICS_Options_voiceVolume_tooltip"      : "Hlasitost hlasů bublin chatu. Platí i herní „%1“."
 }
